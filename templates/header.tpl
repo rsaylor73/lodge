@@ -1,8 +1,8 @@
+{literal}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-{literal}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,18 +21,20 @@
 
 
     <!-- jQuery -->
-    <script src="js/jquery.min.js"></script>
 
-   <link rel="stylesheet" href="/jquery-ui-1.10.3/themes/base/jquery.ui.all.css">
-   <script src="/jquery-ui-1.10.3/jquery-1.9.1.js"></script>
-   <script src="/jquery-ui-1.10.3/ui/jquery.ui.core.js"></script>
-   <script src="/jquery-ui-1.10.3/ui/jquery.ui.widget.js"></script>
-   <script src="/jquery-ui-1.10.3/ui/jquery.ui.datepicker.js"></script>
-   <script src="/jquery-ui-1.10.3/ui/jquery.ui.menu.js"></script>
-   <script src="/jquery-ui-1.10.3/ui/jquery.ui.autocomplete.js"></script>
+   <script src="jquery-ui-1.10.3/jquery-1.9.1.js"></script>
+   <script src="js/bootstrap.js"></script>
+   <link rel="stylesheet" href="jquery-ui-1.10.3/themes/base/jquery.ui.all.css">
+   <script src="jquery-ui-1.10.3/ui/jquery.ui.core.js"></script>
+   <script src="jquery-ui-1.10.3/ui/jquery.ui.widget.js"></script>
+   <script src="jquery-ui-1.10.3/ui/jquery.ui.datepicker.js"></script>
+   <script src="jquery-ui-1.10.3/ui/jquery.ui.menu.js"></script>
+   <script src="jquery-ui-1.10.3/ui/jquery.ui.autocomplete.js"></script>
+   <script src="jquery-ui-1.10.3/ui/jquery.ui.dialog.js"></script>
+   <script src='https://www.google.com/recaptcha/api.js'></script>
 
-{/literal}
 </head>
+{/literal}
 
   <body>
 

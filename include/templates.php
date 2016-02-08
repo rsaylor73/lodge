@@ -8,13 +8,13 @@
 
 
 // This is PHP Smarty
-require_once('libs/Smarty.class.php');
+require_once($GLOBAL['path'] .'/libs/Smarty.class.php');
 $smarty=new Smarty();
 
-$smarty->setTemplateDir('templates/');
-$smarty->setCompileDir('templates_c/');
-$smarty->setConfigDir('configs/');
-$smarty->setCacheDir('cache/');
+$smarty->setTemplateDir($GLOBAL['path'] . '/templates/');
+$smarty->setCompileDir($GLOBAL['path'] . '/templates_c/');
+$smarty->setConfigDir($GLOBAL['path'] . '/configs/');
+$smarty->setCacheDir($GLOBAL['path'] . '/cache/');
 
 // init the core class (custom code)
 include $GLOBAL['path']."/class/core.class.php";

@@ -1,6 +1,6 @@
 <?php
 
-$GLOBAL['path'] = "/home/livenet/www/lodge_res";
+$GLOBAL['path'] = "/home/livenet/www/lodge";
 
 // email headers - This is fine tuned, please do not modify
 $sitename = "TBD";
