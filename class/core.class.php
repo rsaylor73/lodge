@@ -47,6 +47,11 @@ class Core {
 		}
 	}
 
+	public function navigation($id) {
+
+
+	}
+
 	public function load_smarty($vars,$template) {
 		require_once('libs/Smarty.class.php');
 			$smarty=new Smarty();
@@ -64,8 +69,19 @@ class Core {
 	}
 
 	public function logout() {
+		$data['msg'] = "<font color=green>You have been logged out. Loading...</font>";
+		$this->load_smarty($data,'message.tpl');
+
 		session_destroy();
-                $this->login('<font color=green><br>You have been logged out.</font>');
+		?>
+	   <script>
+	   setTimeout(function() {
+	      window.location.replace('index.php')
+	   }
+	   ,2000);
+
+	   </script>
+		<?php
 	}
 
 	// Login form

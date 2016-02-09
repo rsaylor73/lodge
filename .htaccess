@@ -2,10 +2,14 @@ RewriteEngine On
 Options +FollowSymLinks
 AddType application/x-httpd-php5 .php5 .php .php3 .php2 .phtml
 
+RewriteCond %{SERVER_PORT} 80 
+RewriteRule ^(.*)$ https://www.liveaboardfleet.net/lodge/$1 [R,L]
+
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
  
 RewriteRule ^dashboard/?$ index.php?section=dashboard [NC,L]
+RewriteRule ^logout/?$ index.php?section=logout [NC,L]
 
 
 

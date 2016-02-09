@@ -13,7 +13,15 @@ $check = $core->check_login();
 if ($check == "FALSE") {
 	$smarty->display('login.tpl');
 } else {
-	$smarty->display('dashboard.tpl');
+	$smarty->display('navigation.tpl');
+
+	if ($_GET['section'] == "dashboard") {
+		$smarty->display('dashboard.tpl');
+	}
+
+	if ($_GET['section'] == "logout") {
+		$core->logout();
+	}
 }
 
 // footer

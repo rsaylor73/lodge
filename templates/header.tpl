@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template -->
     <link href="assets/css/main.css" rel="stylesheet">
+  	 <link rel="stylesheet" href="css/styles.css">
 
 
     <!-- jQuery -->
@@ -33,7 +34,7 @@
    <script src="jquery-ui-1.10.3/ui/jquery.ui.autocomplete.js"></script>
    <script src="jquery-ui-1.10.3/ui/jquery.ui.dialog.js"></script>
    <script src='https://www.google.com/recaptcha/api.js'></script>
-
+	<script src="js/script.js"></script>
 </head>
 {/literal}
 
@@ -50,11 +51,6 @@
           </button>
           <a class="navbar-brand" href="#">Aggressor Safari L<i class="fa fa-circle"></i>DGE</a>
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="index.php">HOME</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
       </div>
     </div>
 
