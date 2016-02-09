@@ -1,0 +1,11 @@
+RewriteEngine On
+Options +FollowSymLinks
+AddType application/x-httpd-php5 .php5 .php .php3 .php2 .phtml
+
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+ 
+RewriteRule ^dashboard/?$ index.php?section=dashboard [NC,L]
+
+
+

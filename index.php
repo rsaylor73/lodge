@@ -5,6 +5,7 @@ include "include/mysql.php";
 include "include/templates.php";
 
 if ($_GET['h'] != "no") {
+
 	$smarty->display('header.tpl');
 }
 

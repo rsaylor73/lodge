@@ -6,7 +6,7 @@
 		<td><b>Username:</b><br><input type="text" name="uuname" placeholder="User Name" size=20 required></td>
 	</tr>
 	<tr>
-		<td><b>Password:</b><br><input type="password" name="uupass" placeholder="Password" size=20 required></td>
+		<td><b>Password:</b><br><input type="password" name="uupass" placeholder="Password" size=20 required onkeypress="if(event.keyCode==13) { loginfrm(this.form); return false;}"></td>
 	</tr>
 	<tr>
 		<td><center><input type="button" name="login" value="Login" class="btn btn-primary" onclick="loginfrm(this.form)"></center></td>
