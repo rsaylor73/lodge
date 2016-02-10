@@ -1,3 +1,3 @@
-<div class="col-lg-3">
-<h2>Dashboard</h2>
+<div class="col-lg-6">
+<h2>Dashboard : {$name} ({$access})</h2>
 </div>

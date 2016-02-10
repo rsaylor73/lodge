@@ -13,9 +13,13 @@ $check = $core->check_login();
 if ($check == "FALSE") {
 	$smarty->display('login.tpl');
 } else {
-	$smarty->display('navigation.tpl');
+	$core->navigation();
+	//$smarty->display('navigation.tpl');
 
 	if ($_GET['section'] == "dashboard") {
+		$name = "$_SESSION[first] $_SESSION[last]";
+		$smarty->assign('name',$name);
+		$smarty->assign('access',$_SESSION['userType']);
 		$smarty->display('dashboard.tpl');
 	}
 

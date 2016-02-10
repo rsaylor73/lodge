@@ -47,8 +47,17 @@ class Core {
 		}
 	}
 
-	public function navigation($id) {
-
+	public function navigation() {
+		$sql = "SELECT * FROM `users` WHERE `id` = '$_SESSION[id]' AND `active` = 'Yes'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$userType = $row['userType'];
+		}
+		if ($userType != "") {
+			$data['access'] = $userType; // crew, agent, admin
+			$template = "navigation.tpl";
+			$this->load_smarty($data,$template);
+		}
 
 	}
 
