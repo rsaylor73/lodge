@@ -1,4 +1,4 @@
-<div class="col-lg-3">
+<div class="col-md-4">
 
 <div id='cssmenu'>
 <ul>
@@ -17,7 +17,7 @@
 	{/if}
 
    {if ($access eq "admin" or $access eq "agent" or $access eq "accounting")}
-   <li class='active has-sub'><a href='#'><span>Reservations</span></a>
+   <li class='active has-sub'><a href='#'><span>Customers</span></a>
       <ul>
 			<li><a href="#"><span>Resellers</span></a></li>
 			<li><a href="#"><span>Contacts</span></a></li>
@@ -45,7 +45,7 @@
 
          <li class='has-sub'><a href='#'><span>Users</span></a>
             <ul>
-               <li><a href='#'><span>Manage Users</span></a></li>
+               <li><a href='users'><span>Manage Users</span></a></li>
             </ul>
          </li>
 

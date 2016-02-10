@@ -61,6 +61,44 @@ class Core {
 
 	}
 
+	public function check_access($type) {
+		/* This function checks if the user has access to the module. Each module will define the access and send to this method */
+		foreach ($type as $value) {
+			if ($_SESSION['userType'] == $value) {
+				$ok = "1";
+			}
+		}
+		if ($ok != "1") {
+			print "<br><br><font color=red>Sorry, but you do not have access to the requestion action.</font><br><br>";
+			die;
+		}
+	}
+
+	/*
+		General note about check_access : You define an array and pass the possible user access types. IE you could pass admin and accounting then that module would
+		be allowed to be accessed from those user types.
+
+	*/
+
+	public function users() {
+		$access_required[] = "admin";
+		$this->check_access($access_required);
+
+		$template = "users.tpl";
+		$data = array();
+		$this->load_smarty($data,$template);
+
+	}
+
+	public function addnewuser() {
+      $access_required[] = "admin";
+      $this->check_access($access_required);
+
+      $template = "addnewuser.tpl";
+      $data = array();
+      $this->load_smarty($data,$template);
+	}
+
 	public function load_smarty($vars,$template) {
 		require_once('libs/Smarty.class.php');
 			$smarty=new Smarty();
@@ -78,7 +116,7 @@ class Core {
 	}
 
 	public function logout() {
-		$data['msg'] = "<font color=green>You have been logged out. Loading...</font>";
+		$data['msg'] = "<font color=green>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have been logged out. Loading...</font>";
 		$this->load_smarty($data,'message.tpl');
 
 		session_destroy();

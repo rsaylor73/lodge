@@ -23,6 +23,14 @@ if ($check == "FALSE") {
 		$smarty->display('dashboard.tpl');
 	}
 
+	if ($_GET['section'] == "users") {
+		$core->users();
+	}
+
+	if ($_GET['section'] == "addnewuser") {
+		$core->addnewuser();
+	}
+
 	if ($_GET['section'] == "logout") {
 		$core->logout();
 	}

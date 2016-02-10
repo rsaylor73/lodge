@@ -1,3 +1,4 @@
-<div class="col-lg-6">
-<h2>Dashboard : {$name} ({$access})</h2>
+<div class="col-md-6">
+<h2>Dashboard</h2>{$name} ({$access})
+
 </div>
