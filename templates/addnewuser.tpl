@@ -4,7 +4,7 @@
 
 <div class="input-group input-group-lg">
   <span class="input-group-addon" id="sizing-addon1" style="width:125px;">User: </span>
-  <input type="text" name="uuname" required class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+  <input type="text" name="uuname" required class="form-control" placeholder="Username" aria-describedby="sizing-addon1" onblur='check_user(this.form)'> <div id="check_user"></div>
 </div>
 
 <div class="input-group input-group-lg">
@@ -46,6 +46,16 @@
 
 
 </form>
+
+<script>
+function check_user(myform) {
+	$.get('ajax/check_user.php',
+	$(myform).serialize(),
+	function(php_msg) {
+	$("#check_user").html(php_msg);
+	});
+}
+</script>
 
 </div>
 
