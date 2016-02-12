@@ -25,6 +25,31 @@
 	</li>
 	{/if}
 
+
+   <li class='active has-sub'><a href='#'><span>Reports</span></a>
+      <ul>
+         {if ($access eq "admin" or $access eq "accounting")}
+
+         <li class='has-sub'><a href='#'><span>Financial</span></a>
+            <ul>
+               <li><a href='#'><span>Transfer Report</span></a>
+               <li><a href='#'><span>Balance Report</span></a>
+               <li><a href='#'><span>Reconsile Report</span></a>
+
+            </ul>
+         </li>
+         {/if}
+
+         <li class='has-sub'><a href='#'><span>Guests</span></a>
+            <ul>
+               <li><a href='#'><span>Check-In Report</span></a>
+               <li><a href='#'><span>Check-Out Report</span></a>
+            </ul>
+         </li>
+      </ul>
+   </li>
+
+
 	{if $access eq "admin"}
    <li class='active has-sub'><a href='#'><span>Administration</span></a>
       <ul>
@@ -43,39 +68,12 @@
             </ul>
          </li>
 
-         <li class='has-sub'><a href='#'><span>Users</span></a>
-            <ul>
-               <li><a href='users'><span>Manage Users</span></a></li>
-            </ul>
-         </li>
+         <li><a href='users'><span>Users</span></a></li>
 
 
       </ul>
    </li>
 	{/if}
-
-   <li class='active has-sub'><a href='#'><span>Reports</span></a>
-      <ul>
-	      {if ($access eq "admin" or $access eq "accounting")}
-
-         <li class='has-sub'><a href='#'><span>Financial</span></a>
-            <ul>
-               <li><a href='#'><span>Transfer Report</span></a>
-               <li><a href='#'><span>Balance Report</span></a>
-               <li><a href='#'><span>Reconsile Report</span></a>
-
-            </ul>
-         </li>
-			{/if}
-
-         <li class='has-sub'><a href='#'><span>Guests</span></a>
-            <ul>
-               <li><a href='#'><span>Check-In Report</span></a>
-               <li><a href='#'><span>Check-Out Report</span></a>
-            </ul>
-         </li>
-      </ul>
-   </li>
 
 
 

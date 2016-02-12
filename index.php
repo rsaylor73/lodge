@@ -31,6 +31,22 @@ if ($check == "FALSE") {
 		$core->addnewuser();
 	}
 
+	if ($_GET['section'] == "saveuser") {
+		$core->saveuser();
+	}
+
+	if ($_GET['section'] == "edituser") {
+		$core->edituser();
+	}
+
+	if ($_GET['section'] == "updateuser") {
+		$core->updateuser();
+	}
+
+	if ($_GET['section'] == "deleteuser") {
+		$core->deleteuser();
+	}
+
 	if ($_GET['section'] == "logout") {
 		$core->logout();
 	}

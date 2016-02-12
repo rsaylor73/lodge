@@ -86,7 +86,87 @@ class Core {
 
 		$template = "users.tpl";
 		$data = array();
+
+		$data['output'] = $this->list_users(); // gets data
+
 		$this->load_smarty($data,$template);
+
+	}
+
+	public function list_users() {
+      $access_required[] = "admin";
+      $this->check_access($access_required);
+
+		$sql = "SELECT * FROM `users` ORDER BY `active`, `last`,`first`";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$output .= "<tr><td>$row[first] $row[last]</td><td>$row[userType]</td><td>$row[active]</td><td>
+				<input type=\"button\" value=\"Edit\" onclick=\"document.location.href='edituser/$row[id]'\" class=\"btn btn-primary\">&nbsp;
+				<input type=\"button\" value=\"Delete\" onclick=\"if(confirm('You are about to delete $row[first] $row[last]. Click OK to delete the user or Cancel to abort.')){document.location.href='deleteuser/$row[id]';}\" class=\"btn btn-danger\">
+
+				</td></tr>";
+		}
+		return $output;
+
+	}
+
+	public function deleteuser() {
+      $access_required[] = "admin";
+      $this->check_access($access_required);
+
+		// check if they are trying to delete them self
+		if ($_SESSION['id'] != $_GET['id']) {
+			$sql = "DELETE FROM `users` WHERE `id` = '$_GET[id]'";
+	      $result = $this->new_mysql($sql);
+   	   if ($result == "TRUE") {
+      	   $msg = "<font color=green>The user was deleted.</font><br>";
+	      } else {
+   	      $msg = "<font color=red>The user failed to delete.</font><br>";
+	      }
+		} else {
+			$msg = "<font color=red>Really, you are trying to delete yourself?</font><br>";
+		}
+      $data['msg'] = $msg;
+      $data['output'] = $this->list_users(); // gets data
+      $template = "users.tpl";
+      $this->load_smarty($data,$template);
+
+	}
+
+	public function edituser() {
+      $access_required[] = "admin";
+      $this->check_access($access_required);
+
+		$sql = "SELECT * FROM `users` WHERE `id` = '$_GET[id]'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			foreach ($row as $key=>$value) {
+				$data[$key] = $value;
+			}
+		}
+
+		$template = "edituser.tpl";
+		$this->load_smarty($data,$template);
+
+	}
+
+	public function updateuser() {
+      $access_required[] = "admin";
+      $this->check_access($access_required);
+
+		$sql = "
+		UPDATE `users` SET `first` = '$_POST[first]', `last` = '$_POST[last]', `email` = '$_POST[email]', `uupass` = '$_POST[uupass]', `userType` = '$_POST[userType]', `active` = '$_POST[active]' WHERE `id` = '$_POST[id]'
+		";
+      $result = $this->new_mysql($sql);
+      if ($result == "TRUE") {
+         $msg = "<font color=green>The user was updated.</font><br>";
+      } else {
+         $msg = "<font color=red>The user failed to update.</font><br>";
+      }
+      $data['msg'] = $msg;
+      $data['output'] = $this->list_users(); // gets data
+      $template = "users.tpl";
+      $this->load_smarty($data,$template);
 
 	}
 
@@ -96,6 +176,24 @@ class Core {
 
       $template = "addnewuser.tpl";
       $data = array();
+      $this->load_smarty($data,$template);
+	}
+
+	public function saveuser() {
+      $access_required[] = "admin";
+      $this->check_access($access_required);
+
+		$today = date("Ymd");
+		$sql = "INSERT INTO `users` (`first`,`last`,`email`,`uuname`,`uupass`,`userType`,`active`,`date_created`) VALUES ('$_POST[first]','$_POST[last]','$_POST[email]','$_POST[uuname]','$_POST[uupass]','$_POST[userType]','Yes','$today')";
+		$result = $this->new_mysql($sql);
+		if ($result == "TRUE") {
+			$msg = "<font color=green>The user was created.</font><br>";
+		} else {
+			$msg = "<font color=red>The user failed to create.</font><br>";
+		}
+		$data['msg'] = $msg;
+      $data['output'] = $this->list_users(); // gets data
+		$template = "users.tpl";
       $this->load_smarty($data,$template);
 	}
 

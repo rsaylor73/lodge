@@ -18,7 +18,11 @@ while ($row = $result->fetch_assoc()) {
 	}
    $_SESSION['logged'] = "TRUE";
    $ok = "1";
-   print "<div class=\"modal-body\"><br><br><font color=green>Login sucessfull. Loading please wait...</font><br><bR></div>";
+	if ($row['active'] == "Yes") {
+	   print "<div class=\"modal-body\"><br><br><font color=green>Login sucessfull. Loading please wait...</font><br><bR></div>";
+	} else {
+      print "<div class=\"modal-body\"><br><br><font color=orange>Sorry, but your account is no longer active. Loading please wait...</font><br><bR></div>";
+	}
 
    ?>
    <script>

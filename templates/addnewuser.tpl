@@ -1,6 +1,6 @@
 <div class="col-md-6">
 <h2>New User</h2>
-<form name="myform">
+<form name="myform" action="saveuser" method="post">
 
 <div class="input-group input-group-lg">
   <span class="input-group-addon" id="sizing-addon1" style="width:125px;">User: </span>
@@ -40,7 +40,7 @@
 		
 </div>
 
-<div class="input-group input-group-lg">
+<div class="input-group input-group-lg" id="submit" style="display:none">
 	<input type="submit" value="Add User" class="btn btn-primary">
 </div>
 
@@ -55,6 +55,7 @@ function check_user(myform) {
 	$("#check_user").html(php_msg);
 	});
 }
+
 </script>
 
 </div>

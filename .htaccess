@@ -12,5 +12,8 @@ RewriteRule ^dashboard/?$ index.php?section=dashboard [NC,L]
 RewriteRule ^logout/?$ index.php?section=logout [NC,L]
 RewriteRule ^users/?$ index.php?section=users [NC,L]
 RewriteRule ^addnewuser/?$ index.php?section=addnewuser [NC,L]
-
+RewriteRule ^saveuser/?$ index.php?section=saveuser [NC,L]
+RewriteRule ^edituser/([a-zA-Z0-9]+)/?$ index.php?section=edituser&id=$1 [NC,L]
+RewriteRule ^updateuser/? index.php?section=updateuser [NC,L]
+RewriteRule ^deleteuser/([a-zA-Z0-9]+)/?$ index.php?section=deleteuser&id=$1 [NC,L]
 

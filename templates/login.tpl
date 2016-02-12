@@ -1,7 +1,8 @@
+<div style="text-align:center;">
 <h2>Login</h2>
 {$msg}
 <form name="myform">
-<table class="table" width=500>
+<table class="table" width=500 align="center">
 	<tr>
 		<td><b>Username:</b><br><input type="text" name="uuname" placeholder="User Name" size=20 required></td>
 	</tr>
@@ -13,6 +14,7 @@
 	</tr>
 </table>
 </form>
+</div>
 
 <script>
 function loginfrm(myform) {
