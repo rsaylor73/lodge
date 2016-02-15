@@ -56,8 +56,7 @@
 
          <li class='has-sub'><a href='#'><span>Locations</span></a>
             <ul>
-               <li><a href='#'><span>Manage Lodge</span></a></li>
-               <li><a href='#'><span>Add Lodge</span></a></li>
+               <li><a href='lodge'><span>Manage Lodge</span></a></li>
                <li class='last'><a href='#'><span>Lodge Settings</span></a></li>
             </ul>
          </li>

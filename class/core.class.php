@@ -5,9 +5,45 @@ class Core {
 	public $linkID;
 	function __construct($linkID){ $this->linkID = $linkID; }
 
-   public function new_mysql($sql) {
+   private function new_mysql($sql) {
 		$result = $this->linkID->query($sql) or die($this->linkID->error.__LINE__);
       return $result;
+	}
+
+	private function error() {
+      $template = "error.tpl";
+      $data = array();
+      $this->load_smarty($data,$template);
+		die;
+	}
+
+	public function ignore_list($string) {
+		// list of methods load_module will not be allowed to pass
+		$data = array();
+		$data[] = "error";
+		$data[] = "new_mysql";
+		$data[] = "load_module";
+		$err = 0;
+		foreach ($data as $value) {
+			if ($value == $string) {
+				$err = "1";
+			}
+		}
+		return $err;
+	}
+
+	public function load_module($module) {
+		$err = $this->ignore_list($module);
+		if ($err == "1") {
+			print "<br><font color=red>You have called the program incorrectly.</font><br>";
+			die;
+		}
+		if (method_exists('Core',$module)) {
+			$this->$module();
+		} else {
+			print "<br><font color=red>You have called the program incorrectly.</font><br>";
+			die;
+		}
 	}
 
 	// gets a list of states
@@ -79,6 +115,52 @@ class Core {
 		be allowed to be accessed from those user types.
 
 	*/
+
+	public function managelodge($msg='') {
+      $access_required[] = "admin";
+      $this->check_access($access_required);
+
+		$template = "lodge.tpl";
+      $data = array();
+		$data['msg'] = $msg;
+
+		// load locations
+		$output = $this->load_locations();
+		$data['output'] = $output;
+      $this->load_smarty($data,$template);
+
+	}
+
+	public function addlodge() {
+      $access_required[] = "admin";
+      $this->check_access($access_required);
+
+      $template = "newlodge.tpl";
+      $data = array();
+
+
+      $this->load_smarty($data,$template);
+
+   }
+
+	public function savelodge() {
+		$sql = "INSERT INTO `locations` (`name`,`min_night_stay`,`agent_email`) VALUES ('$_POST[name]','$_POST[min_night_stay]','$_POST[agent_email]')";
+		$result = $this->new_mysql($sql);
+		if ($result == "TRUE") {
+			$this->managelodge('<font color=green>The location was saved.</font><br>');
+		} else {
+			$this->error();
+		}
+	}
+
+	private function load_locations() {
+		$sql = "SELECT * FROM `locations` ORDER BY `name` ASC";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$output .= "<tr><td>$row[name]</td><td>Edit</td></tr>";
+		}
+		return $output;
+	}
 
 	public function users() {
 		$access_required[] = "admin";

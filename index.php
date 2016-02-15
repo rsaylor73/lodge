@@ -23,33 +23,10 @@ if ($check == "FALSE") {
 		$smarty->display('dashboard.tpl');
 	}
 
-	if ($_GET['section'] == "users") {
-		$core->users();
+	if (($_GET['section'] != "dashboard") && ($_GET['section'] != "")) {
+		$core->load_module($_GET['section']);
 	}
 
-	if ($_GET['section'] == "addnewuser") {
-		$core->addnewuser();
-	}
-
-	if ($_GET['section'] == "saveuser") {
-		$core->saveuser();
-	}
-
-	if ($_GET['section'] == "edituser") {
-		$core->edituser();
-	}
-
-	if ($_GET['section'] == "updateuser") {
-		$core->updateuser();
-	}
-
-	if ($_GET['section'] == "deleteuser") {
-		$core->deleteuser();
-	}
-
-	if ($_GET['section'] == "logout") {
-		$core->logout();
-	}
 }
 
 // footer
