@@ -17,23 +17,35 @@ class Core {
 		die;
 	}
 
-	public function ignore_list($string) {
-		// list of methods load_module will not be allowed to pass
+	public function whitelist($string) {
+		// list of methods load_module is allowed to pass
+
+		// will DB this most likely - RBS
+
 		$data = array();
-		$data[] = "error";
-		$data[] = "new_mysql";
-		$data[] = "load_module";
-		$err = 0;
-		foreach ($data as $value) {
-			if ($value == $string) {
-				$err = "1";
+		$data[] = "logout";
+		$data[] = "users";
+		$data[] = "addnewuser";
+		$data[] = "saveuser";
+		$data[] = "edituser";
+		$data[] = "updateuser";
+		$data[] = "deleteuser";
+		$data[] = "managelodge";
+		$data[] = "lodge";
+		$data[] = "addlodge";
+		$data[] = "savelodge";
+
+		$err = "1";
+      foreach ($data as $value) {
+         if ($value == $string) {
+				$err = "0";
 			}
 		}
 		return $err;
 	}
 
 	public function load_module($module) {
-		$err = $this->ignore_list($module);
+		$err = $this->whitelist($module);
 		if ($err == "1") {
 			print "<br><font color=red>You have called the program incorrectly.</font><br>";
 			die;
