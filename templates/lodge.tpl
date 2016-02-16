@@ -6,7 +6,7 @@
 <hr><b>Existing Locations</b><br>
 <table class="table">
 <tr>
-	<td><b>Name</b></td><td>&nbsp;</td>
+	<td><b>Name</b></td><td><b>Active</b></td><td>&nbsp;</td>
 </tr>
 {$output}
 </table>

@@ -161,14 +161,34 @@ class Core {
 	}
 
 	public function editlodge() {
+		$sql = "SELECT * FROM `locations` WHERE `id` = '$_GET[id]'";
+		$result = $this->new_mysql($sql);
+		$data = array();
+		while ($row = $result->fetch_assoc()) {
+			foreach ($row as $key=>$value) {
+				$data[$key] = $value;
+			}
+		}
+      $template = "editlodge.tpl";
+      $this->load_smarty($data,$template);
 
 	}
 
+	public function updatelodge() {
+		$sql = "UPDATE `locations` SET `name` = '$_POST[name]', `min_night_stay` = '$_POST[min_night_stay]', `agent_email` = '$_POST[agent_email]', `active` = '$_POST[active]' WHERE `id` = '$_POST[id]'";
+		$result = $this->new_mysql($sql);
+      if ($result == "TRUE") {
+         $this->managelodge('<font color=green>The location was updated.</font><br>');
+      } else {
+         $this->error();
+      }
+	}
+
 	private function load_locations() {
-		$sql = "SELECT * FROM `locations` ORDER BY `name` ASC";
+		$sql = "SELECT * FROM `locations` ORDER BY `active` ASC, `name` ASC";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$output .= "<tr><td>$row[name]</td><td><input type=\"button\" value=\"Edit\" class=\"btn btn-primary\" onclick=\"document.location.href='editlodge/$row[id]'\"></td></tr>";
+			$output .= "<tr><td>$row[name]</td><td>$row[active]</td><td><input type=\"button\" value=\"Edit\" class=\"btn btn-primary\" onclick=\"document.location.href='editlodge/$row[id]'\"></td></tr>";
 		}
 		return $output;
 	}

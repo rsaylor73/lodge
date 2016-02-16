@@ -20,3 +20,4 @@ RewriteRule ^editlodge/([a-zA-Z0-9]+)/?$ index.php?section=editlodge&id=$1 [NC,L
 RewriteRule ^lodge/?$ index.php?section=managelodge [NC,L]
 RewriteRule ^addlodge/?$ index.php?section=addlodge [NC,L]
 RewriteRule ^savelodge/?$ index.php?section=savelodge [NC,L]
+RewriteRule ^updatelodge/?$ index.php?section=updatelodge [NC,L]
