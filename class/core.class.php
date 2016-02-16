@@ -5,7 +5,7 @@ class Core {
 	public $linkID;
 	function __construct($linkID){ $this->linkID = $linkID; }
 
-   private function new_mysql($sql) {
+   public function new_mysql($sql) {
 		$result = $this->linkID->query($sql) or die($this->linkID->error.__LINE__);
       return $result;
 	}
@@ -21,24 +21,27 @@ class Core {
 		// list of methods load_module is allowed to pass
 
 		// will DB this most likely - RBS
-
+		$sql = "SELECT `method` FROM `whitelist`";
+		$result = $this->new_mysql($sql);
 		$data = array();
-		$data[] = "logout";
-		$data[] = "users";
-		$data[] = "addnewuser";
-		$data[] = "saveuser";
-		$data[] = "edituser";
-		$data[] = "updateuser";
-		$data[] = "deleteuser";
-		$data[] = "managelodge";
-		$data[] = "lodge";
-		$data[] = "addlodge";
-		$data[] = "savelodge";
-
+		while ($row = $result->fetch_assoc()) {
+			foreach ($row as $key1=>$value1) {
+				$data[] = $value1;
+			}
+		}
 		$err = "1";
       foreach ($data as $value) {
          if ($value == $string) {
 				$err = "0";
+				// check access
+				$sql2 = "SELECT `access` FROM `whitelist` WHERE `method` = '$string'";
+				$result2 = $this->new_mysql($sql2);
+				while ($row2 = $result2->fetch_assoc()) {
+					$access = $row2['access'];
+					$access_required = explode(",",$access);
+				}
+		      $this->check_access($access_required);
+
 			}
 		}
 		return $err;
@@ -83,10 +86,14 @@ class Core {
 
 	// check login system
 	public function check_login() {
-		$sql = "SELECT `users`.`id` FROM `users` WHERE `users`.`uuname` = '$_SESSION[uuname]' AND `users`.`uupass` = '$_SESSION[uupass]' AND `users`.`active` = 'Yes'";
+		$sql = "SELECT * FROM `users` WHERE `users`.`uuname` = '$_SESSION[uuname]' AND `users`.`uupass` = '$_SESSION[uupass]' AND `users`.`active` = 'Yes'";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
       	$found = "1";
+			// update session data
+			foreach ($row as $key=>$value) {
+				$_SESSION[$key] = $value;
+			}
 		}
       if ($found == "1") {
       	return "TRUE";
@@ -122,16 +129,7 @@ class Core {
 		}
 	}
 
-	/*
-		General note about check_access : You define an array and pass the possible user access types. IE you could pass admin and accounting then that module would
-		be allowed to be accessed from those user types.
-
-	*/
-
 	public function managelodge($msg='') {
-      $access_required[] = "admin";
-      $this->check_access($access_required);
-
 		$template = "lodge.tpl";
       $data = array();
 		$data['msg'] = $msg;
@@ -144,9 +142,6 @@ class Core {
 	}
 
 	public function addlodge() {
-      $access_required[] = "admin";
-      $this->check_access($access_required);
-
       $template = "newlodge.tpl";
       $data = array();
 
@@ -165,19 +160,20 @@ class Core {
 		}
 	}
 
+	public function editlodge() {
+
+	}
+
 	private function load_locations() {
 		$sql = "SELECT * FROM `locations` ORDER BY `name` ASC";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$output .= "<tr><td>$row[name]</td><td>Edit</td></tr>";
+			$output .= "<tr><td>$row[name]</td><td><input type=\"button\" value=\"Edit\" class=\"btn btn-primary\" onclick=\"document.location.href='editlodge/$row[id]'\"></td></tr>";
 		}
 		return $output;
 	}
 
 	public function users() {
-		$access_required[] = "admin";
-		$this->check_access($access_required);
-
 		$template = "users.tpl";
 		$data = array();
 
@@ -188,9 +184,6 @@ class Core {
 	}
 
 	public function list_users() {
-      $access_required[] = "admin";
-      $this->check_access($access_required);
-
 		$sql = "SELECT * FROM `users` ORDER BY `active`, `last`,`first`";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
@@ -205,9 +198,6 @@ class Core {
 	}
 
 	public function deleteuser() {
-      $access_required[] = "admin";
-      $this->check_access($access_required);
-
 		// check if they are trying to delete them self
 		if ($_SESSION['id'] != $_GET['id']) {
 			$sql = "DELETE FROM `users` WHERE `id` = '$_GET[id]'";
@@ -228,9 +218,6 @@ class Core {
 	}
 
 	public function edituser() {
-      $access_required[] = "admin";
-      $this->check_access($access_required);
-
 		$sql = "SELECT * FROM `users` WHERE `id` = '$_GET[id]'";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
@@ -245,9 +232,6 @@ class Core {
 	}
 
 	public function updateuser() {
-      $access_required[] = "admin";
-      $this->check_access($access_required);
-
 		$sql = "
 		UPDATE `users` SET `first` = '$_POST[first]', `last` = '$_POST[last]', `email` = '$_POST[email]', `uupass` = '$_POST[uupass]', `userType` = '$_POST[userType]', `active` = '$_POST[active]' WHERE `id` = '$_POST[id]'
 		";
@@ -265,18 +249,12 @@ class Core {
 	}
 
 	public function addnewuser() {
-      $access_required[] = "admin";
-      $this->check_access($access_required);
-
       $template = "addnewuser.tpl";
       $data = array();
       $this->load_smarty($data,$template);
 	}
 
 	public function saveuser() {
-      $access_required[] = "admin";
-      $this->check_access($access_required);
-
 		$today = date("Ymd");
 		$sql = "INSERT INTO `users` (`first`,`last`,`email`,`uuname`,`uupass`,`userType`,`active`,`date_created`) VALUES ('$_POST[first]','$_POST[last]','$_POST[email]','$_POST[uuname]','$_POST[uupass]','$_POST[userType]','Yes','$today')";
 		$result = $this->new_mysql($sql);
