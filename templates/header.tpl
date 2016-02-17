@@ -35,6 +35,22 @@
    <script src="jquery-ui-1.10.3/ui/jquery.ui.dialog.js"></script>
    <script src='https://www.google.com/recaptcha/api.js'></script>
 	<script src="js/script.js"></script>
+
+   <script>
+   $(function() {
+      $( "#start_date"   ).datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true
+      });
+      $( "#end_date"      ).datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true
+      });
+   });
+	</script>
+
 </head>
 {/literal}
 

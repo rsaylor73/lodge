@@ -193,6 +193,39 @@ class Core {
 		return $output;
 	}
 
+	public function managerooms() {
+		$sql = "SELECT `name` FROM `locations` WHERE `id` = '$_GET[id]'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$name = $row['name'];
+		}
+
+		$template = "managerooms.tpl";
+		$data = array();
+		$data['name'] = $name;
+		$data['id'] = $_GET['id'];
+
+      $this->load_smarty($data,$template);
+
+	}
+
+	public function newroom() {
+      $sql = "SELECT `name` FROM `locations` WHERE `id` = '$_GET[id]'";
+      $result = $this->new_mysql($sql);
+      while ($row = $result->fetch_assoc()) {
+         $name = $row['name'];
+      }
+
+      $template = "newroom.tpl";
+      $data = array();
+      $data['name'] = $name;
+      $data['id'] = $_GET['id'];
+
+      $this->load_smarty($data,$template);
+
+
+	}
+
 	public function users() {
 		$template = "users.tpl";
 		$data = array();
