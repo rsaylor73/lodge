@@ -161,6 +161,7 @@ class Core {
 	}
 
 	public function editlodge() {
+
 		$sql = "SELECT * FROM `locations` WHERE `id` = '$_GET[id]'";
 		$result = $this->new_mysql($sql);
 		$data = array();
@@ -175,7 +176,16 @@ class Core {
 	}
 
 	public function updatelodge() {
-		$sql = "UPDATE `locations` SET `name` = '$_POST[name]', `min_night_stay` = '$_POST[min_night_stay]', `agent_email` = '$_POST[agent_email]', `active` = '$_POST[active]' WHERE `id` = '$_POST[id]'";
+	
+		if ($_POST['active'] == "") {
+			$_POST['active'] = "No";
+		}
+		if ($_POST['auto_inventory'] == "") {
+			$_POST['auto_inventory'] = "Off";
+		}
+	
+		$sql = "UPDATE `locations` SET `name` = '$_POST[name]', `min_night_stay` = '$_POST[min_night_stay]', `agent_email` = '$_POST[agent_email]', `active` = '$_POST[active]', `inventory_start_date` = '$_POST[inventory_start_date]',
+		`auto_inventory` = '$_POST[auto_inventory]'  WHERE `id` = '$_POST[id]'";
 		$result = $this->new_mysql($sql);
       if ($result == "TRUE") {
          $this->managelodge('<font color=green>The location was updated.</font><br>');
@@ -188,7 +198,11 @@ class Core {
 		$sql = "SELECT * FROM `locations` ORDER BY `active` ASC, `name` ASC";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$output .= "<tr><td>$row[name]</td><td>$row[active]</td><td><input type=\"button\" value=\"Edit\" class=\"btn btn-primary\" onclick=\"document.location.href='editlodge/$row[id]'\"></td></tr>";
+			$output .= "<tr><td>$row[name]</td><td>$row[active]</td><td>
+			<input type=\"button\" value=\"Edit\" class=\"btn btn-primary\" onclick=\"document.location.href='editlodge/$row[id]'\">&nbsp;
+			<input type=\"button\" value=\"Rooms\" class=\"btn btn-warning\" onclick=\"document.location.href='managerooms/$row[id]'\">
+
+		</td></tr>";
 		}
 		return $output;
 	}
@@ -204,6 +218,7 @@ class Core {
 		$data = array();
 		$data['name'] = $name;
 		$data['id'] = $_GET['id'];
+      $data['output'] = $this->listrooms($_GET['id']);
 
       $this->load_smarty($data,$template);
 
@@ -222,8 +237,91 @@ class Core {
       $data['id'] = $_GET['id'];
 
       $this->load_smarty($data,$template);
+	}
+
+	public function editroom() {
+      $data = array();
+      $sql = "SELECT `name` FROM `locations` WHERE `id` = '$_GET[id2]'";
+      $result = $this->new_mysql($sql);
+      while ($row = $result->fetch_assoc()) {
+         $name = $row['name'];
+      }  
+		$sql = "SELECT * FROM `rooms` WHERE `id` = '$_GET[id]'";
+      $result = $this->new_mysql($sql);
+      while ($row = $result->fetch_assoc()) {
+			foreach ($row as $key=>$value) {
+				$data[$key] = $value;
+			}
+		}
+      
+      $template = "editroom.tpl";
+      $data['name'] = $name;
+      $data['id'] = $_GET['id'];
+		$data['id2'] = $_GET['id2'];
+
+      $this->load_smarty($data,$template);
 
 
+	}
+
+	public function updateroom() {
+		if ($_POST['delete'] == "checked") {
+			$sql = "DELETE FROM `rooms` WHERE `id` = '$_POST[id]'";
+		} else {
+			$sql = "UPDATE `rooms` SET `description` = '$_POST[description]', `min_pax` = '$_POST[min_pax]', `beds` = '$_POST[beds]', `nightly_rate` = '$_POST[nightly_rate]' WHERE `id` = '$_POST[id]'";
+		}
+      $result = $this->new_mysql($sql);
+      if ($result == "TRUE") {
+         $_GET['id'] = $_POST['id2'];
+         $sql = "SELECT `name` FROM `locations` WHERE `id` = '$_GET[id]'";
+         $result = $this->new_mysql($sql);
+         while ($row = $result->fetch_assoc()) {
+            $name = $row['name'];
+         }
+
+         $template = "managerooms.tpl";
+         $data = array();
+         $data['name'] = $name;
+         $data['id'] = $_GET['id'];
+         $data['output'] = $this->listrooms($_GET['id']);
+         $data['msg'] = "<br><font color=green>The room was updated.</font><br>";
+         $this->load_smarty($data,$template);
+      } else {
+         $this->error();
+      }
+
+	}
+
+	public function saveroom() {
+		$sql = "INSERT INTO `rooms` (`locationID`,`description`,`min_pax`,`beds`,`nightly_rate`) VALUES ('$_POST[id]','$_POST[description]','$_POST[min_pax]','$_POST[beds]','$_POST[nightly_rate]')";
+		$result = $this->new_mysql($sql);
+		if ($result == "TRUE") {
+			$_GET['id'] = $_POST['id'];
+	      $sql = "SELECT `name` FROM `locations` WHERE `id` = '$_GET[id]'";
+	      $result = $this->new_mysql($sql);
+   	   while ($row = $result->fetch_assoc()) {
+      	   $name = $row['name'];
+	      }
+
+	      $template = "managerooms.tpl";
+   	   $data = array();
+      	$data['name'] = $name;
+	      $data['id'] = $_GET['id'];
+			$data['output'] = $this->listrooms($_GET['id']);
+			$data['msg'] = "<br><font color=green>The room was added.</font><br>";
+	      $this->load_smarty($data,$template);
+		} else {
+         $this->error();
+		}
+	}
+
+	public function listrooms($id) {
+		$sql = "SELECT * FROM `rooms` WHERE `locationID` = '$id'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$output .= "<tr><td>$row[description]</td><td>$row[beds]</td><td>$row[min_pax]</td><td>$row[nightly_rate]</td><td><input type=\"button\" class=\"btn btn-primary\" value=\"Edit\" onclick=\"document.location.href='editroom/$row[id]/$id'\"></td></tr>";
+		}
+		return $output;
 	}
 
 	public function users() {

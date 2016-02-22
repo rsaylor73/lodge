@@ -54,18 +54,7 @@
    <li class='active has-sub'><a href='#'><span>Administration</span></a>
       <ul>
 
-         <li class='has-sub'><a href='#'><span>Locations</span></a>
-            <ul>
-               <li><a href='lodge'><span>Manage Lodge</span></a></li>
-            </ul>
-         </li>
-
-         <li class='has-sub'><a href='#'><span>Inventory</span></a>
-            <ul>
-               <li><a href='#'><span>Manage Inventory</span></a></li>
-            </ul>
-         </li>
-
+         <li><a href='lodge'><span>Manage Lodge</span></a></li>
          <li><a href='users'><span>Users</span></a></li>
 
 

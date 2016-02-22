@@ -1,5 +1,5 @@
 <div class="col-md-6">
-<h2>Edit User</h2>
+<h2><a href="users">Users</a> : Edit User</h2>
 <form name="myform" action="updateuser" method="post">
 <input type="hidden" name="id" value="{$id}">
 

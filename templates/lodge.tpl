@@ -1,5 +1,5 @@
 <div class="col-md-6">
-<h2>Manage Lodge</h2>
+<h2><a href="lodge">Manage Lodge</a></h2>
 <input type="button" class="btn btn-success" value="Add Lodge" onclick="document.location.href='addlodge'">
 {$msg}
 

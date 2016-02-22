@@ -36,7 +36,12 @@
    <script src='https://www.google.com/recaptcha/api.js'></script>
 	<script src="js/script.js"></script>
 
+
+	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+
    <script>
+
    $(function() {
       $( "#start_date"   ).datepicker({
         dateFormat: "yy-mm-dd",
