@@ -61,6 +61,293 @@ class Core {
 		}
 	}
 
+	// Create one week of inventory
+	public function create_inventory($locationID,$start_date,$days) {
+
+		$date = strtotime($start_date);
+		$date = strtotime("-1 day", $date);
+		$start_date = date("Ymd", $date);
+
+		for ($i=0; $i < $days; $i++) {
+			$date = strtotime($start_date);
+			$date = strtotime("+1 day", $date);
+			$end_date[] = date("Ymd", $date);
+			$start_date = date("Ymd", $date);
+		}
+
+		$bed_map[0] = "A";
+		$bed_map[1] = "B";
+		$bed_map[2] = "C";
+		$bed_map[3] = "D";
+
+		// Create inventory
+		$sql = "SELECT * FROM `rooms` WHERE `locationID` = '$locationID'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			for ($i=0; $i < $days; $i++) {
+				$sql2 = "INSERT INTO `inventory` (`locationID`,`roomID`,`date_code`) VALUES ('$locationID','$row[id]','$end_date[$i]')";
+				$sql3 = "SELECT * FROM `inventory` WHERE `locationID` = '$locationID' AND `roomID` = '$row[id]' AND `date_code` = '$end_date[$i]'";
+				$result3 = $this->new_mysql($sql3);
+				$test = "";
+				$test = $result3->num_rows;
+				if ($test == "") {
+					// create inventory
+					$result2 = $this->new_mysql($sql2);
+					$inventoryID = $this->linkID->insert_id;
+		         for ($i2 = 0; $i2 < $row['beds']; $i2++) {
+						$sql4 = "INSERT INTO `beds` (`inventoryID`,`status`,`name`) VALUES ('$inventoryID','avail','$bed_map[$i2]')";
+						$result4 = $this->new_mysql($sql4);
+		         }
+
+				}
+			}
+		}
+		return "1";	
+
+	}
+
+	public function newreservation() {
+      $template = "newreservation.tpl";
+      $data = array();
+      $data['msg'] = $msg;
+
+		$options = "<option value=\"\" selected>Select Lodge</option>";
+		$sql = "SELECT `id`,`name` FROM `locations` WHERE `active` = 'Yes'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$options .= "<option value=\"$row[id]\">$row[name]</option>";
+		}
+		$data['lodge'] = $options;
+
+		for ($i=1; $i < 30; $i++) {
+			$pax .= "<option value=\"$i\">$i</option>";
+		}
+		$data['pax'] = $pax;
+
+      $this->load_smarty($data,$template);
+
+	}
+
+	public function quick_search($day) {
+      $sql = "
+      SELECT
+         COUNT(`b`.`status`) AS 'total_beds'
+            
+      FROM     
+         `inventory` i, `beds` b
+               
+      WHERE 
+         `i`.`locationID` = '$_POST[lodge]'
+         AND `i`.`date_code` BETWEEN '$day' AND '$day'
+         AND `i`.`inventoryID` = `b`.`inventoryID`
+         AND `b`.`status` = 'avail'
+
+      GROUP BY `b`.`status`
+         
+      HAVING total_beds >= '$_POST[pax]'
+      ";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$found = "1";
+		}
+		if ($found == "1") {
+			$color = "#E0F8E0";
+		} else {
+			$color= "#F5D0A9";
+		}
+		return $color;
+
+	}
+
+	public function searchinventory() {
+
+		$start_date = str_replace("-","",$_POST['start_date']);
+		$end_date = str_replace("-","",$_POST['end_date']);
+
+		$sql = "
+		SELECT
+			COUNT(`b`.`status`) AS 'total_beds'
+
+		FROM
+			`inventory` i, `beds` b
+
+		WHERE
+			`i`.`locationID` = '$_POST[lodge]'
+			AND `i`.`date_code` BETWEEN '$start_date' AND '$end_date'
+			AND `i`.`inventoryID` = `b`.`inventoryID`
+			AND `b`.`status` = 'avail'
+
+		GROUP BY `b`.`status`
+
+		HAVING total_beds >= '$_POST[pax]'
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$found = "1";
+			// build calendar to show # rooms available for each day
+	      $this->load_smarty($null,'reservations_header.tpl');
+
+			$months = $this->getMonthsInRange($_POST['start_date'],$_POST['end_date']);
+			print "<table class=\"table\">
+			<tr>";
+			foreach ($months as $key=>$value) {
+					$counter++;
+					$year = $value['year'];
+					$month = $value['month'];
+
+					echo "<td>" . $this->calendar_table("$month $year") . "</td>";
+					if ($counter > 3) {
+						print "</tr><tr>";
+						$counter = "0";
+				}
+			}
+			print "</tr></table>";
+			// ajax
+			print '
+			</div>
+			<div class="row">
+			<div class="col-md-6">
+			<h2><a href="lodge">Available Rooms</a></h2>
+
+
+			</div>
+			';
+
+
+			// end ajax
+         $this->load_smarty($null,'reservations_footer.tpl');
+
+
+		}
+		if ($found != "1") {
+			// display search form if no inventory found
+	      $options = "<option value=\"\" selected>Select Lodge</option>";
+   	   $sql = "SELECT `id`,`name` FROM `locations` WHERE `active` = 'Yes'";
+	      $result = $this->new_mysql($sql);
+   	   while ($row = $result->fetch_assoc()) {
+				if ($_POST['lodge'] == $row['id']) {
+					$options .= "<option selected value=\"$row[id]\">$row[name]</option>";
+				} else {
+		         $options .= "<option value=\"$row[id]\">$row[name]</option>";
+				}
+   	   }
+	      $data['lodge'] = $options;
+
+	      for ($i=1; $i < 30; $i++) {
+				if ($_POST['pax'] == $i) {
+					$pax .= "<option selected value=\"$i\">$i</option>";
+				} else {
+		         $pax .= "<option value=\"$i\">$i</option>";
+				}
+	      }
+	      $data['pax'] = $pax;
+			$data['start_date'] = $_POST['start_date'];
+			$data['end_date'] = $_POST['end_date'];
+
+			$data['msg'] = "<font color=red><br>Sorry, we did not locate any inventory that matched your search criteria.</b></font><br>";
+	      $template = "newreservation.tpl";
+	      $this->load_smarty($data,$template);
+		}
+
+	}
+
+
+
+	public function getMonthsInRange($startDate, $endDate) {
+		$months = array();
+		while (strtotime($startDate) <= strtotime($endDate)) {
+			$months[] = array('year' => date('Y', strtotime($startDate)), 'month' => date('F', strtotime($startDate)), );
+			$startDate = date('d M Y', strtotime($startDate.
+			'+ 1 month'));
+		}
+
+		return $months;
+	}
+
+
+	/*
+	Credit for this function goes to Ray Paseur (McLean, VA) from expert-exchange.com
+	*/
+	public function calendar_table($date='Today') {
+	    $dateobj           = new DateTime($date);
+	    $month             = new DateTime($dateobj->format('Y-m-01'));
+	    $caption           = $month->format("F Y");
+	    $first_day_number  = $month->format("w");
+   	 $last_day_of_month = $month->format("t");
+		 $the_month 		  = $month->format("m");
+       $the_year          = $month->format("Y");
+	    $day_counter       = 0;
+
+	    // USE HEREDOC NOTATION TO START THE HTML DOCUMENT
+	    $html  = '
+		<style type="text/css">
+		caption { text-align:left; }
+		th,td   { text-align:right; width:14%; padding-right:0.2em; }
+		th      { color:gray;    border:1px solid silver;    }
+		td      { color:dimgray; border:1px solid gainsboro; }
+		td.nul  {                border:1px solid white;     }
+		</style>
+
+		<table>
+		<caption>'.$caption.'</caption>
+		<tr class="cal">
+		<th abbr="Sunday">    S </th>
+		<th abbr="Monday">    M </th>
+		<th abbr="Tuesday">   T </th>
+		<th abbr="Wednesday"> W </th>
+		<th abbr="Thursday">  T </th>
+		<th abbr="Friday">    F </th>
+		<th abbr="Saturday">  S </th>
+		</tr>
+		';
+
+	    // THE FIRST ROW MAY HAVE DAYS THAT ARE NOT PART OF THIS MONTH
+	    $html .= '<tr>';
+	    while ($day_counter < $first_day_number)
+	    {
+	        $html .= '<td class="nul">&nbsp;</td>';
+   	     $day_counter++;
+	    }
+
+	    // THE DAYS OF THE MONTH
+   	 $mday = 1;
+	    while ($mday <= $last_day_of_month)
+   	 {
+	        // THE DAYS OF THE WEEK
+   	     while ($day_counter < 7)
+      	  {
+					$x = "";
+					if ($mday < 10) {
+						$x = "0";
+					}
+					$day = $the_year.$the_month.$x.$mday;
+					$color = $this->quick_search($day);
+
+               $html .= "<td bgcolor=$color>$mday</td>";
+         	   //$html .= "<td bgcolor=green>$the_month $x$mday $the_year</td>";
+	            $day_counter++;
+   	         $mday++;
+      	      if ($mday > $last_day_of_month) break 2;
+	        }
+
+	        $html .= '</tr>';
+   	     $html .= '<tr>';
+      	  $day_counter = 0;
+	    }
+
+	    // THE LAST ROW MAY HAVE DAYS THAT ARE NOT PART OF THIS MONTH
+   	 while ($day_counter < 7)
+	    {
+   	     $html .= '<td class="nul">&nbsp;</td>';
+      	  $day_counter++;
+	    }
+
+	    $html .= '</tr>';
+	    $html .= '</table>';
+
+	    return $html;
+	}
+
 	// gets a list of states
 	public function get_states($id) {
 		$sql = "SELECT * FROM `state` ORDER BY `state` ASC";
@@ -320,6 +607,22 @@ class Core {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$output .= "<tr><td>$row[description]</td><td>$row[beds]</td><td>$row[min_pax]</td><td>$row[nightly_rate]</td><td><input type=\"button\" class=\"btn btn-primary\" value=\"Edit\" onclick=\"document.location.href='editroom/$row[id]/$id'\"></td></tr>";
+			for ($i=0; $i < $row['beds']; $i++) {
+				switch ($i) {
+					case "0":
+					$loc = "A";
+					break;
+
+					case "1":
+					$loc = "B";
+					break;
+
+					default:
+					$loc = "Unknown";
+					break;
+				}
+				$output .= "<tr><td>&nbsp;</td><td colspan=4><i class=\"fa fa-bed\"></i> Bed $loc</td></tr>";
+			}
 		}
 		return $output;
 	}

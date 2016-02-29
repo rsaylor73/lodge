@@ -27,6 +27,15 @@ if ($check == "FALSE") {
 		$core->load_module($_GET['section']);
 	}
 
+	// Test
+	if ($_GET['action'] == "robert") {
+		$locationID = "2";
+		$start_date = "20160229";
+		$days = "728";
+		$core->create_inventory($locationID,$start_date,$days);
+
+	}
+
 }
 
 // footer

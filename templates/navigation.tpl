@@ -9,7 +9,7 @@
       <ul>
 
 			{if ($access eq "admin" or $access eq "agent")}
-         <li><a href='#'><span>New Reservation</span></a></li>
+         <li><a href='newreservation'><span>New Reservation</span></a></li>
 			{/if}
 			<li><a href='#'><span>Locate Reservation</span></a></li>
 		</ul>
