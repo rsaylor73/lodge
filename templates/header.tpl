@@ -22,6 +22,7 @@
   	 <link rel="stylesheet" href="css/styles.css">
 
     <!-- jQuery -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
    <script src="jquery-ui-1.10.3/jquery-1.9.1.js"></script>
    <script src="js/bootstrap.js"></script>
@@ -32,7 +33,6 @@
    <script src="jquery-ui-1.10.3/ui/jquery.ui.menu.js"></script>
    <script src="jquery-ui-1.10.3/ui/jquery.ui.autocomplete.js"></script>
    <script src="jquery-ui-1.10.3/ui/jquery.ui.dialog.js"></script>
-   <script src='https://www.google.com/recaptcha/api.js'></script>
 	<script src="js/script.js"></script>
 
 

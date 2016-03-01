@@ -205,14 +205,7 @@ class Core {
 			// ajax
 			print '
 			</div>
-			<div class="row">
-			<div class="col-md-6">
-			<h2><a href="lodge">Available Rooms</a></h2>
-
-
-			</div>
 			';
-
 
 			// end ajax
          $this->load_smarty($null,'reservations_footer.tpl');
@@ -251,6 +244,21 @@ class Core {
 
 	}
 
+
+	public function viewtent() {
+
+      $template = "viewtent.tpl";
+      $data = array();
+		$data['lodge'] = $_GET['lodge'];
+		$data['pax'] = $_GET['pax'];
+		$data['start_date'] = $_GET['start_date'];
+		$data['end_date'] = $_GET['end_date'];
+		$data['day'] = $_GET['day'];
+
+      $this->load_smarty($data,$template);
+
+
+	}
 
 
 	public function getMonthsInRange($startDate, $endDate) {
@@ -323,7 +331,21 @@ class Core {
 					$day = $the_year.$the_month.$x.$mday;
 					$color = $this->quick_search($day);
 
-               $html .= "<td bgcolor=$color>$mday</td>";
+					$start_date = str_replace("-","",$_POST['start_date']);
+					$end_date = str_replace("-","",$_POST['end_date']);
+
+					if ($color == "#E0F8E0") {
+                  $html .= "
+
+							<td bgcolor=$color>
+								<a href=\"viewtent/$_POST[lodge]/$_POST[pax]/$day/$start_date/$end_date\">$mday</a>
+
+
+							
+							</td>";
+					} else {
+	               $html .= "<td bgcolor=$color>$mday</td>";
+					}
          	   //$html .= "<td bgcolor=green>$the_month $x$mday $the_year</td>";
 	            $day_counter++;
    	         $mday++;
@@ -344,7 +366,6 @@ class Core {
 
 	    $html .= '</tr>';
 	    $html .= '</table>';
-
 	    return $html;
 	}
 
