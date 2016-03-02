@@ -164,6 +164,13 @@ class Core {
 		$start_date = str_replace("-","",$_POST['start_date']);
 		$end_date = str_replace("-","",$_POST['end_date']);
 
+		$sql = "SELECT `name`,`min_night_stay` FROM `locations` WHERE `id` = '$_POST[lodge]'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$data['name'] = $row['name'];
+			$data['min_night_stay'] = $row['min_night_stay'];
+		}
+
 		$sql = "
 		SELECT
 			COUNT(`b`.`status`) AS 'total_beds'
@@ -185,7 +192,7 @@ class Core {
 		while ($row = $result->fetch_assoc()) {
 			$found = "1";
 			// build calendar to show # rooms available for each day
-	      $this->load_smarty($null,'reservations_header.tpl');
+	      $this->load_smarty($data,'reservations_header.tpl');
 
 			$months = $this->getMonthsInRange($_POST['start_date'],$_POST['end_date']);
 			print "<table class=\"table\">
@@ -244,6 +251,47 @@ class Core {
 
 	}
 
+	public function get_tent_data($day) {
+
+      $sql = "
+      SELECT
+         `inventory`.`inventoryID`,
+         `rooms`.`description`,
+         `rooms`.`beds`,
+         `rooms`.`nightly_rate`,
+         `rooms`.`min_pax`,
+         `beds`.`name`,
+         `beds`.`bedID`,
+         DATE_FORMAT(`inventory`.`date_code`, '%m/%d/%Y') AS 'date'
+
+      FROM
+         `inventory`,`beds`,`rooms`
+
+      WHERE
+         `inventory`.`locationID` = '$_GET[lodge]'
+         AND `inventory`.`date_code` = '$day'
+         AND `inventory`.`inventoryID` = `beds`.`inventoryID`
+         AND `beds`.`status` = 'avail'
+         AND `inventory`.`roomID` = `rooms`.`id`
+		";
+
+      $result = $this->new_mysql($sql);
+      while ($row = $result->fetch_assoc()) {
+         if ($row['min_pax'] == "1") {
+            $guest = "<font color=blue><b>S</b></font>";
+         } else {
+            $guest = "<font color=green><b>C</b></font>";
+         }
+         $html .= "<tr><td>$row[description]</td><td><i class=\"fa fa-bed\"></i> $row[name]</td><td><i class=\"fa fa-user\"></i> $guest</td><td>$$row[nightly_rate]</td>
+         <td><input data-toggle=\"toggle\" name=\"book_$row[bedID]\" type=\"checkbox\" value=\"On\"></td></tr>
+         ";
+			$date = $row['date'];
+      }
+		$data[0] = $html;
+		$data[1] = $date;
+		return $data;
+
+	}
 
 	public function viewtent() {
 
@@ -254,6 +302,27 @@ class Core {
 		$data['start_date'] = $_GET['start_date'];
 		$data['end_date'] = $_GET['end_date'];
 		$data['day'] = $_GET['day'];
+
+		$temp = strtotime("$_GET[day] - 1 day");
+		$p = date("Ymd", $temp);
+
+		$temp = strtotime("$_GET[day] + 1 day");
+		$n = date("Ymd", $temp);
+
+		$p_array 	= $this->get_tent_data($p);
+		$c_array		= $this->get_tent_data($_GET['day']);
+		$n_array		= $this->get_tent_data($n);
+
+		// smarty
+		$data['p_html'] = $p_array[0];
+		$data['p_date'] = $p_array[1];
+
+      $data['c_html'] = $c_array[0];
+      $data['c_date'] = $c_array[1];
+
+      $data['n_html'] = $n_array[0];
+      $data['n_date'] = $n_array[1];
+
 
       $this->load_smarty($data,$template);
 
