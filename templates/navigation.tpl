@@ -11,7 +11,7 @@
 			{if ($access eq "admin" or $access eq "agent")}
          <li><a href='newreservation'><span>New Reservation</span></a></li>
 			{/if}
-			<li><a href='#'><span>Locate Reservation</span></a></li>
+			<li><a href='locatereservation'><span>Locate Reservation</span></a></li>
 		</ul>
 	</li>
 	{/if}
@@ -20,7 +20,7 @@
    <li class='active has-sub'><a href='#'><span>Customers</span></a>
       <ul>
 			<li><a href="#"><span>Resellers</span></a></li>
-			<li><a href="#"><span>Contacts</span></a></li>
+			<li><a href="contacts"><span>Contacts</span></a></li>
 		</ul>
 	</li>
 	{/if}

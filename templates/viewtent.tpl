@@ -16,7 +16,7 @@
 <input type="hidden" name="start_date" value="{$start_date}">
 <input type="hidden" name="end_date" value="{$end_date}">
 
-<input type="button" value="Assign Guests and return to Calendar View" class="btn btn-primary">
+<input type="submit" value="Assign Guests and return to Calendar View" class="btn btn-primary">
 <table class="table">
 
 <tr>
