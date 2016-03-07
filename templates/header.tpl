@@ -88,7 +88,10 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Aggressor Safari L<i class="fa fa-circle"></i>DGE</a>
+          <a class="navbar-brand" href="#">
+			<img src="assets/img/logo.png" height="75">
+			</a>
+
         </div>
       </div>
     </div>

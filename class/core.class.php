@@ -545,6 +545,9 @@ class Core {
 	public function contacts() {
 
 		$template = "contacts.tpl";
+
+		$data['list'] = $this->list_contacts();
+
       $this->load_smarty($data,$template);
 
 	}
@@ -575,6 +578,7 @@ class Core {
 			$msg = "<font color=green>The contact was added.</font><br>";
 			$data['msg'] = $msg;
 			$template = "contacts.tpl";
+	      $data['list'] = $this->list_contacts();
 			$this->load_smarty($data,$template);
 		} else {
 			$this->error();
@@ -583,7 +587,117 @@ class Core {
 
 	}
 
+	public function searchcontacts() {
+
+		$_SESSION['case'] = "";
+
+		/*
+		split $_POST[search_string] into 4 pages.
+		name - split into first, middle, last
+		city
+		state or province
+		country
+
+		*/
+		$input = explode(",",$_POST['search_string']);
+
+		$name = explode(" ",$input[0]);
+		foreach ($name as $value) {
+			$counter++;
+		}
+		// name
+		switch ($counter) {
+			case "1":
+			$_SESSION['first'] = $name[0];
+			$_SESSION['middle'] = "";
+			$_SESSION['last'] = "";
+			$_SESSION['case'] = "1";
+			break;
+
+			case "2":
+         $_SESSION['first'] = $name[0];
+         $_SESSION['middle'] = "";
+         $_SESSION['last'] = "$name[1]";
+			$_SESSION['case'] = "2";
+			break;
+
+			case "3":
+         $_SESSION['first'] = $name[0];
+         $_SESSION['middle'] = $name[1];
+         $_SESSION['last'] = $name[2];
+			$_SESSION['case'] = "3";
+			break;
+		}
+
+		// City
+		$test = $input[1][0];
+		if ($test == " ") {
+			$input[1] = $this->clear_white($input[1]);
+		}
+		$_SESSION['city'] = $input[1];
+
+		// State or Province
+      $test = $input[2][0];
+      if ($test == " ") {
+         $input[2] = $this->clear_white($input[2]);
+      }
+
+		$len = strlen($input[2]);
+		switch ($len) {
+			case "2":
+				$state = strtoupper($input[2]);
+				$sql = "SELECT `state_abbr`,`id` FROM `state` WHERE `state_abbr` = '$state'";
+				$result = $this->new_mysql($sql);
+				while ($row = $result->fetch_assoc()) {
+					$state_id = $row['id'];
+				}
+			break;
+
+			case "0":
+			case "1":
+			// nothing
+			break;
+
+			default:
+				print "Province! $len<br>";
+				$province = $input['2'];
+			break;
+		}
+		$_SESSION['stateID'] = $state_id;
+		$_SESSION['province'] = $province;
+
+		$this->contacts();		
+
+	}
+
 	public function list_contacts() {
+
+		if ($_SESSION['city'] != "") {
+			$city = "AND `c`.`city` LIKE '%$_SESSION[city]%'";
+		}
+
+		if ($_SESSION['stateID'] != "") {
+			$state = "AND `c`.`stateID` = '$_SESSION[stateID]'";
+		}
+
+		if ($_SESSION['province'] != "") {
+			$province = "AND `c`.`province` LIKE '%$_SESSION[province]%'";
+		}
+
+		switch ($_SESSION['case']) {
+			case "1":
+				$name = "AND `first` LIKE '%$_SESSION[first]%'";
+			break;
+
+			case "2":
+				$name = "AND CONCAT(`c`.`first`,' ',`c`.`last`) LIKE '%$_SESSION[first] $_SESSION[last]%'";
+			break;
+
+			case "3":
+            $name = "AND CONCAT(`c`.`first`,' ',`c`.`middle`,' ',`c`.`last`) LIKE '%$_SESSION[first] $_SESSION[middle] $_SESSION[last]%'";
+			break;
+		}
+
 		$sql = "
 		SELECT
 			`c`.`first`,
@@ -598,22 +712,30 @@ class Core {
 		FROM
 			`contacts` c
 
-		LEFT JOIN `state` s ON `c`.`state` = `s`.`id`
+		LEFT JOIN `state` s ON `c`.`stateID` = `s`.`id`
 		LEFT JOIN `countries` cn ON `c`.`countryID` = `cn`.`countryID`
 
 		WHERE
-			`c`.`first` LIKE '%$_SESSION[search_first]%'
-			AND `c`.`last` LIKE '%$_SESSION[search_last]%'
+			`c`.`contactID` > 0
+			$name
+			$city
+			$state
+			$province
 
 		LIMIT 20
 		";
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$html .= "<tr><td>$row[first] $row[middle] $row[last]</td><td>$row[city]</td><td>$row[state_abbr]$row[province]</td></tr>";
+			$html .= "<tr><td><i class=\"fa fa-pencil-square-o\"></i> $row[first] $row[middle] $row[last]</td><td>$row[city]</td><td>$row[state_abbr]$row[province]</td><td>$row[country]</td></tr>";
 		}
-		
+		return $html;	
 
+	}
+
+	public function clear_white($string) {
+		$string = substr($string,1);
+		return $string;
 	}
 
 	public function getMonthsInRange($startDate, $endDate) {

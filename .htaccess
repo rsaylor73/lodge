@@ -38,3 +38,4 @@ RewriteRule ^reservation_dashboard/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?se
 RewriteRule ^contacts/?$ index.php?section=contacts [NC,L]
 RewriteRule ^newcontact/?$ index.php?section=newcontact [NC,L]
 RewriteRule ^savecontact/?$ index.php?section=savecontact [NC,L]
+RewriteRule ^searchcontacts/?$ index.php?section=searchcontacts [NC,L]
