@@ -94,10 +94,16 @@ class Core {
 					// create inventory
 					$result2 = $this->new_mysql($sql2);
 					$inventoryID = $this->linkID->insert_id;
+					// Adults
 		         for ($i2 = 0; $i2 < $row['beds']; $i2++) {
-						$sql4 = "INSERT INTO `beds` (`inventoryID`,`status`,`name`) VALUES ('$inventoryID','avail','$bed_map[$i2]')";
+						$sql4 = "INSERT INTO `beds` (`inventoryID`,`status`,`name`,`type`) VALUES ('$inventoryID','avail','$bed_map[$i2]','adult')";
 						$result4 = $this->new_mysql($sql4);
 		         }
+					//Child
+               for ($i2 = 0; $i2 < $row['children']; $i2++) {
+                  $sql4 = "INSERT INTO `beds` (`inventoryID`,`status`,`name`,`type`) VALUES ('$inventoryID','avail','N/A','child')";
+                  $result4 = $this->new_mysql($sql4);
+               }
 
 				}
 			}
@@ -146,6 +152,29 @@ class Core {
          
       HAVING total_beds >= '$_POST[pax]'
       ";
+
+		$sql = "
+		SELECT 
+			COUNT(`a`.`status`) AS 'total_adult_beds',
+			COUNT(`c`.`status`) AS 'total_child_beds'
+
+		FROM 
+			`inventory` i
+
+		LEFT JOIN `beds` a ON `i`.`inventoryID` = `a`.`inventoryID` AND `a`.`type` = 'adult' AND `a`.`status` = 'avail'
+		LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail'
+
+
+		WHERE 
+			`i`.`locationID` = '$_POST[lodge]' 
+			AND `i`.`date_code` BETWEEN '$day' AND '$day' 
+
+		HAVING 
+			total_adult_beds >= '$_POST[pax]' AND total_child_beds >= '$_POST[children]'
+
+
+		";
+
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$found = "1";
@@ -186,8 +215,30 @@ class Core {
 
 		GROUP BY `b`.`status`
 
-		HAVING total_beds >= '$_POST[pax]'
+		HAVING 
+			total_beds >= '$_POST[pax]'
 		";
+
+		$sql = "
+		SELECT 
+			COUNT(`a`.`status`) AS 'total_adult_beds',
+			COUNT(`c`.`status`) AS 'total_child_beds'
+
+		FROM 
+			`inventory` i
+
+		LEFT JOIN `beds` a ON `i`.`inventoryID` = `a`.`inventoryID` AND `a`.`type` = 'adult' AND `a`.`status` = 'avail'
+		LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail'
+
+
+		WHERE 
+			`i`.`locationID` = '$_POST[lodge]' 
+			AND `i`.`date_code` BETWEEN '$start_date' AND '$end_date' 
+
+		HAVING 
+			total_adult_beds >= '$_POST[pax]' AND total_child_beds >= '$_POST[children]'
+		";
+
 		$result = $this->new_mysql($sql);
 
 		if ($_SESSION['reservationID'] != "") {
@@ -200,6 +251,14 @@ class Core {
 	      $this->load_smarty($data,'reservations_header.tpl');
 
 			$months = $this->getMonthsInRange($_POST['start_date'],$_POST['end_date']);
+			print "<form name=\"myform\" method=\"post\" action=\"viewtent\">
+			<input type=\"hidden\" name=\"lodge\" value=\"$_POST[lodge]\">
+			<input type=\"hidden\" name=\"pax\" value=\"$_POST[pax]\">
+			<input type=\"hidden\" name=\"children\" value=\"$_POST[children]\">
+			<input type=\"hidden\" name=\"nights\" value=\"$_POST[nights]\">
+			
+			";
+
 			print "<table class=\"table\">
 			<tr>";
 			foreach ($months as $key=>$value) {
@@ -208,12 +267,18 @@ class Core {
 					$month = $value['month'];
 
 					echo "<td>" . $this->calendar_table("$month $year") . "</td>";
-					if ($counter > 3) {
+					if ($counter > 2) {
 						print "</tr><tr>";
 						$counter = "0";
 				}
 			}
 			print "</tr></table>";
+
+			print "<div id=\"viewtent\" style=\"display:none\">
+				<input type=\"submit\" value=\"Select Room\" class=\"btn btn-primary\">
+			</div>";
+
+			print "</form>";
 			// ajax
 			print '
 			</div>
@@ -264,10 +329,10 @@ class Core {
          `rooms`.`description`,
          `rooms`.`beds`,
          `rooms`.`nightly_rate`,
-         `rooms`.`min_pax`,
          `beds`.`name`,
          `beds`.`bedID`,
-         DATE_FORMAT(`inventory`.`date_code`, '%m/%d/%Y') AS 'date'
+         DATE_FORMAT(`inventory`.`date_code`, '%m/%d/%Y') AS 'date',
+			`beds`.`status`
 
       FROM
          `inventory`,`beds`,`rooms`
@@ -276,7 +341,6 @@ class Core {
          `inventory`.`locationID` = '$_GET[lodge]'
          AND `inventory`.`date_code` = '$day'
          AND `inventory`.`inventoryID` = `beds`.`inventoryID`
-         AND `beds`.`status` = 'avail'
          AND `inventory`.`roomID` = `rooms`.`id`
 		";
 
@@ -287,9 +351,15 @@ class Core {
          } else {
             $guest = "<font color=green><b>C</b></font>";
          }
-         $html .= "<tr><td>$row[description]</td><td><i class=\"fa fa-bed\"></i> $row[name]</td><td><i class=\"fa fa-user\"></i> $guest</td><td>$$row[nightly_rate]</td>
-         <td><input data-toggle=\"toggle\" name=\"book_$row[bedID]\" type=\"checkbox\" value=\"On\"></td></tr>
-         ";
+			if ($row['status'] != "avail") {
+            $html .= "<tr><td>$row[description]</td><td><i class=\"fa fa-bed\"></i> $row[name]</td><td><i class=\"fa fa-user\"></i> $guest</td><td>$$row[nightly_rate]</td>
+            <td><center><i class=\"fa fa-exclamation-triangle text-danger\"><br>Sold Out</i></center></td></tr>
+            ";	
+			} else {
+	         $html .= "<tr><td>$row[description]</td><td><i class=\"fa fa-bed\"></i> $row[name]</td><td><i class=\"fa fa-user\"></i> $guest</td><td>$$row[nightly_rate]</td>
+   	      <td><input data-toggle=\"toggle\" name=\"book_$row[bedID]\" type=\"checkbox\" value=\"On\"></td></tr>
+      	   ";
+			}
 			$date = $row['date'];
       }
 		$data[0] = $html;
@@ -347,35 +417,210 @@ class Core {
 
       $template = "viewtent.tpl";
       $data = array();
-		$data['lodge'] = $_GET['lodge'];
-		$data['pax'] = $_GET['pax'];
-		$data['start_date'] = $_GET['start_date'];
-		$data['end_date'] = $_GET['end_date'];
-		$data['day'] = $_GET['day'];
 
-		$temp = strtotime("$_GET[day] - 1 day");
-		$p = date("Ymd", $temp);
+		foreach ($_POST as $key=>$value) {
+			$form_html .= "<input type=\"hidden\" name=\"$key\" value=\"$value\">\n";
+		}
 
-		$temp = strtotime("$_GET[day] + 1 day");
-		$n = date("Ymd", $temp);
+		$data['form_html'] = $form_html;
 
-		$p_array 	= $this->get_tent_data($p);
-		$c_array		= $this->get_tent_data($_GET['day']);
-		$n_array		= $this->get_tent_data($n);
+		foreach ($_POST as $key=>$value) {
+			if (preg_match("/data/i",$key)) {
+				$temp = explode("_",$key);
+				$dates[] = $temp[1];
+			}
+		}
+		asort($dates);
+		foreach ($dates as $value) {
+			if ($test == "1") {
+				$counter++;
+				$next = date("Ymd", strtotime($first ."+ $counter days"));
+				if ($next != $value) {
+					print "<br><h2>Error:</h2><font color=red>You must select consecutive days.</font><br>";
+					die;
+				}
+			}
+			if ($test != "1") {
+				$first = $value;
+				$test = "1";
+			}
+			$nights++;
+			$in_dates .= "'$value',";
+		}
+		$in_dates = substr($in_dates,0,-1);
 
-		// smarty
-		$data['p_html'] = $p_array[0];
-		$data['p_date'] = $p_array[1];
+		$adults = $_POST['pax'] * $nights;
+		if ($_POST['children'] > 0) {
+			$children = $_POST['children'] * $nights;
+		} else {
+			$children = "0";
+		}
 
-      $data['c_html'] = $c_array[0];
-      $data['c_date'] = $c_array[1];
 
-      $data['n_html'] = $n_array[0];
-      $data['n_date'] = $n_array[1];
+		$sql = "
+		SELECT
+			`r`.`id`,
+			`r`.`description`,
+			COUNT(`a`.`status`) AS 'total_adult_beds',
+			COUNT(`c`.`status`) AS 'total_child_beds',
+			`r`.`nightly_rate`
 
+		FROM
+			`inventory` i, `rooms` r
+
+		LEFT JOIN `beds` a ON `i`.`inventoryID` = `a`.`inventoryID` AND `a`.`type` = 'adult' AND `a`.`status` = 'avail'
+		LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail'
+
+		WHERE
+			`i`.`locationID` = '$_POST[lodge]' 
+			AND `i`.`date_code` IN($in_dates)
+			AND `i`.`roomID` = `r`.`id`
+
+		GROUP BY `r`.`description`
+
+		HAVING total_adult_beds >= '$adults' AND total_child_beds >= '$children'
+		";
+
+		$data['nights'] = $nights;
+		$data['adults'] = $_POST['pax'];
+		$data['children'] = $_POST['children'];
+		$start_date = reset($dates);
+		$data['start_date2'] = date("m/d/Y",strtotime($start_date));
+		$end_date = end($dates);
+		$data['end_date2'] = date("m/d/Y",strtotime($end_date));
+
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$total = $row['nightly_rate'] * $nights;
+			$html .= "<tr><td>$row[description]</td><td>$$total</td><td>Click to select this tent <input type=\"radio\" value=\"$row[id]\" name=\"roomID\" data-toggle=\"toggle\" onchange=\"document.getElementById('booknow').style.display='inline'\"></td></tr>";
+			$found = "1";
+		}
+		if ($found != "1") {
+			$data['msg'] = "<br><font color=red>Sorry, there are no rooms available for the duration and number of guests you have selected.</font><br>";
+		}
+
+		$data['btn'] = "<div id=\"booknow\" style=\"display:none\"><input type=\"submit\" value=\"Book Reservation\" class=\"btn btn-success\"></div>";
+
+		$data['html'] = $html;
+
+		/*
+		print "<pre>";
+		print_r($dates);
+		print "</pre>";
+		*/
 
       $this->load_smarty($data,$template);
 
+
+	}
+
+	public function reservenow() {
+
+      foreach ($_POST as $key=>$value) {
+         if (preg_match("/data/i",$key)) {
+            $temp = explode("_",$key);
+            $dates[] = $temp[1];
+         }
+      }
+
+      asort($dates);
+      foreach ($dates as $value) {
+         $nights++;
+         $in_dates .= "'$value',";
+      }
+      $in_dates = substr($in_dates,0,-1);
+
+      $adults = $_POST['pax'] * $nights;
+      if ($_POST['children'] > 0) {
+         $children = $_POST['children'] * $nights;
+      } else {
+         $children = "0";
+      }
+
+
+      $sql = "
+      SELECT
+         `r`.`id`,
+         `r`.`description`,
+         COUNT(`a`.`status`) AS 'total_adult_beds',
+         COUNT(`c`.`status`) AS 'total_child_beds',
+         `r`.`nightly_rate`
+
+      FROM
+         `inventory` i, `rooms` r
+
+      LEFT JOIN `beds` a ON `i`.`inventoryID` = `a`.`inventoryID` AND `a`.`type` = 'adult' AND `a`.`status` = 'avail'
+      LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail'
+
+      WHERE
+         `i`.`locationID` = '$_POST[lodge]' 
+         AND `i`.`date_code` IN($in_dates)
+         AND `i`.`roomID` = `r`.`id`
+			AND `r`.`id` = '$_POST[roomID]'
+
+      GROUP BY `r`.`description`
+
+      HAVING total_adult_beds >= '$adults' AND total_child_beds >= '$children'
+      ";
+
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			// Let's get a reservation number
+			$reservationID = $this->generate_reservationID();
+
+			// Adult
+			$sql2 = "
+			SELECT 
+				`a`.`bedID`
+
+			FROM 
+				`inventory` i, `rooms` r 
+
+			LEFT JOIN `beds` a ON `i`.`inventoryID` = `a`.`inventoryID` AND `a`.`type` = 'adult' AND `a`.`status` = 'avail' 
+
+			WHERE 
+	         `i`.`locationID` = '$_POST[lodge]' 
+   	      AND `i`.`date_code` IN($in_dates)
+      	   AND `i`.`roomID` = `r`.`id`
+         	AND `r`.`id` = '$_POST[roomID]'
+			";
+
+			$result2 = $this->new_mysql($sql2);
+         while ($row2 = $result2->fetch_assoc()) {
+				$sql3 = "UPDATE `beds` SET `reservationID` = '$reservationID', `status` = 'agent_hold' WHERE `bedID` = '$row2[bedID]'";
+				$result3 = $this->new_mysql($sql3);
+			}
+
+			// Child
+         $sql2 = "
+         SELECT 
+            `c`.`bedID`
+
+         FROM 
+            `inventory` i, `rooms` r 
+      
+			LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail' 
+
+         WHERE 
+            `i`.`locationID` = '$_POST[lodge]' 
+            AND `i`.`date_code` IN($in_dates)
+            AND `i`.`roomID` = `r`.`id`
+            AND `r`.`id` = '$_POST[roomID]'
+         ";
+
+         $result2 = $this->new_mysql($sql2);
+			while ($row2 = $result2->fetch_assoc()) {
+            $sql3 = "UPDATE `beds` SET `reservationID` = '$reservationID', `status` = 'agent_hold' WHERE `bedID` = '$row2[bedID]'";
+            $result3 = $this->new_mysql($sql3);
+         }
+
+			print "<br><font color=green>The reservation <b>$reservationID</b> has been booked. Please wait loading...<br>Click <a href=\"reservation_dashboard/$reservationID/details\">here</a> if the page does not load.<br></font>";
+			print "<meta http-equiv=\"refresh\" content=\"3; url=reservation_dashboard/$reservationID/details\">";
+			$ok = "1";
+		}
+		if ($ok != "1") {
+			print "<br><font color=red>Sorry, but the dates you selected are no longer available.</font><br>";
+		}
 
 	}
 
@@ -814,14 +1059,17 @@ class Core {
 					if ($color == "#E0F8E0") {
                   $html .= "
 
-							<td bgcolor=$color>
-								<a href=\"viewtent/$_POST[lodge]/$_POST[pax]/$day/$start_date/$end_date\">$mday</a>
+							<td bgcolor=$color><label>
+								$mday<br>
+								<input type=\"checkbox\" name=\"data_$day\" value=\"checked\" onclick=\"document.getElementById('viewtent').style.display='inline'\">
+				
+								<!--<a href=\"viewtent/$_POST[lodge]/$_POST[pax]/$day/$start_date/$end_date\">$mday</a>-->
 
 
 							
-							</td>";
+							</label></td>";
 					} else {
-	               $html .= "<td bgcolor=$color>$mday</td>";
+	               $html .= "<td bgcolor=$color><label>$mday<br><input type=\"checkbox\" disabled></label></td>";
 					}
          	   //$html .= "<td bgcolor=green>$the_month $x$mday $the_year</td>";
 	            $day_counter++;
@@ -986,7 +1234,7 @@ class Core {
 		}
 	
 		$sql = "UPDATE `locations` SET `name` = '$_POST[name]', `min_night_stay` = '$_POST[min_night_stay]', `agent_email` = '$_POST[agent_email]', `active` = '$_POST[active]', `inventory_start_date` = '$_POST[inventory_start_date]',
-		`auto_inventory` = '$_POST[auto_inventory]'  WHERE `id` = '$_POST[id]'";
+		`auto_inventory` = '$_POST[auto_inventory]',`inventory_stop_date` = '$_POST[inventory_stop_date]'  WHERE `id` = '$_POST[id]'";
 		$result = $this->new_mysql($sql);
       if ($result == "TRUE") {
          $this->managelodge('<font color=green>The location was updated.</font><br>');
@@ -1069,7 +1317,7 @@ class Core {
 		if ($_POST['delete'] == "checked") {
 			$sql = "DELETE FROM `rooms` WHERE `id` = '$_POST[id]'";
 		} else {
-			$sql = "UPDATE `rooms` SET `description` = '$_POST[description]', `min_pax` = '$_POST[min_pax]', `beds` = '$_POST[beds]', `nightly_rate` = '$_POST[nightly_rate]' WHERE `id` = '$_POST[id]'";
+			$sql = "UPDATE `rooms` SET `description` = '$_POST[description]', `beds` = '$_POST[beds]', `children` = '$_POST[children]', `nightly_rate` = '$_POST[nightly_rate]' WHERE `id` = '$_POST[id]'";
 		}
       $result = $this->new_mysql($sql);
       if ($result == "TRUE") {
@@ -1094,7 +1342,7 @@ class Core {
 	}
 
 	public function saveroom() {
-		$sql = "INSERT INTO `rooms` (`locationID`,`description`,`min_pax`,`beds`,`nightly_rate`) VALUES ('$_POST[id]','$_POST[description]','$_POST[min_pax]','$_POST[beds]','$_POST[nightly_rate]')";
+		$sql = "INSERT INTO `rooms` (`locationID`,`description`,`beds`,`children`,`nightly_rate`) VALUES ('$_POST[id]','$_POST[description]','$_POST[beds]','$_POST[children]','$_POST[nightly_rate]')";
 		$result = $this->new_mysql($sql);
 		if ($result == "TRUE") {
 			$_GET['id'] = $_POST['id'];
@@ -1120,23 +1368,7 @@ class Core {
 		$sql = "SELECT * FROM `rooms` WHERE `locationID` = '$id'";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$output .= "<tr><td>$row[description]</td><td>$row[beds]</td><td>$row[min_pax]</td><td>$row[nightly_rate]</td><td><input type=\"button\" class=\"btn btn-primary\" value=\"Edit\" onclick=\"document.location.href='editroom/$row[id]/$id'\"></td></tr>";
-			for ($i=0; $i < $row['beds']; $i++) {
-				switch ($i) {
-					case "0":
-					$loc = "A";
-					break;
-
-					case "1":
-					$loc = "B";
-					break;
-
-					default:
-					$loc = "Unknown";
-					break;
-				}
-				$output .= "<tr><td>&nbsp;</td><td colspan=4><i class=\"fa fa-bed\"></i> Bed $loc</td></tr>";
-			}
+			$output .= "<tr><td>$row[description]</td><td>$row[beds]</td><td>$row[children]</td><td>$$row[nightly_rate]</td><td><input type=\"button\" class=\"btn btn-primary\" value=\"Edit\" onclick=\"document.location.href='editroom/$row[id]/$id'\"></td></tr>";
 		}
 		return $output;
 	}

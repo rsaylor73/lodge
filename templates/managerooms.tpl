@@ -6,8 +6,8 @@
 <table class="table">
 <tr>
 	<td><b>Room</b></td>
-	<td><b># Beds</b></td>
-	<td><b>Min Pax</b></td>
+	<td><b># Adult Beds</b></td>
+	<td><b># Child Beds</b></td>
 	<td><b>Nightly Rate</b></td>
 	<td>&nbsp;</td>
 </tr>

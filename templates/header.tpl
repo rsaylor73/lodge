@@ -20,6 +20,7 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/main.css" rel="stylesheet">
   	 <link rel="stylesheet" href="css/styles.css">
+	 <link rel="stylesheet" href="css/af.css">
 
     <!-- jQuery -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -89,7 +90,7 @@
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">
-			<img src="assets/img/logo.png" height="75">
+			<img src="assets/img/logo.png">
 			</a>
 
         </div>
