@@ -865,6 +865,14 @@ class Core {
 
 	}
 
+	public function editcontact() {
+
+      $template = "editcontact.tpl";
+      $this->load_smarty($data,$template);
+
+
+	}
+
 	public function list_contacts() {
 
 		if ($_POST['first'] 		!= "") { $first = "AND `c`.`first` LIKE '%$_POST[first]%'";}
