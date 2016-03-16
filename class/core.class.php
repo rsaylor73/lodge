@@ -865,7 +865,37 @@ class Core {
 
 	}
 
-	public function editcontact() {
+	private function editcontact() {
+
+		$sql = "
+			SELECT
+				`c`.`title`,
+				`c`.`first`,
+				`c`.`middle`,
+				`c`.`last`,
+				`c`.`address1`,
+				`c`.`address2`,
+				`c`.`city`,
+				`c`.`state`,
+				`c`.`province`,
+				`c`.`zip`,
+				`c`.`countryID`,
+				`c`.`phone1_type`,
+				`c`.`phone2_type`,
+				`c`.`phone3_type`,
+				`c`.`phone4_type`,
+				`c`.`phone1`,
+				`c`.`phone2`,
+				`c`.`phone3`,
+				`c`.`phone4`
+
+			FROM
+				`reserve`.`contacts` c
+
+			WHERE
+				`c`.`contactID` = '$_GET[contactID]'
+
+		";
 
       $template = "editcontact.tpl";
       $this->load_smarty($data,$template);
