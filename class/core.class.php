@@ -787,10 +787,37 @@ class Core {
       return $data;
    }
 
+	public function country_list($id) {
+		if ($id == "") {
+			$option .= "<option selected value=\"\">--Select Country--</option>";
+		}
+		$sql = "
+		SELECT
+			`c`.`countryID`,
+			`c`.`country`
+
+		FROM
+			`reserve`.`countries` c
+
+		ORDER BY `c`.`country` ASC
+		";
+
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			if ($id == $row['countryID']) {
+				$option .= "<option selected value=\"$row[countryID]\">$row[country]</option>";
+			} else {
+            $option .= "<option value=\"$row[countryID]\">$row[country]</option>";
+			}
+		}
+		return $option;
+	}
+
 	public function contacts() {
 
 		$template = "contacts.tpl";
 
+		$data['country'] = $this->country_list($null);
 		$data['list'] = $this->list_contacts();
 
       $this->load_smarty($data,$template);
@@ -834,88 +861,66 @@ class Core {
 
 	public function searchcontacts() {
 
-		$_SESSION['case'] = "";
-
-		/*
-		split $_POST[search_string] into 4 pages.
-		name - split into first, middle, last
-		city
-		state or province
-		country
-
-		*/
-		$input = explode(",",$_POST['search_string']);
-
-		$name = explode(" ",$input[0]);
-		foreach ($name as $value) {
-			$counter++;
-		}
-		// name
-		switch ($counter) {
-			case "1":
-			$_SESSION['first'] = $name[0];
-			$_SESSION['middle'] = "";
-			$_SESSION['last'] = "";
-			$_SESSION['case'] = "1";
-			break;
-
-			case "2":
-         $_SESSION['first'] = $name[0];
-         $_SESSION['middle'] = "";
-         $_SESSION['last'] = "$name[1]";
-			$_SESSION['case'] = "2";
-			break;
-
-			case "3":
-         $_SESSION['first'] = $name[0];
-         $_SESSION['middle'] = $name[1];
-         $_SESSION['last'] = $name[2];
-			$_SESSION['case'] = "3";
-			break;
-		}
-
-		// City
-		$test = $input[1][0];
-		if ($test == " ") {
-			$input[1] = $this->clear_white($input[1]);
-		}
-		$_SESSION['city'] = $input[1];
-
-		// State or Province
-      $test = $input[2][0];
-      if ($test == " ") {
-         $input[2] = $this->clear_white($input[2]);
-      }
-
-		$len = strlen($input[2]);
-		switch ($len) {
-			case "2":
-				$state = strtoupper($input[2]);
-				$sql = "SELECT `state_abbr`,`id` FROM `state` WHERE `state_abbr` = '$state'";
-				$result = $this->new_mysql($sql);
-				while ($row = $result->fetch_assoc()) {
-					$state_id = $row['id'];
-				}
-			break;
-
-			case "0":
-			case "1":
-			// nothing
-			break;
-
-			default:
-				print "Province! $len<br>";
-				$province = $input['2'];
-			break;
-		}
-		$_SESSION['stateID'] = $state_id;
-		$_SESSION['province'] = $province;
-
 		$this->contacts();		
 
 	}
 
 	public function list_contacts() {
+
+		if ($_POST['first'] 		!= "") { $first = "AND `c`.`first` LIKE '%$_POST[first]%'";}
+		if ($_POST['last'] 		!= "") { $last = "AND `c`.`last` LIKE '%$_POST[last]%'";}
+		if ($_POST['phone'] 		!= "") { $phone = "AND (`c`.`phone1` LIKE '%$_POST[phone]%') OR (`c`.`phone2` LIKE '%$_POST[phone]%') OR (`c`.`phone3` LIKE '%$_POST[phone]%') OR (`c`.`phone4` LIKE '%$_POST[phone]%')";}
+		if ($_POST['zip'] 		!= "") { $zip = "AND `c`.`zip` LIKE '%$_POST[zip]%'";}
+		if ($_POST['email'] 		!= "") { $email = "AND `c`.`email` LIKE '%$_POST[email]%'";}
+		if ($_POST['country'] 	!= "") { $country = "AND `c`.`countryID` = '$_POST[country]'";}
+		if ($_POST['contactID'] != "") { $contactID = "AND `c`.`contactID` = '$_POST[contactID]'";}
+		if ($_POST['city']		!= "") { $city = "AND `c`.`city` = '$_POST[city]'";}
+		if ($_POST['address']	!= "") { $address = "AND `c`.`address1` LIKE '%$_POST[address]%'";}
+		if ($_POST['province']	!= "") { $province = "AND `c`.`province` LIKE '%$_POST[province]%'";}
+
+		$sql = "
+		SELECT
+			`c`.`contactID`,
+         `c`.`first`,
+         `c`.`middle`,
+         `c`.`last`,
+         `c`.`city`,
+			`c`.`province`,
+			`c`.`state`,
+         `cn`.`country`
+
+
+		FROM
+			`reserve`.`contacts` c
+
+      LEFT JOIN `countries` cn ON `c`.`countryID` = `cn`.`countryID`
+
+		WHERE
+         `c`.`contactID` > 0
+			$first
+			$last
+			$phone
+			$zip
+			$email
+			$country
+			$contactID
+			$city
+			$address
+			$province
+
+      LIMIT 20
+		";
+
+      $result = $this->new_mysql($sql);
+      while ($row = $result->fetch_assoc()) {
+         $html .= "<tr><td><a href=\"javascript:void(0)\" onclick=\"document.location.href='editcontact/$row[contactID]'\"><i class=\"fa fa-pencil-square-o\"></i></a> $row[first] $row[middle] $row[last]</td><td>$row[city]</td><td>$row[state]$row[province]</td><td>$row[country]</td></tr>";
+      }
+      return $html;
+
+	}
+
+
+	public function list_contactsOLD() {
 
 		if ($_SESSION['city'] != "") {
 			$city = "AND `c`.`city` LIKE '%$_SESSION[city]%'";
