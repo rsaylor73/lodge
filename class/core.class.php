@@ -53,6 +53,18 @@ class Core {
 			print "<br><font color=red>You do not have access to the $module method.</font><br>";
 			die;
 		}
+		
+
+		if (method_exists('Core', $module)) {
+			$this->$module();
+		} elseif {
+			//
+		} else {
+			//
+		}
+
+
+		/*
 		if (method_exists('Core',$module)) {
 			$this->$module();
 		} elseif {
@@ -65,6 +77,7 @@ class Core {
 			print "<br><font color=red>The $module method does not exist.</font><br>";
 			die;
 		}
+		*/
 	}
 
 	// Create one week of inventory
