@@ -35,6 +35,22 @@ class Core {
 		}
 	}
 
+	public function load_smarty($vars,$template) {
+		require_once('libs/Smarty.class.php');
+			$smarty=new Smarty();
+			$smarty->setTemplateDir('templates/');
+			$smarty->setCompileDir('templates_c/');
+			$smarty->setConfigDir('configs/');
+			$smarty->setCacheDir('cache/');
+		if (is_array($vars)) {
+			foreach ($vars as $key=>$value) {
+				$smarty->assign($key,$value);
+			}
+		}
+		$smarty->display($template);
+
+	}
+
 	public function navigation() {
 		$sql = "SELECT * FROM `users` WHERE `id` = '$_SESSION[id]' AND `active` = 'Yes'";
 		$result = $this->new_mysql($sql);
