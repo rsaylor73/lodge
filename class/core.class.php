@@ -1,6 +1,7 @@
 <?php
 
 if( !class_exists( 'Core')) {
+
 class Core {
 	public $linkID;
 	function __construct($linkID){ $this->linkID = $linkID; }
