@@ -1,7 +1,7 @@
 <?php
 class contacts extends Core {
 
-		private function contacts() {
+		public function contacts() {
 
 			$template = "contacts.tpl";
 
