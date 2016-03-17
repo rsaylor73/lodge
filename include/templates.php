@@ -17,7 +17,7 @@ $smarty->setConfigDir($GLOBAL['path'] . '/configs/');
 $smarty->setCacheDir($GLOBAL['path'] . '/cache/');
 
 // init the core class (custom code)
-include $GLOBAL['path']."/class/core.class.php";
-$core = new Core($linkID);
+include $GLOBAL['path']."/class/loader.class.php";
+$core = new loader($linkID);
 
 ?>
