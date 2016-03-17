@@ -61,7 +61,11 @@ class Core {
 		include_once("class/contacts.class.php");
 		$contacts = new contacts();
 
+		if (method_exists('Core', $module)) {
+			$this->$module();
+		}
 
+		/*
 		if (method_exists('Core', $module)) {
 			$this->$module();
 		} elseif (method_exists('contacts', $module)) {
@@ -69,7 +73,8 @@ class Core {
 		} else {
 			//
 		}
-
+		*/
+		
 
 		/*
 		if (method_exists('Core',$module)) {
