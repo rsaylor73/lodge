@@ -1121,18 +1121,7 @@ class test extends Core {
 	
 
 
-	public function check_access($type) {
-		/* This function checks if the user has access to the module. Each module will define the access and send to this method */
-		foreach ($type as $value) {
-			if ($_SESSION['userType'] == $value) {
-				$ok = "1";
-			}
-		}
-		if ($ok != "1") {
-			print "<br><br><font color=red>Sorry, but you do not have access to the requestion action.</font><br><br>";
-			die;
-		}
-	}
+
 
 	public function managelodge($msg='') {
 		$template = "lodge.tpl";
