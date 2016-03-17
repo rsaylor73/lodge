@@ -1,4 +1,7 @@
 <?php
+
+include "class/reports.class.php";
+
 class loader extends reports {
 
 	public $linkID;
