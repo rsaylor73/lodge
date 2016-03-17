@@ -9,7 +9,7 @@ class Core {
       return $result;
 	}
 
-	private function error() {
+	public function error() {
       $template = "error.tpl";
       $data = array();
       $this->load_smarty($data,$template);
@@ -88,7 +88,7 @@ class Core {
 
 	}
 
-	private function newreservation() {
+	public function newreservation() {
       $template = "newreservation.tpl";
       $data = array();
       $data['msg'] = $msg;
@@ -110,7 +110,7 @@ class Core {
 
 	}
 
-	private function quick_search($day) {
+	public function quick_search($day) {
       $sql = "
       SELECT
          COUNT(`b`.`status`) AS 'total_beds'
@@ -164,7 +164,7 @@ class Core {
 
 	}
 
-	private function searchinventory() {
+	public function searchinventory() {
 
 		$start_date = str_replace("-","",$_POST['start_date']);
 		$end_date = str_replace("-","",$_POST['end_date']);
@@ -297,7 +297,7 @@ class Core {
 
 	}
 
-	private function get_tent_data($day) {
+	public function get_tent_data($day) {
 
       $sql = "
       SELECT
@@ -344,7 +344,7 @@ class Core {
 
 	}
 
-	private function generate_reservationID() {
+	public function generate_reservationID() {
 		$today = date("Ymd");
 		$sql = "INSERT INTO `reservations` (`date_created`,`userID`,`active`) VALUES ('$today','$_SESSION[id]','Yes')";
 		$result = $this->new_mysql($sql);
@@ -352,7 +352,7 @@ class Core {
 		return $reservationID;
 	}
 
-	private function togglebeds() {
+	public function togglebeds() {
 		$ok = "0";
 		$fail = "0";
 
@@ -389,7 +389,7 @@ class Core {
 
 	}
 
-	private function viewtent() {
+	public function viewtent() {
 
       $template = "viewtent.tpl";
       $data = array();
@@ -490,7 +490,7 @@ class Core {
 
 	}
 
-	private function reservenow() {
+	public function reservenow() {
 
       foreach ($_POST as $key=>$value) {
          if (preg_match("/data/i",$key)) {
@@ -600,7 +600,7 @@ class Core {
 
 	}
 
-	private function completereservation() {
+	public function completereservation() {
 		$sql = "UPDATE `reservations` SET `complete` = 'Yes' WHERE `reservationID` = '$_SESSION[reservationID]'";
 		$result = $this->new_mysql($sql);
 		$reservationID = $_SESSION['reservationID'];
@@ -613,12 +613,12 @@ class Core {
 		//$this->reservation_dashboard();
 	}
 
-	private function locatereservation() {
+	public function locatereservation() {
 		$template = "locatereservation.tpl";
       $this->load_smarty($null,$template);
 	}
 
-	private function reservation_dashboard() {
+	public function reservation_dashboard() {
 		$reservationID = $_REQUEST['reservationID'];
 		$data['reservationID'] = $reservationID;
 
@@ -665,7 +665,7 @@ class Core {
 		data is not confused with another tab
 	*/
 
-	private function reservation_details($reservationID) {
+	public function reservation_details($reservationID) {
 		// Tab 1
 
 		$sql = "
@@ -693,7 +693,7 @@ class Core {
 		return $data;
 	}
 
-   private function reservation_guests($reservationID) {
+   public function reservation_guests($reservationID) {
 		// Tab 2
 		
 		$sql = "
@@ -748,17 +748,17 @@ class Core {
       return $data;
    }
 
-   private function reservation_dollars($reservationID) {
+   public function reservation_dollars($reservationID) {
       $data['test'] = "ok 3";
       return $data;
    }
 
-   private function reservation_notes($reservationID) {
+   public function reservation_notes($reservationID) {
       $data['test'] = "ok 4";
       return $data;
    }
 
-   private function reservation_cancel($reservationID) {
+   public function reservation_cancel($reservationID) {
       $data['test'] = "ok 5";
       return $data;
    }
@@ -790,7 +790,7 @@ class Core {
 	}
 
 /*
-	private function contacts() {
+	public function contacts() {
 
 		$template = "contacts.tpl";
 
@@ -801,7 +801,7 @@ class Core {
 
 	}
 */
-	private function newcontact() {
+	public function newcontact() {
 
 		$state = "<option value=\"\">--Select--</option>";
 		$state .= $this->get_states($null);
@@ -816,7 +816,7 @@ class Core {
 
 	}
 
-	private function savecontact() {
+	public function savecontact() {
 		$sql = "INSERT INTO `contacts` (`first`,`middle`,`last`,`title`,`pedigree`,`email`,`addr1`,`addr2`,`city`,`stateID`,`province`,`countryID`,`zip`,`dob`,`cell_phone`,`home_phone`,`work_phone`) VALUES
 		('$_POST[first]','$_POST[middle]','$_POST[last]','$_POST[title]','$_POST[pedigree]','$_POST[email]','$_POST[addr1]','$_POST[addr2]','$_POST[city]','$_POST[state]','$_POST[province]','$_POST[country]',
 		'$_POST[zip]','$_POST[dob]','$_POST[cell_phone]','$_POST[home_phone]','$_POST[work_phone]')
@@ -836,13 +836,13 @@ class Core {
 
 	}
 
-	private function searchcontacts() {
+	public function searchcontacts() {
 
 		$this->contacts();		
 
 	}
 
-	private function editcontact() {
+	public function editcontact() {
 
 		$sql = "
 			SELECT
@@ -880,7 +880,7 @@ class Core {
 
 	}
 
-	private function list_contacts() {
+	public function list_contacts() {
 
 		if ($_POST['first'] 		!= "") { $first = "AND `c`.`first` LIKE '%$_POST[first]%'";}
 		if ($_POST['last'] 		!= "") { $last = "AND `c`.`last` LIKE '%$_POST[last]%'";}
@@ -1223,7 +1223,7 @@ class Core {
       }
 	}
 
-	private function load_locations() {
+	public function load_locations() {
 		$sql = "SELECT * FROM `locations` ORDER BY `active` ASC, `name` ASC";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
