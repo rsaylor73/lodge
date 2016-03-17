@@ -17,6 +17,7 @@ $smarty->setConfigDir($GLOBAL['path'] . '/configs/');
 $smarty->setCacheDir($GLOBAL['path'] . '/cache/');
 
 // init the core class (custom code)
+include "class/reports.class.php";
 include $GLOBAL['path']."/class/loader.class.php";
 
 
