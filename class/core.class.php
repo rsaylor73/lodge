@@ -58,6 +58,7 @@ class Core {
 		
 
 		// load classes
+		include_once("class/contacts.class.php");
 		$contacts = new contacts;
 
 
