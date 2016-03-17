@@ -1,7 +1,7 @@
 <?php
 
 if( !class_exists( 'Core')) {
-class Core {
+abstract class Core {
 	public $linkID;
 	function __construct($linkID){ $this->linkID = $linkID; }
 
@@ -813,6 +813,7 @@ class Core {
 		return $option;
 	}
 
+/*
 	private function contacts() {
 
 		$template = "contacts.tpl";
@@ -823,7 +824,7 @@ class Core {
       $this->load_smarty($data,$template);
 
 	}
-
+*/
 	private function newcontact() {
 
 		$state = "<option value=\"\">--Select--</option>";
