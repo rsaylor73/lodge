@@ -18,6 +18,12 @@ $smarty->setCacheDir($GLOBAL['path'] . '/cache/');
 
 // init the core class (custom code)
 include $GLOBAL['path']."/class/loader.class.php";
+include $GLOBAL['path']."/class/admin.class.php";
+include $GLOBAL['path']."/class/core.class.php";
+include $GLOBAL['path']."/class/reports.class.php";
+include $GLOBAL['path']."/class/resellers.class.php";
+include $GLOBAL['path']."/class/reservations.class.php";
+
 $core = new loader($linkID);
 
 ?>
