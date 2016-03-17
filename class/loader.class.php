@@ -83,6 +83,8 @@ class loader extends reports {
 	}
 
 	public function load_module($module) {
+		// The method is checked in the classes below and if found the method is executed
+		// This is simular to Laravel's route system
 		$err = $this->whitelist($module);
 		if ($err == "1") {
 			print "<br><font color=red>You do not have access to the $module method.</font><br>";
@@ -93,6 +95,14 @@ class loader extends reports {
 		if (method_exists('Core',$module)) {
 			$this->$module();
 		} elseif (method_exists('contacts',$module)) {
+			$this->$module();
+		} elseif (method_exists('reports',$module)) {
+			$this->$module();
+		} elseif (method_exists('reservations',$module)) {
+			$this->$module();
+		} elseif (method_exists('resellers',$module)) {
+			$this->$module();
+		} elseif (method_exists('admin',$module)) {
 			$this->$module();
 		} else {
 			print "<br><font color=red>The $module method does not exist.</font><br>";
