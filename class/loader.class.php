@@ -90,11 +90,11 @@ class loader extends reports {
 		}
 		
 
-		if (method_exists('Core',$module)) {
+		//if (method_exists('Core',$module)) {
 			$this->$module();
-		} else {
-			print "<br><font color=red>The $module method does not exist.</font><br>";
-			die;
-		}
+		//} else {
+		//	print "<br><font color=red>The $module method does not exist.</font><br>";
+		//	die;
+		//}
 	}
 }
