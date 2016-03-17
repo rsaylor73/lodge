@@ -1,6 +1,6 @@
 <?php
 
-include "class/reports.class.php";
+include $GLOBAL['path']."class/reports.class.php";
 
 class loader extends reports {
 
