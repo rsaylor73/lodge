@@ -55,10 +55,16 @@ class Core {
 		}
 		
 
+		
+
+		// load classes
+		$contacts = new contacts;
+
+
 		if (method_exists('Core', $module)) {
 			$this->$module();
-		} elseif {
-			//
+		} elseif (method_exists('contacts', $module)) {
+			$contacts->$module();
 		} else {
 			//
 		}
