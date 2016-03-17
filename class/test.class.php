@@ -1119,19 +1119,7 @@ class test extends Core {
 	}
 
 	
-	public function navigation() {
-		$sql = "SELECT * FROM `users` WHERE `id` = '$_SESSION[id]' AND `active` = 'Yes'";
-		$result = $this->new_mysql($sql);
-		while ($row = $result->fetch_assoc()) {
-			$userType = $row['userType'];
-		}
-		if ($userType != "") {
-			$data['access'] = $userType; // crew, agent, admin
-			$template = "navigation.tpl";
-			$this->load_smarty($data,$template);
-		}
 
-	}
 
 	public function check_access($type) {
 		/* This function checks if the user has access to the module. Each module will define the access and send to this method */
