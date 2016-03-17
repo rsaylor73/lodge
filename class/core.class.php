@@ -59,7 +59,7 @@ class Core {
 
 		// load classes
 		include_once("class/contacts.class.php");
-		$contacts = new contacts;
+		$contacts = new contacts();
 
 
 		if (method_exists('Core', $module)) {
