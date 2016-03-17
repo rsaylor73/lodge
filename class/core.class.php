@@ -813,6 +813,7 @@ class Core {
 		return $option;
 	}
 
+/*
 	private function contacts() {
 
 		$template = "contacts.tpl";
@@ -823,7 +824,7 @@ class Core {
       $this->load_smarty($data,$template);
 
 	}
-
+*/
 	private function newcontact() {
 
 		$state = "<option value=\"\">--Select--</option>";
