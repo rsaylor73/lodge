@@ -1,5 +1,5 @@
 <?php
-include "class/admin.class.php";
+include $GLOBAL['path']."/class/admin.class.php";
 
 class reports extends admin {
 
