@@ -1118,24 +1118,7 @@ class test extends Core {
 		return $state;
 	}
 
-	// check login system
-	public function check_login() {
-		$sql = "SELECT * FROM `users` WHERE `users`.`uuname` = '$_SESSION[uuname]' AND `users`.`uupass` = '$_SESSION[uupass]' AND `users`.`active` = 'Yes'";
-		$result = $this->new_mysql($sql);
-		while ($row = $result->fetch_assoc()) {
-      	$found = "1";
-			// update session data
-			foreach ($row as $key=>$value) {
-				$_SESSION[$key] = $value;
-			}
-		}
-      if ($found == "1") {
-      	return "TRUE";
-		} else {
-			return "FALSE";
-		}
-	}
-
+	
 	public function navigation() {
 		$sql = "SELECT * FROM `users` WHERE `id` = '$_SESSION[id]' AND `active` = 'Yes'";
 		$result = $this->new_mysql($sql);
