@@ -94,6 +94,7 @@ class contacts extends reservations {
 				`c`.`contactID` = '$_GET[contactID]'
 
 		";
+		print "SQL: $sql<br>"
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			foreach ($row as $key=>$value) {
