@@ -4,10 +4,9 @@ include $GLOBAL['path']."/class/core.class.php";
 class reservations extends Core {
 
 	public function newreservation() {
-      $template = "newreservation.tpl";
-      $data = array();
-      $data['msg'] = $msg;
-
+      	$template = "newreservation.tpl";
+      	$data = array();
+      	$data['msg'] = $msg;
 		$options = "<option value=\"\" selected>Select Lodge</option>";
 		$sql = "SELECT `id`,`name` FROM `locations` WHERE `active` = 'Yes'";
 		$result = $this->new_mysql($sql);
@@ -20,29 +19,27 @@ class reservations extends Core {
 			$pax .= "<option value=\"$i\">$i</option>";
 		}
 		$data['pax'] = $pax;
-
-      $this->load_smarty($data,$template);
-
+	    $this->load_smarty($data,$template);
 	}
 
 	public function quick_search($day) {
-      $sql = "
-      SELECT
-         COUNT(`b`.`status`) AS 'total_beds'
+	    $sql = "
+    	SELECT
+        	COUNT(`b`.`status`) AS 'total_beds'
             
-      FROM     
-         `inventory` i, `beds` b
+      	FROM     
+         	`inventory` i, `beds` b
                
-      WHERE 
-         `i`.`locationID` = '$_POST[lodge]'
-         AND `i`.`date_code` BETWEEN '$day' AND '$day'
-         AND `i`.`inventoryID` = `b`.`inventoryID`
-         AND `b`.`status` = 'avail'
+      	WHERE 
+        	`i`.`locationID` = '$_POST[lodge]'
+         	AND `i`.`date_code` BETWEEN '$day' AND '$day'
+         	AND `i`.`inventoryID` = `b`.`inventoryID`
+         	AND `b`.`status` = 'avail'
 
-      GROUP BY `b`.`status`
+      	GROUP BY `b`.`status`
          
-      HAVING total_beds >= '$_POST[pax]'
-      ";
+      	HAVING total_beds >= '$_POST[pax]'
+      	";
 
 		$sql = "
 		SELECT 
@@ -63,7 +60,6 @@ class reservations extends Core {
 		HAVING 
 			total_adult_beds >= '$_POST[pax]' AND total_child_beds >= '$_POST[children]'
 
-
 		";
 
 		$result = $this->new_mysql($sql);
@@ -76,7 +72,6 @@ class reservations extends Core {
 			$color= "#F5D0A9";
 		}
 		return $color;
-
 	}
 
 	public function searchinventory() {
@@ -139,7 +134,7 @@ class reservations extends Core {
 		while ($row = $result->fetch_assoc()) {
 			$found = "1";
 			// build calendar to show # rooms available for each day
-	      $this->load_smarty($data,'reservations_header.tpl');
+	     	$this->load_smarty($data,'reservations_header.tpl');
 
 			$months = $this->getMonthsInRange($_POST['start_date'],$_POST['end_date']);
 			print "<form name=\"myform\" method=\"post\" action=\"viewtent\">
@@ -167,7 +162,8 @@ class reservations extends Core {
 
 			print "<div id=\"viewtent\" style=\"display:none\">
 				<input type=\"submit\" value=\"Select Room\" class=\"btn btn-primary\">
-			</div>";
+				</div>
+			";
 
 			print "</form>";
 			// ajax
@@ -176,87 +172,80 @@ class reservations extends Core {
 			';
 
 			// end ajax
-         $this->load_smarty($null,'reservations_footer.tpl');
-
-
+         	$this->load_smarty($null,'reservations_footer.tpl');
 		}
 		if ($found != "1") {
 			// display search form if no inventory found
-	      $options = "<option value=\"\" selected>Select Lodge</option>";
-   	   $sql = "SELECT `id`,`name` FROM `locations` WHERE `active` = 'Yes'";
-	      $result = $this->new_mysql($sql);
-   	   while ($row = $result->fetch_assoc()) {
+	    	$options = "<option value=\"\" selected>Select Lodge</option>";
+   	   		$sql = "SELECT `id`,`name` FROM `locations` WHERE `active` = 'Yes'";
+	      	$result = $this->new_mysql($sql);
+   	   		while ($row = $result->fetch_assoc()) {
 				if ($_POST['lodge'] == $row['id']) {
 					$options .= "<option selected value=\"$row[id]\">$row[name]</option>";
 				} else {
 		         $options .= "<option value=\"$row[id]\">$row[name]</option>";
 				}
-   	   }
-	      $data['lodge'] = $options;
-
-	      for ($i=1; $i < 30; $i++) {
+   	   		}
+	      	$data['lodge'] = $options;
+	      	for ($i=1; $i < 30; $i++) {
 				if ($_POST['pax'] == $i) {
 					$pax .= "<option selected value=\"$i\">$i</option>";
 				} else {
-		         $pax .= "<option value=\"$i\">$i</option>";
+		         	$pax .= "<option value=\"$i\">$i</option>";
 				}
-	      }
-	      $data['pax'] = $pax;
+	      	}
+	      	$data['pax'] = $pax;
 			$data['start_date'] = $_POST['start_date'];
 			$data['end_date'] = $_POST['end_date'];
-
 			$data['msg'] = "<font color=red><br>Sorry, we did not locate any inventory that matched your search criteria.</b></font><br>";
-	      $template = "newreservation.tpl";
-	      $this->load_smarty($data,$template);
+	      	$template = "newreservation.tpl";
+	      	$this->load_smarty($data,$template);
 		}
-
 	}
 
 	public function get_tent_data($day) {
-
-      $sql = "
-      SELECT
-         `inventory`.`inventoryID`,
-         `rooms`.`description`,
-         `rooms`.`beds`,
-         `rooms`.`nightly_rate`,
-         `beds`.`name`,
-         `beds`.`bedID`,
-         DATE_FORMAT(`inventory`.`date_code`, '%m/%d/%Y') AS 'date',
+    	$sql = "
+      	SELECT
+        	`inventory`.`inventoryID`,
+        	`rooms`.`description`,
+        	`rooms`.`beds`,
+        	`rooms`.`nightly_rate`,
+        	`beds`.`name`,
+        	`beds`.`bedID`,
+        	DATE_FORMAT(`inventory`.`date_code`, '%m/%d/%Y') AS 'date',
 			`beds`.`status`
 
-      FROM
-         `inventory`,`beds`,`rooms`
+      	FROM
+        	`inventory`,`beds`,`rooms`
 
-      WHERE
-         `inventory`.`locationID` = '$_GET[lodge]'
-         AND `inventory`.`date_code` = '$day'
-         AND `inventory`.`inventoryID` = `beds`.`inventoryID`
-         AND `inventory`.`roomID` = `rooms`.`id`
+      	WHERE
+        	`inventory`.`locationID` = '$_GET[lodge]'
+        	AND `inventory`.`date_code` = '$day'
+        	AND `inventory`.`inventoryID` = `beds`.`inventoryID`
+        	AND `inventory`.`roomID` = `rooms`.`id`
 		";
 
-      $result = $this->new_mysql($sql);
-      while ($row = $result->fetch_assoc()) {
-         if ($row['min_pax'] == "1") {
-            $guest = "<font color=blue><b>S</b></font>";
-         } else {
-            $guest = "<font color=green><b>C</b></font>";
-         }
+      	$result = $this->new_mysql($sql);
+      	while ($row = $result->fetch_assoc()) {
+        	if ($row['min_pax'] == "1") {
+            	$guest = "<font color=blue><b>S</b></font>";
+         	} else {
+            	$guest = "<font color=green><b>C</b></font>";
+         	}
 			if ($row['status'] != "avail") {
-            $html .= "<tr><td>$row[description]</td><td><i class=\"fa fa-bed\"></i> $row[name]</td><td><i class=\"fa fa-user\"></i> $guest</td><td>$$row[nightly_rate]</td>
-            <td><center><i class=\"fa fa-exclamation-triangle text-danger\"><br>Sold Out</i></center></td></tr>
-            ";	
+            	$html .= "<tr><td>$row[description]</td><td><i class=\"fa fa-bed\"></i> $row[name]</td><td><i class=\"fa fa-user\"></i> $guest</td><td>$$row[nightly_rate]</td>
+            	<td><center><i class=\"fa fa-exclamation-triangle text-danger\"><br>Sold Out</i></center></td></tr>
+            	";	
 			} else {
-	         $html .= "<tr><td>$row[description]</td><td><i class=\"fa fa-bed\"></i> $row[name]</td><td><i class=\"fa fa-user\"></i> $guest</td><td>$$row[nightly_rate]</td>
-   	      <td><input data-toggle=\"toggle\" name=\"book_$row[bedID]\" type=\"checkbox\" value=\"On\"></td></tr>
-      	   ";
+	        	$html .= "<tr><td>$row[description]</td><td><i class=\"fa fa-bed\"></i> $row[name]</td><td><i class=\"fa fa-user\"></i> $guest</td><td>$$row[nightly_rate]</td>
+   	      		<td><input data-toggle=\"toggle\" name=\"book_$row[bedID]\" type=\"checkbox\" value=\"On\"></td></tr>
+      	   		";
 			}
 			$date = $row['date'];
-      }
+      	}
 		$data[0] = $html;
 		$data[1] = $date;
 		return $data;
-
 	}
 
 	public function generate_reservationID() {
@@ -299,16 +288,13 @@ class reservations extends Core {
 		$data['end_date'] = $_POST['end_date'];
 		$data['reservationID'] = $_SESSION['reservationID'];
 
-      $this->load_smarty($data,$template);
-
-
+      	$this->load_smarty($data,$template);
 	}
 
 	public function viewtent() {
 
-      $template = "viewtent.tpl";
-      $data = array();
-
+    	$template = "viewtent.tpl";
+      	$data = array();
 		foreach ($_POST as $key=>$value) {
 			$form_html .= "<input type=\"hidden\" name=\"$key\" value=\"$value\">\n";
 		}
@@ -383,7 +369,8 @@ class reservations extends Core {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$total = $row['nightly_rate'] * $nights;
-			$html .= "<tr><td>$row[description]</td><td>$$total</td><td>Click to select this tent <input type=\"radio\" value=\"$row[id]\" name=\"roomID\" data-toggle=\"toggle\" onchange=\"document.getElementById('booknow').style.display='inline'\"></td></tr>";
+			$html .= "<tr><td>$row[description]</td><td>$$total</td><td>Click to select this tent <input type=\"radio\" value=\"$row[id]\" 
+			name=\"roomID\" data-toggle=\"toggle\" onchange=\"document.getElementById('booknow').style.display='inline'\"></td></tr>";
 			$found = "1";
 		}
 		if ($found != "1") {
@@ -393,66 +380,53 @@ class reservations extends Core {
 		$data['btn'] = "<div id=\"booknow\" style=\"display:none\"><input type=\"submit\" value=\"Book Reservation\" class=\"btn btn-success\"></div>";
 
 		$data['html'] = $html;
-
-		/*
-		print "<pre>";
-		print_r($dates);
-		print "</pre>";
-		*/
-
-      $this->load_smarty($data,$template);
-
-
+	    $this->load_smarty($data,$template);
 	}
 
 	public function reservenow() {
+    	foreach ($_POST as $key=>$value) {
+       		if (preg_match("/data/i",$key)) {
+            	$temp = explode("_",$key);
+            	$dates[] = $temp[1];
+         	}
+      	}
+	    asort($dates);
+    	foreach ($dates as $value) {
+        	$nights++;
+         	$in_dates .= "'$value',";
+      	}
+      	$in_dates = substr($in_dates,0,-1);
+      	$adults = $_POST['pax'] * $nights;
+      	if ($_POST['children'] > 0) {
+        	$children = $_POST['children'] * $nights;
+      	} else {
+        	$children = "0";
+      	}
 
-      foreach ($_POST as $key=>$value) {
-         if (preg_match("/data/i",$key)) {
-            $temp = explode("_",$key);
-            $dates[] = $temp[1];
-         }
-      }
+	    $sql = "
+      	SELECT
+        	`r`.`id`,
+         	`r`.`description`,
+         	COUNT(`a`.`status`) AS 'total_adult_beds',
+         	COUNT(`c`.`status`) AS 'total_child_beds',
+         	`r`.`nightly_rate`
 
-      asort($dates);
-      foreach ($dates as $value) {
-         $nights++;
-         $in_dates .= "'$value',";
-      }
-      $in_dates = substr($in_dates,0,-1);
+      	FROM
+        	`inventory` i, `rooms` r
 
-      $adults = $_POST['pax'] * $nights;
-      if ($_POST['children'] > 0) {
-         $children = $_POST['children'] * $nights;
-      } else {
-         $children = "0";
-      }
+      	LEFT JOIN `beds` a ON `i`.`inventoryID` = `a`.`inventoryID` AND `a`.`type` = 'adult' AND `a`.`status` = 'avail'
+      	LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail'
 
-
-      $sql = "
-      SELECT
-         `r`.`id`,
-         `r`.`description`,
-         COUNT(`a`.`status`) AS 'total_adult_beds',
-         COUNT(`c`.`status`) AS 'total_child_beds',
-         `r`.`nightly_rate`
-
-      FROM
-         `inventory` i, `rooms` r
-
-      LEFT JOIN `beds` a ON `i`.`inventoryID` = `a`.`inventoryID` AND `a`.`type` = 'adult' AND `a`.`status` = 'avail'
-      LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail'
-
-      WHERE
-         `i`.`locationID` = '$_POST[lodge]' 
-         AND `i`.`date_code` IN($in_dates)
-         AND `i`.`roomID` = `r`.`id`
+      	WHERE
+        	`i`.`locationID` = '$_POST[lodge]' 
+         	AND `i`.`date_code` IN($in_dates)
+         	AND `i`.`roomID` = `r`.`id`
 			AND `r`.`id` = '$_POST[roomID]'
 
-      GROUP BY `r`.`description`
+      	GROUP BY `r`.`description`
 
-      HAVING total_adult_beds >= '$adults' AND total_child_beds >= '$children'
-      ";
+      	HAVING total_adult_beds >= '$adults' AND total_child_beds >= '$children'
+      	";
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
@@ -470,49 +444,49 @@ class reservations extends Core {
 			LEFT JOIN `beds` a ON `i`.`inventoryID` = `a`.`inventoryID` AND `a`.`type` = 'adult' AND `a`.`status` = 'avail' 
 
 			WHERE 
-	         `i`.`locationID` = '$_POST[lodge]' 
-   	      AND `i`.`date_code` IN($in_dates)
-      	   AND `i`.`roomID` = `r`.`id`
-         	AND `r`.`id` = '$_POST[roomID]'
+	        	`i`.`locationID` = '$_POST[lodge]' 
+   	      		AND `i`.`date_code` IN($in_dates)
+      	   		AND `i`.`roomID` = `r`.`id`
+         		AND `r`.`id` = '$_POST[roomID]'
 			";
 
 			$result2 = $this->new_mysql($sql2);
-         while ($row2 = $result2->fetch_assoc()) {
+         	while ($row2 = $result2->fetch_assoc()) {
 				$sql3 = "UPDATE `beds` SET `reservationID` = '$reservationID', `status` = 'agent_hold' WHERE `bedID` = '$row2[bedID]'";
 				$result3 = $this->new_mysql($sql3);
 			}
 
 			// Child
-         $sql2 = "
-         SELECT 
-            `c`.`bedID`
+         	$sql2 = "
+         	SELECT 
+            	`c`.`bedID`
 
-         FROM 
-            `inventory` i, `rooms` r 
+         	FROM 
+            	`inventory` i, `rooms` r 
       
 			LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail' 
 
-         WHERE 
-            `i`.`locationID` = '$_POST[lodge]' 
-            AND `i`.`date_code` IN($in_dates)
-            AND `i`.`roomID` = `r`.`id`
-            AND `r`.`id` = '$_POST[roomID]'
-         ";
+         	WHERE 
+            	`i`.`locationID` = '$_POST[lodge]' 
+            	AND `i`.`date_code` IN($in_dates)
+            	AND `i`.`roomID` = `r`.`id`
+            	AND `r`.`id` = '$_POST[roomID]'
+         	";
 
-         $result2 = $this->new_mysql($sql2);
-			while ($row2 = $result2->fetch_assoc()) {
-            $sql3 = "UPDATE `beds` SET `reservationID` = '$reservationID', `status` = 'agent_hold' WHERE `bedID` = '$row2[bedID]'";
-            $result3 = $this->new_mysql($sql3);
-         }
+         	$result2 = $this->new_mysql($sql2);
+				while ($row2 = $result2->fetch_assoc()) {
+            	$sql3 = "UPDATE `beds` SET `reservationID` = '$reservationID', `status` = 'agent_hold' WHERE `bedID` = '$row2[bedID]'";
+            	$result3 = $this->new_mysql($sql3);
+         	}
 
-			print "<br><font color=green>The reservation <b>$reservationID</b> has been booked. Please wait loading...<br>Click <a href=\"reservation_dashboard/$reservationID/details\">here</a> if the page does not load.<br></font>";
+			print "<br><font color=green>The reservation <b>$reservationID</b> has been booked. Please wait loading...<br>Click <a href=\"reservation_dashboard/$reservationID/details\">here</a> 
+			if the page does not load.<br></font>";
 			print "<meta http-equiv=\"refresh\" content=\"3; url=reservation_dashboard/$reservationID/details\">";
 			$ok = "1";
 		}
 		if ($ok != "1") {
 			print "<br><font color=red>Sorry, but the dates you selected are no longer available.</font><br>";
 		}
-
 	}
 
 	public function completereservation() {
@@ -524,13 +498,11 @@ class reservations extends Core {
 
 		print "Loading...<br>";
 		print "<meta http-equiv=\"refresh\" content=\"1;url=reservation_dashboard/$reservationID\">";
-
-		//$this->reservation_dashboard();
 	}
 
 	public function locatereservation() {
 		$template = "locatereservation.tpl";
-      $this->load_smarty($null,$template);
+      	$this->load_smarty($null,$template);
 	}
 
 	public function reservation_dashboard() {
@@ -546,17 +518,17 @@ class reservations extends Core {
 		switch ($data['part']) {
 			case "details":
 				$array = $this->reservation_details($reservationID);
-		      $data = array_merge($data,$array);
+		      	$data = array_merge($data,$array);
 			break;
 
 			case "guests":
-            $array = $this->reservation_guests($reservationID);
-            $data = array_merge($data,$array);
+            	$array = $this->reservation_guests($reservationID);
+            	$data = array_merge($data,$array);
 			break;
 
 			case "dollars":
-            $array = $this->reservation_dollars($reservationID);
-            $data = array_merge($data,$array);
+            	$array = $this->reservation_dollars($reservationID);
+            	$data = array_merge($data,$array);
 			break;
 
 			case "notes":
@@ -565,14 +537,13 @@ class reservations extends Core {
 			break;
 
 			case "cancel":
-            $array = $this->reservation_cancel($reservationID);
-            $data = array_merge($data,$array);
+            	$array = $this->reservation_cancel($reservationID);
+            	$data = array_merge($data,$array);
 			break;
-
 		}
 
 		$template = "reservation_dashboard.tpl";
-      $this->load_smarty($data,$template);
+      	$this->load_smarty($data,$template);
 	}
 
 	/*
@@ -658,25 +629,24 @@ class reservations extends Core {
 		
 		}
 
-
       $data['t2_html'] = $html;
       return $data;
-   }
+   	}
 
-   public function reservation_dollars($reservationID) {
-      $data['test'] = "ok 3";
-      return $data;
-   }
+   	public function reservation_dollars($reservationID) {
+    	$data['test'] = "ok 3";
+      	return $data;
+   	}
 
-   public function reservation_notes($reservationID) {
-      $data['test'] = "ok 4";
-      return $data;
-   }
+   	public function reservation_notes($reservationID) {
+      	$data['test'] = "ok 4";
+      	return $data;
+   	}
 
-   public function reservation_cancel($reservationID) {
-      $data['test'] = "ok 5";
-      return $data;
-   }
+   	public function reservation_cancel($reservationID) {
+      	$data['test'] = "ok 5";
+      	return $data;
+   	}
 
 
 	public function calendar_table($date='Today') {
@@ -684,9 +654,9 @@ class reservations extends Core {
 	    $month             = new DateTime($dateobj->format('Y-m-01'));
 	    $caption           = $month->format("F Y");
 	    $first_day_number  = $month->format("w");
-   	 $last_day_of_month = $month->format("t");
-		 $the_month 		  = $month->format("m");
-       $the_year          = $month->format("Y");
+   	 	$last_day_of_month = $month->format("t");
+		$the_month 		  = $month->format("m");
+       	$the_year          = $month->format("Y");
 	    $day_counter       = 0;
 
 	    // USE HEREDOC NOTATION TO START THE HTML DOCUMENT
@@ -714,65 +684,54 @@ class reservations extends Core {
 
 	    // THE FIRST ROW MAY HAVE DAYS THAT ARE NOT PART OF THIS MONTH
 	    $html .= '<tr>';
-	    while ($day_counter < $first_day_number)
-	    {
+	    while ($day_counter < $first_day_number) {
 	        $html .= '<td class="nul">&nbsp;</td>';
-   	     $day_counter++;
+   	     	$day_counter++;
 	    }
 
 	    // THE DAYS OF THE MONTH
-   	 $mday = 1;
-	    while ($mday <= $last_day_of_month)
-   	 {
+   	 	$mday = 1;
+	    while ($mday <= $last_day_of_month) {
 	        // THE DAYS OF THE WEEK
-   	     while ($day_counter < 7)
-      	  {
-					$x = "";
-					if ($mday < 10) {
-						$x = "0";
-					}
-					$day = $the_year.$the_month.$x.$mday;
-					$color = $this->quick_search($day);
+   	     	while ($day_counter < 7){
+				$x = "";
+				if ($mday < 10) {
+					$x = "0";
+				}
+				$day = $the_year.$the_month.$x.$mday;
+				$color = $this->quick_search($day);
 
-					$start_date = str_replace("-","",$_POST['start_date']);
-					$end_date = str_replace("-","",$_POST['end_date']);
+				$start_date = str_replace("-","",$_POST['start_date']);
+				$end_date = str_replace("-","",$_POST['end_date']);
 
-					if ($color == "#E0F8E0") {
-                  $html .= "
+				if ($color == "#E0F8E0") {
+                	$html .= "
+					<td bgcolor=$color><label>
+					$mday<br>
+					<input type=\"checkbox\" name=\"data_$day\" value=\"checked\" onclick=\"document.getElementById('viewtent').style.display='inline'\">
+					<!--<a href=\"viewtent/$_POST[lodge]/$_POST[pax]/$day/$start_date/$end_date\">$mday</a>-->
+					</label></td>";
+				} else {
+               		$html .= "<td bgcolor=$color><label>$mday<br><input type=\"checkbox\" disabled></label></td>";
+				}
+            	$day_counter++;
+         		$mday++;
+   	      		if ($mday > $last_day_of_month) break 2;
+        	}
+        	$html .= '</tr>';
+     		$html .= '<tr>';
+   	  		$day_counter = 0;
+    	}
 
-							<td bgcolor=$color><label>
-								$mday<br>
-								<input type=\"checkbox\" name=\"data_$day\" value=\"checked\" onclick=\"document.getElementById('viewtent').style.display='inline'\">
-				
-								<!--<a href=\"viewtent/$_POST[lodge]/$_POST[pax]/$day/$start_date/$end_date\">$mday</a>-->
-
-
-							
-							</label></td>";
-					} else {
-	               $html .= "<td bgcolor=$color><label>$mday<br><input type=\"checkbox\" disabled></label></td>";
-					}
-         	   //$html .= "<td bgcolor=green>$the_month $x$mday $the_year</td>";
-	            $day_counter++;
-   	         $mday++;
-      	      if ($mday > $last_day_of_month) break 2;
-	        }
-
-	        $html .= '</tr>';
-   	     $html .= '<tr>';
-      	  $day_counter = 0;
+    	// THE LAST ROW MAY HAVE DAYS THAT ARE NOT PART OF THIS MONTH
+ 		while ($day_counter < 7) {
+   	     	$html .= '<td class="nul">&nbsp;</td>';
+      	  	$day_counter++;
 	    }
-
-	    // THE LAST ROW MAY HAVE DAYS THAT ARE NOT PART OF THIS MONTH
-   	 while ($day_counter < 7)
-	    {
-   	     $html .= '<td class="nul">&nbsp;</td>';
-      	  $day_counter++;
-	    }
-
-	    $html .= '</tr>';
-	    $html .= '</table>';
+		$html .= '</tr>';
+		$html .= '</table>';
 	    return $html;
 	}
-
+	
+// end class
 }
