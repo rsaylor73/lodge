@@ -4,21 +4,18 @@ include $GLOBAL['path']."/class/reservations.class.php";
 class contacts extends reservations {
 
 		public function contacts() {
-
 			$template = "contacts.tpl";
-
 			$data['country'] = $this->country_list($null);
 			$data['list'] = $this->list_contacts();
-
     		$this->load_smarty($data,$template);
-
-	}
+		}
 
 	public function list_contacts() {
 
 		if ($_POST['first'] 		!= "") { $first = "AND `c`.`first` LIKE '%$_POST[first]%'";}
 		if ($_POST['last'] 		!= "") { $last = "AND `c`.`last` LIKE '%$_POST[last]%'";}
-		if ($_POST['phone'] 		!= "") { $phone = "AND (`c`.`phone1` LIKE '%$_POST[phone]%') OR (`c`.`phone2` LIKE '%$_POST[phone]%') OR (`c`.`phone3` LIKE '%$_POST[phone]%') OR (`c`.`phone4` LIKE '%$_POST[phone]%')";}
+		if ($_POST['phone'] 		!= "") { $phone = "AND (`c`.`phone1` LIKE '%$_POST[phone]%') OR (`c`.`phone2` LIKE '%$_POST[phone]%') 
+			OR (`c`.`phone3` LIKE '%$_POST[phone]%') OR (`c`.`phone4` LIKE '%$_POST[phone]%')";}
 		if ($_POST['zip'] 		!= "") { $zip = "AND `c`.`zip` LIKE '%$_POST[zip]%'";}
 		if ($_POST['email'] 		!= "") { $email = "AND `c`.`email` LIKE '%$_POST[email]%'";}
 		if ($_POST['country'] 	!= "") { $country = "AND `c`.`countryID` = '$_POST[country]'";}
@@ -30,22 +27,21 @@ class contacts extends reservations {
 		$sql = "
 		SELECT
 			`c`.`contactID`,
-         `c`.`first`,
-         `c`.`middle`,
-         `c`.`last`,
-         `c`.`city`,
+         	`c`.`first`,
+         	`c`.`middle`,
+         	`c`.`last`,
+         	`c`.`city`,
 			`c`.`province`,
 			`c`.`state`,
-         `cn`.`country`
-
+         	`cn`.`country`
 
 		FROM
 			`reserve`.`contacts` c
 
-      LEFT JOIN `countries` cn ON `c`.`countryID` = `cn`.`countryID`
+	    LEFT JOIN `countries` cn ON `c`.`countryID` = `cn`.`countryID`
 
 		WHERE
-         `c`.`contactID` > 0
+    	    `c`.`contactID` > 0
 			$first
 			$last
 			$phone
@@ -62,10 +58,9 @@ class contacts extends reservations {
 
       $result = $this->new_mysql($sql);
       while ($row = $result->fetch_assoc()) {
-         $html .= "<tr><td><a href=\"javascript:void(0)\" onclick=\"document.location.href='editcontact/$row[contactID]'\"><i class=\"fa fa-pencil-square-o\"></i></a> $row[first] $row[middle] $row[last]</td><td>$row[city]</td><td>$row[state]$row[province]</td><td>$row[country]</td></tr>";
+        $html .= "<tr><td><a href=\"javascript:void(0)\" onclick=\"document.location.href='editcontact/$row[contactID]'\"><i class=\"fa fa-pencil-square-o\"></i></a> $row[first] $row[middle] $row[last]</td><td>$row[city]</td><td>$row[state]$row[province]</td><td>$row[country]</td></tr>";
       }
       return $html;
-
 	}
 
 	public function editcontact() {
@@ -100,16 +95,12 @@ class contacts extends reservations {
 
 		";
 
-      $template = "editcontact.tpl";
-      $this->load_smarty($data,$template);
-
-
+      	$template = "editcontact.tpl";
+      	$this->load_smarty($data,$template);
 	}
 
 	public function searchcontacts() {
-
 		$this->contacts();		
-
 	}
 
 	public function newcontact() {
@@ -123,8 +114,7 @@ class contacts extends reservations {
 		$data['state'] = $state;
 		$data['country'] = $country;
 		$template = "newcontact.tpl";
-      $this->load_smarty($data,$template);
-
+     	$this->load_smarty($data,$template);
 	}
 
 	public function savecontact() {
@@ -138,14 +128,13 @@ class contacts extends reservations {
 			$msg = "<font color=green>The contact was added.</font><br>";
 			$data['msg'] = $msg;
 			$template = "contacts.tpl";
-	      $data['list'] = $this->list_contacts();
+	      	$data['list'] = $this->list_contacts();
 			$this->load_smarty($data,$template);
 		} else {
 			$this->error();
-
 		}
-
 	}
 
 
+// end class
 }

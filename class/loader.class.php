@@ -18,8 +18,8 @@ class loader extends reports {
 				$_SESSION[$key] = $value;
 			}
 		}
-      if ($found == "1") {
-      	return "TRUE";
+      	if ($found == "1") {
+      		return "TRUE";
 		} else {
 			return "FALSE";
 		}
@@ -49,13 +49,10 @@ class loader extends reports {
 			$template = "navigation.tpl";
 			$this->load_smarty($data,$template);
 		}
-
 	}
 
 	public function whitelist($string) {
 		// list of methods load_module is allowed to pass
-
-		// will DB this most likely - RBS
 		$sql = "SELECT `method` FROM `whitelist`";
 		$result = $this->new_mysql($sql);
 		$data = array();
@@ -65,8 +62,8 @@ class loader extends reports {
 			}
 		}
 		$err = "1";
-      foreach ($data as $value) {
-         if ($value == $string) {
+      	foreach ($data as $value) {
+        	if ($value == $string) {
 				$err = "0";
 				// check access
 				$sql2 = "SELECT `access` FROM `whitelist` WHERE `method` = '$string'";
@@ -75,8 +72,7 @@ class loader extends reports {
 					$access = $row2['access'];
 					$access_required = explode(",",$access);
 				}
-		      $this->check_access($access_required);
-
+		      	$this->check_access($access_required);
 			}
 		}
 		return $err;
@@ -109,4 +105,6 @@ class loader extends reports {
 			die;
 		}
 	}
+
+// end class	
 }
