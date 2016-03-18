@@ -10,40 +10,32 @@ class Core {
 	}
 
 	public function error() {
-      $template = "error.tpl";
-      $data = array();
-      $this->load_smarty($data,$template);
+		// Generic error message
+      	$template = "error.tpl";
+      	$data = array();
+      	$this->load_smarty($data,$template);
 		die;
 	}
 
 	public function load_smarty($vars,$template) {
+		// loads the PHP Smarty class
 		require_once('libs/Smarty.class.php');
-			$smarty=new Smarty();
-			$smarty->setTemplateDir('templates/');
-			$smarty->setCompileDir('templates_c/');
-			$smarty->setConfigDir('configs/');
-			$smarty->setCacheDir('cache/');
+		$smarty=new Smarty();
+		$smarty->setTemplateDir('templates/');
+		$smarty->setCompileDir('templates_c/');
+		$smarty->setConfigDir('configs/');
+		$smarty->setCacheDir('cache/');
 		if (is_array($vars)) {
 			foreach ($vars as $key=>$value) {
 				$smarty->assign($key,$value);
 			}
 		}
 		$smarty->display($template);
-
 	}
 
 
-
-
-
-
-
-
-
-
-
-
 	public function country_list($id) {
+		// returns a list of counties from the AF database
 		if ($id == "") {
 			$option .= "<option selected value=\"\">--Select Country--</option>";
 		}
@@ -70,21 +62,10 @@ class Core {
 	}
 
 
-	// gets a list of countries
 	public function get_countries($id) {
-      $sql = "SELECT * FROM `countries` ORDER BY `country` ASC";
-      $result = $this->new_mysql($sql);
-      while ($row = $result->fetch_assoc()) {
-         if ($row['countryID'] == $id) {
-            $country .= "<option selected value=\"$row[countryID]\">$row[country]</option>";
-         } else {
-            $country .= "<option value=\"$row[countryID]\">$row[country]</option>";
-         }
-      }
-      return $country;
-
-
-	}
+		// older function redirecting to newer function now
+		$this->country_list($id);
+    }
 
 	public function clear_white($string) {
 		$string = substr($string,1);
@@ -103,15 +84,8 @@ class Core {
 	}
 
 
-	/*
-	Credit for this function goes to Ray Paseur (McLean, VA) from expert-exchange.com
-	*/
-
-
-
-
-	// get a list of states
 	public function get_states($id) {
+		// returns a list of states
 		$sql = "SELECT * FROM `state` ORDER BY `state` ASC";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
@@ -125,11 +99,11 @@ class Core {
 	}
 
 	public function get_one_state($id) {
-   	$sql = "SELECT * FROM `state` WHERE `id` = '$id'";
-      $result = $this->new_mysql($sql);
-      while ($row = $result->fetch_assoc()) {
-      	$state .= "<option selected value=\"$row[id]\">$row[state]</option>";
-      }
+   		$sql = "SELECT * FROM `state` WHERE `id` = '$id'";
+      	$result = $this->new_mysql($sql);
+      	while ($row = $result->fetch_assoc()) {
+      		$state .= "<option selected value=\"$row[id]\">$row[state]</option>";
+      	}
 		return $state;
 	}
 
@@ -140,13 +114,13 @@ class Core {
 
 		session_destroy();
 		?>
-	   <script>
-	   setTimeout(function() {
+	   	<script>
+	   	setTimeout(function() {
 	      window.location.replace('index.php')
-	   }
+	   	}
 	   ,2000);
 
-	   </script>
+	   	</script>
 		<?php
 	}
 
@@ -168,37 +142,37 @@ class Core {
 	   switch ($_SESSION['userType']) {
 			case "admin":
 			case "member":
-   	   $this->dashboard_admin();
-      	break;
+   	   		$this->dashboard_admin();
+      		break;
 		}
 	}
 
 
 	public function get_settings() {
 		// settings
-      $sql = "SELECT * FROM `settings` WHERE `id` = '1'";
-      $result = $this->new_mysql($sql);
-      $row = $result->fetch_assoc();
+      	$sql = "SELECT * FROM `settings` WHERE `id` = '1'";
+      	$result = $this->new_mysql($sql);
+      	$row = $result->fetch_assoc();
 
-      $sitename = $row['sitename'];
-      $siteurl = $row['siteurl'];
-      $site_email = $row['site_email'];
-      $base_path = $row['base_path'];
+      	$sitename = $row['sitename'];
+      	$siteurl = $row['siteurl'];
+      	$site_email = $row['site_email'];
+      	$base_path = $row['base_path'];
                
-      // email headers - This is fine tuned, please do not modify
-      $header = "MIME-Version: 1.0\r\n";
-      $header .= "Content-type: text/html; charset=iso-8859-1\r\n";
-      $header .= "From: $sitename <$site_email>\r\n";
-      $header .= "Reply-To: $sitename <$site_email>\r\n";
-      $header .= "X-Priority: 3\r\n";
-      $header .= "X-Mailer: PHP/" . phpversion()."\r\n";
+      	// email headers - This is fine tuned, please do not modify
+      	$header = "MIME-Version: 1.0\r\n";
+      	$header .= "Content-type: text/html; charset=iso-8859-1\r\n";
+      	$header .= "From: $sitename <$site_email>\r\n";
+      	$header .= "Reply-To: $sitename <$site_email>\r\n";
+      	$header .= "X-Priority: 3\r\n";
+      	$header .= "X-Mailer: PHP/" . phpversion()."\r\n";
 
-      $data = array();
-      $data[] = $sitename;
-      $data[] = $siteurl;
-      $data[] = $site_email;
-      $data[] = $header;
-      $data[] = $base_path;
+      	$data = array();
+      	$data[] = $sitename;
+      	$data[] = $siteurl;
+      	$data[] = $site_email;
+      	$data[] = $header;
+      	$data[] = $base_path;
 		$data[] = $identifier;
 		$data[] = $api_username;
 		$data[] = $api_password;
