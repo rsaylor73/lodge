@@ -22,10 +22,46 @@
 
 	<tr><td colspan=2><hr></td></tr>
 
-	<tr><td><b>{$phone1_type}:</b></td><td><input type="text" name="{$phone1_type}" value="{$phone1}" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
-    <tr><td><b>{$phone2_type}:</b></td><td><input type="text" name="{$phone2_type}" value="{$phone2}" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
-    <tr><td><b>{$phone3_type}:</b></td><td><input type="text" name="{$phone3_type}" value="{$phone3}" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
-    <tr><td><b>{$phone4_type}:</b></td><td><input type="text" name="{$phone4_type}" value="{$phone4}" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
+	<tr><td>
+		<select name="phone1_type">
+		<option>Home</option>option>
+		<option>Work</option>option>
+		<option>Mobile</option>option>
+		<option>Fax</option>option>
+		{if $phone1_type ne ""}
+		<option selected>{$phone1_type}</option>
+		{/if}
+	</td><td><input type="text" name="{$phone1}" value="{$phone1}" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
+    <tr><td>
+    	<select name="phone2_type">
+		<option>Home</option>option>
+		<option>Work</option>option>
+		<option>Mobile</option>option>
+		<option>Fax</option>option>
+		{if $phone2_type ne ""}
+		<option selected>{$phone2_type}</option>
+		{/if}
+    </td><td><input type="text" name="{$phone2}" value="{$phone2}" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
+    <tr><td>
+		<select name="phone3_type">
+		<option>Home</option>option>
+		<option>Work</option>option>
+		<option>Mobile</option>option>
+		<option>Fax</option>option>
+		{if $phone3_type ne ""}
+		<option selected>{$phone3_type}</option>
+		{/if}
+    </td><td><input type="text" name="{$phone3}" value="{$phone3}" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
+    <tr><td>
+		<select name="phone4_type">
+		<option>Home</option>option>
+		<option>Work</option>option>
+		<option>Mobile</option>option>
+		<option>Fax</option>option>
+		{if $phone4_type ne ""}
+		<option selected>{$phone4_type}</option>
+		{/if}
+    </td><td><input type="text" name="{$phone4}" value="{$phone4}" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
 
 	<tr><td colspan=2><input type="submit" value="Update Contact" class="btn btn-primary"></td></tr>
 </table>
