@@ -94,7 +94,12 @@ class contacts extends reservations {
 				`c`.`contactID` = '$_GET[contactID]'
 
 		";
-
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			foreach ($row as $key=>$value) {
+				$data[$key] = $value;
+			}
+		}
       	$template = "editcontact.tpl";
       	$this->load_smarty($data,$template);
 	}
