@@ -21,7 +21,7 @@
 		{if $state eq ""}
 			<option selected value="">--Select--</option>option>
 		{/if}
-		{$state_list}
+		{$list_states}
 	</select>  US Only</td></tr>
 	<tr><td><b>Province:</b></td><td><input type="text" name="province" value="{$province}" size=40></td></tr>
 	<tr><td><b>Country:</b></td><td><select name="country" required>{$country}</select></td></tr>
