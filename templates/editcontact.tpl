@@ -24,7 +24,7 @@
 		{$list_states}
 	</select>  US Only</td></tr>
 	<tr><td><b>Province:</b></td><td><input type="text" name="province" value="{$province}" size=40></td></tr>
-	<tr><td><b>Country:</b></td><td><select name="country" required>{$country}</select></td></tr>
+	<tr><td><b>Country:</b></td><td><select name="country" required>{$list_country}</select></td></tr>
 	<tr><td><b>Zip Code:</b></td><td><input type="text" name="zip" value="{$zip}" size=40></td></tr>
 	<tr><td><b>Date Of Birth:</b></td><td><input type="text" name="dob" value="{$date_of_birth}" size=40></td></tr>
 

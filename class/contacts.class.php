@@ -99,6 +99,7 @@ class contacts extends reservations {
 			foreach ($row as $key=>$value) {
 				$data[$key] = $value;
 			}
+			$data['list_country'] = $this->country_list($row['countryID']);
 		}
 		$data['list_states'] = $this->list_states();
       	$template = "editcontact.tpl";
