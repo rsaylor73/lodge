@@ -14,7 +14,15 @@
 	<tr><td><b>Address Line 1:</b></td><td><input type="text" name="address1" value="{$address1}" size=40></td></tr>
 	<tr><td><b>Address Line 2:</b></td><td><input type="text" name="address2" value="{$address2}" size=40></td></tr>
 	<tr><td><b>City:</b></td><td><input type="text" name="city" value="{$city}" size=40></td></tr>
-	<tr><td><b>State:</b></td><td><select name="state"><option selected>{$state}</option>option></select>  US Only</td></tr>
+	<tr><td><b>State:</b></td><td><select name="state">
+		{if $state ne ""}
+			<option selected>{$state}</option>option>
+		{/if}
+		{if $state eq ""}
+			<option selected value="">--Select--</option>option>
+		{/if}
+		{$state_list}
+	</select>  US Only</td></tr>
 	<tr><td><b>Province:</b></td><td><input type="text" name="province" value="{$province}" size=40></td></tr>
 	<tr><td><b>Country:</b></td><td><select name="country" required>{$country}</select></td></tr>
 	<tr><td><b>Zip Code:</b></td><td><input type="text" name="zip" value="{$zip}" size=40></td></tr>

@@ -83,7 +83,7 @@ class Core {
 		return $months;
 	}
 
-
+	/*
 	public function get_states($id) {
 		// returns a list of states
 		$sql = "SELECT * FROM `state` ORDER BY `state` ASC";
@@ -106,7 +106,7 @@ class Core {
       	}
 		return $state;
 	}
-
+	*/
 
 	public function logout() {
 		$data['msg'] = "<font color=green>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have been logged out. Loading...</font>";

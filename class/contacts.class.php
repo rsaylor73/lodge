@@ -100,6 +100,7 @@ class contacts extends reservations {
 				$data[$key] = $value;
 			}
 		}
+		$data['list_states'] = $this->list_states();
       	$template = "editcontact.tpl";
       	$this->load_smarty($data,$template);
 	}
@@ -138,6 +139,15 @@ class contacts extends reservations {
 		} else {
 			$this->error();
 		}
+	}
+
+	public function list_states() {
+		$sql = "SELECT `state_abbr` FROM `state` ORDER BY `state_abbr` ASC";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$states .= "<option>$row[state_abbr]</option>";
+		}
+		return $states;
 	}
 
 
