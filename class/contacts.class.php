@@ -56,6 +56,8 @@ class contacts extends reservations {
       LIMIT 20
 		";
 
+		print "SQL:<br>$sql<br>";
+
       $result = $this->new_mysql($sql);
       while ($row = $result->fetch_assoc()) {
         $html .= "<tr><td><a href=\"javascript:void(0)\" onclick=\"document.location.href='editcontact/$row[contactID]'\"><i class=\"fa fa-pencil-square-o\"></i></a> $row[first] $row[middle] $row[last]</td><td>$row[city]</td><td>$row[state]$row[province]</td><td>$row[country]</td></tr>";
