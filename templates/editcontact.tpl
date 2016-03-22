@@ -26,7 +26,7 @@
 	<tr><td><b>Province:</b></td><td><input type="text" name="province" value="{$province}" size=40></td></tr>
 	<tr><td><b>Country:</b></td><td><select name="country" required>{$list_country}</select></td></tr>
 	<tr><td><b>Zip Code:</b></td><td><input type="text" name="zip" value="{$zip}" size=40></td></tr>
-	<tr><td><b>Date Of Birth: (YYYYMMDD)</b></td><td><input type="text" name="dob" value="{$date_of_birth}" placeholder="YYYYMMDD" {literal} pattern="d{8}" {/literal} size=40></td></tr>
+	<tr><td><b>Date Of Birth: (YYYYMMDD)</b></td><td><input type="date" name="dob" value="{$date_of_birth}" placeholder="YYYYMMDD" class="date" size=40></td></tr>
 
 	<tr><td colspan=2><hr></td></tr>
 
