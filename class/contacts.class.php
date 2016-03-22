@@ -87,7 +87,8 @@ class contacts extends reservations {
 				`c`.`phone1`,
 				`c`.`phone2`,
 				`c`.`phone3`,
-				`c`.`phone4`
+				`c`.`phone4`,
+				`c`.`contactID`
 
 			FROM
 				`reserve`.`contacts` c
