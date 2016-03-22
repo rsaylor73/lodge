@@ -137,6 +137,7 @@ class contacts extends reservations {
 			$data['msg'] = $msg;
 			$template = "contacts.tpl";
 	      	$data['list'] = $this->list_contacts();
+	      	$data['country'] = $this->country_list($null);
 			$this->load_smarty($data,$template);
 		} else {
 			$this->error();
