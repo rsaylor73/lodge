@@ -3,7 +3,7 @@ include $GLOBAL['path']."/class/contacts.class.php";
 
 class resellers extends contacts {
 
-	public function resellers {
+	public function resellers() {
 			$template = "resellers.tpl";
 			$data['list'] = $this->list_resellers();
 			$data['country'] = $this->country_list($null);
@@ -12,6 +12,6 @@ class resellers extends contacts {
 
 	public function list_resellers() {
 
-	
+
 	}
 }
