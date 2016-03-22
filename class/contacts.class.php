@@ -24,6 +24,18 @@ class contacts extends reservations {
 		if ($_POST['address']	!= "") { $address = "AND `c`.`address1` LIKE '%$_POST[address]%'";}
 		if ($_POST['province']	!= "") { $province = "AND `c`.`province` LIKE '%$_POST[province]%'";}
 
+		if ($_POST['contactID'] != "") {
+			$first = "";
+			$last = "";
+			$phone = "";
+			$zip = "";
+			$email = "";
+			$country = "";
+			$city = "";
+			$address = "";
+			$province = "";
+		}
+
 		$sql = "
 		SELECT
 			`c`.`contactID`,
