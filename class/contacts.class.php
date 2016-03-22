@@ -77,6 +77,8 @@ class contacts extends reservations {
 				`c`.`state`,
 				`c`.`province`,
 				`c`.`zip`,
+				`c`.`email`,
+				`c`.`date_of_birth`,
 				`c`.`countryID`,
 				`c`.`phone1_type`,
 				`c`.`phone2_type`,
