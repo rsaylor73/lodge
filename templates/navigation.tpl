@@ -19,7 +19,7 @@
    {if ($access eq "admin" or $access eq "agent" or $access eq "accounting")}
    <li class='active has-sub'><a href='#'><span>Customers</span></a>
       <ul>
-			<li><a href="#"><span>Resellers</span></a></li>
+			<li><a href="resellers"><span>Resellers</span></a></li>
 			<li><a href="contacts"><span>Contacts</span></a></li>
 		</ul>
 	</li>
