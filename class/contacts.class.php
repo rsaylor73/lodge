@@ -68,8 +68,6 @@ class contacts extends reservations {
       LIMIT 20
 		";
 
-		print "SQL:<br>$sql<br>";
-
       $result = $this->new_mysql($sql);
       while ($row = $result->fetch_assoc()) {
         $html .= "<tr><td><a href=\"javascript:void(0)\" onclick=\"document.location.href='editcontact/$row[contactID]'\"><i class=\"fa fa-pencil-square-o\"></i></a> $row[first] $row[middle] $row[last]</td><td>$row[city]</td><td>$row[state]$row[province]</td><td>$row[country]</td></tr>";
@@ -126,7 +124,7 @@ class contacts extends reservations {
 	public function updatecontact() {
 		$sql = "UPDATE `reserve`.`contacts` c SET
 
-		`title` = '$_POST[title]', `first` = '$_POST[first]', `middle` = '$_POST[middle]', `last` = '$_POST[list]', `email` = '$_POST[email]', `address1` = '$_POST[address1]', `address2` = '$_POST[address2]',
+		`title` = '$_POST[title]', `first` = '$_POST[first]', `middle` = '$_POST[middle]', `last` = '$_POST[last]', `email` = '$_POST[email]', `address1` = '$_POST[address1]', `address2` = '$_POST[address2]',
 		`city` = '$_POST[city]', `state` = '$_POST[state]', `province` = '$_POST[province]', `countryID` = '$_POST[country]', `zip` = '$_POST[zip]', `date_of_birth` = '$_POST[dob]',
 		`phone1_type` = '$_POST[phone1_type]', `phone2_type` = '$_POST[phone2_type]', `phone3_type` = '$_POST[phone3_type]', `phone4_type` = '$_POST[phone4_type]',
 		`phone1` = '$_POST[phone1]', `phone2` = '$_POST[phone2]', `phone3` = '$_POST[phone3]', `phone4` = '$_POST[phone4]'
