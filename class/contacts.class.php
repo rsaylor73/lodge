@@ -117,7 +117,10 @@ class contacts extends reservations {
 		`phone1` = '$_POST[phone1]', `phone2` = '$_POST[phone2]', `phone3` = '$_POST[phone3]', `phone4` = '$_POST[phone4]'
 
 		WHERE `c`.`contactID` = '$_POST[contactID]'";
-		
+
+		print "SQL:<br>$sql<br>";
+		die;
+
 		$result = $this->new_mysql($sql);
 		$result = $this->new_mysql($sql);
 		if ($result == "TRUE") {
