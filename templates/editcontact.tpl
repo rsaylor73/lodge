@@ -26,7 +26,7 @@
 	<tr><td><b>Province:</b></td><td><input type="text" name="province" value="{$province}" size=40></td></tr>
 	<tr><td><b>Country:</b></td><td><select name="country" required>{$list_country}</select></td></tr>
 	<tr><td><b>Zip Code:</b></td><td><input type="text" name="zip" value="{$zip}" size=40></td></tr>
-	<tr><td><b>Date Of Birth: (YYYYMMDD)</b></td><td><input type="date" name="dob" value="{$date_of_birth}" placeholder="YYYYMMDD" class="date" size=40></td></tr>
+	<tr><td><b>Date Of Birth: (YYYYMMDD)</b></td><td><input type="number" name="dob" value="{$date_of_birth}" min="8" max="8" placeholder="YYYYMMDD" class="date" size=40></td></tr>
 
 	<tr><td colspan=2><hr></td></tr>
 
@@ -39,7 +39,7 @@
 		{if $phone1_type ne ""}
 		<option selected>{$phone1_type}</option>
 		{/if}
-	</td><td><input type="text" name="{$phone1}" value="{$phone1}" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
+	</td><td><input type="text" name="phone1" value="{$phone1}" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
     <tr><td>
     	<select name="phone2_type">
 		<option>Home</option>option>
@@ -49,7 +49,7 @@
 		{if $phone2_type ne ""}
 		<option selected>{$phone2_type}</option>
 		{/if}
-    </td><td><input type="text" name="{$phone2}" value="{$phone2}" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
+    </td><td><input type="text" name="phone2" value="{$phone2}" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
     <tr><td>
 		<select name="phone3_type">
 		<option>Home</option>option>
@@ -59,7 +59,7 @@
 		{if $phone3_type ne ""}
 		<option selected>{$phone3_type}</option>
 		{/if}
-    </td><td><input type="text" name="{$phone3}" value="{$phone3}" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
+    </td><td><input type="text" name="phone3" value="{$phone3}" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
     <tr><td>
 		<select name="phone4_type">
 		<option>Home</option>option>
@@ -69,7 +69,7 @@
 		{if $phone4_type ne ""}
 		<option selected>{$phone4_type}</option>
 		{/if}
-    </td><td><input type="text" name="{$phone4}" value="{$phone4}" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
+    </td><td><input type="text" name="phone4" value="{$phone4}" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
 
 	<tr><td colspan=2><input type="submit" value="Update Contact" class="btn btn-primary"></td></tr>
 </table>
