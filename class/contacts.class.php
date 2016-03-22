@@ -119,10 +119,6 @@ class contacts extends reservations {
 
 		WHERE `c`.`contactID` = '$_POST[contactID]'";
 
-		print "SQL:<br>$sql<br>";
-		die;
-
-		$result = $this->new_mysql($sql);
 		$result = $this->new_mysql($sql);
 		if ($result == "TRUE") {
 			$msg = "<font color=green>The contact was updated.</font><br>";
