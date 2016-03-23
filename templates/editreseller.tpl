@@ -24,7 +24,7 @@
 		{/if}
 		{$list_states}
 	</select>  US Only</td></tr>
-	<tr><td><b>Country:</b></td><td><select name="country" required>{$list_country}</select></td></tr>
+	<tr><td><b>Country:</b></td><td><select name="country" required>{$country}</select></td></tr>
 	<tr><td><b>Zip Code:</b></td><td><input type="text" name="zip" value="{$zip}" size=40></td></tr>
 
 	<tr><td colspan=2><hr></td></tr>
@@ -32,6 +32,6 @@
 	<tr><td>Phone 1</td><td><input type="text" name="phone" value="{$phone}" size=40 placeholder="Phone number"></td></tr>
 	<tr><td>Phone 2</td><td><input type="text" name="phone2" value="{$phone2}" size=40 placeholder="Phone number"></td></tr>
 
-	<tr><td colspan=2><input type="submit" value="Update Contact" class="btn btn-primary"></td></tr>
+	<tr><td colspan=2><input type="submit" value="Update Reseller" class="btn btn-primary"></td></tr>
 </table>
 </form>
