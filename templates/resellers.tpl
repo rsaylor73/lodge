@@ -6,7 +6,7 @@
 
 <br>
 
-<form action="searchcresellers" method="post">
+<form action="resellers" method="post">
 <table class="table">
 <tr>
 	<td><input type="text" name="first" placeholder="First Name" size=20></td>
@@ -35,16 +35,16 @@
 	<td><select name="country" style="width:200px">{$country}</select></td>
 </tr>
 <tr id="s3" style="display:none">
-	<td><input type="text" name="contactID" placeholder="Contact ID"></td>
+	<td><input type="text" name="resellerID" placeholder="Reseller ID"></td>
 	<td><input type="text" name="city" placeholder="City"></td>
 </tr>
 <tr id="s4" style="display:none">
 	<td><input type="text" name="address" placeholder="Address"></td>
-	<td><input type="text" name="province" placeholder="Province"></td>
+	<td><input type="text" name="company" placeholder="Company"></td>
 </tr>
 <tr>
 	<td colspan=2>
-		&nbsp;&nbsp;<input type="submit" value="Search" class="btn btn-primary">&nbsp;&nbsp;<input type="button" value="Clear" class="btn btn-warning" onclick="document.location.href='searchresellers'">
+		&nbsp;&nbsp;<input type="submit" value="Search" class="btn btn-primary">&nbsp;&nbsp;<input type="button" value="Clear" class="btn btn-warning" onclick="document.location.href='resellers'">
 	</td>
 </tr>
 </table>
