@@ -53,9 +53,9 @@
 
 <table class="table">
 <tr>
+	<td><b>Company</b></td>
 	<td><b>Name</b></td>
 	<td><b>City</b></td>
-	<td><b>State/Province</b></td>
 	<td><b>Country</b></td>
 </tr>
 
