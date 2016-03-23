@@ -25,7 +25,7 @@ class resellers extends contacts {
 			$zip = "AND `r`.`zip` = '$_POST[zip]'";
 		}
 		if ($_POST['email'] != "") {
-			$email = "AND `r`.`email` LIKE '%$_POST[email]%'"
+			$email = "AND `r`.`email` LIKE '%$_POST[email]%'";
 		}
 		if ($_POST['country'] != "") {
 			$country = "AND `r`.`countryID` = '$_POST[country]'";
@@ -69,7 +69,7 @@ class resellers extends contacts {
 			$city
 			$address
 			$company
-			
+
 		LIMIT 20
 		";
 
