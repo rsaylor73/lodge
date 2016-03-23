@@ -116,7 +116,7 @@ class resellers extends contacts {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			if ($id == $row['reseller_typeID']) {
-				$option .= "<option selected value=\"$row[reseller_typeID\">$row[type]</option>";
+				$option .= "<option selected value=\"$row[reseller_typeID]\">$row[type]</option>";
 			} else {
 				$option .= "<option value=\"$row[reseller_typeID\">$row[type]</option>";
 			}
