@@ -11,6 +11,38 @@ class resellers extends contacts {
 	}
 
 	public function list_resellers() {
+
+		if ($_POST['first'] != "") {
+			$first = "AND `r`.`first` LIKE '%$_POST[first]%'";
+		}
+		if ($_POST['last'] != "") {
+			$last = "AND `r`.`last` LIKE '%$_POST[last]%'";
+		}
+		if ($_POST['phone'] != "") {
+			$phone = "AND (`r`.`phone` LIKE '%$_POST[phone]') OR (`r`.`phone2` LIKE '%$_POST[phone]%')";
+		}
+		if ($_POST['zip'] != "") {
+			$zip = "AND `r`.`zip` = '$_POST[zip]'";
+		}
+		if ($_POST['email'] != "") {
+			$email = "AND `r`.`email` LIKE '%$_POST[email]%'"
+		}
+		if ($_POST['country'] != "") {
+			$country = "AND `r`.`countryID` = '$_POST[country]'";
+		}
+		if ($_POST['resellerID'] != "") {
+			$resellerID = "AND `r`.`resellerID` = '$_POST[resellerID]'";
+		}
+		if ($_POST['city'] != "") {
+			$city = "AND `r`.`city` LIKE '%$_POST[city]%'";
+		}
+		if ($_POST['address'] != "") {
+			$address = "AND `r`.`address` LIKE '%$_POST[address]%'";
+		}
+		if ($_POST['company'] != "") {
+			$company = "AND `r`.`company` LIKE '%$_POST[company]%'";
+		}
+
 		$sql = "
 		SELECT
 			`r`.`resellerID`,
@@ -27,7 +59,17 @@ class resellers extends contacts {
 
 		WHERE
 			`r`.`status` = 'Active'
-
+			$first
+			$last
+			$phone
+			$zip
+			$email
+			$country
+			$resellerID
+			$city
+			$address
+			$company
+			
 		LIMIT 20
 		";
 
