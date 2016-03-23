@@ -102,11 +102,26 @@ class resellers extends contacts {
 				$data[$key] = $value;
 			}
 			$data['country'] = $this->country_list($row['countryID']);
+			$data['reseller_type'] = $this->reseller_types($row['resellerID']);
 
 		}
 		$template = "editreseller.tpl";
 		$data['list_states'] = $this->list_states();
    		$this->load_smarty($data,$template);
+	}
+
+	// private classes can only be executed in this class. This will not extend to the other classes - RBS
+	private function reseller_types($id) {
+		$sql = "SELECT `reseller_typeID`,`type` FROM `reserve`.`reseller_types` WHERE `status` = 'Active' ORDER BY `type` ASC";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			if ($id == $row['reseller_typeID']) {
+				$option .= "<option selected value=\"$row[reseller_typeID\">$row[type]</option>";
+			} else {
+				$option .= "<option value=\"$row[reseller_typeID\">$row[type]</option>";
+			}
+		}
+		return $option;
 	}
 
 // end class	
