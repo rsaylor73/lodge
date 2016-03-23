@@ -118,7 +118,7 @@ class resellers extends contacts {
 			if ($id == $row['reseller_typeID']) {
 				$option .= "<option selected value=\"$row[reseller_typeID]\">$row[type]</option>";
 			} else {
-				$option .= "<option value=\"$row[reseller_typeID\">$row[type]</option>";
+				$option .= "<option value=\"$row[reseller_typeID]\">$row[type]</option>";
 			}
 		}
 		return $option;
