@@ -84,4 +84,30 @@ class resellers extends contacts {
 		return $html;
 
 	}
+
+	public function editreseller() {
+		$sql = "
+		SELECT
+			`r`.*
+
+		FROM
+			`reserve`.`resellers` r
+
+		WHERE
+			`r`.`resellerID` = '$_GET[resellerID]'
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			foreach ($row as $key=>$value) {
+				$data[$key] = $value;
+			}
+			$data['country'] = $this->country_list($row['countryID']);
+
+		}
+		$template = "editreseller.tpl";
+		$data['list_states'] = $this->list_states();
+   		$this->load_smarty($data,$template);
+	}
+
+// end class	
 }
