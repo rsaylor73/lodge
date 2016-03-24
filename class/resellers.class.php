@@ -221,9 +221,9 @@ class resellers extends contacts {
 				`r`.`company`
 
 			FROM
-				`reservat`.`reseller_agents` a
+				`reserve`.`reseller_agents` a
 			
-			LEFT JOIN `reservat`.`resellers` r ON `a`.`resellerID` = `r`.`resellerID`
+			LEFT JOIN `reserve`.`resellers` r ON `a`.`resellerID` = `r`.`resellerID`
 
 			WHERE
 				`a`.`reseller_agentID` = '$_GET[agentID]'
