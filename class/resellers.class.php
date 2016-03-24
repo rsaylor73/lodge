@@ -173,7 +173,11 @@ class resellers extends contacts {
 	}
 
 	public function editagents() {
-
+		$sql = "SELECT `company` FROM `reserve`.`resellers` r WHERE `r`.`resellerID` = '$_GET[resellerID]'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$data['company'] = $row['company'];
+		}
 
 		$template = "editagents.tpl";
 		$this->load_smarty($data,$template);
