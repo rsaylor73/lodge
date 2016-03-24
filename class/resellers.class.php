@@ -168,8 +168,16 @@ class resellers extends contacts {
     		$this->load_smarty($data,$template);
 		} else {
 			$template = "error.tpl";
-			$this->load_smarty($data,$template);
+			$this->load_smarty($null,$template);
 		}
+	}
+
+	public function editagents() {
+
+
+		$template = "editagents.tpl";
+		$this->load_smarty($data,$template);
+
 
 	}
 
