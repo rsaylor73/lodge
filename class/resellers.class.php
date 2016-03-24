@@ -87,7 +87,7 @@ class resellers extends contacts {
 		while ($row = $result->fetch_assoc()) {
 			$html .= "<tr><td>
 				<a href=\"javascript:void(0)\" onclick=\"document.location.href='editreseller/$row[resellerID]'\"><i class=\"fa fa-pencil-square-o\"></i></a> 
-				<a href=\"javascript:void(0)\" onclick=\"document.location.href='editagents/$row[resellerID]'\"><a class=\"fa fa-users\"></i></a> 
+				<a href=\"javascript:void(0)\" onclick=\"document.location.href='editagents/$row[resellerID]'\"><i class=\"fa fa-users\"></i></a> 
 
 			$row[company]</td><td>$row[first] $row[last]</td><td>$row[city]</td><td>$row[country]</td></tr>";
 		}
