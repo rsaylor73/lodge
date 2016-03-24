@@ -4,7 +4,7 @@
 <form action="updatereseller" method="post">
 <input type="hidden" name="resellerID" value="{$resellerID}">
 <table class="table">
-	<tr><td><b>Company:</b></td><td><input type="text" name="title" value="{$company}" placeholder="Company name" size=40></td></tr>
+	<tr><td><b>Company:</b></td><td><input type="text" name="company" value="{$company}" placeholder="Company name" size=40></td></tr>
 	<tr><td><b>Reseller Type:</b></td><td><select name="reseller_type">{$reseller_type}</select></td></tr>
 	<tr><td><b>Status:</b></td><td><select name="status"><option selected>{$status}</option><option>Active</option><option>Inactive</option></select></td></tr>
 	<tr><td><b>Commission:</b></td><td><input type="text" name="commission" value="{$commission}" size=40 placeholder="Commission"></td></tr>
