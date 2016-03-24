@@ -205,9 +205,27 @@ class resellers extends contacts {
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$html .= "<tr><td>$row[first] $row[last]</td><td>$row[status]</td></tr>";
+			$html .= "<tr><td><a href=\"javascript:void(0)\" onclick=\"document.location.href='editragent/$id/$row[reseller_agentID]'\"><i class=\"fa fa-pencil-square-o\"></i></a> $row[first] $row[last]</td><td>$row[status]</td></tr>";
 		}
 		return $html;
+	}
+
+	public function editragent() {
+
+			$sql = "
+			SELECT
+
+
+			FROM
+
+			
+			WHERE
+
+
+			";
+
+			$template = "editragent.tpl";
+    		$this->load_smarty($data,$template);
 	}
 
 // end class	
