@@ -6,6 +6,8 @@
 <tr><td><b>Status:</b></td><td>TBD</td></tr>
 <tr><td><b>First Name:</b></td><td><input type="text" name="first" value="{$first}" size=40></td></tr>
 <tr><td><b>Middle Initial:</b></td><td><input type="text" name="middle" value="{$middle}" size=40></td></tr>
+<tr><td><b>Last Name:</b></td><td><input type="text" name="last" value="{$last}" size=40></td></tr>
 
+<tr><td colspan=2><input type="submit" value="Update" class="btn btn-primary"></td></tr>
 </table>
 </form>

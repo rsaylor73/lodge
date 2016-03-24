@@ -216,6 +216,7 @@ class resellers extends contacts {
 			SELECT
 				`a`.`status`,
 				`a`.`first`,
+				`a`.`middle`,
 				`a`.`last`,
 				`a`.`reseller_agentID`,
 				`r`.`company`
