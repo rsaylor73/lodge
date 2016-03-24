@@ -3,6 +3,11 @@ include $GLOBAL['path']."/class/contacts.class.php";
 
 class resellers extends contacts {
 
+	/*
+	any function called from the loader class must be public
+	any function called only in the reseller class can be private
+	*/
+
 	public function resellers() {
 			$template = "resellers.tpl";
 			$data['list'] = $this->list_resellers();
@@ -10,7 +15,7 @@ class resellers extends contacts {
     		$this->load_smarty($data,$template);
 	}
 
-	public function list_resellers() {
+	private function list_resellers() {
 
 		if ($_POST['first'] != "") {
 			$first = "AND `r`.`first` LIKE '%$_POST[first]%'";
@@ -129,7 +134,7 @@ class resellers extends contacts {
 		return $option;
 	}
 
-	private function updatereseller() {
+	public function updatereseller() {
 		$sql = "
 
 		UPDATE `reserve`.`resellers` r 
