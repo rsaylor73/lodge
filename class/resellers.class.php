@@ -182,6 +182,7 @@ class resellers extends contacts {
 
 
 		$template = "editagents.tpl";
+		$data['agent_list'] = $this->list_agents($_GET['resellerID']);
 		$this->load_smarty($data,$template);
 
 
