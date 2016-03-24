@@ -102,7 +102,7 @@ class resellers extends contacts {
 				$data[$key] = $value;
 			}
 			$data['country'] = $this->country_list($row['countryID']);
-			$data['reseller_type'] = $this->reseller_types($row['resellerID']);
+			$data['reseller_type'] = $this->reseller_types($row['reseller_typeID']);
 
 		}
 		$template = "editreseller.tpl";
