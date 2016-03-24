@@ -45,3 +45,4 @@ RewriteRule ^editcontact/([a-zA-Z0-9]+)/?$ index.php?section=editcontact&contact
 RewriteRule ^updatecontact/?$ index.php?section=updatecontact [NC,L]
 RewriteRule ^resellers/?$ index.php?section=resellers [NC,L]
 RewriteRule ^editreseller/([a-zA-Z0-9]+)/?$ index.php?section=editreseller&resellerID=$1 [NC,L]
+RewriteRule ^updatereseller/?$ index.php?section=updatereseller [NC,L]

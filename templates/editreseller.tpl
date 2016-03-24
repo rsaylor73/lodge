@@ -6,6 +6,7 @@
 <table class="table">
 	<tr><td><b>Company:</b></td><td><input type="text" name="title" value="{$company}" placeholder="Company name" size=40></td></tr>
 	<tr><td><b>Reseller Type:</b></td><td><select name="reseller_type">{$reseller_type}</select></td></tr>
+	<tr><td><b>Status:</b></td><td><select name="status"><option selected>{$status}</option><option>Active</option><option>Inactive</option></select></td></tr>
 	<tr><td><b>Commission:</b></td><td><input type="text" name="commission" value="{$commission}" size=40 placeholder="Commission"></td></tr>
 	<tr><td><b>First Name:</b></td><td><input type="text" name="first" value="{$first}" size=40 required></td></tr>
 	<tr><td><b>Middle Initial:</b></td><td><input type="text" name="middle" value="{$middle}" maxlength="2" size=40></td></tr>

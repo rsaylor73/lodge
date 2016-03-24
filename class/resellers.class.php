@@ -43,6 +43,11 @@ class resellers extends contacts {
 			$company = "AND `r`.`company` LIKE '%$_POST[company]%'";
 		}
 
+		if ($_POST['resellerID'] != "") {
+			// direct match clear other criteria
+			$first = ""; $last = ""; $phone = ""; $zip = ""; $email = ""; $country = ""; $city = ""; $address = ""; $company = "";
+		}
+
 		$sql = "
 		SELECT
 			`r`.`resellerID`,
@@ -122,6 +127,45 @@ class resellers extends contacts {
 			}
 		}
 		return $option;
+	}
+
+	private function updatereseller() {
+		$sql = "
+
+		UPDATE `reserve`.`resellers` r 
+
+		SET 
+
+		`r`.`company` = '$_POST[company]',
+		`r`.`reseller_typeID` = '$_POST[reseller_type]',
+		`r`.`status` = '$_POST[status]',
+		`r`.`commission` = '$_POST[commission]',
+		`r`.`first` = '$_POST[first]',
+		`r`.`middle` = '$_POST[middle]',
+		`r`.`last` = '$_POST[last]',
+		`r`.`email` = '$_POST[email]',
+		`r`.`address` = '$_POST[address]',
+		`r`.`city` = '$_POST[city]',
+		`r`.`state` = '$_POST[state]',
+		`r`.`countryID` = '$_POST[country]',
+		`r`.`zip` = '$_POST[zip]',
+		`r`.`phone` = '$_POST[phone]',
+		`r`.`phone2` = '$_POST[phone2]'
+
+		WHERE `r`.`resellerID` = '$_POST[resellerID]'
+		";
+		$result = $this->new_mysql($sql);
+		if ($result == "TRUE") {
+			$template = "resellers.tpl";
+			$data['list'] = $this->list_resellers();
+			$data['country'] = $this->country_list($null);
+			$data['msg'] = "<font color=green>The reseller was updated.</font><br>";
+    		$this->load_smarty($data,$template);
+		} else {
+			$template = "error.tpl";
+			$this->load_smarty($data,$template);
+		}
+
 	}
 
 // end class	
