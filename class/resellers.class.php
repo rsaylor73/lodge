@@ -179,10 +179,34 @@ class resellers extends contacts {
 			$data['company'] = $row['company'];
 		}
 
+
+
 		$template = "editagents.tpl";
 		$this->load_smarty($data,$template);
 
 
+	}
+
+	private function list_agents($id) {
+		$sql = "
+		SELECT
+			`a`.`status`,
+			`a`.`first`,
+			`a`.`last`,
+			`a`.`reseller_agentID`
+
+		FROM
+			`reserve`.`reseller_agents` a
+
+		WHERE
+			`a`.`resellerID` = '$id'
+		";
+
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$html .= "<tr><td>$row[first] $row[last]</td><td>$row[status]</td></tr>";
+		}
+		return $html;
 	}
 
 // end class	
