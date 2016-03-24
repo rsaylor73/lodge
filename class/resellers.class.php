@@ -234,6 +234,7 @@ class resellers extends contacts {
 				foreach ($row as $key=>$value) {
 					$data[$key] = $value;
 				}
+				$data['name'] = $row['first'] . " " . $row['last'];
 			}
 
 			$template = "editagent.tpl";
