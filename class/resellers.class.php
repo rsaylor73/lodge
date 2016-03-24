@@ -214,15 +214,27 @@ class resellers extends contacts {
 
 			$sql = "
 			SELECT
-
+				`a`.`status`,
+				`a`.`first`,
+				`a`.`last`,
+				`a`.`reseller_agentID`,
+				`r`.`company`
 
 			FROM
-
+				`reservat`.`reseller_agents` a
 			
+			LEFT JOIN `reservat`.`resellers` r ON `a`.`resellerID` = `r`.`resellerID`
+
 			WHERE
-
-
+				`a`.`reseller_agentID` = '$_GET[agentID]'
 			";
+
+			$result = $this->new_mysql($sql);
+			while ($row = $result->fetch_assoc()) {
+				foreach ($row as $key=>$value) {
+					$data[$key] = $value;
+				}
+			}
 
 			$template = "editagent.tpl";
     		$this->load_smarty($data,$template);
