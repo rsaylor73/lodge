@@ -210,7 +210,7 @@ class resellers extends contacts {
 		return $html;
 	}
 
-	public function editragent() {
+	public function editagent() {
 
 			$sql = "
 			SELECT
@@ -224,7 +224,7 @@ class resellers extends contacts {
 
 			";
 
-			$template = "editragent.tpl";
+			$template = "editagent.tpl";
     		$this->load_smarty($data,$template);
 	}
 
