@@ -564,6 +564,8 @@ class reservations extends Core {
 		FROM
 			`reservations` r, `users` u
 
+		LEFT JOIN `reserve`.`reseller_agents` a ON `reservations`.`reseller_agentID` = `a`.`reseller_agentID`
+
 		WHERE
 			`r`.`reservationID` = '$reservationID'
 			AND `r`.`userID` = `u`.`id`
@@ -578,6 +580,8 @@ class reservations extends Core {
 			$data['end_date'] 	= $this->get_reservation_dates($reservationID,'DESC');
 			$data['nights']		= $this->get_reservation_nights($reservationID);
 		}
+
+
 
 		return $data;
 	}
