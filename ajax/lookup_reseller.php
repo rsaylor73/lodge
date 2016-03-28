@@ -16,7 +16,7 @@ if ($check == "FALSE") {
 		$sql = "
 		SELECT
 			`r`.`company`,
-			`r.`resellerID`,
+			`r`.`resellerID`,
 			`a`.`reseller_agentID`,
 			`a`.`first`,
 			`a`.`last`
@@ -31,7 +31,6 @@ if ($check == "FALSE") {
 
 		ORDER BY `a`.`first` ASC, `a`.`last` ASC
 		";
-		print "<br>$sql<br>";
 	} elseif ($_GET['company'] != "") {
 		# code...
 	} else {
