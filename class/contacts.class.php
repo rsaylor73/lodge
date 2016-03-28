@@ -162,9 +162,10 @@ class contacts extends reservations {
 	}
 
 	public function savecontact() {
-		$sql = "INSERT INTO `contacts` (`first`,`middle`,`last`,`title`,`pedigree`,`email`,`addr1`,`addr2`,`city`,`stateID`,`province`,`countryID`,`zip`,`dob`,`cell_phone`,`home_phone`,`work_phone`) VALUES
-		('$_POST[first]','$_POST[middle]','$_POST[last]','$_POST[title]','$_POST[pedigree]','$_POST[email]','$_POST[addr1]','$_POST[addr2]','$_POST[city]','$_POST[state]','$_POST[province]','$_POST[country]',
-		'$_POST[zip]','$_POST[dob]','$_POST[cell_phone]','$_POST[home_phone]','$_POST[work_phone]')
+		$sql = "INSERT INTO `reserve`.`contacts` 
+		(`first`,`middle`,`last`,`title`,`email`,`address1`,`address2`,`city`,`state`,`province`,`countryID`,`zip`,`date_of_birth`,`phone1_type`,`phone1`,`phone2_type`,`phone2`,`phone3_type`,`phone3`,`sex`) VALUES
+		('$_POST[first]','$_POST[middle]','$_POST[last]','$_POST[title]','$_POST[email]','$_POST[addr1]','$_POST[addr2]','$_POST[city]','$_POST[state]','$_POST[province]','$_POST[country]',
+		'$_POST[zip]','$_POST[dob]','Cell','$_POST[cell_phone]','Home','$_POST[home_phone]','Work','$_POST[work_phone]','$_POST[sex]')
 		";
 
 		$result = $this->new_mysql($sql);

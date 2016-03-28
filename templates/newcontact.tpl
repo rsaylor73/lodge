@@ -7,7 +7,6 @@
 	<tr><td><b>First Name:</b></td><td><input type="text" name="first" size=40 required></td></tr>
 	<tr><td><b>Middle Name:</b></td><td><input type="text" name="middle" size=40></td></tr>
 	<tr><td><b>Last Name:</b></td><td><input type="text" name="last" size=40 required></td></tr>
-	<tr><td><b>Pedigree:</b></td><td><input type="text" name="pedigree" placeholder="(Jr., Sr., III, etc.)" size=40></td></tr>
 
    <tr><td colspan=2><hr></td></tr>
 	<tr><td><b>Email:</b></td><td><input type="text" name="email" size=40 required></td></tr>
@@ -19,6 +18,7 @@
 	<tr><td><b>Country:</b></td><td><select name="country" required>{$country}</select></td></tr>
 	<tr><td><b>Zip Code:</b></td><td><input type="text" name="zip" size=40></td></tr>
 	<tr><td><b>Date Of Birth:</b></td><td><input type="text" name="dob" id="dob" size=40></td></tr>
+	<tr><td><b>Gender:</b></td><td><select name="sex" required><option value="">--Select--</option><option value="male">Male</option><option value="female">Female</option></select></td></tr>
 
 	<tr><td colspan=2><hr></td></tr>
 	<tr><td><b>Cell Phone:</b></td><td><input type="text" name="cell_phone" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
