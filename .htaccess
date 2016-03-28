@@ -50,3 +50,4 @@ RewriteRule ^editagents/([a-zA-Z0-9]+)/?$ index.php?section=editagents&resellerI
 RewriteRule ^editagent/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editagent&resellerID=$1&agentID=$2 [NC,L]
 RewriteRule ^updateagent/?$ index.php?section=updateagent [NC,L]
 RewriteRule ^newagent/?$ index.php?section=newagent [NC,L]
+RewriteRule ^newreseller/?$ index.php?section=newreseller [NC,L]
