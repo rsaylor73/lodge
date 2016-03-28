@@ -219,12 +219,28 @@ class resellers extends contacts {
 				`a`.`middle`,
 				`a`.`last`,
 				`a`.`reseller_agentID`,
-				`r`.`company`
+				`r`.`company`,
+				`a`.`address1`,
+				`a`.`address2`,
+				`a`.`city`,
+				`a`.`state`,
+				`a`.`zip`,
+				`c`.`country`
+				`a`.`phone1_type`.
+				`a`.`phone1`,
+				`a`.`phone2_type`.
+				`a`.`phone2`,
+				`a`.`phone3_type`.
+				`a`.`phone3`,
+				`a`.`phone4_type`.
+				`a`.`phone4`,
+				`a`.`email`
 
 			FROM
 				`reserve`.`reseller_agents` a
 			
 			LEFT JOIN `reserve`.`resellers` r ON `a`.`resellerID` = `r`.`resellerID`
+			LEFT JOIN `reserve`.`countries` c ON `a`.`countryID` = `c`.`countryID`
 
 			WHERE
 				`a`.`reseller_agentID` = '$_GET[agentID]'
