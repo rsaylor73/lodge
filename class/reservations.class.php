@@ -576,6 +576,7 @@ class reservations extends Core {
 			}
 			$data['begin_date'] = $this->get_reservation_dates($reservationID,'ASC');
 			$data['end_date'] 	= $this->get_reservation_dates($reservationID,'DESC');
+			$data['nights']		= $this->get_reservation_night($reservationID);
 		}
 
 		return $data;
@@ -599,8 +600,6 @@ class reservations extends Core {
 		ORDER BY `inventory`.`date_code` $direction LIMIT 1
 		";
 
-		print "SQL:<br>$sql<br>";
-
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$date = $row['date'];
@@ -608,7 +607,29 @@ class reservations extends Core {
 		return $date;
 	}
 
-   public function reservation_guests($reservationID) {
+	public function get_reservation_nights($reservationID) {
+		$sql = "
+		SELECT
+			`inventory`.`date_code`,
+			DATE_FORMAT(`inventory`.`date_code`, '%m/%d/%Y') AS 'date'
+
+		FROM
+			`beds`,`inventory`
+
+		WHERE
+			`beds`.`reservationID` = '$reservationID'
+			AND `beds`.`inventoryID` = `inventory`.`inventoryID`
+
+		GROUP BY `beds`.`inventoryID`, `inventory`.`date_code`
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$counter++;
+		}
+		return $counter;
+	}
+
+    public function reservation_guests($reservationID) {
 		// Tab 2
 		
 		$sql = "
