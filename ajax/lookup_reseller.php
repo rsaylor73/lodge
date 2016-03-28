@@ -28,8 +28,8 @@ if ($check == "FALSE") {
 			`r`.`resellerID` = '$_GET[resellerID]'
 			AND `r`.`resellerID` = `a`.`resellerID`
 			AND `a`.`status` = 'Active'
-			AND `a`.`first` != ""
-			AND `a`.`last` != ""
+			AND `a`.`first` != ''
+			AND `a`.`last` != ''
 
 		ORDER BY `a`.`first` ASC, `a`.`last` ASC
 		";
@@ -49,8 +49,8 @@ if ($check == "FALSE") {
 			`r`.`company` LIKE '%$_GET[company]%'
 			AND `r`.`resellerID` = `a`.`resellerID`
 			AND `a`.`status` = 'Active'
-			AND `a`.`first` != ""
-			AND `a`.`last` != ""
+			AND `a`.`first` != ''
+			AND `a`.`last` != ''
 
 		ORDER BY `a`.`first` ASC, `a`.`last` ASC
 		";
@@ -65,7 +65,7 @@ if ($check == "FALSE") {
 			$html .= "<tr><td colspan=2><b>$row[company]</b></td></tr>";
 			$this_company = $row['company'];
 		}
-		$html .= "<tr><td width=\"150\">$row[first] $row[last]</td><td><input type=\"button\" onclick=\"document.location.href='assignagenttoreservation/$_GET[reservationID]/$row[reseller_agentID]'\" class=\"btn btn-primary\" value=\"Assign Agent\"></td></tr>";
+		$html .= "<tr><td width=\"250\">$row[first] $row[last]</td><td><input type=\"button\" onclick=\"document.location.href='assignagenttoreservation/$_GET[reservationID]/$row[reseller_agentID]'\" class=\"btn btn-primary\" value=\"Assign Agent\"></td></tr>";
 	}
 	print "<table class=\"table\">$html</table>";
 
