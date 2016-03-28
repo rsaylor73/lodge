@@ -29,4 +29,11 @@
 	<td>{$end_date}</td>
 	<td>{$nights}</td>
 </tr>
+
+{if $resellerID eq ""}
+<tr><td colspan=3><input type="button" value="Assign Reseller" class="btn btn-warning"></td></tr>
+{else}
+<tr><td colspan=3>Reseller....</td></tr>
+{/if}
+
 </table>
