@@ -606,7 +606,6 @@ class reservations extends Core {
 			AND `i`.`locationID` = `l`.`id`
 			AND `i`.`roomID` = `r`.`id`
 
-		GROUP BY `t2_description`
 
 		";
 
