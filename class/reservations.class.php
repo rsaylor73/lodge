@@ -574,9 +574,35 @@ class reservations extends Core {
 			foreach ($row as $key=>$value) {
 				$data[$key] = $value;
 			}
+			$data['begin_date'] = $this->get_reservation_dates($row['reservationID'],'ASC');
+			$data['end_date'] 	= $this->get_reservation_dates($row['reservationID'],'DESC');
 		}
 
 		return $data;
+	}
+
+	public function get_reservation_dates($reservationID,$direction) {
+		$sql = "
+		SELECT
+			`inventory`.`date_code`,
+			DATE_FORMAT(`inventory`.`date_code`, '%m/%d/%Y') AS 'date'
+
+		FROM
+			`beds`,`inventory`
+
+		WHERE
+			`beds`.`reservationID` = '$reservationID'
+			AND `beds`.`inventoryID` = `inventory`.`inventoryID`
+
+		GROUP BY `beds`.`inventoryID`, `inventory`.`date_code`
+
+		ORDER BY `inventory`.`date_code` $direction LIMIT 1
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$date = $row['date'];
+		}
+		return $date;
 	}
 
    public function reservation_guests($reservationID) {

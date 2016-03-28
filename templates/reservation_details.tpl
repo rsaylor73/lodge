@@ -17,4 +17,16 @@
 	<td><a href="mailto:{$t1_email}">{$t1_first} {$t1_last}</a></td>
 	<td>{$t1_booked_date}</td>
 </tr>
+
+<tr>
+	<td><b>Starting Date</b></td>
+	<td><b>Ending Date</b></td>
+	<td><b>Number of Nights</b></td>
+</tr>
+
+<tr>
+	<td>{$begin_date}</td>
+	<td>{$end_date}</td>
+	<td>{$nights}</td>
+</tr>
 </table>
