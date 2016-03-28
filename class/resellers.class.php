@@ -235,7 +235,7 @@ class resellers extends contacts {
 				`a`.`phone4_type`,
 				`a`.`phone4`,
 				`a`.`email`,
-				`a`.`status`,
+				`a`.`status`
 
 			FROM
 				`reserve`.`reseller_agents` a
