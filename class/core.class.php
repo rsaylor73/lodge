@@ -91,9 +91,9 @@ class Core {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			if ($row['id'] == $id) {
-				$state .= "<option selected value=\"$row[state]\">$row[state]</option>";
+				$state .= "<option selected value=\"$row[state_abbr]\">$row[state_abbr]</option>";
 			} else {
-				$state .= "<option value=\"$row[state]\">$row[state]</option>";
+				$state .= "<option value=\"$row[state_abbr]\">$row[state_abbr]</option>";
 			}
 		}
 		return $state;
