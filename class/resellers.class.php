@@ -303,5 +303,10 @@ class resellers extends contacts {
 		$this->load_smarty($null,$template);
 	}
 
+	public function newreseller() {
+		$template = "newreseller";
+		$this->load_smarty($null,$template);
+	}
+
 // end class	
 }
