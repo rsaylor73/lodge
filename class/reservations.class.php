@@ -585,10 +585,10 @@ class reservations extends Core {
 		$sql = "
 		SELECT
 			`b`.`status` 										AS 't2_status',
-			`r`.`description` 								AS 't2_description',
+			`r`.`description` 									AS 't2_description',
 			`b`.`name` 											AS 't2_bedname',
-			DATE_FORMAT(`i`.`date_code`, '%m/%d/%Y') 	AS 't2_date',
-			`c`.`contactID`									AS 't2_contactID',
+			DATE_FORMAT(`i`.`date_code`, '%m/%d/%Y') 			AS 't2_date',
+			`c`.`contactID`										AS 't2_contactID',
 			`c`.`first`											AS 't2_first',
 			`c`.`middle`										AS 't2_middle',
 			`c`.`last`											AS 't2_last',
@@ -606,6 +606,8 @@ class reservations extends Core {
 			AND `i`.`locationID` = `l`.`id`
 			AND `i`.`roomID` = `r`.`id`
 
+		GROUP BY `t2_description`
+
 		";
 
 		$result = $this->new_mysql($sql);
@@ -622,7 +624,7 @@ class reservations extends Core {
 				<td>$row[t2_description]</td>
 				<td>$row[t2_bedname]</td>
 				<td>$row[t2_status]</td>
-				<td>$row[t2_date]</td>
+				<!--<td>$row[t2_date]</td>-->
 				<td>$contact</td>
 			</tr>
 			";
