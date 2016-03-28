@@ -19,4 +19,16 @@
 
 </form>
 
+<script>
+
+function lookup_reseller(myform) {
+	$.get('ajax/lookup_reseller.php',
+	$(myform).serialize(),
+	function(php_msg) {
+		$("#results").html(php_msg);
+	});
+}
+
+</script>
+
 </div>
