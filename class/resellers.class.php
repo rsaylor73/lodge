@@ -308,5 +308,11 @@ class resellers extends contacts {
 		$this->load_smarty($null,$template);
 	}
 
+	public function assignreseller() {
+		$template = "assignreseller.tpl";
+		$data['reservationID'] = $_GET['reservationID'];
+		$this->load_smarty($data,$template);
+	}
+
 // end class	
 }

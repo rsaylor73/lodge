@@ -31,7 +31,12 @@
 </tr>
 
 {if $resellerID eq ""}
-<tr><td colspan=3><input type="button" value="Assign Reseller" class="btn btn-warning"></td></tr>
+<tr>
+	<td colspan=3>
+		<form action="assignreseller/{$reservationID}" method="get">
+		<input type="submit" value="Assign Reseller" class="btn btn-warning">
+		</form>
+	</td></tr>
 {else}
 <tr><td colspan=3>Reseller....</td></tr>
 {/if}
