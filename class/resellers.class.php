@@ -298,5 +298,10 @@ class resellers extends contacts {
 		}
 	}
 
+	public function newagent() {
+		$template = "newagent.tpl";
+		$this->load_smarty($null,$template);
+	}
+
 // end class	
 }
