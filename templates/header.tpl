@@ -76,6 +76,14 @@
         } 
       });
 
+      $( "#dob" ).datepicker({ 
+         dateFormat: "yymmdd",
+         changeMonth: true,
+         changeYear: true,
+         yearRange: "-100:+0"
+         
+      });
+
    });
 
 	</script>

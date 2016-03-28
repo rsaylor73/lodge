@@ -18,7 +18,7 @@
 	<tr><td><b>Province:</b></td><td><input type="text" name="province" size=40></td></tr>
 	<tr><td><b>Country:</b></td><td><select name="country" required>{$country}</select></td></tr>
 	<tr><td><b>Zip Code:</b></td><td><input type="text" name="zip" size=40></td></tr>
-	<tr><td><b>Date Of Birth:</b></td><td><input type="text" name="dob" size=40></td></tr>
+	<tr><td><b>Date Of Birth:</b></td><td><input type="text" name="dob" id="dob" size=40></td></tr>
 
 	<tr><td colspan=2><hr></td></tr>
 	<tr><td><b>Cell Phone:</b></td><td><input type="text" name="cell_phone" placeholder="Country code and number IE 1-706-955-0044" size=40></td></tr>
