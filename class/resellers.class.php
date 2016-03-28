@@ -285,7 +285,7 @@ class resellers extends contacts {
 		";
 		$result = $this->new_mysql($sql);
 		if ($result == "TRUE") {
-			$sql2 = "SELECT `company` FROM `reserve`.`resellers` r WHERE `r`.`resellerID` = '$_GET[resellerID]'";
+			$sql2 = "SELECT `company` FROM `reserve`.`resellers` r WHERE `r`.`resellerID` = '$_POST[resellerID]'";
 			$result2 = $this->new_mysql($sql2);
 			while ($row2 = $result2->fetch_assoc()) {
 				$data['company'] = $row2['company'];
