@@ -28,6 +28,8 @@ if ($check == "FALSE") {
 			`r`.`resellerID` = '$_GET[resellerID]'
 			AND `r`.`resellerID` = `a`.`resellerID`
 			AND `a`.`status` = 'Active'
+			AND `a`.`first` != ""
+			AND `a`.`last` != ""
 
 		ORDER BY `a`.`first` ASC, `a`.`last` ASC
 		";
@@ -47,6 +49,8 @@ if ($check == "FALSE") {
 			`r`.`company` LIKE '%$_GET[company]%'
 			AND `r`.`resellerID` = `a`.`resellerID`
 			AND `a`.`status` = 'Active'
+			AND `a`.`first` != ""
+			AND `a`.`last` != ""
 
 		ORDER BY `a`.`first` ASC, `a`.`last` ASC
 		";
