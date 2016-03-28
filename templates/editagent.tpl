@@ -2,6 +2,8 @@
 <h2>Agent :: {$company} :: {$name}</h2>
 
 <form name="myform" action="updateagent" method="post">
+<input type="hidden" name="reseller_agentID" value="{$reseller_agentID}">
+<input type="hidden" name="resellerID" value="{$resellerID}">
 <table class="table">
 <tr><td><b>Status:</b></td><td><select name="status"><option selected value="{$status}">{$status} (Default)</option><option>Active</option><option>Inactive</option></select></td></tr>
 <tr><td><b>First Name:</b></td><td><input type="text" name="first" value="{$first}" size=40></td></tr>

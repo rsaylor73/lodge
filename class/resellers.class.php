@@ -219,6 +219,7 @@ class resellers extends contacts {
 				`a`.`middle`,
 				`a`.`last`,
 				`a`.`reseller_agentID`,
+				`a`.`resellerID`,
 				`r`.`company`,
 				`a`.`address1`,
 				`a`.`address2`,
@@ -257,6 +258,44 @@ class resellers extends contacts {
 
 			$template = "editagent.tpl";
     		$this->load_smarty($data,$template);
+	}
+
+	public function updateagent() {
+		$sql = "UPDATE `reserve`.`reseller_agents` SET
+		`status` = '$_POST[status]',
+		`first` = '$_POST[first]',
+		`middle` = '$_POST[middle]',
+		`last` = '$_POST[last]',
+		`address1` = '$_POST[address1]',
+		`address2` = '$_POST[address2]',
+		`city` = '$_POST[city]',
+		`state` = '$_POST[state]',
+		`zip` = '$_POST[zip]',
+		`countryID` = '$_POST[countryID]',
+		`phone1_type` = '$_POST[phone1_type]',
+		`phone2_type` = '$_POST[phone2_type]',
+		`phone3_type` = '$_POST[phone3_type]',
+		`phone4_type` = '$_POST[phone4_type]',
+		`phone1` = '$_POST[phone1]',
+		`phone2` = '$_POST[phone2]',
+		`phone3` = '$_POST[phone3]',
+		`phone4` = '$_POST[phone4]',
+		`email` = '$_POST[email]'
+		WHERE `reseller_agentID` = '$_POST[reseller_agentID]'
+		";
+		$result = $this->new_mysql($sql);
+		if ($result == "TRUE") {
+			$sql2 = "SELECT `company` FROM `reserve`.`resellers` r WHERE `r`.`resellerID` = '$_GET[resellerID]'";
+			$result2 = $this->new_mysql($sql2);
+			while ($row2 = $result2->fetch_assoc()) {
+				$data['company'] = $row2['company'];
+			}
+
+			$template = "editagents.tpl";
+			$data['msg'] = "<font color=green>The agent was updated.<br></font>";
+			$data['agent_list'] = $this->list_agents($_POST['resellerID']);
+			$this->load_smarty($data,$template);
+		}
 	}
 
 // end class	
