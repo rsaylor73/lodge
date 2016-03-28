@@ -606,7 +606,7 @@ class reservations extends Core {
 			AND `i`.`locationID` = `l`.`id`
 			AND `i`.`roomID` = `r`.`id`
 
-
+		GROUP BY `t2_bedname`
 		";
 
 		$result = $this->new_mysql($sql);
