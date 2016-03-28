@@ -13,7 +13,7 @@
 <tr><td colspan="2"><input type="button" value="Search" class="btn btn-primary" onclick="lookup_reseller(this.form)"></td></tr>
 </table>
 
-	<div id="results">
+	<div id="displayresults">
 
 	</div>
 
@@ -25,7 +25,7 @@ function lookup_reseller(myform) {
 	$.get('ajax/lookup_reseller.php',
 	$(myform).serialize(),
 	function(php_msg) {
-		$("#results").html(php_msg);
+		$("#displayresults").html(php_msg);
 	});
 }
 
