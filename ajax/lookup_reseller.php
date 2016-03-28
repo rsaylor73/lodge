@@ -39,8 +39,9 @@ if ($check == "FALSE") {
 
 	$result = $core->new_mysql($sql);
 	while ($row = $result->fetch_assoc()) {
-		if ($html == "") {
+		if ($this_company != $row['company']) {
 			$html .= "<tr><td colspan=2><b>$row[company]</b></td></tr>";
+			$company = $row['company'];
 		}
 		$html .= "<tr><td width=\"150\">$row[first] $row[last]</td><td><input type=\"button\" onclick=\"document.location.href='assignagenttoreservation/$_GET[reservationID]/$row[reseller_agentID]'\" class=\"btn btn-primary\" value=\"Assign Agent\"></td></tr>";
 	}
