@@ -22,7 +22,7 @@
 <script>
 
 function lookup_reseller(myform) {
-	$.get('ajax/lookup_reseller.php',
+	$.get('ajax/lookup_reseller2.php',
 	$(myform).serialize(),
 	function(php_msg) {
 		$("#displayresults").html(php_msg);
