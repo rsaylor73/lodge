@@ -559,12 +559,17 @@ class reservations extends Core {
 			`u`.`first` AS 't1_first',
 			`u`.`last` AS 't1_last',
 			`u`.`email` AS 't1_email',
-			DATE_FORMAT(`r`.`date_created`, '%m/%d/%Y') AS 't1_booked_date'
+			DATE_FORMAT(`r`.`date_created`, '%m/%d/%Y') AS 't1_booked_date',
+			`a`.`reseller_agentID`,
+			`s`.`resellerID`,
+			`s`.`company`
+
 
 		FROM
 			`reservations` r, `users` u
 
 		LEFT JOIN `reserve`.`reseller_agents` a ON `r`.`reseller_agentID` = `a`.`reseller_agentID`
+		LEFT JOIN `reserve`.`resellers` s ON `a`.`resellerID` = `s`.`resellerID`
 
 		WHERE
 			`r`.`reservationID` = '$reservationID'
