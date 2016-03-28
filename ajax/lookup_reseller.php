@@ -31,7 +31,7 @@ if ($check == "FALSE") {
 
 		ORDER BY `a`.`first` ASC, `a`.`last` ASC
 		";
-		print "$sql<br>";
+		print "<br>$sql<br>";
 	} elseif ($_GET['company'] != "") {
 		# code...
 	} else {
