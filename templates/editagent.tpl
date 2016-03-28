@@ -11,6 +11,7 @@
 <tr><td><b>Address Line 2:</b></td><td><input type="text" name="address2" value="{$address2}" size="40"></td></tr>
 <tr><td><b>City:</b></td><td><input type="text" name="city" value="{$city}" size="40"></td></tr>
 <tr><td><b>State/Province:</b></td><td><input type="text" name="state" value="{$state}" size="40"></td></tr>
+<tr><td><b>Country:</b></td><td><select name="countryID">{$country}</select></td></tr>
 
 <tr><td><b>Phone <select name="phone1_type">
 	{if $phone1_type ne ""}<option selected>{$phone1_type}</option>option>{/if}
