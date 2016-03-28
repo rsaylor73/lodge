@@ -64,7 +64,8 @@ class Core {
 
 	public function get_countries($id) {
 		// older function redirecting to newer function now
-		$this->country_list($id);
+		$option = $this->country_list($id);
+		return $option;
     }
 
 	public function clear_white($string) {
