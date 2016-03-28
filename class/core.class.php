@@ -83,7 +83,7 @@ class Core {
 		return $months;
 	}
 
-	/*
+	
 	public function get_states($id) {
 		// returns a list of states
 		$sql = "SELECT * FROM `state` ORDER BY `state` ASC";
@@ -98,6 +98,7 @@ class Core {
 		return $state;
 	}
 
+	/*
 	public function get_one_state($id) {
    		$sql = "SELECT * FROM `state` WHERE `id` = '$id'";
       	$result = $this->new_mysql($sql);
