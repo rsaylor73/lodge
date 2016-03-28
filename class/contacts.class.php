@@ -153,8 +153,7 @@ class contacts extends reservations {
 		$state = "<option value=\"\">--Select--</option>";
 		$state .= $this->get_states($null);
 
-		$country = "<option value=\"\">--Select--</option>";
-		$country .= $this->get_countries($null);
+		$country = $this->get_countries($null);
 
 		$data['state'] = $state;
 		$data['country'] = $country;
