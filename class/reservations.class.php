@@ -574,8 +574,8 @@ class reservations extends Core {
 			foreach ($row as $key=>$value) {
 				$data[$key] = $value;
 			}
-			$data['begin_date'] = $this->get_reservation_dates($row['reservationID'],'ASC');
-			$data['end_date'] 	= $this->get_reservation_dates($row['reservationID'],'DESC');
+			$data['begin_date'] = $this->get_reservation_dates($reservationID,'ASC');
+			$data['end_date'] 	= $this->get_reservation_dates($reservationID,'DESC');
 		}
 
 		return $data;
