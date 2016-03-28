@@ -576,7 +576,7 @@ class reservations extends Core {
 			}
 			$data['begin_date'] = $this->get_reservation_dates($reservationID,'ASC');
 			$data['end_date'] 	= $this->get_reservation_dates($reservationID,'DESC');
-			$data['nights']		= $this->get_reservation_night($reservationID);
+			$data['nights']		= $this->get_reservation_nights($reservationID);
 		}
 
 		return $data;
