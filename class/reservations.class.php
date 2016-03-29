@@ -561,8 +561,11 @@ class reservations extends Core {
 			`u`.`email` AS 't1_email',
 			DATE_FORMAT(`r`.`date_created`, '%m/%d/%Y') AS 't1_booked_date',
 			`a`.`reseller_agentID`,
+			`a`.`first`,
+			`a`.`last`,
 			`s`.`resellerID`,
-			`s`.`company`
+			`s`.`company`,
+			`s`.`commission`
 
 
 		FROM
