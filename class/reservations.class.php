@@ -661,7 +661,8 @@ class reservations extends Core {
 			`c`.`first`											AS 't2_first',
 			`c`.`middle`										AS 't2_middle',
 			`c`.`last`											AS 't2_last',
-			`c`.`email`											AS 't2_email'
+			`c`.`email`											AS 't2_email',
+			`i`.`reservationID`
 
 		FROM
 			`beds` b, `inventory` i, `locations` l, `rooms` r
@@ -682,7 +683,7 @@ class reservations extends Core {
 		while ($row = $result->fetch_assoc()) {
 
 			if ($row['t2_contactID'] == "") {
-				$contact = "<input type=\"button\" value=\"Assign Contact\" class=\"btn btn-primary\">";
+				$contact = "<input type=\"button\" value=\"Assign Contact\" class=\"btn btn-primary\" onclick=\"document.location.href='assigncontact/$row[reservationID]/$row[t2_bedname]'\">";
 			} else {
 				$contact = "$row[t2_first] $row[t2_middle] $row[t2_last]";
 			}
@@ -692,7 +693,6 @@ class reservations extends Core {
 				<td>$row[t2_description]</td>
 				<td>$row[t2_bedname]</td>
 				<td>$row[t2_status]</td>
-				<!--<td>$row[t2_date]</td>-->
 				<td>$contact</td>
 			</tr>
 			";
