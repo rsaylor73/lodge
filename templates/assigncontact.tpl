@@ -18,7 +18,7 @@
 	<td width="150"><b>Contact ID</b></td><td><input type="text" name="resellerID" size="40" onkeypress="if(event.keyCode==13) { lookup_contact(this.form); return false;}"></td>
 </tr>
 
-<tr><td colspan="2"><input type="button" value="Search" class="btn btn-primary" onclick="lookup_contact(this.form)"></td></tr>
+<tr><td colspan="2"><input type="button" value="Search" class="btn btn-primary" onclick="lookup_contact(this.form)">&nbsp;&nbsp;<input type="button" value="New Contact" class="btn btn-success" onclick="window.open('newcontact')"></td></tr>
 </table>
 
 	<div id="displayresults">
