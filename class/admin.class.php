@@ -5,7 +5,7 @@ include $GLOBAL['path']."/class/resellers.class.php";
 
 class admin extends resellers {
 
-	public functin lodge($msg='') {
+	public function lodge($msg='') {
 		// alias to managelodge
 		$this->managelodge($msg);
 	}
