@@ -314,5 +314,11 @@ class resellers extends contacts {
 		$this->load_smarty($data,$template);
 	}
 
+	public function assignagenttoreservation() {
+		$sql = "UPDATE `reservations` SET `reseller_agentID` = '$_GET[reseller_agentID]' WHERE `reservationID` = '$_GET[reservationID]'";
+		$result = $this->new_mysql($sql);
+		$this->reservation_dashboard();
+	}
+
 // end class	
 }
