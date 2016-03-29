@@ -197,7 +197,11 @@ class contacts extends reservations {
 	}
 
 	public function assigncontacttobed() {
-		print "To Do...";
+		$sql = "UPDATE `beds` SET `contactID` = '$_GET[contactID]', `status` = 'booked' WHERE `reservationID` = '$_GET[reservationID]' AND `name` = '$_GET[bed]'";
+		$result = $this->new_mysql($sql);
+		$template = "assigncontacttobed.tpl";
+		$data['reservationID'] = $_GET['reservationID'];
+		$this->load_smarty($data,$template);
 	}
 
 // end class
