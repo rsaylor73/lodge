@@ -38,3 +38,9 @@ RewriteRule ^editagent/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editag
 RewriteRule ^assignagenttoreservation/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=assignagenttoreservation&reservationID=$1&reseller_agentID=$2 [NC,L]
 RewriteRule ^assigncontact/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=assigncontact&reservationID=$1&bed=$2 [NC,L]
 
+
+# Four params
+# IE: search/12345/676767/A
+
+RewriteRule ^assigncontacttobed/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=assigncontacttobed&reservationID=$1&contactID=$2&bed=$3
+

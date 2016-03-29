@@ -194,9 +194,11 @@ class contacts extends reservations {
 		$data['bed'] = $_GET['bed'];
 		$template = "assigncontact.tpl";
 		$this->load_smarty($data,$template);
-
 	}
 
+	public function assigncontacttobed() {
+		print "To Do...";
+	}
 
 // end class
 }
