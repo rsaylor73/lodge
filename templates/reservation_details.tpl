@@ -39,7 +39,7 @@
 	</td></tr>
 {else}
 <tr><td><b>Reseller</b></td><td><b>Agent</b></td><td><b>Commission</b></td></tr>
-<tr><td>{$company}</td><td>{$first} {$last}</td><td>{$commission}</td></tr>
+<tr><td>{$company}</td><td>{$first} {$last}</td><td>{$commission} %</td></tr>
 <tr><td colspan="3">
 		<form action="assignreseller/{$reservationID}" method="get">
 		<input type="submit" value="Change Agent" class="btn btn-warning">
