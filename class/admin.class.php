@@ -5,6 +5,11 @@ include $GLOBAL['path']."/class/resellers.class.php";
 
 class admin extends resellers {
 
+	public functin lodge($msg='') {
+		// alias to managelodge
+		$this->managelodge($msg);
+	}
+
 	public function managelodge($msg='') {
 		$template = "lodge.tpl";
       	$data = array();
