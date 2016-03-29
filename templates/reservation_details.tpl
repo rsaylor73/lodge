@@ -19,8 +19,8 @@
 </tr>
 
 <tr>
-	<td><b>Starting Date</b></td>
-	<td><b>Ending Date</b></td>
+	<td><b>Check-In</b></td>
+	<td><b>Check-Out</b></td>
 	<td><b>Number of Nights</b></td>
 </tr>
 

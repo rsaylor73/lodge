@@ -595,10 +595,16 @@ class reservations extends Core {
 	}
 
 	public function get_reservation_dates($reservationID,$direction) {
+		if ($direction == "DESC") {
+			// add 1 day to result
+			$d = "DATE_FORMAT(DATE_ADD(`inventory`.`date_code`,INTERVAL 1 DAY), '%m/%d/%Y') AS 'date'";
+		} else {
+			$d = "DATE_FORMAT(`inventory`.`date_code`, '%m/%d/%Y') AS 'date'";
+		}
 		$sql = "
 		SELECT
 			`inventory`.`date_code`,
-			DATE_FORMAT(`inventory`.`date_code`, '%m/%d/%Y') AS 'date'
+			$d
 
 		FROM
 			`beds`,`inventory`
@@ -611,6 +617,8 @@ class reservations extends Core {
 
 		ORDER BY `inventory`.`date_code` $direction LIMIT 1
 		";
+
+		print "SQL: $sql<br>";
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
