@@ -667,7 +667,7 @@ class reservations extends Core {
 			`beds` b, `inventory` i, `locations` l, `rooms` r
 
 
-		LEFT JOIN `contacts` c ON `b`.`contactID` = `c`.`contactID`
+		LEFT JOIN `reserve`.`contacts` c ON `b`.`contactID` = `c`.`contactID`
 
 		WHERE
 			`b`.`reservationID` = '$reservationID'
