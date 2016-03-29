@@ -5,10 +5,10 @@
 <input type="hidden" name="reservationID" value="{$reservationID}">
 <table class="table">
 <tr>
-	<td width="150"><b>Reseller ID</b></td><td><input type="text" name="resellerID" size="40"></td>
+	<td width="150"><b>Reseller ID</b></td><td><input type="text" name="resellerID" size="40" onkeypress="if(event.keyCode==13) { lookup_reseller(this.form); return false;}"></td>
 </tr>
 <tr>
-	<td width="150"><b>Company:</b></td><td><input type="text" name="company" size="40"></td>
+	<td width="150"><b>Company:</b></td><td><input type="text" name="company" size="40" onkeypress="if(event.keyCode==13) { lookup_reseller(this.form); return false;}"></td>
 </tr>
 <tr><td colspan="2"><input type="button" value="Search" class="btn btn-primary" onclick="lookup_reseller(this.form)"></td></tr>
 </table>
