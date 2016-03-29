@@ -20,7 +20,7 @@
 
 <tr><td colspan="2"><input type="button" value="Search" class="btn btn-primary" onclick="lookup_contact(this.form)">&nbsp;&nbsp;<input type="button" value="New Contact" class="btn btn-success" 
 onclick="window.open('newcontact');document.getElementById('message').style.display='inline';"> 
-<div id="message" style="display:none"><i>You can search for your new contact after you add them.</i></div></td></tr>
+<div id="message" style="display:none"><br><i>You can search for your new contact after you add them.</i></div></td></tr>
 </table>
 
 	<div id="displayresults">
