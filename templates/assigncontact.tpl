@@ -4,9 +4,7 @@
 <form name="myform">
 <input type="hidden" name="reservationID" value="{$reservationID}">
 <table class="table">
-<tr>
-	<td width="150"><b>Contact ID</b></td><td><input type="text" name="resellerID" size="40" onkeypress="if(event.keyCode==13) { lookup_contact(this.form); return false;}"></td>
-</tr>
+
 <tr>
 	<td width="150"><b>First Name:</b></td><td><input type="text" name="first" size="40" onkeypress="if(event.keyCode==13) { lookup_contact(this.form); return false;}"></td>
 </tr>
@@ -15,6 +13,9 @@
 </tr>
 <tr>
 	<td width="150"><b>Email:</b></td><td><input type="text" name="email" size="40" onkeypress="if(event.keyCode==13) { lookup_contact(this.form); return false;}"></td>
+</tr>
+<tr>
+	<td width="150"><b>Contact ID</b></td><td><input type="text" name="resellerID" size="40" onkeypress="if(event.keyCode==13) { lookup_contact(this.form); return false;}"></td>
 </tr>
 
 <tr><td colspan="2"><input type="button" value="Search" class="btn btn-primary" onclick="lookup_contact(this.form)"></td></tr>
