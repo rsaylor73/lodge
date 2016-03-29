@@ -684,7 +684,10 @@ class reservations extends Core {
 			if ($row['t2_contactID'] == "") {
 				$contact = "<input type=\"button\" value=\"Assign Contact\" class=\"btn btn-primary\" onclick=\"document.location.href='assigncontact/$reservationID/$row[t2_bedname]'\">";
 			} else {
-				$contact = "$row[t2_first] $row[t2_middle] $row[t2_last]";
+				$contact = "$row[t2_first] $row[t2_middle] $row[t2_last]&nbsp;&nbsp;
+				<a href=\"javascript:void(0)\" onclick=\"document.location.href='assigncontact/$reservationID/$row[t2_bedname]'\"><i class=\"fa fa-wrench\"></i></a>
+
+				";
 			}
 
 			$html .= "
