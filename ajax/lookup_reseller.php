@@ -31,7 +31,7 @@ if ($check == "FALSE") {
 			AND `a`.`first` != ''
 			AND `a`.`last` != ''
 
-		ORDER BY `a`.`first` ASC, `a`.`last` ASC
+		ORDER BY `r`.`company` ASC, `a`.`first` ASC, `a`.`last` ASC
 		";
 	} elseif ($_GET['company'] != "") {
 		$sql = "
@@ -52,7 +52,7 @@ if ($check == "FALSE") {
 			AND `a`.`first` != ''
 			AND `a`.`last` != ''
 
-		ORDER BY `a`.`first` ASC, `a`.`last` ASC
+		ORDER BY `r`.`company` ASC, `a`.`first` ASC, `a`.`last` ASC
 		";
 	} else {
 		print "<br><font color=red>Please enter in a company name or a reseller ID.</font><br>";
