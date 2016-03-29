@@ -563,6 +563,7 @@ class reservations extends Core {
 			`a`.`reseller_agentID`,
 			`a`.`first`,
 			`a`.`last`,
+			`a`.`email`,
 			`s`.`resellerID`,
 			`s`.`company`,
 			`s`.`commission`
