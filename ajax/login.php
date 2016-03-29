@@ -27,7 +27,7 @@ while ($row = $result->fetch_assoc()) {
    ?>
    <script>
    setTimeout(function() {
-		window.location.replace('dashboard/')
+		window.location.replace('dashboard')
 	}
    ,2000);
 
