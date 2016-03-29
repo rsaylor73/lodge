@@ -3,6 +3,7 @@
 
 <form name="myform">
 <input type="hidden" name="reservationID" value="{$reservationID}">
+<input type="hidden" name="bed" value="{$bed}">
 <table class="table">
 
 <tr>
