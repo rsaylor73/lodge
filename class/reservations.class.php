@@ -618,8 +618,6 @@ class reservations extends Core {
 		ORDER BY `inventory`.`date_code` $direction LIMIT 1
 		";
 
-		print "SQL: $sql<br>";
-
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$date = $row['date'];
