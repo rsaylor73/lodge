@@ -519,6 +519,7 @@ class reservations extends Core {
 
 	public function reservation_dashboard() {
 		$reservationID = $_REQUEST['reservationID'];
+		$this->is_rsv_valid($reservationID);
 		$data['reservationID'] = $reservationID;
 
 		if ($_REQUEST['part'] == "") {
