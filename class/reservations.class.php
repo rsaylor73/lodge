@@ -1,7 +1,7 @@
 <?php
-include $GLOBAL['path']."/class/core.class.php";
+include $GLOBAL['path']."/class/money.class.php";
 
-class reservations extends Core {
+class reservations extends money {
 
 	public function newreservation() {
       	$template = "newreservation.tpl";
