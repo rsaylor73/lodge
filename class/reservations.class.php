@@ -142,6 +142,7 @@ class reservations extends money {
 			<input type=\"hidden\" name=\"pax\" value=\"$_POST[pax]\">
 			<input type=\"hidden\" name=\"children\" value=\"$_POST[children]\">
 			<input type=\"hidden\" name=\"nights\" value=\"$_POST[nights]\">
+			<input type=\"hidden\" name=\"tents\" value=\"$_POST[tents]\">
 			
 			";
 
