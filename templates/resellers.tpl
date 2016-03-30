@@ -12,33 +12,19 @@
 	<td><input type="text" name="first" placeholder="First Name" size=20></td>
 	<td><input type="text" name="last" placeholder="Last Name" size=20></td>
 </tr>
-
-<tr id="s0">
-	<td colspan=2><i class="fa fa-arrow-down" onclick="
-	document.getElementById('s0').style.display='none';
-   document.getElementById('s1').style.display='table-row';
-   document.getElementById('s2').style.display='table-row';
-   document.getElementById('s3').style.display='table-row';
-   document.getElementById('s4').style.display='table-row';
-
-">
-
- Show more search options</i></td>
-</tr>
-
-<tr id="s1" style="display:none">
+<tr id="s1">
 	<td><input type="text" name="phone" placeholder="Phone" size=20></td>
 	<td><input type="text" name="zip" placeholder="Zip" size=20></td>
 </tr>
-<tr id="s2" style="display:none">
+<tr id="s2">
 	<td><input type="text" name="email" placeholder="Email" size=20></td>
 	<td><select name="country" style="width:200px">{$country}</select></td>
 </tr>
-<tr id="s3" style="display:none">
+<tr id="s3">
 	<td><input type="text" name="resellerID" placeholder="Reseller ID"></td>
 	<td><input type="text" name="city" placeholder="City"></td>
 </tr>
-<tr id="s4" style="display:none">
+<tr id="s4">
 	<td><input type="text" name="address" placeholder="Address"></td>
 	<td><input type="text" name="company" placeholder="Company"></td>
 </tr>
