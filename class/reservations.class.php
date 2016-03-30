@@ -334,6 +334,10 @@ class reservations extends money {
 			$children = "0";
 		}
 
+		if ($_POST['tents'] > 1) {
+			$adults = $adults / $_POST['tents'];
+			
+		}
 
 		$sql = "
 		SELECT
