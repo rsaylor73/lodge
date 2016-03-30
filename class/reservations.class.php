@@ -513,6 +513,9 @@ class reservations extends Core {
 		}
 		if ($found != "1") {
 			print "<br><font color=red>The reservation <b>$reservationID</b> is invalid.</font><br>";
+			print "</div>";
+			$template = "footer.tpl";
+			$this->load_smarty($nul,$template);
 			die;
 		}
 	}
