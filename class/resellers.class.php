@@ -179,9 +179,8 @@ class resellers extends contacts {
 			$data['company'] = $row['company'];
 		}
 
-
-
 		$template = "editagents.tpl";
+		$data['resellerID'] = $_GET['resellerID'];
 		$data['agent_list'] = $this->list_agents($_GET['resellerID']);
 		$this->load_smarty($data,$template);
 
@@ -299,9 +298,8 @@ class resellers extends contacts {
 	}
 
 	public function newagent() {
-		$data['resellerID'] = $_GET['resellerID'];
 		$template = "newagent.tpl";
-		$this->load_smarty($data,$template);
+		$this->load_smarty($null,$template);
 	}
 
 	public function newreseller() {
