@@ -505,6 +505,18 @@ class reservations extends Core {
       	$this->load_smarty($null,$template);
 	}
 
+	public function is_rsv_valid($reservationID) {
+		$sql = "SELECT `reservationID` FROM `reservations` WHERE `reservationID` = '$reservationID'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$found = "1";
+		}
+		if ($found != "1") {
+			print "<br><font color=red>The reservation <b>$reservationID</b> is invalid.</font><br>";
+			die;
+		}
+	}
+
 	public function reservation_dashboard() {
 		$reservationID = $_REQUEST['reservationID'];
 		$data['reservationID'] = $reservationID;
