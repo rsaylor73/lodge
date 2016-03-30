@@ -299,8 +299,9 @@ class resellers extends contacts {
 	}
 
 	public function newagent() {
+		$data['resellerID'] = $_GET['resellerID'];
 		$template = "newagent.tpl";
-		$this->load_smarty($null,$template);
+		$this->load_smarty($data,$template);
 	}
 
 	public function newreseller() {
