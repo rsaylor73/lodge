@@ -345,7 +345,9 @@ class reservations extends money {
 			`r`.`description`,
 			COUNT(`a`.`status`) AS 'total_adult_beds',
 			COUNT(`c`.`status`) AS 'total_child_beds',
-			`r`.`nightly_rate`
+			`r`.`nightly_rate`,
+			`r`.`beds` AS 'adult',
+			`r`.`children`
 
 		FROM
 			`inventory` i, `rooms` r
@@ -374,7 +376,7 @@ class reservations extends money {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$total = $row['nightly_rate'] * $nights;
-			$html .= "<tr><td>$row[description]</td><td>$$total</td><td>Click to select this tent <input type=\"radio\" value=\"$row[id]\" 
+			$html .= "<tr><td>$row[description]</td><td>$$total</td><td>$row[adult]</td><td>$row[children]</td><td>Click to select this tent <input type=\"radio\" value=\"$row[id]\" 
 			name=\"roomID\" data-toggle=\"toggle\" onchange=\"document.getElementById('booknow').style.display='inline'\"></td></tr>";
 			$found = "1";
 		}

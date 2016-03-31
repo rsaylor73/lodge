@@ -25,7 +25,7 @@
 
 <table class="table">
 	<tr>
-		<td><b>Tent</b></td><td><b>Total</b></td><td><b>Select</b></td>
+		<td><b>Tent</b></td><td><b>Total</b></td><td>Adult(s)</td><td>Children</td><td><b>Select</b></td>
 	</tr>
 	{$html}
 </table>
