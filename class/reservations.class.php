@@ -814,7 +814,6 @@ class reservations extends money {
 
 		GROUP BY `t2_description`, `t2_bedname`
 		";
-		print "$sql<br>";
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
