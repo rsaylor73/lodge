@@ -418,8 +418,45 @@ class reservations extends money {
 				$len = strlen($key);
 				$len2 = $len - 6;
 				$value2 = substr($key, 6,$len2);
-				print "Test: $value2<br>";
+				//print "Test: $value2<br>";
+
+				$sql = "SELECT `status` FROM `beds` WHERE `bedID` = '$value2'";
+				$result = $this->new_mysql($sql);
+				while ($row = $result->fetch_assoc()) {
+					if ($row['status'] != "avail") {
+						$err = "1";
+					}
+				}
 			}
+		}
+		if ($err != "1") {
+			$reservationID = $this->generate_reservationID();
+
+			foreach ($_POST as $key=>$value) {
+				if (preg_match("/roomID/i", $key)) {
+					$len = strlen($key);
+					$len2 = $len - 6;
+					$value2 = substr($key, 6,$len2);
+					//print "Test: $value2<br>";
+
+					$sql = "SELECT `status` FROM `beds` WHERE `bedID` = '$value2'";
+					$result = $this->new_mysql($sql);
+					while ($row = $result->fetch_assoc()) {
+						$sql3 = "UPDATE `beds` SET `reservationID` = '$reservationID', `status` = 'agent_hold' WHERE `bedID` = '$value2'";
+						$result3 = $this->new_mysql($sql3);
+					}
+				}
+			}
+
+			print "<br><font color=green>The reservation <b>$reservationID</b> has been booked. Please wait loading...<br>Click <a href=\"reservation_dashboard/$reservationID/details\">here</a> 
+			if the page does not load.<br></font>";
+			print "<meta http-equiv=\"refresh\" content=\"3; url=reservation_dashboard/$reservationID/details\">";
+
+		} else {
+			print "<br><font color=red>One or more tents are no longer available. Please re-start your search.</font><br>";
+			$template = "footer.tpl";
+			$this->load_smarty($null,$template);
+			die;
 		}
 	}
 
