@@ -413,6 +413,20 @@ class reservations extends money {
 	}
 
 	public function reservenow_group() {
+
+    	foreach ($_POST as $key=>$value) {
+       		if (preg_match("/data/i",$key)) {
+            	$temp = explode("_",$key);
+            	$dates[] = $temp[1];
+         	}
+      	}
+	    asort($dates);
+    	foreach ($dates as $value) {
+        	$nights++;
+         	$in_dates .= "'$value',";
+      	}
+      	$in_dates = substr($in_dates,0,-1);
+
 		foreach ($_POST as $key=>$value) {
 			if (preg_match("/roomID/i", $key)) {
 				$len = strlen($key);
@@ -420,8 +434,28 @@ class reservations extends money {
 				$value2 = substr($key, 6,$len2);
 				//print "Test: $value2<br>";
 
-				$sql = "SELECT `status` FROM `beds` WHERE `bedID` = '$value2'";
-				print "SQL: $sql<Br>";
+				//$sql = "SELECT `status` FROM `beds` WHERE `bedID` = '$value2'";
+				//print "SQL: $sql<Br>";
+
+				$sql = "
+				SELECT 
+					`a`.`bedID`,
+					`a`.`status`
+
+				FROM 
+					`inventory` i, `rooms` r 
+
+				LEFT JOIN `beds` a ON `i`.`inventoryID` = `a`.`inventoryID` 
+
+				WHERE 
+	        		`i`.`locationID` = '$_POST[lodge]' 
+   	      			AND `i`.`date_code` IN($in_dates)
+      	   			AND `i`.`roomID` = `r`.`id`
+         			AND `r`.`id` = '$_POST[roomID]'
+				";
+				print "$sql<br>";
+				die;
+				
 				$result = $this->new_mysql($sql);
 				while ($row = $result->fetch_assoc()) {
 					if ($row['status'] != "avail") {
