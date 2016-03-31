@@ -376,8 +376,19 @@ class reservations extends money {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$total = $row['nightly_rate'] * $nights;
-			$html .= "<tr><td>$row[description]</td><td>$$total</td><td>$row[adult]</td><td>$row[children]</td><td>Click to select this tent <input type=\"radio\" value=\"$row[id]\" 
-			name=\"roomID\" data-toggle=\"toggle\" onchange=\"document.getElementById('booknow').style.display='inline'\"></td></tr>";
+			if ($_POST['tents'] > 0) {
+				$html .= "<tr><td>$row[description]</td><td>$$total</td><td>$row[adult]</td><td>$row[children]</td><td>Click to select this tent 
+
+				<input data-toggle=\"toggle\" name=\"roomID$row[id]\" type=\"checkbox\" value=\"On\">
+
+				<input type=\"radio\" value=\"$row[id]\" 
+				name=\"roomID\" data-toggle=\"toggle\" onchange=\"document.getElementById('booknow').style.display='inline'\"></td></tr>";
+
+
+			} else {
+				$html .= "<tr><td>$row[description]</td><td>$$total</td><td>$row[adult]</td><td>$row[children]</td><td>Click to select this tent <input type=\"radio\" value=\"$row[id]\" 
+				name=\"roomID\" data-toggle=\"toggle\" onchange=\"document.getElementById('booknow').style.display='inline'\"></td></tr>";
+			}
 			$found = "1";
 		}
 		if ($found != "1") {
