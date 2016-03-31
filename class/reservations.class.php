@@ -401,15 +401,24 @@ class reservations extends money {
 	}
 
 	public function reservenow() {
+		switch ($_POST['tents']) {
+			case "1":
+			$this->reservenow_single();
+			break;
 
-		print "<pre>";
-		print_r($_POST);
-		print "</pre>";
-
+			default:
+			$this->reservenow_group();
+			break;
+		}
 	}
 
 	public function reservenow_group() {
-
+		foreach ($_POST as $key=>$value) {
+			if (preg_match("roomID", $key)) {
+				$value2 = substr($key, -6);
+				print "Test: $value2<br>";
+			}
+		}
 	}
 
 	public function reservenow_single() {
