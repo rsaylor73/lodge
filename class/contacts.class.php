@@ -127,13 +127,12 @@ class contacts extends reservations {
 		$month = substr($_POST['dob'], 0,2);
 		$day = substr($_POST['dob'], 3,2);
 		$dob = $year . $month . $day;
-		print "Test: $dob<br>";
-		die;
+
 
 		$sql = "UPDATE `reserve`.`contacts` c SET
 
 		`title` = '$_POST[title]', `first` = '$_POST[first]', `middle` = '$_POST[middle]', `last` = '$_POST[last]', `email` = '$_POST[email]', `address1` = '$_POST[address1]', `address2` = '$_POST[address2]',
-		`city` = '$_POST[city]', `state` = '$_POST[state]', `province` = '$_POST[province]', `countryID` = '$_POST[country]', `zip` = '$_POST[zip]', `date_of_birth` = '$_POST[dob]',
+		`city` = '$_POST[city]', `state` = '$_POST[state]', `province` = '$_POST[province]', `countryID` = '$_POST[country]', `zip` = '$_POST[zip]', `date_of_birth` = '$dob',
 		`phone1_type` = '$_POST[phone1_type]', `phone2_type` = '$_POST[phone2_type]', `phone3_type` = '$_POST[phone3_type]', `phone4_type` = '$_POST[phone4_type]',
 		`phone1` = '$_POST[phone1]', `phone2` = '$_POST[phone2]', `phone3` = '$_POST[phone3]', `phone4` = '$_POST[phone4]'
 
