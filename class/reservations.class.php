@@ -377,12 +377,11 @@ class reservations extends money {
 		while ($row = $result->fetch_assoc()) {
 			$total = $row['nightly_rate'] * $nights;
 			if ($_POST['tents'] > 0) {
-				$html .= "<tr><td>$row[description]</td><td>$$total</td><td>$row[adult]</td><td>$row[children]</td><td>Click to select this tent 
+				$html .= "<tr><td>$row[description]</td><td>$$total</td><td>$row[adult]</td><td>$row[children]</td><td> 
 
 				<input data-toggle=\"toggle\" name=\"roomID$row[id]\" type=\"checkbox\" value=\"On\">
 
-				<input type=\"radio\" value=\"$row[id]\" 
-				name=\"roomID\" data-toggle=\"toggle\" onchange=\"document.getElementById('booknow').style.display='inline'\"></td></tr>";
+				</td></tr>";
 
 
 			} else {
