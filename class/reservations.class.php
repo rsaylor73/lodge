@@ -812,7 +812,7 @@ class reservations extends money {
 			AND `i`.`locationID` = `l`.`id`
 			AND `i`.`roomID` = `r`.`id`
 
-		GROUP BY `t2_bedname`
+		GROUP BY `t2_description`, `t2_bedname`
 		";
 		print "$sql<br>";
 
