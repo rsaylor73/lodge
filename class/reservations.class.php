@@ -421,6 +421,7 @@ class reservations extends money {
 				//print "Test: $value2<br>";
 
 				$sql = "SELECT `status` FROM `beds` WHERE `bedID` = '$value2'";
+				print "SQL: $sql<Br>";
 				$result = $this->new_mysql($sql);
 				while ($row = $result->fetch_assoc()) {
 					if ($row['status'] != "avail") {
