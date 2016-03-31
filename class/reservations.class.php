@@ -415,7 +415,9 @@ class reservations extends money {
 	public function reservenow_group() {
 		foreach ($_POST as $key=>$value) {
 			if (preg_match("/roomID/i", $key)) {
-				$value2 = substr($key, 0,6);
+				$len = strlen($key);
+				$len2 = $len - 6;
+				$value2 = substr($key, 6,$len2);
 				print "Test: $value2<br>";
 			}
 		}
