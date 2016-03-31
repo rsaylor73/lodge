@@ -432,10 +432,6 @@ class reservations extends money {
 				$len = strlen($key);
 				$len2 = $len - 6;
 				$value2 = substr($key, 6,$len2);
-				//print "Test: $value2<br>";
-
-				//$sql = "SELECT `status` FROM `beds` WHERE `bedID` = '$value2'";
-				//print "SQL: $sql<Br>";
 
 				$sql = "
 				SELECT 
@@ -453,8 +449,6 @@ class reservations extends money {
       	   			AND `i`.`roomID` = `r`.`id`
          			AND `r`.`id` = '$value2'
 				";
-				print "$sql<br>";
-				die;
 
 				$result = $this->new_mysql($sql);
 				while ($row = $result->fetch_assoc()) {
@@ -474,10 +468,25 @@ class reservations extends money {
 					$value2 = substr($key, 6,$len2);
 					//print "Test: $value2<br>";
 
-					$sql = "SELECT `status` FROM `beds` WHERE `bedID` = '$value2'";
+					$sql = "
+					SELECT 
+						`a`.`bedID`,
+						`a`.`status`
+
+					FROM 
+						`inventory` i, `rooms` r 
+
+					LEFT JOIN `beds` a ON `i`.`inventoryID` = `a`.`inventoryID` 
+
+					WHERE 
+	        			`i`.`locationID` = '$_POST[lodge]' 
+   	      				AND `i`.`date_code` IN($in_dates)
+      	   				AND `i`.`roomID` = `r`.`id`
+         				AND `r`.`id` = '$value2'
+					";
 					$result = $this->new_mysql($sql);
 					while ($row = $result->fetch_assoc()) {
-						$sql3 = "UPDATE `beds` SET `reservationID` = '$reservationID', `status` = 'agent_hold' WHERE `bedID` = '$value2'";
+						$sql3 = "UPDATE `beds` SET `reservationID` = '$reservationID', `status` = 'agent_hold' WHERE `bedID` = '$row[bedID]'";
 						$result3 = $this->new_mysql($sql3);
 					}
 				}
