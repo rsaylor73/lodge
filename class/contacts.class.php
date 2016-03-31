@@ -124,8 +124,8 @@ class contacts extends reservations {
 	public function updatecontact() {
 
 		$year = substr($_POST['dob'], -4);
-		$month = substr($_POST['dob'], 2);
-		$day = substr($_POST['dob'], 4,2);
+		$month = substr($_POST['dob'], 0,2);
+		$day = substr($_POST['dob'], 3,2);
 		$dob = $year . $month . $day;
 		print "Test: $dob<br>";
 		die;
