@@ -401,6 +401,18 @@ class reservations extends money {
 	}
 
 	public function reservenow() {
+
+		print "<pre>";
+		print_r($_POST);
+		print "</pre>";
+
+	}
+
+	public function reservenow_group() {
+
+	}
+
+	public function reservenow_single() {
     	foreach ($_POST as $key=>$value) {
        		if (preg_match("/data/i",$key)) {
             	$temp = explode("_",$key);
