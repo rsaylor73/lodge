@@ -379,7 +379,7 @@ class reservations extends money {
 			if ($_POST['tents'] > 0) {
 				$html .= "<tr><td>$row[description]</td><td>$$total</td><td>$row[adult]</td><td>$row[children]</td><td> 
 
-				<input data-toggle=\"toggle\" name=\"roomID$row[id]\" type=\"checkbox\" value=\"On\">
+				<input data-toggle=\"toggle\" name=\"roomID$row[id]\" type=\"checkbox\" value=\"On\" onchange=\"document.getElementById('booknow').style.display='inline'\">
 
 				</td></tr>";
 
