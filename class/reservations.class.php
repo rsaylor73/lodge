@@ -451,11 +451,11 @@ class reservations extends money {
 	        		`i`.`locationID` = '$_POST[lodge]' 
    	      			AND `i`.`date_code` IN($in_dates)
       	   			AND `i`.`roomID` = `r`.`id`
-         			AND `r`.`id` = '$_POST[roomID]'
+         			AND `r`.`id` = '$value2'
 				";
 				print "$sql<br>";
 				die;
-				
+
 				$result = $this->new_mysql($sql);
 				while ($row = $result->fetch_assoc()) {
 					if ($row['status'] != "avail") {
