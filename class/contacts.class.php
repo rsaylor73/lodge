@@ -90,7 +90,7 @@ class contacts extends reservations {
 				`c`.`province`,
 				`c`.`zip`,
 				`c`.`email`,
-				`c`.`date_of_birth`,
+				DATE_FORMAT(`c`.`date_of_birth`, '%m/%d/%Y') AS 'date_of_birth',
 				`c`.`countryID`,
 				`c`.`phone1_type`,
 				`c`.`phone2_type`,
