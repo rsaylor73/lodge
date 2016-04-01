@@ -75,7 +75,7 @@ class contacts extends reservations {
       $result = $this->new_mysql($sql);
       while ($row = $result->fetch_assoc()) {
         $html .= "<tr><td><a href=\"javascript:void(0)\" onclick=\"document.location.href='editcontact/$row[contactID]'\"><i class=\"fa fa-pencil-square-o\"></i></a> $row[first] $row[middle] $row[last]</td><td>$row[city]</td><td>$row[state]$row[province]</td><td>$row[country]</td></tr>";
-        $html .= "<tr><td>DOB: $row[dob]</td><td colspan=2>$row[email]</td></tr>"
+        $html .= "<tr><td>DOB: $row[dob]</td><td colspan=2>$row[email]</td></tr>";
       }
       return $html;
 	}
