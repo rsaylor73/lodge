@@ -181,16 +181,6 @@ class contacts extends reservations {
 
 	public function savecontact() {
 
-		print "<pre>";
-		print_r($_POST);
-		print "</pre>";
-
-		if ($_POST['reservationID'] != "") {
-			print "Test!<br>";
-		}
-
-		die;
-
 		$sql = "INSERT INTO `reserve`.`contacts` 
 		(`first`,`middle`,`last`,`title`,`email`,`address1`,`address2`,`city`,`state`,`province`,`countryID`,`zip`,`date_of_birth`,`phone1_type`,`phone1`,`phone2_type`,`phone2`,`phone3_type`,`phone3`,`sex`) VALUES
 		('$_POST[first]','$_POST[middle]','$_POST[last]','$_POST[title]','$_POST[email]','$_POST[addr1]','$_POST[addr2]','$_POST[city]','$_POST[state]','$_POST[province]','$_POST[country]',
