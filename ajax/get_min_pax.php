@@ -28,6 +28,59 @@ if ($check == "FALSE") {
 		$adults = $row['beds'];
 	}
 
-	print "Limit $adults per tent";
+	$sql = "
+	SELECT
+		`r`.`beds`
+
+	FROM
+		`rooms` r
+
+	WHERE
+		`r`.`locationID` = '$_GET[lodge]'
+
+	ORDER BY `r`.`beds` ASC LIMIT 1
+	";
+	$result = $core->new_mysql($sql);
+	while ($row = $result->fetch_assoc()) {
+		$adults2 = $row['beds'];
+	}
+
+	$sql = "
+	SELECT
+		`r`.`children`
+
+	FROM
+		`rooms` r
+
+	WHERE
+		`r`.`locationID` = '$_GET[lodge]'
+
+	ORDER BY `r`.`children` DESC LIMIT 1
+	";
+	$result = $core->new_mysql($sql);
+	while ($row = $result->fetch_assoc()) {
+		$child = $row['children'];
+	}
+
+	$sql = "
+	SELECT
+		`r`.`children`
+
+	FROM
+		`rooms` r
+
+	WHERE
+		`r`.`locationID` = '$_GET[lodge]'
+
+	ORDER BY `r`.`children` ASC LIMIT 1
+	";
+	$result = $core->new_mysql($sql);
+	while ($row = $result->fetch_assoc()) {
+		$child2 = $row['children'];
+	}
+
+	if ($adults != "") {
+		print "Limit $adults2 - $adults adults and $child2 - $child per tent";
+	}
 }
 ?>
