@@ -45,7 +45,9 @@ class contacts extends reservations {
          	`c`.`city`,
 			`c`.`province`,
 			`c`.`state`,
-         	`cn`.`country`
+         	`cn`.`country`,
+         	DATE_FORMAT(`c`.`date_of_birth`, '%m/%d/%Y') AS 'dob',
+         	`c`.`email`
 
 		FROM
 			`reserve`.`contacts` c
@@ -65,7 +67,9 @@ class contacts extends reservations {
 			$address
 			$province
 
-      LIMIT 20
+		ORDER BY `c`.`date_created` ASC
+
+      	LIMIT 20
 		";
 
       $result = $this->new_mysql($sql);
