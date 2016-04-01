@@ -180,6 +180,12 @@ class contacts extends reservations {
 	}
 
 	public function savecontact() {
+
+		print "<pre>";
+		print_r($_POST);
+		print "</pre>";
+		die;
+
 		$sql = "INSERT INTO `reserve`.`contacts` 
 		(`first`,`middle`,`last`,`title`,`email`,`address1`,`address2`,`city`,`state`,`province`,`countryID`,`zip`,`date_of_birth`,`phone1_type`,`phone1`,`phone2_type`,`phone2`,`phone3_type`,`phone3`,`sex`) VALUES
 		('$_POST[first]','$_POST[middle]','$_POST[last]','$_POST[title]','$_POST[email]','$_POST[addr1]','$_POST[addr2]','$_POST[city]','$_POST[state]','$_POST[province]','$_POST[country]',
@@ -188,11 +194,28 @@ class contacts extends reservations {
 
 		$result = $this->new_mysql($sql);
 		if ($result == "TRUE") {
-			$msg = "<font color=green>The contact was added.</font><br>";
-			$data['msg'] = $msg;
-			$template = "contacts.tpl";
-	      	$data['list'] = $this->list_contacts();
-			$this->load_smarty($data,$template);
+
+			if ($_POST['reservationID'] != "") {
+				print "<br><font color=green>The contact was added. Loading...<br>Click <a href=\"assigncontact/$_POST[reservationID]/$_POST[bed]\">here</a> if the page does not load.</font><br>";
+
+				// redirect here
+				?>
+				<script>
+   				setTimeout(function() {
+					window.location.replace('assigncontact/<?=$_POST['reservationID'];?>/<?=$_POST['bed'];?>')
+				}
+   				,2000);
+				</script>
+				<?php
+
+
+			} else {
+				$msg = "<font color=green>The contact was added.</font><br>";
+				$data['msg'] = $msg;
+				$template = "contacts.tpl";
+	      		$data['list'] = $this->list_contacts();
+				$this->load_smarty($data,$template);
+			}
 		} else {
 			$this->error();
 		}
