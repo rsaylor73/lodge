@@ -80,7 +80,7 @@ if ($check == "FALSE") {
 	}
 
 	if ($adults != "") {
-		print "Limit $adults2 - $adults adults and $child2 - $child per tent";
+		print "<br><font color=blue><b>Limit $adults2 - $adults adults and $child2 - $child children per tent</b></font>";
 	}
 }
 ?>
