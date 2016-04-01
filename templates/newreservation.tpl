@@ -5,8 +5,8 @@
 <form method="post" action="searchinventory">
 <table class="table">
 <tr><td>Select Lodge:</td><td><select name="lodge" required>{$lodge}</select></td></tr>
-<tr><td>Adults:</td><td><select name="pax" required><option selected value="">Select</option>{$pax}</select></td></tr>
-<tr><td>Children:</td><td><select name="children"><option selected value="">Select</option><option>0</option><option>1</option><option>2</option><option>3</option></td></tr>
+<tr><td>Adults:</td><td><select name="pax" required>{$pax}</select></td></tr>
+<tr><td>Children:</td><td><select name="children"><option>0</option><option>1</option><option>2</option><option>3</option></td></tr>
 <tr><td>Number of Tents:</td><td><select name="tents">
 	<option selected>1</option>
 	<option>2</option>
