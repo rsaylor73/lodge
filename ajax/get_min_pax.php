@@ -11,10 +11,23 @@ $check = $core->check_login();
 if ($check == "FALSE") {
 	print "<br><font color=red>Error: you must log back in.</font><br>";
 } else {
+	$sql = "
+	SELECT
+		`r`.`beds`
 
-	print "<pre>";
-	print_r($_GET);
-	print "</pre>";
+	FROM
+		`beds` r
 
+	WHERE
+		`r`.`locationID` = '$_GET[lodge]'
+
+	ORDER BY `r`.`beds` DESC LIMIT 1
+	";
+	$result = $core->new_mysql($sql);
+	while ($row = $result->fetch_assoc()) {
+		$adults = $row['beds'];
+	}
+
+	print "Limit $adults per tent";
 }
 ?>
