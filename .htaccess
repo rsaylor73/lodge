@@ -38,6 +38,7 @@ RewriteRule ^reservation_dashboard/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?se
 RewriteRule ^editagent/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editagent&resellerID=$1&agentID=$2 [NC,L]
 RewriteRule ^assignagenttoreservation/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=assignagenttoreservation&reservationID=$1&reseller_agentID=$2 [NC,L]
 RewriteRule ^assigncontact/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=assigncontact&reservationID=$1&bed=$2 [NC,L]
+RewriteRule ^newcontact/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=newcontact&reservationID=$1&bed=$2 [NC,L]
 
 
 # Four params
