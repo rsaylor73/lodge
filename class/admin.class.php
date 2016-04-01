@@ -276,6 +276,15 @@ class admin extends resellers {
       	$this->load_smarty($data,$template);
 	}
 
+	public function get_rates($roomID) {
+		$sql = "SELECT `nightly_rate` FROM `rooms` WHERE `id` = '$roomID'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$nightly_rate = $row['nightly_rate'];
+		}
+		return $nightly_rate;
+	}
+
 	// Create one week of inventory
 	public function create_inventory($locationID,$start_date,$days) {
 		$date = strtotime($start_date);
@@ -296,7 +305,9 @@ class admin extends resellers {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			for ($i=0; $i < $days; $i++) {
-				$sql2 = "INSERT INTO `inventory` (`locationID`,`roomID`,`date_code`) VALUES ('$locationID','$row[id]','$end_date[$i]')";
+				$nightly_rate = $this->get_rates($row['id']);
+
+				$sql2 = "INSERT INTO `inventory` (`locationID`,`roomID`,`date_code`,`nightly_rate`) VALUES ('$locationID','$row[id]','$end_date[$i]','$nightly_rate')";
 				$sql3 = "SELECT * FROM `inventory` WHERE `locationID` = '$locationID' AND `roomID` = '$row[id]' AND `date_code` = '$end_date[$i]'";
 				$result3 = $this->new_mysql($sql3);
 				$test = "";
