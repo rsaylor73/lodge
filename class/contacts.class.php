@@ -184,6 +184,11 @@ class contacts extends reservations {
 		print "<pre>";
 		print_r($_POST);
 		print "</pre>";
+
+		if ($_POST['reservationID'] != "") {
+			print "Test!<br>";
+		}
+
 		die;
 
 		$sql = "INSERT INTO `reserve`.`contacts` 
