@@ -16,14 +16,21 @@ if ($check == "FALSE") {
 
 		$sql = "
 		SELECT
-			`c`.`first`,
-			`c`.`last`,
-			`c`.`email`,
-			`c`.`city`,
-			DATE_FORMAT(`c`.`date_of_birth`, '%m/%d/%Y') AS 'dob'
+			`c`.`contactID`,
+         	`c`.`first`,
+         	`c`.`middle`,
+         	`c`.`last`,
+         	`c`.`city`,
+			`c`.`province`,
+			`c`.`state`,
+         	`cn`.`country`,
+         	DATE_FORMAT(`c`.`date_of_birth`, '%m/%d/%Y') AS 'dob',
+         	`c`.`email`
 
 		FROM
 			`reserve`.`contacts` c
+
+		LEFT JOIN `countries` cn ON `c`.`countryID` = `cn`.`countryID`
 
 		WHERE
 			`c`.`contactID` = '$_GET[contactID]'
@@ -34,15 +41,21 @@ if ($check == "FALSE") {
 		// name, email
 		$sql = "
 		SELECT
-			`c`.`first`,
-			`c`.`last`,
-			`c`.`email`,
-			`c`.`city`,
 			`c`.`contactID`,
-			DATE_FORMAT(`c`.`date_of_birth`, '%m/%d/%Y') AS 'dob'
+         	`c`.`first`,
+         	`c`.`middle`,
+         	`c`.`last`,
+         	`c`.`city`,
+			`c`.`province`,
+			`c`.`state`,
+         	`cn`.`country`,
+         	DATE_FORMAT(`c`.`date_of_birth`, '%m/%d/%Y') AS 'dob',
+         	`c`.`email`
 
 		FROM
 			`reserve`.`contacts` c
+
+		LEFT JOIN `countries` cn ON `c`.`countryID` = `cn`.`countryID`
 
 		WHERE
 			`c`.`first` LIKE '%$_GET[first]%'
