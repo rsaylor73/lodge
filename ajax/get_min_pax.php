@@ -16,7 +16,7 @@ if ($check == "FALSE") {
 		`r`.`beds`
 
 	FROM
-		`beds` r
+		`rooms` r
 
 	WHERE
 		`r`.`locationID` = '$_GET[lodge]'
