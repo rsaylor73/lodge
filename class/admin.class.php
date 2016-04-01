@@ -312,7 +312,7 @@ class admin extends resellers {
 		         	}
 					//Child
                		for ($i2 = 0; $i2 < $row['children']; $i2++) {
-                  		$sql4 = "INSERT INTO `beds` (`inventoryID`,`status`,`name`,`type`) VALUES ('$inventoryID','avail','N/A','child')";
+                  		$sql4 = "INSERT INTO `beds` (`inventoryID`,`status`,`name`,`type`) VALUES ('$inventoryID','avail','Child','child')";
                   		$result4 = $this->new_mysql($sql4);
                		}
 				}
