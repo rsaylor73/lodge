@@ -170,6 +170,12 @@ class contacts extends reservations {
 		$data['state'] = $state;
 		$data['country'] = $country;
 		$template = "newcontact.tpl";
+
+		if ($_GET['reservationID'] != "") {
+			$data['reservationID'] = $_GET['reservationID'];
+			$data['bed'] = $_GET['bed'];
+		}
+
      	$this->load_smarty($data,$template);
 	}
 
