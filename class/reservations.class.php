@@ -361,7 +361,7 @@ class reservations extends money {
 			if ($row['adult_status'] == "avail") {
 				$total = $row['nightly_rate'] * $nights;
 				$html .= "<tr><td>$row[description]</td><td>$$total</td><td>$row[adult]</td><td>$row[children]</td><td> 
-				<input data-toggle=\"toggle\" name=\"roomID$row[id]\" type=\"checkbox\" value=\"On\" onchange=\"document.getElementById('booknow').style.display='inline';onchange=\"checkboxes()\"\">
+				<input data-toggle=\"toggle\" name=\"roomID$row[id]\" type=\"checkbox\" value=\"On\" onchange=\"document.getElementById('booknow').style.display='inline';checkboxes()\">
 				</td></tr>";	
 				$found = "1";
 				$counter++;
