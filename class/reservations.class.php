@@ -11,10 +11,6 @@ class reservations extends money {
 			$options = "<option value=\"\" selected>Select Lodge</option>";
 		}
 
-		print "<pre>";
-		print_r($_POST);
-		print "</pre>";
-
 		$sql = "SELECT `id`,`name` FROM `locations` WHERE `active` = 'Yes'";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
