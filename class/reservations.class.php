@@ -356,18 +356,9 @@ class reservations extends money {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$total = $row['nightly_rate'] * $nights;
-			if ($_POST['tents'] > 0) {
 				$html .= "<tr><td>$row[description]</td><td>$$total</td><td>$row[adult]</td><td>$row[children]</td><td> 
-
 				<input data-toggle=\"toggle\" name=\"roomID$row[id]\" type=\"checkbox\" value=\"On\" onchange=\"document.getElementById('booknow').style.display='inline'\">
-
-				</td></tr>";
-
-
-			} else {
-				$html .= "<tr><td>$row[description]</td><td>$$total</td><td>$row[adult]</td><td>$row[children]</td><td>Click to select this tent <input type=\"radio\" value=\"$row[id]\" 
-				name=\"roomID\" data-toggle=\"toggle\" onchange=\"document.getElementById('booknow').style.display='inline'\"></td></tr>";
-			}
+				</td></tr>";	
 			$found = "1";
 		}
 		if ($found != "1") {
@@ -381,35 +372,13 @@ class reservations extends money {
 	}
 
 	public function reservenow() {
+
 		print "<pre>";
 		print_r($_POST);
 		print "</pre>";
-		
-		switch ($_POST['tents']) {
-			case "1":
-			$this->reservenow_single();
-			break;
 
-			default:
-			$this->reservenow_group();
-			break;
-		}
-	}
-
-	public function reservenow_group() {
-
-    	foreach ($_POST as $key=>$value) {
-       		if (preg_match("/data/i",$key)) {
-            	$temp = explode("_",$key);
-            	$dates[] = $temp[1];
-         	}
-      	}
-	    asort($dates);
-    	foreach ($dates as $value) {
-        	$nights++;
-         	$in_dates .= "'$value',";
-      	}
-      	$in_dates = substr($in_dates,0,-1);
+		$start_date = str_replace("-","",$_POST['start_date']);
+		$end_date = date("Ymd", strtotime($start_date ."+ $_POST[nights] days"));
 
 		foreach ($_POST as $key=>$value) {
 			if (preg_match("/roomID/i", $key)) {
@@ -429,7 +398,7 @@ class reservations extends money {
 
 				WHERE 
 	        		`i`.`locationID` = '$_POST[lodge]' 
-   	      			AND `i`.`date_code` IN($in_dates)
+   	      			AND `i`.`date_code` BETWEEN '$start_date' AND '$end_date'
       	   			AND `i`.`roomID` = `r`.`id`
          			AND `r`.`id` = '$value2'
 				";
@@ -464,7 +433,7 @@ class reservations extends money {
 
 					WHERE 
 	        			`i`.`locationID` = '$_POST[lodge]' 
-   	      				AND `i`.`date_code` IN($in_dates)
+   	      				AND `i`.`date_code` BETWEEN '$start_date' AND '$end_date'
       	   				AND `i`.`roomID` = `r`.`id`
          				AND `r`.`id` = '$value2'
 					";
@@ -489,6 +458,7 @@ class reservations extends money {
 	}
 
 	public function reservenow_single() {
+		/* Historic - no longer used */
     	foreach ($_POST as $key=>$value) {
        		if (preg_match("/data/i",$key)) {
             	$temp = explode("_",$key);
