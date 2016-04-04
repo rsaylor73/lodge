@@ -6,7 +6,7 @@
 <form method="post" action="viewtent" name="myform">
 <table class="table">
 <tr><td>Select Lodge:</td><td><select name="lodge" required onchange="get_min_pax(this.form)">{$lodge}</select></td></tr>
-<tr><td>Adults:</td><td><select name="pax" required>{$pax}</select></td></tr>
+<tr><td>Adults:</td><td><select name="pax" id="pax" required onchange="get_min_tent(this.form)">{$pax}</select></td></tr>
 <tr><td>Children:</td><td><select name="children"><option>0</option><option>1</option><option>2</option><option>3</option></td></tr>
 <tr><td>Number of Tents:</td><td><select name="tents" id="tents">
 	<option selected>1</option>
@@ -35,6 +35,14 @@ function get_min_pax(myform) {
 	$(myform).serialize(),
 	function(php_msg) {
 	$("#min_pax").html(php_msg);
+	});
+}
+
+function get_min_tent(myform) {
+	$.get('ajax/set_min_tents.php',
+	$(myform).serialize(),
+	function(php_msg) {
+	$("#null").html(php_msg);
 	});
 }
 </script>
