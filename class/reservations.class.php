@@ -355,6 +355,9 @@ class reservations extends money {
 		$data['start_date2'] = date("m/d/Y",strtotime($start_date));
 		$data['end_date2'] = date("m/d/Y",strtotime($end_date));
 		$data['tents'] = $_POST['tents'];
+		$data['lodge'] = $_POST['lodge'];
+		$data['start_date'] = $_POST['start_date'];
+		$data['pax'] = $_POST['pax'];
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
