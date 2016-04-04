@@ -32,6 +32,9 @@
 </table>
 {$msg}
 {$btn}
+
+<div id="waiting" style="display:inline"><br><b>Please select {tents} tents. Once you select {$tents} tents this message will be replaced with a reservation button.</b></div>
+
 </form>
 
 <script>
@@ -46,8 +49,10 @@ function checkboxes(){
     if (count == "{$tents}") {
     	//alert(document.querySelectorAll('input[type="checkbox"]:checked').length);
     	document.getElementById('booknow').style.display='inline';
+	   	document.getElementById('waiting').style.display='none';
     } else {
     	document.getElementById('booknow').style.display='none';
+    	document.getElementById('waiting').style.display='inline';
     }
 }}
 </script>
