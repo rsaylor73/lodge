@@ -294,12 +294,10 @@ class reservations extends money {
 
 	public function viewtent() {
 
-		print "<pre>";
-		print_r($_POST);
-		print "</pre>";
+		$nights2 = $_POST['nights'] - 1;
 
 		$start_date = str_replace("-","",$_POST['start_date']);
-		$end_date = date("Ymd", strtotime($start_date ."+ $_POST[nights] days"));
+		$end_date = date("Ymd", strtotime($start_date ."+ $nights2 days"));
 
     	$template = "viewtent.tpl";
       	$data = array();
@@ -373,12 +371,10 @@ class reservations extends money {
 
 	public function reservenow() {
 
-		print "<pre>";
-		print_r($_POST);
-		print "</pre>";
+		$nights2 = $_POST['nights'] - 1;
 
 		$start_date = str_replace("-","",$_POST['start_date']);
-		$end_date = date("Ymd", strtotime($start_date ."+ $_POST[nights] days"));
+		$end_date = date("Ymd", strtotime($start_date ."+ $nights2 days"));
 
 		foreach ($_POST as $key=>$value) {
 			if (preg_match("/roomID/i", $key)) {
@@ -730,7 +726,7 @@ class reservations extends money {
 			`beds`.`reservationID` = '$reservationID'
 			AND `beds`.`inventoryID` = `inventory`.`inventoryID`
 
-		GROUP BY `beds`.`inventoryID`, `inventory`.`date_code`
+		GROUP BY `inventory`.`date_code`
 		";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
