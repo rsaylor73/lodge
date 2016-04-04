@@ -10,7 +10,8 @@
 <tr><td>Children:</td><td><select name="children"><option>0</option><option>1</option><option>2</option><option>3</option>{if $post_children ne ""}<option selected>{$post_children}</option>{/if}</td></tr>
 <tr><td>Number of Tents:</td><td>
 
-<input type="hidden" name="tents" id="tents" {if $post_tents ne ""} value="{$post_tents}" {/else} value="1" {/if}>
+<input type="hidden" name="tents" id="tents" 
+	{if $post_tents ne ""} value="{$post_tents}" {else} value="1" {/if}>
 <select name="tents2" id="tents2" disabled>
 	<option selected>1</option>
 	<option>2</option>
