@@ -10,7 +10,11 @@ class reservations extends money {
       	//if ($_GET['lodge'] != "") {
 			$options = "<option value=\"\" selected>Select Lodge</option>";
 		//}
-			print "Test: $_REQUEST[lodge]<br>";
+
+		print "<pre>";
+		print_r($_GET);
+		print "</pre>";
+
 		$sql = "SELECT `id`,`name` FROM `locations` WHERE `active` = 'Yes'";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
