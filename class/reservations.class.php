@@ -294,6 +294,10 @@ class reservations extends money {
 
 	public function viewtent() {
 
+		print "<pre>";
+		print_r($_POST);
+		print "</pre>";
+
     	$template = "viewtent.tpl";
       	$data = array();
 		foreach ($_POST as $key=>$value) {
