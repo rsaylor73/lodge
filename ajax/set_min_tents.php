@@ -38,7 +38,7 @@ if ($check == "FALSE") {
 
 	?>
 	<script>
-	document.getElementById('tents').value=$tents;
+	document.getElementById('tents').value='<?=$tents;?>';
 	</script>
 	<?php
 
