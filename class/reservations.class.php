@@ -381,6 +381,10 @@ class reservations extends money {
 	}
 
 	public function reservenow() {
+		print "<pre>";
+		print_r($_POST);
+		print "</pre>";
+		
 		switch ($_POST['tents']) {
 			case "1":
 			$this->reservenow_single();
