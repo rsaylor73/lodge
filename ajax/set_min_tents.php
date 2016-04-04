@@ -34,8 +34,6 @@ if ($check == "FALSE") {
 		$tents = "1";
 	}
 
-	print "Test $tents";
-
 	?>
 	<script>
 	document.getElementById('tents').value='<?=$tents;?>';
