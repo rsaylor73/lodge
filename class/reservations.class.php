@@ -7,9 +7,9 @@ class reservations extends money {
       	$template = "newreservation.tpl";
       	$data = array();
       	$data['msg'] = $msg;
-      	//if ($_GET['lodge'] != "") {
+      	if ($_POST['lodge'] != "") {
 			$options = "<option value=\"\" selected>Select Lodge</option>";
-		//}
+		}
 
 		print "<pre>";
 		print_r($_POST);
@@ -18,7 +18,7 @@ class reservations extends money {
 		$sql = "SELECT `id`,`name` FROM `locations` WHERE `active` = 'Yes'";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			if ($row['id'] == $_GET['lodge']) {
+			if ($row['id'] == $_POST['lodge']) {
 				$s = "selected";
 			} else {
 				$s = "";
@@ -28,11 +28,21 @@ class reservations extends money {
 		$data['lodge'] = $options;
 
 		for ($i=1; $i < 30; $i++) {
-			$pax .= "<option value=\"$i\">$i</option>";
+			if ($i == $_POST['pax']) {
+				$s2 = "selected";
+			} else {
+				$s2 = "";
+			}
+			$pax .= "<option $s2 value=\"$i\">$i</option>";
 		}
 		$data['pax'] = $pax;
 
 		// send GET data
+		$data['post_pax'] = $_POST['pax'];
+		$data['post_start_date'] = $_POST['start_date'];
+		$data['post_children'] = $_POST['children'];
+		$data['post_tents'] = $_POST['tents2'];
+		$data['post_nights'] = $_POST['nights'];
 
 	    $this->load_smarty($data,$template);
 	}

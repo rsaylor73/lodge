@@ -7,9 +7,10 @@
 <table class="table">
 <tr><td>Select Lodge:</td><td><select name="lodge" required onchange="get_min_pax(this.form)">{$lodge}</select></td></tr>
 <tr><td>Adults:</td><td><select name="pax" id="pax" required onchange="get_min_tent(this.form)">{$pax}</select></td></tr>
-<tr><td>Children:</td><td><select name="children"><option>0</option><option>1</option><option>2</option><option>3</option></td></tr>
+<tr><td>Children:</td><td><select name="children"><option>0</option><option>1</option><option>2</option><option>3</option>{if $post_children ne ""}<option selected>{$post_children}</option>{/if}</td></tr>
 <tr><td>Number of Tents:</td><td>
-<input type="hidden" name="tents" id="tents" value="1">
+
+<input type="hidden" name="tents" id="tents" {if $post_tents ne ""} value="{$post_tents}" {/else} value="1" {/if}>
 <select name="tents2" id="tents2" disabled>
 	<option selected>1</option>
 	<option>2</option>
@@ -23,8 +24,12 @@
 	<option>10</option>
 	<option>11</option>
 	<option>12</option>
+	{if $post_tents ne ""}
+		<option>{$post_tents}</option>
+	{/if}
 	</select> <div id="min_pax" style="display:inline"></div></td></tr>
-<tr><td>Number of Nights:</td><td><select name="nights"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select></td></tr>
+<tr><td>Number of Nights:</td><td><select name="nights"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option>
+	{if $post_nights ne ""}<option selected>{$post_nights}</option>{/if}</select></td></tr>
 <tr><td>Start Date:</td><td><input type="text" name="start_date" id="start_date" value="{$start_date}" required></td></tr>
 <tr><td colspan=2><input type="submit" value="Search Rooms" class="btn btn-primary"></td></tr>
 </table>
