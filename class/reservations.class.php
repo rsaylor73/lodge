@@ -298,6 +298,9 @@ class reservations extends money {
 		print_r($_POST);
 		print "</pre>";
 
+		$start_date = str_replace("-","",$_POST['start_date']);
+		$end_date = date("Ymd", strtotime($start_date ."+ $_POST[nights] days"));
+
     	$template = "viewtent.tpl";
       	$data = array();
 		foreach ($_POST as $key=>$value) {
@@ -305,31 +308,6 @@ class reservations extends money {
 		}
 
 		$data['form_html'] = $form_html;
-
-		foreach ($_POST as $key=>$value) {
-			if (preg_match("/data/i",$key)) {
-				$temp = explode("_",$key);
-				$dates[] = $temp[1];
-			}
-		}
-		asort($dates);
-		foreach ($dates as $value) {
-			if ($test == "1") {
-				$counter++;
-				$next = date("Ymd", strtotime($first ."+ $counter days"));
-				if ($next != $value) {
-					print "<br><h2>Error:</h2><font color=red>You must select consecutive days.</font><br>";
-					die;
-				}
-			}
-			if ($test != "1") {
-				$first = $value;
-				$test = "1";
-			}
-			$nights++;
-			$in_dates .= "'$value',";
-		}
-		$in_dates = substr($in_dates,0,-1);
 
 		$adults = $_POST['pax'] * $nights;
 		if ($_POST['children'] > 0) {
@@ -361,7 +339,7 @@ class reservations extends money {
 
 		WHERE
 			`i`.`locationID` = '$_POST[lodge]' 
-			AND `i`.`date_code` IN($in_dates)
+			AND `i`.`date_code` BETWEEN '$start_date' AND '$end_date'
 			AND `i`.`roomID` = `r`.`id`
 
 		GROUP BY `r`.`description`
