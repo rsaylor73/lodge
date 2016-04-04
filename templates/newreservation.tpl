@@ -8,7 +8,9 @@
 <tr><td>Select Lodge:</td><td><select name="lodge" required onchange="get_min_pax(this.form)">{$lodge}</select></td></tr>
 <tr><td>Adults:</td><td><select name="pax" id="pax" required onchange="get_min_tent(this.form)">{$pax}</select></td></tr>
 <tr><td>Children:</td><td><select name="children"><option>0</option><option>1</option><option>2</option><option>3</option></td></tr>
-<tr><td>Number of Tents:</td><td><select name="tents" id="tents" readonly>
+<tr><td>Number of Tents:</td><td>
+<input type="hidden" name="tents" id="tents" value="1">
+<select name="tents2" id="tents2" disabled>
 	<option selected>1</option>
 	<option>2</option>
 	<option>3</option>
