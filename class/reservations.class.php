@@ -375,6 +375,11 @@ class reservations extends money {
 		$data['btn'] = "<div id=\"booknow\" style=\"display:none\"><input type=\"submit\" value=\"Book Reservation\" class=\"btn btn-success\"></div>";
 
 		$data['html'] = $html;
+
+		print "<pre>";
+		print_r($data);
+		print "</pre>";
+
 	    $this->load_smarty($data,$template);
 	}
 
