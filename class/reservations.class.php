@@ -369,7 +369,7 @@ class reservations extends money {
 		}
 
 		if ($counter < $_POST['tents']) {
-			$data['msg'] = "<br><font color=red>Sorry, you indicated you need <b>$_POST[tents]</b> but only $counter tents are available.</font><br>";
+			$data['msg'] = "<br><font color=red>Sorry, you indicated you need <b>$_POST[tents]</b> tents but only $counter tents are available.</font><br>";
 			$stop = "1";
 		}
 
