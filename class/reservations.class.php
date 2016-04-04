@@ -11,7 +11,12 @@ class reservations extends money {
 		$sql = "SELECT `id`,`name` FROM `locations` WHERE `active` = 'Yes'";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$options .= "<option value=\"$row[id]\">$row[name]</option>";
+			if ($row['id'] == "$_GET[lodge]") {
+				$s = "selected";
+			} else {
+				$s = "";
+			}
+			$options .= "<option $s value=\"$row[id]\">$row[name]</option>";
 		}
 		$data['lodge'] = $options;
 
@@ -19,6 +24,9 @@ class reservations extends money {
 			$pax .= "<option value=\"$i\">$i</option>";
 		}
 		$data['pax'] = $pax;
+
+		// send GET data
+
 	    $this->load_smarty($data,$template);
 	}
 
