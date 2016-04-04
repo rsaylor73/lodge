@@ -293,6 +293,9 @@ class reservations extends money {
 	}
 
 	public function viewtent() {
+		print "<pre>";
+		print_r($_POST);
+		print "</pre>";
 
 		$nights2 = $_POST['nights'] - 1;
 
