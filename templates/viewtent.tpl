@@ -1,11 +1,13 @@
 <div class="col-md-6">
 <h2>Reserve Tent</h2>
 
-<form action="searchinventory" method="post">
+<form action="newreservation" method="get">
 <input type="hidden" name="lodge" value="{$lodge}">
 <input type="hidden" name="pax" value="{$pax}">
 <input type="hidden" name="start_date" value="{$start_date}">
-<input type="hidden" name="end_date" value="{$end_date}">
+<input type="hidden" name="children" value="{$children}">
+<input type="hidden" name="tents2" value="{$tents}">
+<input type="hidden" name="nights" value="{$nights}">
 <input type="submit" value="Back To Search Results" class="btn btn-success">
 </form>
 <br>
