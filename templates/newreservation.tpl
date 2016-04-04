@@ -27,6 +27,8 @@
 <tr><td colspan=2><input type="submit" value="Search Rooms" class="btn btn-primary"></td></tr>
 </table>
 
+<div id="null"></div>
+
 </form>
 
 <script>

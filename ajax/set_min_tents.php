@@ -32,6 +32,9 @@ if ($check == "FALSE") {
 	if ($tents < 1) {
 		$tents = "1";
 	}
+
+	print "Test $tents";
+
 	?>
 	<script>
 	document.getElementById('tents').value=$tents;
