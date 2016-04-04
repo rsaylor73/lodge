@@ -1,7 +1,7 @@
 <div class="col-md-6">
 <h2>Reserve Tent</h2>
 
-<form action="newreservation" method="get">
+<form action="newreservation" method="post">
 <input type="hidden" name="lodge" value="{$lodge}">
 <input type="hidden" name="pax" value="{$pax}">
 <input type="hidden" name="start_date" value="{$start_date}">
