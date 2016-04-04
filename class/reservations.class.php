@@ -7,7 +7,9 @@ class reservations extends money {
       	$template = "newreservation.tpl";
       	$data = array();
       	$data['msg'] = $msg;
-		$options = "<option value=\"\" selected>Select Lodge</option>";
+      	if ($_GET['lodge'] != "") {
+			$options = "<option value=\"\" selected>Select Lodge</option>";
+		}
 		$sql = "SELECT `id`,`name` FROM `locations` WHERE `active` = 'Yes'";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
