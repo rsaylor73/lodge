@@ -327,7 +327,9 @@ class reservations extends money {
 			COUNT(`c`.`status`) AS 'total_child_beds',
 			`r`.`nightly_rate`,
 			`r`.`beds` AS 'adult',
-			`r`.`children`
+			`r`.`children`,
+			`a`.`status` AS 'adult_status',
+			`c`.`status` AS 'child_status'
 
 		FROM
 			`inventory` i, `rooms` r
