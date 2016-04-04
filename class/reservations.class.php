@@ -347,12 +347,10 @@ class reservations extends money {
 		HAVING total_adult_beds >= '$adults' AND total_child_beds >= '$children'
 		";
 
-		$data['nights'] = $nights;
+		$data['nights'] = $_POST['nights'];
 		$data['adults'] = $_POST['pax'];
 		$data['children'] = $_POST['children'];
-		$start_date = reset($dates);
 		$data['start_date2'] = date("m/d/Y",strtotime($start_date));
-		$end_date = end($dates);
 		$data['end_date2'] = date("m/d/Y",strtotime($end_date));
 
 		$result = $this->new_mysql($sql);
