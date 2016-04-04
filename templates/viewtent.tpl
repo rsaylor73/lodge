@@ -44,7 +44,10 @@ function checkboxes(){
         //alert(document.querySelectorAll('input[type="checkbox"]:checked').length);
     }
     if (count == "{$tents}") {
-    	alert(document.querySelectorAll('input[type="checkbox"]:checked').length);
+    	//alert(document.querySelectorAll('input[type="checkbox"]:checked').length);
+    	document.getElementById('booknow').style.display='inline';
+    } else {
+    	document.getElementById('booknow').style.display='none';
     }
 }}
 </script>
