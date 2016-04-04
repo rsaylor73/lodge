@@ -41,7 +41,10 @@ function checkboxes(){
     for (var i=0; i<inputElems.length; i++) {
     if (inputElems[i].type === "checkbox" && inputElems[i].checked === true){
         count++;
-        alert(document.querySelectorAll('input[type="checkbox"]:checked').length);
+        //alert(document.querySelectorAll('input[type="checkbox"]:checked').length);
+    }
+    if (count == "{$tents}") {
+    	alert(document.querySelectorAll('input[type="checkbox"]:checked').length);
     }
 }}
 </script>
