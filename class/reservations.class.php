@@ -345,7 +345,7 @@ class reservations extends money {
 		HAVING total_adult_beds >= '$adults' AND total_child_beds >= '$children'
 		";
 
-		print "SQL:<br>$sql<br>";
+		//print "SQL:<br>$sql<br>";
 
 		$data['nights'] = $_POST['nights'];
 		$data['adults'] = $_POST['pax'];
@@ -355,11 +355,13 @@ class reservations extends money {
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$total = $row['nightly_rate'] * $nights;
+			if ($row['adult_status'] == "avail") {
+				$total = $row['nightly_rate'] * $nights;
 				$html .= "<tr><td>$row[description]</td><td>$$total</td><td>$row[adult]</td><td>$row[children]</td><td> 
 				<input data-toggle=\"toggle\" name=\"roomID$row[id]\" type=\"checkbox\" value=\"On\" onchange=\"document.getElementById('booknow').style.display='inline'\">
 				</td></tr>";	
-			$found = "1";
+				$found = "1";
+			}
 		}
 		if ($found != "1") {
 			$data['msg'] = "<br><font color=red>Sorry, there are no rooms available for the duration and number of guests you have selected.</font><br>";
