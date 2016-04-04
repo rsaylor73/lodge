@@ -293,9 +293,6 @@ class reservations extends money {
 	}
 
 	public function viewtent() {
-		print "<pre>";
-		print_r($_POST);
-		print "</pre>";
 
 		$nights2 = $_POST['nights'] - 1;
 
@@ -367,19 +364,24 @@ class reservations extends money {
 				<input data-toggle=\"toggle\" name=\"roomID$row[id]\" type=\"checkbox\" value=\"On\" onchange=\"document.getElementById('booknow').style.display='inline'\">
 				</td></tr>";	
 				$found = "1";
+				$counter++;
 			}
 		}
+
+		if ($counter < $_POST['tents']) {
+			$data['msg'] = "<br><font color=red>Sorry, you indicated you need <b>$_POST[tents]</b> but only $counter tents are available.</font><br>";
+			$stop = "1";
+		}
+
 		if ($found != "1") {
 			$data['msg'] = "<br><font color=red>Sorry, there are no rooms available for the duration and number of guests you have selected.</font><br>";
 		}
 
-		$data['btn'] = "<div id=\"booknow\" style=\"display:none\"><input type=\"submit\" value=\"Book Reservation\" class=\"btn btn-success\"></div>";
+		if ($stop != "1") {
+			$data['btn'] = "<div id=\"booknow\" style=\"display:none\"><input type=\"submit\" value=\"Book Reservation\" class=\"btn btn-success\"></div>";
+		}
 
 		$data['html'] = $html;
-
-		print "<pre>";
-		print_r($data);
-		print "</pre>";
 
 	    $this->load_smarty($data,$template);
 	}
