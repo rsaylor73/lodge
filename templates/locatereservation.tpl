@@ -46,7 +46,7 @@
 	<tr><td>
 		<table class="table">
 			{$msg}
-			<tr><td width="200"><b>Reseller Agent Name:</b></td><td><input type="text" name="reseller_agent" required></td></tr>
+			<tr><td width="200"><b>Reseller Company Name:</b></td><td><input type="text" name="reseller_agent" required></td></tr>
 			<tr><td>&nbsp;</td><td><input type="submit" value="Search" class="btn btn-primary"></td></tr>
 		</table>
 	</td></tr>

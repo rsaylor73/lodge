@@ -632,6 +632,56 @@ class reservations extends money {
 		}
 	}
 
+	public function reservation_lookup() {
+		switch($_POST['how']) {
+			case "guest":
+				$sql = "
+				SELECT
+					`c`.`first` + ' ' + `c`.`last` AS 'contact',
+					`c`.`last`,
+					`c`.`contactID`,
+					`b`.`reservationID`,
+					DATE_FORMAT(`r`.`date_created`,'%m/%d/%Y') AS 'booked_date'
+
+				FROM
+					`reserve`.`contacts` c, `lodge_res`.`beds` b, `lodge_res`.`reservations` r
+
+				WHERE
+					CONCAT_WS(' ',`c`.`first`,`c`.`last`) LIKE '%$_POST[guest]%'
+					AND `c`.`contactID` = `b`.`contactID`
+					AND `b`.`reservationID` = `r`.`reservationID`
+
+				GROUP BY `r`.`reservationID`
+				";
+				$headline = "<h2>Reservation By Guest</h2>";
+				$string = $_POST['guest'];
+			break;
+
+			case "booker":
+
+			break;
+
+			case "reseller_agent":
+
+			break;
+		}
+
+		if ($sql != "") {
+			$data['headline'] = $headline;
+			$data['string'] = $string;
+			$result = $this->new_mysql($sql);
+			while ($row = $result->fetch_assoc()) {
+				$html .= "<tr><td>$row[contact]</td><td>$row[reservationID]</td><td>$row[booked_date]</td></tr>";
+			}
+			$data['html'] = $html;
+			$template = "reservation_lookup.tpl";
+			$this->load_smarty($data,$template);
+		} else {
+			$template = "error.tpl";
+			$this->load_smarty($null,$template);
+		}
+	}
+
 	public function reservation_dashboard() {
 		$reservationID = $_REQUEST['reservationID'];
 		$this->is_rsv_valid($reservationID);
