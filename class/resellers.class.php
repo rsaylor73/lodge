@@ -314,7 +314,7 @@ class resellers extends contacts {
 	}
 
 	public function assignagenttoreservation() {
-		$sql = "UPDATE `reservations` SET `reseller_agentID` = '$_GET[reseller_agentID]' WHERE `reservationID` = '$_GET[reservationID]'";
+		$sql = "UPDATE `reservations` SET `reseller_agentID` = '$_GET[reseller_agentID]', `resellerID` = '$_GET[resellerID]' WHERE `reservationID` = '$_GET[reservationID]'";
 		$result = $this->new_mysql($sql);
 		$this->reservation_dashboard();
 	}
