@@ -660,16 +660,20 @@ class reservations extends money {
 			case "company":
 				$sql = "
 				SELECT
-
+					`r`.`company` AS 'contact',
+					`rs`.`reservationID`,
+					DATE_FORMAT(`rs`.`date_created`,'%m/%d/%Y') AS 'booked_date'
 
 				FROM
-					`reserve`.`resellers` r
+					`reserve`.`resellers` r, `lodge_res`.`reservations` rs
 
 				WHERE
 					`r`.`company` LIKE '%$_POST[company]%'
-
-
+					AND `r`.`resellerID` = `rs`.`resellerID`
 				";
+				$headline = "<h2>Reservation By Company</h2>";
+				$string = $_POST['company'];
+
 			break;
 		}
 
