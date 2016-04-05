@@ -671,7 +671,7 @@ class reservations extends money {
 			$data['string'] = $string;
 			$result = $this->new_mysql($sql);
 			while ($row = $result->fetch_assoc()) {
-				$html .= "<tr><td>$row[contact]</td><td><a href=\"reservation_dashboard/$row[reservationID/details\">$row[reservationID]</a></td><td>$row[booked_date]</td></tr>";
+				$html .= "<tr><td>$row[contact]</td><td><a href=\"reservation_dashboard/$row[reservationID]/details\">$row[reservationID]</a></td><td>$row[booked_date]</td></tr>";
 			}
 			$data['html'] = $html;
 			$template = "reservation_lookup.tpl";
