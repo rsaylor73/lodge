@@ -7,7 +7,7 @@
 	<tr><td>
 		<table class="table">
 			{$msg}
-			<tr><td><b>Reservation ID:</b></td><td><input type="text" name="reservationID" required></td></tr>
+			<tr><td width="200"><b>Reservation ID:</b></td><td><input type="text" name="reservationID" required></td></tr>
 			<tr><td>&nbsp;</td><td><input type="submit" value="Search" class="btn btn-primary"></td></tr>
 		</table>
 	</td></tr>
@@ -20,7 +20,7 @@
 	<tr><td>
 		<table class="table">
 			{$msg}
-			<tr><td><b>Booker Name:</b></td><td><input type="text" name="booker" required></td></tr>
+			<tr><td width="200"><b>Booker Name:</b></td><td><input type="text" name="booker" required></td></tr>
 			<tr><td>&nbsp;</td><td><input type="submit" value="Search" class="btn btn-primary"></td></tr>
 		</table>
 	</td></tr>
@@ -33,7 +33,7 @@
 	<tr><td>
 		<table class="table">
 			{$msg}
-			<tr><td><b>Reseller Agent Name:</b></td><td><input type="text" name="reseller_agent" required></td></tr>
+			<tr><td width="200"><b>Reseller Agent Name:</b></td><td><input type="text" name="reseller_agent" required></td></tr>
 			<tr><td>&nbsp;</td><td><input type="submit" value="Search" class="btn btn-primary"></td></tr>
 		</table>
 	</td></tr>
