@@ -36,7 +36,6 @@ RewriteRule ^newagent/([a-zA-Z0-9]+)/?$ index.php?section=newagent&resellerID=$1
 RewriteRule ^editroom/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editroom&id=$1&id2=$2 [NC,L]
 RewriteRule ^reservation_dashboard/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=reservation_dashboard&reservationID=$1&part=$2 [NC,L]
 RewriteRule ^editagent/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editagent&resellerID=$1&agentID=$2 [NC,L]
-RewriteRule ^assignagenttoreservation/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=assignagenttoreservation&reservationID=$1&reseller_agentID=$2 [NC,L]
 RewriteRule ^assigncontact/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=assigncontact&reservationID=$1&bed=$2 [NC,L]
 RewriteRule ^newcontact/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=newcontact&reservationID=$1&bed=$2 [NC,L]
 
@@ -45,4 +44,5 @@ RewriteRule ^newcontact/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=newco
 # IE: search/12345/676767/A
 
 RewriteRule ^assigncontacttobed/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=assigncontacttobed&reservationID=$1&contactID=$2&bed=$3
+RewriteRule ^assignagenttoreservation/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=assignagenttoreservation&reservationID=$1&reseller_agentID=$2&resellerID=$3 [NC,L]
 

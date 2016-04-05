@@ -657,12 +657,19 @@ class reservations extends money {
 				$string = $_POST['guest'];
 			break;
 
-			case "booker":
+			case "company":
+				$sql = "
+				SELECT
 
-			break;
 
-			case "reseller_agent":
+				FROM
+					`reserve`.`resellers` r
 
+				WHERE
+					`r`.`company` LIKE '%$_POST[company]%'
+
+
+				";
 			break;
 		}
 
