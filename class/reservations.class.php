@@ -637,7 +637,7 @@ class reservations extends money {
 			case "guest":
 				$sql = "
 				SELECT
-					`c`.`first` + ' ' + `c`.`last` AS 'contact',
+					CONCAT(`c`.`first`,' ',`c`.`last`) AS 'contact',
 					`c`.`last`,
 					`c`.`contactID`,
 					`b`.`reservationID`,
