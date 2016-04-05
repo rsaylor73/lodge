@@ -15,6 +15,19 @@
 </form>
 
 <form action="reservation_lookup" method="post">
+<input type="hidden" name="how" value="guest">
+<table class="table">
+	<tr><td>
+		<table class="table">
+			{$msg}
+			<tr><td width="200"><b>Guest Name:</b></td><td><input type="text" name="guest" required></td></tr>
+			<tr><td>&nbsp;</td><td><input type="submit" value="Search" class="btn btn-primary"></td></tr>
+		</table>
+	</td></tr>
+</table>
+</form>
+
+<form action="reservation_lookup" method="post">
 <input type="hidden" name="how" value="booker">
 <table class="table">
 	<tr><td>
