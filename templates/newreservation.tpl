@@ -7,7 +7,7 @@
 <table class="table">
 <tr><td>Select Lodge:</td><td><select name="lodge" id="lodge" required onchange="get_min_pax(this.form);turnon();">{$lodge}</select></td></tr>
 <tr><td>Adults:</td><td><select name="pax" id="pax" required onchange="get_min_tent(this.form)" disabled>{$pax}</select></td></tr>
-<tr><td>Children:</td><td><select name="children"><option>0</option><option>1</option><option>2</option><option>3</option>{if $post_children ne ""}<option selected>{$post_children}</option>{/if}</td></tr>
+<tr><td>Children:</td><td><select name="children" id="children" disabled><option>0</option><option>1</option><option>2</option><option>3</option>{if $post_children ne ""}<option selected>{$post_children}</option>{/if}</td></tr>
 <tr><td>Number of Tents:</td><td>
 
 <input type="hidden" name="tents" id="tents" 
@@ -46,9 +46,12 @@ function turnon() {
 	var strUser = e.options[e.selectedIndex].value;
 	if (strUser != "") {
 		document.getElementById('pax').disabled=false;
+		document.getElementById('children').disabled=false;
+
 
 	} else {
 		document.getElementById('pax').disabled=true;
+		document.getElementById('children').disabled=true;
 	}
 }
 
