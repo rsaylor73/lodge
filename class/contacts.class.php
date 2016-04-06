@@ -248,7 +248,6 @@ class contacts extends reservations {
 			AND `b`.`inventoryID` = `i`.`inventoryID`
 			AND `i`.`roomID` = '$_GET[roomID]'
 		";
-		print "SQL:<br>$sql<br>";
 		$result = $this->new_mysql($sql);
 		$template = "assigncontacttobed.tpl";
 		$data['reservationID'] = $_GET['reservationID'];
