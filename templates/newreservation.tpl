@@ -52,6 +52,8 @@ function turnon() {
 	} else {
 		document.getElementById('pax').disabled=true;
 		document.getElementById('children').disabled=true;
+		document.getElementById('pax').value='1';
+		document.getElementById('children').value='0';
 	}
 }
 
