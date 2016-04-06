@@ -29,9 +29,7 @@ if ($check == "FALSE") {
 	}
 
 	$tents = $_GET['pax'] / $adults;
-	print "Test 1: $tents<br>";
 	$tents = round($tents);
-	print "Test 2: $tents<br>";
 	if ($tents < 1) {
 		$tents = "1";
 	}
