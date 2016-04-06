@@ -30,6 +30,7 @@ if ($check == "FALSE") {
 
 	$tents = $_GET['pax'] / $adults;
 	$tents = floor($tents);
+	print "Test: $tents<br>";
 	if ($tents < 1) {
 		$tents = "1";
 	}
