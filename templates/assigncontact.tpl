@@ -4,6 +4,7 @@
 <form name="myform">
 <input type="hidden" name="reservationID" value="{$reservationID}">
 <input type="hidden" name="bed" value="{$bed}">
+<input type="hidden" name="roomID" value="{$roomID}">
 <table class="table">
 
 <tr>

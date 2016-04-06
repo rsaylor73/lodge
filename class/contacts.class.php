@@ -228,6 +228,7 @@ class contacts extends reservations {
 	public function assigncontact() {
 		$data['reservationID'] = $_GET['reservationID'];
 		$data['bed'] = $_GET['bed'];
+		$data['roomID'] = $_GET['roomID'];
 		$template = "assigncontact.tpl";
 		$this->load_smarty($data,$template);
 	}
