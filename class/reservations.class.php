@@ -850,7 +850,8 @@ class reservations extends money {
 			`c`.`first`											AS 't2_first',
 			`c`.`middle`										AS 't2_middle',
 			`c`.`last`											AS 't2_last',
-			`c`.`email`											AS 't2_email'
+			`c`.`email`											AS 't2_email',
+			`i`.`roomID`
 
 		FROM
 			`beds` b, `inventory` i, `locations` l, `rooms` r
@@ -871,7 +872,7 @@ class reservations extends money {
 		while ($row = $result->fetch_assoc()) {
 
 			if ($row['t2_contactID'] == "") {
-				$contact = "<input type=\"button\" value=\"Assign Contact\" class=\"btn btn-primary\" onclick=\"document.location.href='assigncontact/$reservationID/$row[t2_bedname]'\">";
+				$contact = "<input type=\"button\" value=\"Assign Contact\" class=\"btn btn-primary\" onclick=\"document.location.href='assigncontact/$reservationID/$row[t2_bedname]/$row[roomID]'\">";
 			} else {
 				$contact = "<a href=\"javascript:void(0)\" onclick=\"document.location.href='editcontact/$row[t2_contactID]'\"><i class=\"fa fa-pencil-square-o\"></i></a> 
 				$row[t2_first] $row[t2_middle] $row[t2_last]&nbsp;&nbsp;
