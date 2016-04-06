@@ -44,8 +44,12 @@
 function turnon() {
 	var e = document.getElementById("lodge");
 	var strUser = e.options[e.selectedIndex].value;
-	alert(strUser);
-	document.getElementById('pax').disabled=false;
+	if (strUser != "") {
+		document.getElementById('pax').disabled=false;
+
+	} else {
+		document.getElementById('pax').disabled=true;
+	}
 }
 
 function get_min_pax(myform) {
