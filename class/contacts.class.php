@@ -174,6 +174,7 @@ class contacts extends reservations {
 		if ($_GET['reservationID'] != "") {
 			$data['reservationID'] = $_GET['reservationID'];
 			$data['bed'] = $_GET['bed'];
+			$data['roomID'] = $_GET['roomID'];
 		}
 
      	$this->load_smarty($data,$template);
@@ -197,7 +198,7 @@ class contacts extends reservations {
 				?>
 				<script>
    				setTimeout(function() {
-					window.location.replace('assigncontact/<?=$_POST['reservationID'];?>/<?=$_POST['bed'];?>')
+					window.location.replace('assigncontact/<?=$_POST['reservationID'];?>/<?=$_POST['bed'];?>/<?=$_POST['roomID'];?>')
 				}
    				,2000);
 				</script>
