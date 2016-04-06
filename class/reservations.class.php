@@ -876,7 +876,7 @@ class reservations extends money {
 			} else {
 				$contact = "<a href=\"javascript:void(0)\" onclick=\"document.location.href='editcontact/$row[t2_contactID]'\"><i class=\"fa fa-pencil-square-o\"></i></a> 
 				$row[t2_first] $row[t2_middle] $row[t2_last]&nbsp;&nbsp;
-				<a href=\"javascript:void(0)\" onclick=\"document.location.href='assigncontact/$reservationID/$row[t2_bedname]'\"><i class=\"fa fa-wrench\"></i></a>
+				<a href=\"javascript:void(0)\" onclick=\"document.location.href='assigncontact/$reservationID/$row[t2_bedname]/$row[roomID]'\"><i class=\"fa fa-wrench\"></i></a>
 
 				";
 			}

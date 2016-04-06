@@ -233,7 +233,21 @@ class contacts extends reservations {
 	}
 
 	public function assigncontacttobed() {
-		$sql = "UPDATE `beds` SET `contactID` = '$_GET[contactID]', `status` = 'booked' WHERE `reservationID` = '$_GET[reservationID]' AND `name` = '$_GET[bed]'";
+		$sql = "
+		UPDATE 
+			`beds` b, `inventory` i
+
+		SET 
+			`b`.`contactID` = '$_GET[contactID]', 
+			`b`.`status` = 'booked' 
+
+		WHERE 
+			`b`.`reservationID` = '$_GET[reservationID]' 
+			AND `b`.`name` = '$_GET[bed]'
+			AND `b`.`inventoryID` = `i`.`inventoryID`
+			AND `i`.`roomID` = '$_GET[roomID]'
+		";
+		print "SQL:<br>$sql<br>";
 		$result = $this->new_mysql($sql);
 		$template = "assigncontacttobed.tpl";
 		$data['reservationID'] = $_GET['reservationID'];
