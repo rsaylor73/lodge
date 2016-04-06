@@ -5,7 +5,7 @@
 <!--<form method="post" action="searchinventory" name="myform">-->
 <form method="post" action="viewtent" name="myform">
 <table class="table">
-<tr><td>Select Lodge:</td><td><select name="lodge" required onchange="get_min_pax(this.form);document.getElementById('pax').disabled=false">{$lodge}</select></td></tr>
+<tr><td>Select Lodge:</td><td><select name="lodge" id="lodge" required onchange="get_min_pax(this.form);turnon();">{$lodge}</select></td></tr>
 <tr><td>Adults:</td><td><select name="pax" id="pax" required onchange="get_min_tent(this.form)" disabled>{$pax}</select></td></tr>
 <tr><td>Children:</td><td><select name="children"><option>0</option><option>1</option><option>2</option><option>3</option>{if $post_children ne ""}<option selected>{$post_children}</option>{/if}</td></tr>
 <tr><td>Number of Tents:</td><td>
@@ -40,6 +40,14 @@
 </form>
 
 <script>
+
+function turnon() {
+	var e = document.getElementById("lodge");
+	var strUser = e.options[e.selectedIndex].value;
+	alert(strUser);
+	document.getElementById('pax').disabled=false;
+}
+
 function get_min_pax(myform) {
 	$.get('ajax/get_min_pax.php',
 	$(myform).serialize(),
