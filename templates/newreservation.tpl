@@ -32,7 +32,6 @@
 <tr><td>Number of Nights:</td><td><select name="nights"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option>
 	{if $post_nights ne ""}<option selected>{$post_nights}</option>{/if}</select></td></tr>
 
-<tr><td>Room Type (optional):</td><td><select name="roomID"><option selected value="">Any</option><div id="roomType"></div></select></td></tr>
 
 <tr><td>Start Date:</td><td><input type="text" name="start_date" id="start_date" value="{$post_start_date}" required></td></tr>
 <tr><td colspan=2><input type="submit" value="Search Rooms" class="btn btn-primary"></td></tr>
@@ -72,7 +71,7 @@ function get_min_tent(myform) {
 	$.get('ajax/set_min_tents.php',
 	$(myform).serialize(),
 	function(php_msg) {
-	$("#roomType").html(php_msg);
+	$("#null").html(php_msg);
 	});
 }
 </script>

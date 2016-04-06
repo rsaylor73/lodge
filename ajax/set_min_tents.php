@@ -41,12 +41,5 @@ if ($check == "FALSE") {
 	</script>
 	<?php
 
-	$sql = "SELECT `description`,`id` FROM `rooms` WHERE `locationID` = '$_GET[lodge]' ORDER BY `description` ASC";
-	$result = $core->new_mysql($sql);
-	while ($row = $result->fetch_assoc()) {
-		$opt .= "<option value=\"$row[id]\">$row[description]</option>";
-	}
-	print "$opt";
-
 }
 ?>
