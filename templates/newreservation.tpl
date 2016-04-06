@@ -33,7 +33,7 @@
 	{if $post_nights ne ""}<option selected>{$post_nights}</option>{/if}</select></td></tr>
 
 
-<tr><td>Start Date:</td><td><input type="text" name="start_date" id="start_date" value="{$post_start_date}" required></td></tr>
+<tr><td>Check-In Date:</td><td><input type="text" name="start_date" id="start_date" value="{$post_start_date}" required></td></tr>
 <tr><td colspan=2><input type="submit" value="Search Rooms" class="btn btn-primary"></td></tr>
 </table>
 
