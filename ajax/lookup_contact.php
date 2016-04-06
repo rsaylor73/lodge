@@ -66,7 +66,7 @@ if ($check == "FALSE") {
 	$result = $core->new_mysql($sql);
 	while ($row = $result->fetch_assoc()) {
 		$html .= "<tr><td width=\"250\">$row[first] $row[last]</td><td>$row[city]</td><td>$row[country]</td>
-		<td><input type=\"button\" onclick=\"document.location.href='assigncontacttobed/$_GET[reservationID]/$row[contactID]/$_GET[bed]'\" class=\"btn btn-primary\" value=\"Assign Contact\"></td></tr>
+		<td><input type=\"button\" onclick=\"document.location.href='assigncontacttobed/$_GET[reservationID]/$row[contactID]/$_GET[bed]/$_GET[roomID]'\" class=\"btn btn-primary\" value=\"Assign Contact\"></td></tr>
 		<tr><td>DOB: $row[dob]</td><td colspan=4>$row[email]</td></tr>
 		";
 	}
