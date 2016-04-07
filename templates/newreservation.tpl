@@ -11,7 +11,7 @@
 
 	<td id="child1" style="display:none">
 	Child 1: 
-		<select name="child_age1">
+		<select name="childage1" id="childage1">
 		<option value="">Age?</option>
 		<option value="1">0 - 6</option>
 		<option value="2">7 - 15</option>
@@ -21,7 +21,7 @@
 
 	<td id="child2" style="display:none">
 	Child 2: 
-		<select name="child_age2" id="child_age2">
+		<select name="childage2" id="childage2">
 		<option value="">Age?</option>
 		<option value="1">0 - 6</option>
 		<option value="2">7 - 15</option>
@@ -70,21 +70,21 @@ function do_child() {
 	var strChild = e.options[e.selectedIndex].value;
 	if (strChild == "1") {
 		document.getElementById('child1').style.display='inline';
-		document.getElementById('child_age1').required=true;
-		document.getElementById('child2').style.disabled='none';
-		document.getElementById('child_age2').required=false;
+		document.getElementById('childage1').required=true;
+		document.getElementById('child2').style.display='none';
+		document.getElementById('childage2').required=false;
 	}
 	if (strChild == "2") {
 		document.getElementById('child1').style.display='inline';
-		document.getElementById('child_age1').required=true;
+		document.getElementById('childage1').required=true;
 		document.getElementById('child2').style.display='inline';
-		document.getElementById('child_age2').required=true;
+		document.getElementById('childage2').required=true;
 	}
 	if (strChild == "0") {
-		document.getElementById('child_age1').required=false;
-		document.getElementById('child_age2').required=false;
-		document.getElementById('child1').style.disabled='none';
-		document.getElementById('child2').style.disabled='none';
+		document.getElementById('childage1').required=false;
+		document.getElementById('childage2').required=false;
+		document.getElementById('child1').style.display='none';
+		document.getElementById('child2').style.display='none';
 	}
 }
 
