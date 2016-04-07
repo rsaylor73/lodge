@@ -120,11 +120,27 @@ class admin extends resellers {
 			foreach ($row as $key=>$value) {
 				$data[$key] = $value;
 			}
+			$type = $row['type'];
 		}
+
+		if ($type == "") {
+			$opt .= "<option value=\"\">--Select--</option>";
+		}
+		$sql = "SELECT `type`,`id` FROM `roomtype` ORDER BY `type` ASC";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			if ($row['id'] == $type) {
+				$opt .= "<option selected value=\"$row[id]\">$row[type]</option>";
+			} else {
+				$opt .= "<option value=\"$row[id]\">$row[type]</option>";
+			}
+		}
+
         $template = "editroom.tpl";
       	$data['name'] = $name;
       	$data['id'] = $_GET['id'];
 		$data['id2'] = $_GET['id2'];
+		$data['opt'] = $opt;
 	    $this->load_smarty($data,$template);
 	}
 
@@ -132,7 +148,9 @@ class admin extends resellers {
 		if ($_POST['delete'] == "checked") {
 			$sql = "DELETE FROM `rooms` WHERE `id` = '$_POST[id]'";
 		} else {
-			$sql = "UPDATE `rooms` SET `description` = '$_POST[description]', `beds` = '$_POST[beds]', `children` = '$_POST[children]', `nightly_rate` = '$_POST[nightly_rate]' WHERE `id` = '$_POST[id]'";
+			$sql = "UPDATE `rooms` SET `description` = '$_POST[description]', `beds` = '$_POST[beds]', `children` = '$_POST[children]', 
+			`writeup` = '$_POST[writeup]', `type` = '$_POST[type]',
+			`nightly_rate` = '$_POST[nightly_rate]' WHERE `id` = '$_POST[id]'";
 		}
       	$result = $this->new_mysql($sql);
       	if ($result == "TRUE") {
