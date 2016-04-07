@@ -343,7 +343,7 @@ class admin extends resellers {
 		$sql = "SELECT * FROM `roomtype` ORDER BY `type` ASC";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$html .= "<tr><td colspan=2><input type=\"text\" name=\"type_$row[id]\" value=\"$row[type]\"></td></tr>";
+			$html .= "<tr><td colspan=2><input type=\"text\" name=\"type_$row[id]\" value=\"$row[type]\" size=\"20\"></td></tr>";
 			$found = "1";
 		}
 		if ($found == "1") {
@@ -353,13 +353,22 @@ class admin extends resellers {
 	}
 
 	public function saveroomtypes() {
+		// update
+		$sql = "SELECT * FROM `roomtype` ORDER BY `type` ASC";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$i = "type_";
+			$i .= $row['id'];
+			$type = $_POST[$i];
+			$sql2 = "UPDATE `roomtype` SET `type` = '$type' WHERE `id` = '$row[id]'";
+			$result2 = $this->new_mysql($sql2);
+		}
+
 		// insert new
 		if ($_POST['roomtype'] != "") {
 			$sql = "INSERT INTO `roomtype` (`type`) VALUES ('$_POST[roomtype]')";
 			$result = $this->new_mysql($sql);
 		}
-
-		// update existing
 
 		$data['msg'] = "<font color=green>The room types was updated.</font><br>";
 		$template = "roomtypes.tpl";
