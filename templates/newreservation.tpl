@@ -70,19 +70,19 @@ function do_child() {
 	var strChild = e.options[e.selectedIndex].value;
 	if (strChild == "1") {
 		document.getElementById('child1').style.display='inline';
-		document.getElementById('child1').required=true;
+		document.getElementById('child_age1').required=true;
 		document.getElementById('child2').style.disabled='none';
-		document.getElementById('child2').required=false;
+		document.getElementById('child_age2').required=false;
 	}
 	if (strChild == "2") {
 		document.getElementById('child1').style.display='inline';
-		document.getElementById('child1').required=true;
+		document.getElementById('child_age1').required=true;
 		document.getElementById('child2').style.display='inline';
-		document.getElementById('child2').required=true;
+		document.getElementById('child_age2').required=true;
 	}
 	if (strChild == "0") {
-		document.getElementById('child1').required=false;
-		document.getElementById('child2').required=false;
+		document.getElementById('child_age1').required=false;
+		document.getElementById('child_age2').required=false;
 		document.getElementById('child1').style.disabled='none';
 		document.getElementById('child2').style.disabled='none';
 	}
