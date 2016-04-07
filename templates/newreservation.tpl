@@ -10,8 +10,9 @@
 <tr><td>Children:</td><td><select name="children" id="children" disabled onchange="do_child()"><option>0</option><option>1</option><option>2</option>{if $post_children ne ""}<option selected>{$post_children}</option></select>{/if}
 
 	<td id="child1" style="display:none">
-	Child 1 Age: 
+	Child 1: 
 		<select name="child_age1">
+		<option value="">Age?</option>
 		<option value="1">0 - 6</option>
 		<option value="2">7 - 15</option>
 		<option value="3">16+</option>
@@ -19,8 +20,9 @@
 	</td>
 
 	<td id="child2" style="display:none">
-	Child 2 Age: 
+	Child 2: 
 		<select name="child_age2" id="child_age2">
+		<option value="">Age?</option>
 		<option value="1">0 - 6</option>
 		<option value="2">7 - 15</option>
 		<option value="3">16+</option>
@@ -69,6 +71,8 @@ function do_child() {
 	if (strChild == "1") {
 		document.getElementById('child1').style.display='inline';
 		document.getElementById('child1').required=true;
+		document.getElementById('child2').style.disabled='none';
+		document.getElementById('child2').required=false;
 	}
 	if (strChild == "2") {
 		document.getElementById('child1').style.display='inline';
@@ -76,7 +80,7 @@ function do_child() {
 		document.getElementById('child2').style.display='inline';
 		document.getElementById('child2').required=true;
 	}
-	if (strChild == "") {
+	if (strChild == "0") {
 		document.getElementById('child1').required=false;
 		document.getElementById('child2').required=false;
 		document.getElementById('child1').style.disabled='none';
