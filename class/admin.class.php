@@ -331,6 +331,10 @@ class admin extends resellers {
 		$bed_map[1] = "B";
 		$bed_map[2] = "C";
 		$bed_map[3] = "D";
+
+		$child_map[0] = "Child A";
+		$child_map[1] = "Child B";
+
 		// Create inventory
 		$sql = "SELECT * FROM `rooms` WHERE `locationID` = '$locationID'";
 		$result = $this->new_mysql($sql);
@@ -354,7 +358,7 @@ class admin extends resellers {
 		         	}
 					//Child
                		for ($i2 = 0; $i2 < $row['children']; $i2++) {
-                  		$sql4 = "INSERT INTO `beds` (`inventoryID`,`status`,`name`,`type`) VALUES ('$inventoryID','avail','Child','child')";
+                  		$sql4 = "INSERT INTO `beds` (`inventoryID`,`status`,`name`,`type`) VALUES ('$inventoryID','avail','$child_map[$i2]','child')";
                   		$result4 = $this->new_mysql($sql4);
                		}
 				}
