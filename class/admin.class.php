@@ -331,5 +331,11 @@ class admin extends resellers {
 		}
 		return "1";	
 	}
+
+	public function roomtypes() {
+		$template = "roomtypes.tpl";
+
+		$this->load_smarty($data,$template);
+	}
 // end class
 }
