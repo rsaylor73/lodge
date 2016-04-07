@@ -1,6 +1,6 @@
 <div class="col-md-6">
 <h2>Room Types</h2>
-
+{$msg}
 <form name="myform" action="saveroomtypes" method="post">
 
 <table class="table">
