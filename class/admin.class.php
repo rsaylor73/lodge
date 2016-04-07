@@ -102,6 +102,18 @@ class admin extends resellers {
       	}
       	$template = "newroom.tpl";
       	$data = array();
+
+		$sql = "SELECT `type`,`id` FROM `roomtype` ORDER BY `type` ASC";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			if ($row['id'] == $type) {
+				$opt .= "<option selected value=\"$row[id]\">$row[type]</option>";
+			} else {
+				$opt .= "<option value=\"$row[id]\">$row[type]</option>";
+			}
+		}
+
+		$data['opt'] = $opt;
       	$data['name'] = $name;
       	$data['id'] = $_GET['id'];
       	$this->load_smarty($data,$template);
