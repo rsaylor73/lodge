@@ -7,7 +7,25 @@
 <table class="table">
 <tr><td>Select Lodge:</td><td><select name="lodge" id="lodge" required onchange="get_min_pax(this.form);turnon();">{$lodge}</select></td></tr>
 <tr><td>Adults:</td><td><select name="pax" id="pax" required onchange="get_min_tent(this.form)" disabled>{$pax}</select></td></tr>
-<tr><td>Children:</td><td><select name="children" id="children" disabled><option>0</option><option>1</option><option>2</option><option>3</option>{if $post_children ne ""}<option selected>{$post_children}</option>{/if}</td></tr>
+<tr><td>Children:</td><td><select name="children" id="children" disabled onchange="do_child()"><option>0</option><option>1</option><option>2</option>{if $post_children ne ""}<option selected>{$post_children}</option>{/if}
+
+	<div id="child1" style="display:none">
+	Child 1 Age: <select name="child_age1">
+		<option value="1">0 - 6</option>
+		<option value="2">7 - 15</option>
+		<option value="3">16+</option>
+		</select>
+	</div>
+
+	<div id="child2" style="display:none">
+	Child 2 Age: <select name="child_age2" id="child_age2">
+		<option value="1">0 - 6</option>
+		<option value="2">7 - 15</option>
+		<option value="3">16+</option>
+		</select>
+	</div>
+
+	</td></tr>
 <tr><td>Number of Tents:</td><td>
 
 <input type="hidden" name="tents" id="tents" 
@@ -42,6 +60,27 @@
 </form>
 
 <script>
+
+function do_child() {
+	var e = document.getElementById("children");
+	var strChild = e.options[e.selectedIndex].value;
+	if (strChild == "1") {
+		document.getElementById('child1').style.display='inline';
+		document.getElementById('child1').required=true;
+	}
+	if (strChild == "2") {
+		document.getElementById('child1').style.display='inline';
+		document.getElementById('child1').required=true;
+		document.getElementById('child2').style.display='inline';
+		document.getElementById('child2').required=true;
+	}
+	if (strChild == "") {
+		document.getElementById('child1').required=false;
+		document.getElementById('child2').required=false;
+		document.getElementById('child1').style.disabled='none';
+		document.getElementById('child2').style.disabled='none';
+	}
+}
 
 function turnon() {
 	var e = document.getElementById("lodge");
