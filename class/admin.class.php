@@ -123,8 +123,8 @@ class admin extends resellers {
 			$type = $row['type'];
 		}
 
-		if ($type == "") {
-			$opt .= "<option value=\"\">--Select--</option>";
+		if ($type == "0") {
+			$opt .= "<option selected value=\"\">--Select--</option>";
 		}
 		$sql = "SELECT `type`,`id` FROM `roomtype` ORDER BY `type` ASC";
 		$result = $this->new_mysql($sql);
