@@ -337,5 +337,29 @@ class admin extends resellers {
 
 		$this->load_smarty($data,$template);
 	}
+
+	private function list_room_types() {
+		// output the room types
+	}
+
+	public function saveroomtypes() {
+		// insert new
+		if ($_POST['roomtype'] != "") {
+			$sql = "INSERT INTO `roomtype` (`type`) VALUES ('$_POST[roomtype]')";
+			$result = $this->new_mysql($sql);
+		}
+
+		// update existing
+
+
+		$data['msg'] = "<font color=green>The room types was updated.</font><br>";
+		$template = "roomtypes.tpl";
+
+		$this->load_smarty($data,$template);
+
+	}
+
+
+
 // end class
 }
