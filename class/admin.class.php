@@ -334,12 +334,22 @@ class admin extends resellers {
 
 	public function roomtypes() {
 		$template = "roomtypes.tpl";
-
+		$data['html'] = $this->list_room_types();
 		$this->load_smarty($data,$template);
 	}
 
 	private function list_room_types() {
 		// output the room types
+		$sql = "SELECT * FROM `roomtype` ORDER BY `type` ASC";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$html .= "<tr><td colspan=2><input type=\"text\" name=\"type_$row[id]\" value=\"$row[type]\"></td></tr>";
+			$found = "1";
+		}
+		if ($found == "1") {
+			$html .= "<tr><td colspan=2><input type=\"submit\" value=\"Update\" class=\"btn btn-primary\"></td></tr>";
+		}
+		return $html;
 	}
 
 	public function saveroomtypes() {
@@ -351,10 +361,9 @@ class admin extends resellers {
 
 		// update existing
 
-
 		$data['msg'] = "<font color=green>The room types was updated.</font><br>";
 		$template = "roomtypes.tpl";
-
+		$data['html'] = $this->list_room_types();
 		$this->load_smarty($data,$template);
 
 	}
