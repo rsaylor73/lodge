@@ -4,7 +4,7 @@
 <form name="myform" action="saveroomtypes">
 
 <table class="table">
-	<tr><td><b>New Room Type:</b></td><td><input type="text" name="roomtype" size="20"> <input type="submit" class="btn btn-primary" value="Save"</td></tr>
+	<tr><td><b>New Room Type:</b></td><td><input type="text" name="roomtype" size="20">&nbsp;<input type="submit" class="btn btn-primary" value="Save"</td></tr>
 
 	<tr><td colspan="2"><hr><b>Existing Room Types</b></td></tr>
 
