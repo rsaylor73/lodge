@@ -7,7 +7,7 @@
 
 <table class="table">
 <tr><td>Room Title:</td><td><input type="text" name="description" id="description" value="{$description}" size=30></td></tr>
-<tr><td>Room Description:</td><td><textarea name="writeup" cols="30" rows="5">{$writeup}</textarea></td></tr>
+<tr><td>Room Description:</td><td><textarea name="writeup" cols="28" rows="5">{$writeup}</textarea></td></tr>
 <tr><td>Room Type:</td><td><select name="type">{$type}</select></td></tr>
 <tr><td>Number of Adults:</td><td><select name="beds"><option selected>{$beds}</option><option>1</option><option>2</option><option>3</option><option>4</option></select> (The number of adult bed(s) in this room)</td></tr>
 <tr><td>Number of Children:</td><td><select name="children"><option selected>{$children}</option><option>0</option><option>1</option><option>2</option></select> (The number of child bed(s) in this room)
