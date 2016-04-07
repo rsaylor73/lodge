@@ -40,6 +40,12 @@ class reservations extends money {
 		$data['post_tents'] = $_POST['tents2'];
 		$data['post_nights'] = $_POST['nights'];
 
+		$sql = "SELECT * FROM `roomtype` ORDER BY `type` ASC";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$type .= "<option value=\"$row[id]\">$row[type]</option>";
+		}
+		$data['type'] = $type;
 	    $this->load_smarty($data,$template);
 	}
 
