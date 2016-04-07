@@ -54,7 +54,7 @@
 <tr><td>Number of Nights:</td><td colspan="3"><select name="nights"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option>
 	{if $post_nights ne ""}<option selected>{$post_nights}</option>{/if}</select></td></tr>
 
-<tr><td><b>Type:</b></td><td><select name="type"><option value="">Any</option>{$type}</select></td></tr>
+<tr><td>Type:</td><td><select name="type"><option value="">Any</option>{$type}</select></td></tr>
 <tr><td>Check-In Date:</td><td colspan="3"><input type="text" name="start_date" id="start_date" value="{$post_start_date}" required></td></tr>
 <tr><td colspan=5><input type="submit" value="Search Rooms" class="btn btn-primary"></td></tr>
 </table>
