@@ -185,7 +185,8 @@ class admin extends resellers {
 	}
 
 	public function saveroom() {
-		$sql = "INSERT INTO `rooms` (`locationID`,`description`,`beds`,`children`,`nightly_rate`) VALUES ('$_POST[id]','$_POST[description]','$_POST[beds]','$_POST[children]','$_POST[nightly_rate]')";
+		$sql = "INSERT INTO `rooms` (`locationID`,`description`,`beds`,`children`,`nightly_rate`,`type`,`writeup`) 
+		VALUES ('$_POST[id]','$_POST[description]','$_POST[beds]','$_POST[children]','$_POST[nightly_rate]','$_POST[type]','$_POST[writeup]')";
 		$result = $this->new_mysql($sql);
 		if ($result == "TRUE") {
 			$_GET['id'] = $_POST['id'];
