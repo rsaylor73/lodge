@@ -398,6 +398,9 @@ class reservations extends money {
 		";
 
 		print "<br>SQL:<br>$sql<hr>";
+		print "<pre>";
+		print_r($_POST);
+		print "</pre>";
 
 		$data['nights'] = $_POST['nights'];
 		$data['adults'] = $_POST['pax'];
