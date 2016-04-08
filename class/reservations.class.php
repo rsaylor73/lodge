@@ -355,7 +355,7 @@ class reservations extends money {
 		print "</pre>";
 
 		if ($children == "0") {
-			$children = "99";
+			$child_w1 = "AND COUNT(`c`.`status`) = '0'";
 		} else {
 			$child_join = "LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail'";
 			$child_sql = "AND total_child_beds >= '$children'";
@@ -379,12 +379,13 @@ class reservations extends money {
 			`inventory` i, `rooms` r
 
 		LEFT JOIN `beds` a ON `i`.`inventoryID` = `a`.`inventoryID` AND `a`.`type` = 'adult' AND `a`.`status` = 'avail'
-		$child_join
+		LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail'
 
 		WHERE
 			`i`.`locationID` = '$_POST[lodge]' 
 			AND `i`.`date_code` BETWEEN '$start_date' AND '$end_date'
 			AND `i`.`roomID` = `r`.`id`
+			$child_w1
 
 		GROUP BY `r`.`description`
 
