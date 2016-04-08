@@ -21,8 +21,8 @@
 <tr><td><b>Children:</b></td><td>{$children}</td></tr>
 <tr><td><b>Nights:</b></td><td>{$nights}</td></tr>
 <tr><td><b>Tents:</b></td><td>{$tents}</td></tr>
-<tr><td><b>Start Date:</b></td><td>{$start_date2}</td></tr>
-<tr><td><b>End Date:</b></td><td>{$end_date2}</td></tr>
+<tr><td><b>Check-In Date:</b></td><td>{$start_date2}</td></tr>
+<tr><td><b>Check-Out Date:</b></td><td>{$end_date2}</td></tr>
 </table>
 
 
