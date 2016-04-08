@@ -43,7 +43,11 @@ class reservations extends money {
 		$sql = "SELECT * FROM `roomtype` ORDER BY `type` ASC";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$type .= "<option value=\"$row[id]\">$row[type]</option>";
+			if ($row['id'] == $_POST['type']) {
+				$type .= "<option selected value=\"$row[id]\">$row[type]</option>";
+			} else {
+				$type .= "<option value=\"$row[id]\">$row[type]</option>";
+			}
 		}
 		$data['type'] = $type;
 	    $this->load_smarty($data,$template);
