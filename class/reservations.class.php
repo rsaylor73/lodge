@@ -356,6 +356,7 @@ class reservations extends money {
 
 		if ($children == "0") {
 			//
+			$child_sql = "AND total_child_beds = 0";
 		} else {
 			$child_sql = "AND total_child_beds >= '$children'";
 		}
