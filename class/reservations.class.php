@@ -356,6 +356,9 @@ class reservations extends money {
 
 		if ($children == "0") {
 			$children = "99";
+		} else {
+			$child_join = "LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail'";
+			$child_sql = "AND total_child_beds >= '$children'";
 		}
 
 		$sql = "
@@ -374,7 +377,7 @@ class reservations extends money {
 			`inventory` i, `rooms` r
 
 		LEFT JOIN `beds` a ON `i`.`inventoryID` = `a`.`inventoryID` AND `a`.`type` = 'adult' AND `a`.`status` = 'avail'
-		LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail'
+		$child_join
 
 		WHERE
 			`i`.`locationID` = '$_POST[lodge]' 
@@ -383,7 +386,7 @@ class reservations extends money {
 
 		GROUP BY `r`.`description`
 
-		HAVING total_adult_beds >= '$adults' AND total_child_beds >= '$children'
+		HAVING total_adult_beds >= '$adults' $child_sql
 		";
 
 		//print "SQL:<br>$sql<br>";
