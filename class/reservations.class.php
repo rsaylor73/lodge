@@ -350,6 +350,10 @@ class reservations extends money {
 
 		}
 
+		print "<pre>";
+		print_r($_POST);
+		print "</pre>";
+
 		$sql = "
 		SELECT
 			`r`.`id`,
