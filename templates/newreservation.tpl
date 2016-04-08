@@ -10,9 +10,8 @@
 <tr><td>Children:</td><td><select name="children" id="children" disabled onchange="do_child()"><option>0</option><option>1</option><option>2</option>{if $post_children ne ""}<option selected>{$post_children}</option></select>{/if}
 
 	<td id="child1" style="display:none">
-	Child 1: 
 		<select name="childage1" id="childage1">
-		<option value="">Age?</option>
+		<option value="">Child 1 Age?</option>
 		<option value="1">0 - 6</option>
 		<option value="2">7 - 15</option>
 		<option value="3">16+</option>
@@ -20,9 +19,8 @@
 	</td>
 
 	<td id="child2" style="display:none">
-	Child 2: 
 		<select name="childage2" id="childage2">
-		<option value="">Age?</option>
+		<option value="">Child 2 Age?</option>
 		<option value="1">0 - 6</option>
 		<option value="2">7 - 15</option>
 		<option value="3">16+</option>
