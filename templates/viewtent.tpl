@@ -25,7 +25,7 @@
 <tr><td><b>Check-Out Date:</b></td><td>{$end_date2}</td></tr>
 </table>
 
-
+<br><b>Please select {$tents} tents. Click on the toggle button in the select column to pic a tent.</b>
 <table class="table">
 	<tr>
 		<td><b>Tent</b></td><td><b>Total</b></td><td><b>Adult(s)</b></td><td><b>Children</b></td><td><b>Select</b></td>
