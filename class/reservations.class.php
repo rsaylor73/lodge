@@ -361,6 +361,10 @@ class reservations extends money {
 			$child_sql = "AND total_child_beds >= '$children'";
 		}
 
+		if ($_POST['type'] != "") {
+			$type = "AND `r`.`type` = '$_POST[type]";
+		}
+
 		$sql = "
 		SELECT
 			`r`.`id`,
@@ -383,6 +387,7 @@ class reservations extends money {
 			`i`.`locationID` = '$_POST[lodge]' 
 			AND `i`.`date_code` BETWEEN '$start_date' AND '$end_date'
 			AND `i`.`roomID` = `r`.`id`
+			$type
 
 		GROUP BY `r`.`description`
 
