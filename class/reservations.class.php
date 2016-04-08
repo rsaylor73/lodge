@@ -397,6 +397,8 @@ class reservations extends money {
 		HAVING total_adult_beds >= '$adults' $child_sql
 		";
 
+		print "<br>SQL:<br>$sql<hr>";
+
 		$data['nights'] = $_POST['nights'];
 		$data['adults'] = $_POST['pax'];
 		$data['children'] = $_POST['children'];
