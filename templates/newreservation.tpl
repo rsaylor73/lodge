@@ -7,8 +7,8 @@
 <table class="table">
 <tr><td>Select Lodge:</td><td colspan="3"><select name="lodge" id="lodge" required onchange="get_min_pax(this.form);turnon();">{$lodge}</select></td></tr>
 <tr><td>Adults:</td><td colspan="3"><select name="pax" id="pax" required onchange="get_min_tent(this.form)" disabled>{$pax}</select></td></tr>
-<tr><td>Children:</td><td><select name="children" id="children" disabled onchange="do_child()"><option>0</option><option>1</option><option>2</option>{if $post_children ne ""}<option selected>{$post_children}</option></select>{/if}
-
+<tr><td>Children:</td><td><select name="children" id="children" disabled onchange="do_child()"><option>0</option><option>1</option><option>2</option>{if $post_children ne ""}<option selected>{$post_children}</option></select>{/if}</td></tr>
+<tr>
 	<td id="child1" style="display:none">
 		<select name="childage1" id="childage1">
 		<option value="">Child 1 Age?</option>
@@ -26,8 +26,8 @@
 		<option value="3">16+</option>
 		</select>
 	</td>
+</tr>
 
-	</td></tr>
 <tr><td>Number of Tents:</td><td colspan="3">
 
 	<input type="hidden" name="tents" id="tents" 
