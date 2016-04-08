@@ -350,13 +350,10 @@ class reservations extends money {
 
 		}
 
-		print "<pre>";
-		print_r($_POST);
-		print "</pre>";
-
+		
 		if ($children == "0") {
 			//
-			$child_sql = "AND total_child_beds = 0";
+			$child_sql = "AND total_child_beds = '0'";
 		} else {
 			$child_sql = "AND total_child_beds >= '$children'";
 		}
@@ -393,8 +390,6 @@ class reservations extends money {
 
 		HAVING total_adult_beds >= '$adults' $child_sql
 		";
-
-		print "SQL:<br>$sql<br>";
 
 		$data['nights'] = $_POST['nights'];
 		$data['adults'] = $_POST['pax'];
