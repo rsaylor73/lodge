@@ -354,6 +354,10 @@ class reservations extends money {
 		print_r($_POST);
 		print "</pre>";
 
+		if ($children == "0") {
+			$children = "99";
+		}
+
 		$sql = "
 		SELECT
 			`r`.`id`,
