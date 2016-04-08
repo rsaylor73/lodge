@@ -4,9 +4,7 @@ include $GLOBAL['path']."/class/money.class.php";
 class reservations extends money {
 
 	public function newreservation() {
-		print "<pre>";
-		print_r($_POST);
-		print "</pre>";
+
 
       	$template = "newreservation.tpl";
       	$data = array();
