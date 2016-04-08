@@ -8,6 +8,7 @@
 <input type="hidden" name="children" value="{$children}">
 <input type="hidden" name="tents2" value="{$tents}">
 <input type="hidden" name="nights" value="{$nights}">
+<input type="hidden" name="type" value="{$type}">
 <input type="submit" value="Back To Search Results" class="btn btn-success">
 </form>
 <br>
