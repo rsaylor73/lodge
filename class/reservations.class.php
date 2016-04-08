@@ -362,7 +362,7 @@ class reservations extends money {
 		}
 
 		if ($_POST['type'] != "") {
-			$type = "AND `r`.`type` = '$_POST[type]";
+			$type = "AND `r`.`type` = '$_POST[type]'";
 		}
 
 		$sql = "
