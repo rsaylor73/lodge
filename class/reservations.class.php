@@ -355,25 +355,22 @@ class reservations extends money {
 		print "</pre>";
 
 		if ($children == "0") {
-			$child_w1 = "AND COUNT(`c`.`status`) = '0'";
+			//
 		} else {
-			$child_join = "LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail'";
 			$child_sql = "AND total_child_beds >= '$children'";
-			$child_s1 = "`c`.`status` AS 'child_status',";
-			$child_s2 = "COUNT(`c`.`status`) AS 'total_child_beds',";
 		}
 
 		$sql = "
 		SELECT
 			`r`.`id`,
 			`r`.`description`,
-			$child_s1
-			$child_s2
 			COUNT(`a`.`status`) AS 'total_adult_beds',
+			COUNT(`c`.`status`) AS 'total_child_beds',
 			`r`.`nightly_rate`,
 			`r`.`beds` AS 'adult',
 			`r`.`children`,
-			`a`.`status` AS 'adult_status'
+			`a`.`status` AS 'adult_status',
+			`c`.`status` AS 'child_status'
 
 		FROM
 			`inventory` i, `rooms` r
@@ -385,7 +382,6 @@ class reservations extends money {
 			`i`.`locationID` = '$_POST[lodge]' 
 			AND `i`.`date_code` BETWEEN '$start_date' AND '$end_date'
 			AND `i`.`roomID` = `r`.`id`
-			$child_w1
 
 		GROUP BY `r`.`description`
 
