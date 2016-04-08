@@ -362,7 +362,7 @@ class reservations extends money {
 		}
 
 		if ($_POST['type'] != "") {
-			//$type = "AND `r`.`type` = '$_POST[type]";
+			$type = "AND `r`.`type` = '$_POST[type]";
 		}
 
 		$sql = "
@@ -394,7 +394,7 @@ class reservations extends money {
 		HAVING total_adult_beds >= '$adults' $child_sql
 		";
 
-		//print "SQL:<br>$sql<br>";
+		print "SQL:<br>$sql<br>";
 
 		$data['nights'] = $_POST['nights'];
 		$data['adults'] = $_POST['pax'];
