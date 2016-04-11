@@ -362,8 +362,10 @@ class reservations extends money {
 		$adults = $_POST['pax'] * $nights;
 		print "TEST: $_POST[children]<br>";
 		if ($_POST['children'] > 0) {
+			print "YES<br>";
 			$children = $_POST['children'] * $nights;
 		} else {
+			print "NO<br>";
 			$children = "0";
 		}
 
