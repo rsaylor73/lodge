@@ -369,6 +369,7 @@ class reservations extends money {
 
 		if ($_POST['tents'] > 1) {
 			$adults = $adults / $_POST['tents'];
+			$children = $children / $_POST['tents'];
 
 		}
 
@@ -437,6 +438,9 @@ class reservations extends money {
 		while ($row = $result->fetch_assoc()) {
 			if ($row['adult_status'] == "avail") {
 				$total = $row['nightly_rate'] * $nights;
+
+
+
 				$html .= "<tr><td>$row[description]</td><td>$$total</td><td>$row[adult]</td><td>$row[children]</td><td> 
 				<input data-toggle=\"toggle\" name=\"roomID$row[id]\" type=\"checkbox\" value=\"On\" onchange=\"checkboxes()\">
 				</td></tr>";	
