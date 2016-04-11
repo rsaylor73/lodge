@@ -431,7 +431,8 @@ class reservations extends money {
 		$data['start_date'] = $_POST['start_date'];
 		$data['pax'] = $_POST['pax'];
 		$data['type'] = $_POST['type'];
-		$data['childage1'] = $this->child_age_map($_POST['childage1']);
+		//$data['childage1'] = $this->child_age_map($_POST['childage1']);
+		$data['childage1'] = $_POST['childage1'];
 		$data['childage2'] = $this->child_age_map($_POST['childage2']);
 
 		$result = $this->new_mysql($sql);
