@@ -343,6 +343,7 @@ class reservations extends money {
 	public function viewtent() {
 
 		$nights2 = $_POST['nights'] - 1;
+		$nights = $_POST['nights'];
 
 		$start_date = str_replace("-","",$_POST['start_date']);
 		$end_date = date("Ymd", strtotime($start_date ."+ $nights2 days"));
