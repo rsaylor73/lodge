@@ -538,7 +538,7 @@ class reservations extends money {
 		}
 		if ($err != "1") {
 			$reservationID = $this->generate_reservationID();
-			$sql = "UPDATE `reservations` r SET `r`.`child1_age` = '$_POST[childage1_form]', `r`.`child2_age` = '$_POST[childage2_form]";
+			$sql = "UPDATE `reservations` r SET `r`.`child1_age` = '$_POST[childage1_form]', `r`.`child2_age` = '$_POST[childage2_form]' WHERE `r`.`reservationID` = '$reservationID'";
 			$result = $this->new_mysql($sql);
 			foreach ($_POST as $key=>$value) {
 				if (preg_match("/roomID/i", $key)) {
