@@ -325,6 +325,21 @@ class reservations extends money {
       	$this->load_smarty($data,$template);
 	}
 
+	public function child_age_map($value) {
+		switch ($value) {
+			case "0":
+			$display = "0-6 years";
+			break;
+			case "1":
+			$display = "7-15 years";
+			break;
+			case "3":
+			$display = "16+ years";
+			break;
+		}
+		return $display;
+	}
+
 	public function viewtent() {
 
 		$nights2 = $_POST['nights'] - 1;
@@ -345,6 +360,7 @@ class reservations extends money {
 		$data['form_html'] = $form_html;
 
 		$adults = $_POST['pax'] * $nights;
+		print "TEST: $_POST[children]<br>";
 		if ($_POST['children'] > 0) {
 			$children = $_POST['children'] * $nights;
 		} else {
@@ -414,8 +430,8 @@ class reservations extends money {
 		$data['start_date'] = $_POST['start_date'];
 		$data['pax'] = $_POST['pax'];
 		$data['type'] = $_POST['type'];
-		$data['childage1'] = $_POST['childage1'];
-		$data['childage2'] = $_POST['childage2'];
+		$data['childage1'] = $this->child_age_map($_POST['childage1']);
+		$data['childage2'] = $this->child_age_map($_POST['childage2']);
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
