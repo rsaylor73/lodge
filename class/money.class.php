@@ -28,6 +28,20 @@ class money extends Core {
 		}
 		$nights = $this->get_reservation_nights($reservationID);
 
+		$total = $nightly_rate * $nights;
+
+		if ($child1_age != "") {
+			$fee = $this->child_age_fee($child1_age);
+			$child_amount = (($nightly_rate/2)/$fee) * $nights;
+			print "Child 1 amount: $child_amount<br>";
+		}
+
+		if ($child2_age != "") {
+			$fee = $this->child_age_fee($child2_age);
+			$child_amount = (($nightly_rate/2)/$fee) * $nights;
+			print "Child 2 amount: $child_amount<br>";
+		}
+
 		print "Test:<br>
 		Nightly Rate: $nightly_rate<br>
 		Nights: $nights<br>
