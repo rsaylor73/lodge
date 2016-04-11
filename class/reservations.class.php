@@ -461,13 +461,13 @@ class reservations extends money {
 
 				if ($_POST['childage1'] != "") {
 					$fee = $this->child_age_fee($_POST['childage1']);
-					$child_fee = ($row['nightly_rate'] * $fee) * $nights;
+					$child_fee = ($row['nightly_rate'] / $fee) * $nights;
 				}
 				$total = $total + $child_fee;
 
 				if ($_POST['childage2'] != "") {
 					$fee = $this->child_age_fee($_POST['childage2']);
-					$child_fee = ($row['nightly_rate'] * $fee) * $nights;
+					$child_fee = ($row['nightly_rate'] / $fee) * $nights;
 				}
 				$total = $total + $child_fee;
 
