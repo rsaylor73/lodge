@@ -6,14 +6,17 @@ class money extends Core {
 	public function dollars($reservationID) {
 		$sql = "
 		SELECT
-			`i`.`nightly_rate`
+			`i`.`nightly_rate`,
+			`r`.`child1_age`,
+			`r`.`child2_age`
 
 		FROM
-			`beds` b, `inventory` i
+			`beds` b, `inventory` i, `reservations` r
 
 		WHERE
 			`b`.`reservationID` = '$reservationID'
 			AND `b`.`inventoryID` = `i`.`inventoryID`
+			AND `r`.`reservationID` = '$reservationID'
 
 		LIMIT 1
 		";
