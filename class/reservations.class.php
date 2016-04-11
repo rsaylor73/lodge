@@ -986,8 +986,12 @@ class reservations extends money {
    	}
 
    	public function reservation_dollars($reservationID) {
-    	$this->dollars($reservationID);
+    	$data[] = $this->dollars($reservationID);
     	$data['test'] = "ok 3";
+
+    	print "<pre>";
+    	print_r($data);
+    	print "</pre>";
 
       	return $data;
    	}

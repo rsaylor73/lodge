@@ -28,20 +28,30 @@ class money extends Core {
 		}
 		$nights = $this->get_reservation_nights($reservationID);
 
-		$total = $nightly_rate * $nights;
+		$adults = $nightly_rate * $nights;
 
 		if ($child1_age != "") {
+			$age1 = $this->child_age_map($child1_age);
 			$fee = $this->child_age_fee($child1_age);
-			$child_amount = (($nightly_rate/2)/$fee) * $nights;
-			print "Child 1 amount: $child_amount<br>";
+			$child_amount1 = (($nightly_rate/2)/$fee) * $nights;
+			//print "Child 1 amount: $child_amount<br>";
 		}
 
 		if ($child2_age != "") {
+			$age2 = $this->child_age_map($child2_age);
 			$fee = $this->child_age_fee($child2_age);
-			$child_amount = (($nightly_rate/2)/$fee) * $nights;
-			print "Child 2 amount: $child_amount<br>";
+			$child_amount2 = (($nightly_rate/2)/$fee) * $nights;
+			//print "Child 2 amount: $child_amount<br>";
 		}
 
+		$total = $adults + $child_amount1 + $child_amount2;
+
+		$data['adults_rate'] = $adults;
+		$data['child1_rate'] = $child_amount1;
+		$data['child2_rate'] = $child_amount2;
+		$data['nights'] = $nights;
+
+		/*
 		print "Test:<br>
 		Nightly Rate: $nightly_rate<br>
 		Nights: $nights<br>
@@ -49,6 +59,8 @@ class money extends Core {
 		Child 2: $child2_age<br>
 
 		";
+		*/
 
+		return($data);
 	}
 }
