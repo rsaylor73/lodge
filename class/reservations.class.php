@@ -343,15 +343,15 @@ class reservations extends money {
 	public function child_age_fee($value) {
 		switch ($value) {
 			case "1":
-				$fee = "0";
+				$fee = "0"; // 0%
 			break;
 
 			case "2":
-				$fee = "2";
+				$fee = "2"; // 50%
 			break;
 
 			case "3":
-				$fee = "1";
+				$fee = "1"; // 100%
 			break;
 		}
 		return $fee;
@@ -462,14 +462,12 @@ class reservations extends money {
 				if ($_POST['childage1'] != "") {
 					$fee = $this->child_age_fee($_POST['childage1']);
 					$child_fee = (($row['nightly_rate'] / 2) / $fee) * $nights;
-					print "F1: $child_fee | $fee<br>";
 				}
 				$total = $total + $child_fee;
 
 				if ($_POST['childage2'] != "") {
 					$fee = $this->child_age_fee($_POST['childage2']);
 					$child_fee = (($row['nightly_rate'] / 2) / $fee) * $nights;
-					print "F2: $child_fee | $fee<br>";
 				}
 				$total = $total + $child_fee;
 
