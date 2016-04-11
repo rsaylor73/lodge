@@ -397,12 +397,12 @@ class reservations extends money {
 		HAVING total_adult_beds >= '$adults' $child_sql
 		";
 
-		/*
+		
 		print "<br>SQL:<br>$sql<hr>";
 		print "<pre>";
 		print_r($_POST);
 		print "</pre>";
-		*/
+		
 
 		$data['nights'] = $_POST['nights'];
 		$data['adults'] = $_POST['pax'];
@@ -414,6 +414,8 @@ class reservations extends money {
 		$data['start_date'] = $_POST['start_date'];
 		$data['pax'] = $_POST['pax'];
 		$data['type'] = $_POST['type'];
+		$data['childage1'] = $_POST['childage1'];
+		$data['childage2'] = $_POST['childage2'];
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {

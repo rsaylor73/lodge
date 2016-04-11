@@ -20,6 +20,14 @@
 <table class="table">
 <tr><td><b>Adults</b></td><td>{$adults}</td></tr>
 <tr><td><b>Children:</b></td><td>{$children}</td></tr>
+
+{if $childage1 ne ""}
+<tr><td><b>Child 1 Age:</b></td><td>{$childage1}</td></tr>
+{/if}
+{if $childage2 ne ""}
+<tr><td><b>Child 2 Age:</b></td><td>{$childage2}</td></tr>
+{/if}
+
 <tr><td><b>Nights:</b></td><td>{$nights}</td></tr>
 <tr><td><b>Tents:</b></td><td>{$tents}</td></tr>
 <tr><td><b>Check-In Date:</b></td><td>{$start_date2}</td></tr>
