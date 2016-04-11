@@ -34,6 +34,8 @@ class money extends Core {
 		GROUP BY `t2_description`, `t2_bedname`
 		";
 
+		print "$sql";
+
 
 	}
 }
