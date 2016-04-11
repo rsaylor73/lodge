@@ -29,6 +29,8 @@ class money extends Core {
 		print "Test:<br>
 		Nightly Rate: $nightly_rate<br>
 		Nights: $nights<br>
+		Child 1: $row[child1_age]<br>
+		Child 2: $row[child2_age]<br>
 
 		";
 
