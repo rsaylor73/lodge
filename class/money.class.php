@@ -16,7 +16,9 @@ class money extends Core {
 			`c`.`last`											AS 't2_last',
 			`c`.`email`											AS 't2_email',
 			`i`.`roomID`,
-			`rs`.`reservation
+			`rs`.`reservationID`,
+			`rs`.`child1_age`,
+			`rs`.`child2_age`
 
 		FROM
 			`beds` b, `inventory` i, `locations` l, `rooms` r
