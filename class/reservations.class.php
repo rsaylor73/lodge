@@ -327,10 +327,10 @@ class reservations extends money {
 
 	public function child_age_map($value) {
 		switch ($value) {
-			case "0":
+			case "1":
 			$display = "0-6 years";
 			break;
-			case "1":
+			case "2":
 			$display = "7-15 years";
 			break;
 			case "3":
@@ -431,9 +431,11 @@ class reservations extends money {
 		$data['start_date'] = $_POST['start_date'];
 		$data['pax'] = $_POST['pax'];
 		$data['type'] = $_POST['type'];
-		//$data['childage1'] = $this->child_age_map($_POST['childage1']);
-		$data['childage1'] = $_POST['childage1'];
+		$data['childage1'] = $this->child_age_map($_POST['childage1']);
 		$data['childage2'] = $this->child_age_map($_POST['childage2']);
+		$data['childage1_form'] = $_POST['childage1'];
+		$data['childage2_form'] = $_POST['childage2'];
+
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {

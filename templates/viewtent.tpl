@@ -9,11 +9,15 @@
 <input type="hidden" name="tents2" value="{$tents}">
 <input type="hidden" name="nights" value="{$nights}">
 <input type="hidden" name="type" value="{$type}">
+<input type="hidden" name="childage1_form" value="{$childage1_form}">
+<input type="hidden" name="childage2_form" value="{$childage2_form}">
 <input type="submit" value="Back To Search Results" class="btn btn-success">
 </form>
 <br>
 
 <form action="reservenow" method="post">
+<input type="hidden" name="childage1_form" value="{$childage1_form}">
+<input type="hidden" name="childage2_form" value="{$childage2_form}">
 {$form_html}
 
 
