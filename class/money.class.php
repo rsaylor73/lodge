@@ -23,14 +23,16 @@ class money extends Core {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$nightly_rate = $row['nightly_rate'];
+			$child1_age = $row['child1_age'];
+			$child2_age = $row['child2_age'];
 		}
 		$nights = $this->get_reservation_nights($reservationID);
 
 		print "Test:<br>
 		Nightly Rate: $nightly_rate<br>
 		Nights: $nights<br>
-		Child 1: $row[child1_age]<br>
-		Child 2: $row[child2_age]<br>
+		Child 1: $child1_age<br>
+		Child 2: $child2_age<br>
 
 		";
 
