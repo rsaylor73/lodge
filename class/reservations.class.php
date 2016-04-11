@@ -347,7 +347,7 @@ class reservations extends money {
 			break;
 
 			case "2":
-				$fee = "3";
+				$fee = "2";
 			break;
 
 			case "3":
