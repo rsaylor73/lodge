@@ -340,6 +340,23 @@ class reservations extends money {
 		return $display;
 	}
 
+	public function child_age_fee($value) {
+		switch ($value) {
+			case "1":
+				$fee = "0";
+			break;
+
+			case "2":
+				$fee = "3";
+			break;
+
+			case "3":
+				$fee = "1";
+			break;
+		}
+		return $fee;
+	}
+
 	public function viewtent() {
 
 		$nights2 = $_POST['nights'] - 1;
@@ -442,6 +459,17 @@ class reservations extends money {
 			if ($row['adult_status'] == "avail") {
 				$total = $row['nightly_rate'] * $nights;
 
+				if ($_POST['childage1'] != "") {
+					$fee = $this->child_age_fee($_POST['childage1']);
+					$child_fee = ($row['nightly_rate'] * $fee) * $nights;
+				}
+				$total = $total + $child_fee;
+
+				if ($_POST['childage2'] != "") {
+					$fee = $this->child_age_fee($_POST['childage2']);
+					$child_fee = ($row['nightly_rate'] * $fee) * $nights;
+				}
+				$total = $total + $child_fee;
 
 
 				$html .= "<tr><td>$row[description]</td><td>$$total</td><td>$row[adult]</td><td>$row[children]</td><td> 
