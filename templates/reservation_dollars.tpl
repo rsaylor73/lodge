@@ -12,12 +12,12 @@
 <tr><td>Child 2 Nightly Rate ({$child2_age})</td><td>${$child2_rate}</td></tr>
 {/if}
 
-<tr><td>Number of nights:</td><td>{$nights}</td></tr>
+<tr><td>Number of Nights:</td><td>{$nights}</td></tr>
 <tr><td>Total Reservation:</td><td>${$total}</td></tr>
 </table>
 
 <h3>Transfer/Line Item Dollars</h3>
 
 
-<h3>Payments</h3>
+<h3>Payments <input type="button" value="Make A Payment" class="btn btn-success" onclick="document.location.href='payments/{$reservationID}'"></h3>
 

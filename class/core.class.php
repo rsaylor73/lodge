@@ -160,6 +160,8 @@ class Core {
       	$siteurl = $row['siteurl'];
       	$site_email = $row['site_email'];
       	$base_path = $row['base_path'];
+      	$authnet_login = $row['authnet_login'];
+      	$authnet_key = $row['authnet_key'];
                
       	// email headers - This is fine tuned, please do not modify
       	$header = "MIME-Version: 1.0\r\n";
@@ -175,9 +177,9 @@ class Core {
       	$data[] = $site_email;
       	$data[] = $header;
       	$data[] = $base_path;
-		$data[] = $identifier;
-		$data[] = $api_username;
-		$data[] = $api_password;
+      	$data[] = $authnet_login;
+      	$data[] = $authnet_key;
+
 
       return $data;
 	}
