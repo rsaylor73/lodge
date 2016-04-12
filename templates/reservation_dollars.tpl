@@ -1,5 +1,5 @@
 <br>
-<h3>Dollars</h3>
+<h3>Reservation Dollars</h3>
 
 <table class="table">
 <tr><td>Tent Nightly Rate (Adults):</td><td>${$nightly_rate}</td></tr>
@@ -15,4 +15,6 @@
 <tr><td>Number of nights:</td><td>{$nights}</td></tr>
 <tr><td>Total Reservation:</td><td>${$total}</td></tr>
 </table>
+
+<h3>Transfer/Line Item Dollars</h3>
 
