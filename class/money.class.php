@@ -47,9 +47,13 @@ class money extends Core {
 		$total = $adults + $child_amount1 + $child_amount2;
 
 		$data['adults_rate'] = $adults;
+		$data['nightly_rate'] = $nightly_rate;
 		$data['child1_rate'] = $child_amount1;
+		$data['child1_age'] = $age1;
 		$data['child2_rate'] = $child_amount2;
+		$data['child2_age'] = $age2;
 		$data['nights'] = $nights;
+
 
 		/*
 		print "Test:<br>

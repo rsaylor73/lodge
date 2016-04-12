@@ -992,12 +992,15 @@ class reservations extends money {
     			$data[$key2] = $value2;
     		}
     	}
-    	$data['test'] = "ok 3";
+    	$total = ($data['nightly_rate'] + $data['child1_rate'] + $data['child2_rate']) * $data['nights'];
+    	$data['total'] = $total;
+    	//$data['test'] = "ok 3";
 
+    	/*
     	print "<pre>";
     	print_r($data);
     	print "</pre>";
-
+		*/
       	return $data;
    	}
 
