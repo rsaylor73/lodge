@@ -34,14 +34,12 @@ class money extends Core {
 			$age1 = $this->child_age_map($child1_age);
 			$fee = $this->child_age_fee($child1_age);
 			$child_amount1 = ($nightly_rate/2)/$fee;
-			//print "Child 1 amount: $child_amount<br>";
 		}
 
 		if ($child2_age != "") {
 			$age2 = $this->child_age_map($child2_age);
 			$fee = $this->child_age_fee($child2_age);
 			$child_amount2 = ($nightly_rate/2)/$fee;
-			//print "Child 2 amount: $child_amount<br>";
 		}
 
 		$total = $adults + $child_amount1 + $child_amount2;
@@ -54,17 +52,13 @@ class money extends Core {
 		$data['child2_age'] = $age2;
 		$data['nights'] = $nights;
 
-
-		/*
-		print "Test:<br>
-		Nightly Rate: $nightly_rate<br>
-		Nights: $nights<br>
-		Child 1: $child1_age<br>
-		Child 2: $child2_age<br>
-
-		";
-		*/
-
 		return($data);
+	}
+
+	public function payments() {
+		$template = "payments.tpl";
+		$data['reservationID'] = $_GET['reservationID'];
+
+		$this->load_smarty($data,$template);
 	}
 }
