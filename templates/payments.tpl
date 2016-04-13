@@ -20,12 +20,12 @@
 <tr id="credit_card2" style="display:none"><td>
 	<i class="fa fa-cc-visa fa-3x" aria-hidden="true"></i>
 	<i class="fa fa-cc-mastercard fa-3x" aria-hidden="true"></i>
+	 </td><td><input type="text" name="cc_num" id="cc_num" size=20 placeholder="Credit card number" maxlength="16" {literal}pattern="[0-9]{16}"{/literal}></td></tr>
+<tr id="credit_card3" style="display:none"><td>Expiration Date (MM/YYYY):</td><td>
+	<input type="text" name="cc_month" id="cc_month" size=5 placeholder="Month" maxlength="2" {literal}pattern="[0-9]{2}"{/literal}> / 
+	<input type="text" name="cc_year" id="cc_year" size="5" placeholder="Year"  maxlength="4" {literal}pattern="[0-9]{4}"{/literal}></td></tr>
 
-	 </td><td><input type="text" name="cc_num" id="cc_num" size=20 placeholder="Credit card number"></td></tr>
-<tr id="credit_card3" style="display:none"><td>Expiration Date (MM/YYYY):</td><td><input type="text" name="cc_month" id="cc_month" size=5 placeholder="Month"> / 
-	<input type="text" name="cc_year" id="cc_year" size="5" placeholder="Year"></td></tr>
-
-<tr><td>Amount:</td><td>$<input type="text" name="payment_amount" size=20></td></tr>
+<tr><td>Amount:</td><td>$<input type="text" name="payment_amount" size=20 required></td></tr>
 
 
 <tr><td colspan="2"><input type="submit" value="Process Payment" class="btn btn-primary"></td></tr>
