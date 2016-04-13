@@ -25,7 +25,7 @@
 	<input type="text" name="cc_month" id="cc_month" size=5 placeholder="Month" maxlength="2" {literal}pattern="[0-9]{2}"{/literal}> / 
 	<input type="text" name="cc_year" id="cc_year" size="5" placeholder="Year"  maxlength="4" {literal}pattern="[0-9]{4}"{/literal}></td></tr>
 
-<tr><td>Amount:</td><td>$<input type="text" name="payment_amount" size=20 required></td></tr>
+<tr><td>Amount:</td><td>$<input type="text" name="payment_amount" size=20 {literal}pattern="[0-9.]"{/literal} required></td></tr>
 
 
 <tr><td colspan="2"><input type="submit" value="Process Payment" class="btn btn-primary"></td></tr>
