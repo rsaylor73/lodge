@@ -108,7 +108,6 @@ function turnon() {
 function swap() {
 	var t = document.getElementById("tents2");
 	var strTent = t.options[t.selectedIndex].value;
-	alert(strTent);
 	document.getElementById('tents').value = strTent;
 	//strTent.value = document.getElementById('tents').value;
 }
