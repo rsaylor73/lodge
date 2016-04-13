@@ -6,7 +6,7 @@
 
 <table class="table">
 <tr>
-	<td>Payment Type:</td><td><select name="payment_type" id="payment_type">
+	<td>Payment Type:</td><td><select name="payment_type" id="payment_type" onchange="get_payment_type()">
 		<option selected value="">--Select--</option>
 		<option value="1">Credit Card</option>
 		<option value="2">Check</option>
