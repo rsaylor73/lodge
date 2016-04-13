@@ -35,7 +35,7 @@
 
 
 
-	<select name="tents2" id="tents2" disabled>
+	<select name="tents2" id="tents2" disabled onchange="swap()">
 	<option selected>1</option>
 	<option>2</option>
 	<option>3</option>
@@ -103,6 +103,12 @@ function turnon() {
 		document.getElementById('pax').value='1';
 		document.getElementById('children').value='0';
 	}
+}
+
+function swap() {
+	var t = document.getElementById("tents2");
+	var strTent = t.options[e.selectedIndex].value;
+	document.getElementById('tents').value = strTent.value;
 }
 
 function get_min_pax(myform) {
