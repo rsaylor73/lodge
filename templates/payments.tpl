@@ -18,8 +18,8 @@
 
 <tr id="credit_card1" style="display:none"><td>Name on Card:</td><td><input type="text" name="cc_name" id="cc_name" size=20></td></tr>
 <tr id="credit_card2" style="display:none"><td>
-	<i class="fa fa-cc-visa" aria-hidden="true"></i>
-	<i class="fa fa-cc-mastercard" aria-hidden="true"></i>
+	<i class="fa fa-cc-visa fa-3x" aria-hidden="true"></i>
+	<i class="fa fa-cc-mastercard fa-3x" aria-hidden="true"></i>
 
 	 #:</td><td><input type="text" name="cc_num" id="cc_num" size=20></td></tr>
 <tr id="credit_card3" style="display:none"><td>Expiration Date (MM/YYYY):</td><td><input type="text" name="cc_month" id="cc_month" size=5> / 
