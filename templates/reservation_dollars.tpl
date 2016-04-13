@@ -13,6 +13,7 @@
 {/if}
 
 <tr><td>Number of Nights:</td><td>{$nights}</td></tr>
+<tr><td>Number of Tents:</td><td>{$tents}</td></tr>
 <tr><td>Total Reservation:</td><td>${$total}</td></tr>
 </table>
 
