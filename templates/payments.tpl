@@ -24,7 +24,7 @@
 <tr id="credit_card3" style="display:none"><td>Expiration Date (MM/YYYY):</td><td>
 	<input type="text" name="cc_month" id="cc_month" size=5 placeholder="Month" maxlength="2" {literal}pattern="[0-9]{2}"{/literal}> / 
 	<input type="text" name="cc_year" id="cc_year" size="5" placeholder="Year"  maxlength="4" {literal}pattern="[0-9]{4}"{/literal}></td></tr>
-<tr id="cred_card4" style="display:none"><td>CVV Number:</td><td><input type="text" name="cvv" id="cvv" {literal}patern="[0-9]{3}"{/literal}</td></td>
+<tr id="credit_card4" style="display:none"><td>CVV Number:</td><td><input type="text" name="cvv" id="cvv" {literal}patern="[0-9]{3}"{/literal}</td></td>
 
 <tr><td>Amount:</td><td>$<input type="text" name="payment_amount" size=20 onkeypress="return isNumber(event)" required></td></tr>
 
