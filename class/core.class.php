@@ -162,6 +162,7 @@ class Core {
       	$base_path = $row['base_path'];
       	$authnet_login = $row['authnet_login'];
       	$authnet_key = $row['authnet_key'];
+      	$authnet_testmode = $row['authnet_testmode'];
                
       	// email headers - This is fine tuned, please do not modify
       	$header = "MIME-Version: 1.0\r\n";
@@ -179,6 +180,7 @@ class Core {
       	$data[] = $base_path;
       	$data[] = $authnet_login;
       	$data[] = $authnet_key;
+      	$data[] = $authnet_testmode;
 
 
       return $data;

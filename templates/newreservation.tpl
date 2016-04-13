@@ -32,6 +32,9 @@
 
 	<input type="hidden" name="tents" id="tents" 
 	{if $post_tents ne ""} value="{$post_tents}" {else} value="1" {/if}>
+
+
+
 	<select name="tents2" id="tents2" disabled>
 	<option selected>1</option>
 	<option>2</option>
@@ -48,7 +51,7 @@
 	{if $post_tents ne ""}
 		<option selected>{$post_tents}</option>
 	{/if}
-	</select> <div id="min_pax" style="display:inline"></div></td></tr>
+	</select> <input type="checkbox" name="or" onclick="document.getElementById('tent2').disabled='false'"> Override <div id="min_pax" style="display:inline"></div></td></tr>
 <tr><td>Number of Nights:</td><td colspan="3"><select name="nights"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option>
 	{if $post_nights ne ""}<option selected>{$post_nights}</option>{/if}</select></td></tr>
 
