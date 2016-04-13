@@ -57,6 +57,9 @@ function isNumber(evt) {
     if (charCode > 31 && (charCode < 46 || charCode > 57)) {
         return false;
     }
+    if (charCode == 47) {
+    	return false;
+    }
     return true;
 }
 
