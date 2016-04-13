@@ -30,13 +30,13 @@ class money extends Core {
 
 		$adults = $nightly_rate * $nights;
 
-		if ($child1_age != "") {
+		if ($child1_age > 0) {
 			$age1 = $this->child_age_map($child1_age);
 			$fee = $this->child_age_fee($child1_age);
 			$child_amount1 = ($nightly_rate/2)/$fee;
 		}
 
-		if ($child2_age != "") {
+		if ($child2_age > 0) {
 			$age2 = $this->child_age_map($child2_age);
 			$fee = $this->child_age_fee($child2_age);
 			$child_amount2 = ($nightly_rate/2)/$fee;
