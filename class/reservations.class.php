@@ -926,6 +926,27 @@ class reservations extends money {
 		return $counter;
 	}
 
+	public function get_reservation_tents($reservationID) {
+		$sql = "
+		SELECT
+			`i`.*
+
+		FROM
+			`beds` b, `inventory` i
+		
+		WHERE
+			`b`.`reservationID` = '$reservationID'
+			AND `b`.`inventoryID` = `i`.`inventoryID`
+
+		GROUP BY `i`.`roomID`
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$counter++;
+		}
+		return $counter;
+	}
+
     public function reservation_guests($reservationID) {
 		// Tab 2
 		
