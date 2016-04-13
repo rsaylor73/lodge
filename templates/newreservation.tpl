@@ -109,7 +109,8 @@ function swap() {
 	var t = document.getElementById("tents2");
 	var strTent = t.options[t.selectedIndex].value;
 	alert(strTent);
-	document.getElementById('tents').value = strTent.value;
+	//document.getElementById('tents').value = strTent.value;
+	strTent.value = document.getElementById('tents').value;
 }
 
 function get_min_pax(myform) {
