@@ -528,10 +528,6 @@ class reservations extends money {
          			AND `r`.`id` = '$value2'
 				";
 
-print "<pre>";
-print "$sql";
-print "</pre>";
-
 				$result = $this->new_mysql($sql);
 				while ($row = $result->fetch_assoc()) {
 					if ($row['status'] != "avail") {
