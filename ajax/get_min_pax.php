@@ -33,7 +33,6 @@ if ($check == "FALSE") {
 
 	// get min number of children
 	$child = "0";
-	print "Test $child<br>";
 	$sql = "
 	SELECT
 		`r`.`children`
@@ -52,7 +51,6 @@ if ($check == "FALSE") {
 			$child = $row['children'];
 		}
 	}
-	print "Test: $child<br>";
 
 	// get total adult pax of a lodge
 	$sql = "
