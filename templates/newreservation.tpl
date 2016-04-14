@@ -6,7 +6,7 @@
 <form method="post" action="viewtent" name="myform">
 <table class="table">
 <tr><td width="200">Select Lodge:</td><td colspan="3"><select name="lodge" id="lodge" required onchange="get_min_pax(this.form);turnon();">{$lodge}</select></td></tr>
-<tr><td>Adults:</td><td colspan="3"><select name="pax" id="pax" required onchange="get_min_tent(this.form)">{$pax}</select> <div id="min_pax" style="display:inline"></div></td></tr>
+<tr><td>Adults:</td><td colspan="3"><select name="pax" id="pax" required onchange="get_min_tent(this.form);show_children();">{$pax}</select> <div id="min_pax" style="display:inline"></div></td></tr>
 <tr id="child0"><td>Children:</td><td><select name="children" id="children" onchange="do_child()"><option>0</option><option>1</option><option>2</option>{if $post_children ne ""}<option selected>{$post_children}</option></select>{/if}</td></tr>
 <tr><td></td>
 	<td id="child1" style="display:none">
@@ -57,7 +57,7 @@
 
 <tr><td>Type:</td><td><select name="type"><option value="">Any</option>{$type}</select></td></tr>
 <tr><td>Check-In Date:</td><td colspan="3"><input type="text" name="start_date" id="start_date" value="{$post_start_date}" required></td></tr>
-<tr><td colspan=5><input type="submit" value="Search Rooms" class="btn btn-primary"></td></tr>
+<tr><td colspan=5><input type="submit" value="Search Rooms" class="btn btn-primary">&nbsp;&nbsp;<input type="button" value="Reset" class="btn btn-warning" onclick="document.location.href='newreservation'"></td></tr>
 </table>
 
 <div id="null"></div>
