@@ -56,9 +56,11 @@
 	{if $post_nights ne ""}<option selected>{$post_nights}</option>{/if}</select></td></tr>
 
 <tr><td>Type:</td><td><select name="type"><option value="">Any</option>{$type}</select> <font color=blue><br>Children are welcome in the Family class tents</font></td></tr>
-<tr><td>Check-In Date:</td><td colspan="3"><input type="text" name="start_date" id="start_date" value="{$post_start_date}" required></td></tr>
+<tr><td>Check-In Date:</td><td colspan="3"><input type="text" name="start_date" id="start_date" value="{$post_start_date}" required onchange="quick_look(this.form)"></td></tr>
 <tr><td colspan=5><input type="submit" value="Search Rooms" class="btn btn-primary">&nbsp;&nbsp;<input type="button" value="Reset" class="btn btn-warning" onclick="document.location.href='newreservation'"></td></tr>
 </table>
+
+<div id="quick_look"></div>
 
 <div id="null"></div>
 
@@ -122,6 +124,14 @@ function show_children() {
 	} else {
 		document.getElementById('child0').style.display='table-row';
 	}
+}
+
+function quick_look(myform) {
+	$.get('ajax/quick_look.php',
+	$(myform).serialize(),
+	function(php_msg) {
+	$("#quick_look").html(php_msg);
+	});
 }
 
 function get_min_pax(myform) {
