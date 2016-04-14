@@ -98,6 +98,8 @@ if ($check == "FALSE") {
 	if ($adults != "") {
 		$adult1 = $adult - $adults;
 		print "<br><font color=blue>Max $adult1 Adults <b>OR</b> $adults Adults and $child Children</font>";
+	} else {
+		print "<br><font color=red>ERROR: No rooms are defined.</font>"
 	}
 }
 ?>
