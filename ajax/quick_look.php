@@ -13,7 +13,7 @@ if ($check == "FALSE") {
 } else {
 
 
-$rand = rand(200);
+$rand = rand(200,2000);
 print "Test $rand<br>";
 
 }
