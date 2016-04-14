@@ -7,7 +7,7 @@
 <table class="table">
 <tr><td width="200">Select Lodge:</td><td colspan="3"><select name="lodge" id="lodge" required onchange="get_min_pax(this.form);turnon();">{$lodge}</select></td></tr>
 <tr><td>Adults:</td><td colspan="3"><select name="pax" id="pax" required onchange="get_min_tent(this.form)">{$pax}</select> <div id="min_pax" style="display:inline"></div></td></tr>
-<tr><td>Children:</td><td><select name="children" id="children" onchange="do_child()"><option>0</option><option>1</option><option>2</option>{if $post_children ne ""}<option selected>{$post_children}</option></select>{/if}</td></tr>
+<tr id="child0"><td>Children:</td><td><select name="children" id="children" onchange="do_child()"><option>0</option><option>1</option><option>2</option>{if $post_children ne ""}<option selected>{$post_children}</option></select>{/if}</td></tr>
 <tr><td></td>
 	<td id="child1" style="display:none">
 		<select name="childage1" id="childage1">
@@ -110,6 +110,18 @@ function swap() {
 	var strTent = t.options[t.selectedIndex].value;
 	document.getElementById('tents').value = strTent;
 	//strTent.value = document.getElementById('tents').value;
+}
+
+function show_children() {
+	var p = 2;
+	var k = document.getElementById('pax');
+	var strKids = k.options[k.selectedIndex].value;
+	if (strKids > p) {
+		document.getElementById('child0').style.display='none';
+		document.getElementById('children').value = 0;
+	} else {
+		document.getElementById('child0').style.display='table-row';
+	}
 }
 
 function get_min_pax(myform) {
