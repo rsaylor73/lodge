@@ -97,7 +97,7 @@ if ($check == "FALSE") {
 
 	if ($adults != "") {
 		$adult1 = $adult - $adults;
-		print "<br><font color=blue><b>Max $adult1 Adults OR $adult Adults and $child Children</b></font>";
+		print "<br><font color=blue>Max $adult1 Adults OR $adults Adults and $child Children</font>";
 	}
 }
 ?>
