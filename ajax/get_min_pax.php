@@ -79,8 +79,24 @@ if ($check == "FALSE") {
 		$child2 = $row['children'];
 	}
 
+	$sql = "
+	SELECT
+		SUM(`r`.`beds`) AS 'total_pax'
+
+	FROM
+		`rooms` r
+	
+	WHERE
+		`r`.`locationID` = '$_GET[lodge]'
+
+	";
+	$result = $core->new_mysql($sql);
+	while ($row = $result->fetch_assoc()) {
+		$adult = $row['total_pax'];
+	}
+
 	if ($adults != "") {
-		print "<br><font color=blue><b>Limit $adults2 - $adults adults and $child2 - $child children per tent</b></font>";
+		print "<br><font color=blue><b>Max $adult</b></font>";
 	}
 }
 ?>
