@@ -11,7 +11,6 @@ $check = $core->check_login();
 if ($check == "FALSE") {
 	print "<br><font color=red>Error: you must log back in.</font><br>";
 } else {
-	$child = "0";
 
 	// get max number of adults per tent
 	$sql = "
@@ -33,6 +32,8 @@ if ($check == "FALSE") {
 
 
 	// get min number of children
+	$child = "0";
+	print "Test $child<br>";
 	$sql = "
 	SELECT
 		`r`.`children`
@@ -49,6 +50,7 @@ if ($check == "FALSE") {
 	while ($row = $result->fetch_assoc()) {
 		$child = $row['children'];
 	}
+	print "Test: $child<br>";
 
 	// get total adult pax of a lodge
 	$sql = "
