@@ -56,7 +56,7 @@
 	{if $post_nights ne ""}<option selected>{$post_nights}</option>{/if}</select></td></tr>
 
 <tr><td>Type:</td><td><select name="type"><option value="">Any</option>{$type}</select> <font color=blue><br>Children are welcome in the Family class tents</font></td></tr>
-<tr><td>Check-In Date:</td><td colspan="3"><input type="text" name="start_date" id="start_date" value="{$post_start_date}" required onchange="quick_look(this.form)"> 
+<tr><td>Check-In Date:</td><td colspan="3"><input type="text" name="start_date" id="start_date" value="{$post_start_date}" required> 
 	&nbsp;<button class="btn btn-primary" onclick="quick_look(this.form);return false;"><i class="fa fa-refresh"></i></button>
 
 	</td></tr>
