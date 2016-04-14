@@ -48,7 +48,9 @@ if ($check == "FALSE") {
 	";
 	$result = $core->new_mysql($sql);
 	while ($row = $result->fetch_assoc()) {
-		$child = $row['children'];
+		if ($row['children'] != "") {
+			$child = $row['children'];
+		}
 	}
 	print "Test: $child<br>";
 
