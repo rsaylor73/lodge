@@ -69,10 +69,29 @@ if ($check == "FALSE") {
 		$adult = $row['total_pax'];
 	}
 
+	// get total children per lodge
+	$sql = "
+	SELECT
+		SUM(`r`.`children`) AS 'total_children'
+
+	FROM
+		`rooms` r
+	
+	WHERE
+		`r`.`locationID` = '$_GET[lodge]'
+
+	";
+	$result = $core->new_mysql($sql);
+	while ($row = $result->fetch_assoc()) {
+		$total_child = $row['total_children'];
+	}
+
+	$k_tents = floor($total_child / $adults);
+
 	if ($adults != "") {
-		$adult1 = $adult - $adults;
+		$adult1 = $adult - ($adults * $k_tents);
 		if ($child == "0") {
-			$adult1 = $adult1 + $adults;
+			$adult1 = $adult1 + ($adults * $k_tents);
 			print "<br><font color=blue>Max $adult1 Adults</font>";
 		} else {
 			print "<br><font color=blue>Max $adult1 Adults <b>OR</b> $adults Adults and $child Children</font>";
