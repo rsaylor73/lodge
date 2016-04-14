@@ -11,6 +11,9 @@ $check = $core->check_login();
 if ($check == "FALSE") {
 	print "<br><font color=red>Error: you must log back in.</font><br>";
 } else {
+	$child = "0";
+
+	// get max number of adults per tent
 	$sql = "
 	SELECT
 		`r`.`beds`
@@ -28,23 +31,8 @@ if ($check == "FALSE") {
 		$adults = $row['beds'];
 	}
 
-	$sql = "
-	SELECT
-		`r`.`beds`
 
-	FROM
-		`rooms` r
-
-	WHERE
-		`r`.`locationID` = '$_GET[lodge]'
-
-	ORDER BY `r`.`beds` ASC LIMIT 1
-	";
-	$result = $core->new_mysql($sql);
-	while ($row = $result->fetch_assoc()) {
-		$adults2 = $row['beds'];
-	}
-
+	// get min number of children
 	$sql = "
 	SELECT
 		`r`.`children`
@@ -62,23 +50,7 @@ if ($check == "FALSE") {
 		$child = $row['children'];
 	}
 
-	$sql = "
-	SELECT
-		`r`.`children`
-
-	FROM
-		`rooms` r
-
-	WHERE
-		`r`.`locationID` = '$_GET[lodge]'
-
-	ORDER BY `r`.`children` ASC LIMIT 1
-	";
-	$result = $core->new_mysql($sql);
-	while ($row = $result->fetch_assoc()) {
-		$child2 = $row['children'];
-	}
-
+	// get total adult pax of a lodge
 	$sql = "
 	SELECT
 		SUM(`r`.`beds`) AS 'total_pax'
@@ -97,7 +69,12 @@ if ($check == "FALSE") {
 
 	if ($adults != "") {
 		$adult1 = $adult - $adults;
-		print "<br><font color=blue>Max $adult1 Adults <b>OR</b> $adults Adults and $child Children</font>";
+		if ($child == "0") {
+			$adult1 = $adult1 + $adults;
+			print "<br><font color=blue>Max $adult1 Adults</font>";
+		} else {
+			print "<br><font color=blue>Max $adult1 Adults <b>OR</b> $adults Adults and $child Children</font>";
+		}
 	} else {
 		print "<br><font color=red>ERROR: No rooms are defined.</font>";
 	}
