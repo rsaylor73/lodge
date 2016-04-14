@@ -96,7 +96,7 @@ if ($check == "FALSE") {
 	}
 
 	if ($adults != "") {
-		print "<br><font color=blue><b>Max $adult</b></font>";
+		print "<font color=blue><b>Max $adult</b></font>";
 	}
 }
 ?>
