@@ -57,7 +57,7 @@
 
 <tr><td>Type:</td><td><select name="type"><option value="">Any</option>{$type}</select> <font color=blue><br>Children are welcome in the Family class tents</font></td></tr>
 <tr><td>Check-In Date:</td><td colspan="3"><input type="text" name="start_date" id="start_date" value="{$post_start_date}" required onchange="quick_look(this.form)"> 
-	<button class="btn btn-primary" onclick="quick_look(this.form)"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+	&nbsp;<button class="btn btn-primary" onclick="quick_look(this.form)"><i class="fa fa-refresh" aria-hidden="true"></i></button>
 
 	</td></tr>
 <tr><td colspan=5><input type="submit" value="Search Rooms" class="btn btn-primary">&nbsp;&nbsp;<input type="button" value="Reset" class="btn btn-warning" onclick="document.location.href='newreservation'"></td></tr>
