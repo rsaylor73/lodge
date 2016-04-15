@@ -83,7 +83,7 @@ if ($check == "FALSE") {
 			print "<font color=red>Sorry, but your request of <b>$_GET[tents]</b> tent(s) is not available. Please change your search terms and try again.</font>";
 		}
 
-		$core->calendar_table("04 2016");
+		$core->calendar_table("4 2016");
 
 }
 ?>
