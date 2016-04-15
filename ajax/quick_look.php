@@ -89,7 +89,7 @@ if ($check == "FALSE") {
 		foreach ($_GET as $key=>$value) {
 			$_POST[$key] = $value;
 		}
-		$_POST['$end_date'] = $end_date2; 
+		$_POST['end_date'] = $end_date2; 
 		$core->searchinventory();
 
 }
