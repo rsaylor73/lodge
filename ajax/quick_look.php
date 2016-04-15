@@ -73,10 +73,15 @@ if ($check == "FALSE") {
 		HAVING total_adult_beds >= '$adults' $child_sql
 		";
 
-		print "<pre>";
-		print "$sql";
-		print "</pre>";
-
+		$result = $core->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$counter++;
+		}
+		if ($counter >= $_GET['tents']) {
+			print "<font color=\"#1D9D73\"><i class=\"fa fa-check\" aria-hidden=\"true\"></i> Your request for <b>$_GET[tents]</b> tent(s) is available.</font>";
+		} else {
+			print "<font color=red>Sorry, but your request of <b>$_GET[tents]</b> tent(s) is not available. Please change your search terms and try again.</font>";
+		}
 
 }
 ?>
