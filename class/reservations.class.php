@@ -1033,11 +1033,9 @@ class reservations extends money {
                 	$html .= "
 					<td bgcolor=$color><label>
 					$mday<br>
-					<input type=\"checkbox\" name=\"data_$day\" value=\"checked\" onclick=\"document.getElementById('viewtent').style.display='inline'\">
-					<!--<a href=\"viewtent/$_POST[lodge]/$_POST[pax]/$day/$start_date/$end_date\">$mday</a>-->
 					</label></td>";
 				} else {
-               		$html .= "<td bgcolor=$color><label>$mday<br><input type=\"checkbox\" disabled></label></td>";
+               		$html .= "<td bgcolor=$color><label>$mday<br></label></td>";
 				}
             	$day_counter++;
          		$mday++;
