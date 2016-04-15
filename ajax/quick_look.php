@@ -17,6 +17,8 @@ if ($check == "FALSE") {
 
 		$start_date = str_replace("-","",$_GET['start_date']);
 		$end_date = date("Ymd", strtotime($start_date ."+ $nights2 days"));
+		$end_date2 = date("Ymd", strtotime($start_date ."+ 60 days"));
+
 
 
 		$adults = $_GET['pax'] * $nights;
@@ -87,6 +89,7 @@ if ($check == "FALSE") {
 		foreach ($_GET as $key=>$value) {
 			$_POST[$key] = $value;
 		}
+		$_POST['$end_date'] = $end_date2; 
 		$core->searchinventory();
 
 }
