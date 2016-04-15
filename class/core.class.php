@@ -19,7 +19,7 @@ class Core {
 
 	public function load_smarty($vars,$template) {
 		// loads the PHP Smarty class
-		require_once('libs/Smarty.class.php');
+		require_once('/home/livenet/www/lodge/libs/Smarty.class.php');
 		$smarty=new Smarty();
 		$smarty->setTemplateDir('templates/');
 		$smarty->setCompileDir('templates_c/');
