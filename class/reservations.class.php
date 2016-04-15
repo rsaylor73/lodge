@@ -138,6 +138,7 @@ class reservations extends money {
 		HAVING 
 			total_adult_beds >= '$_POST[pax]' AND total_child_beds >= '$_POST[children]'
 		";
+		print "SQL:<br>$sql<br>";
 
 		$result = $this->new_mysql($sql);
 
