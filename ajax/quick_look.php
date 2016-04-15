@@ -12,6 +12,12 @@ if ($check == "FALSE") {
 	print "<br><font color=red>Error: you must log back in.</font><br>";
 } else {
 
+		$nights = $_GET['nights'];
+		$nights2 = $_GET['nights'] - 1;
+
+		$start_date = str_replace("-","",$_GET['start_date']);
+		$end_date = date("Ymd", strtotime($start_date ."+ $nights2 days"));
+
 
 		$adults = $_GET['pax'] * $nights;
 		if ($_GET['children'] > 0) {
@@ -57,7 +63,7 @@ if ($check == "FALSE") {
 		LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail'
 
 		WHERE
-			`i`.`locationID` = '$_POST[lodge]' 
+			`i`.`locationID` = '$_GET[lodge]' 
 			AND `i`.`date_code` BETWEEN '$start_date' AND '$end_date'
 			AND `i`.`roomID` = `r`.`id`
 			$type
