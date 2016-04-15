@@ -15,6 +15,11 @@ if ($check == "FALSE") {
 
 $rand = rand(200,2000);
 print "Test $rand<br>";
+print "<pre>";
+print_r($_GET);
+print_r($_POST);
+print "</pre>";
+
 
 }
 ?>
