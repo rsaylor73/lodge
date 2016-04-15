@@ -83,7 +83,11 @@ if ($check == "FALSE") {
 			print "<font color=red>Sorry, but your request of <b>$_GET[tents]</b> tent(s) is not available. Please change your search terms and try again.</font>";
 		}
 
-		$core->calendar_table("April 2016");
+		//$core->calendar_table("April 2016");
+		foreach ($_GET as $key=>$value) {
+			$_POST[$key] = $value;
+		}
+		$core->searchinventory();
 
 }
 ?>
