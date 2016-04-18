@@ -999,6 +999,7 @@ class reservations extends money {
 	    $day_counter       = 0;
 
 	    // USE HEREDOC NOTATION TO START THE HTML DOCUMENT
+	    /*
 	    $html  = '
 		<style type="text/css">
 		caption { text-align:left; }
@@ -1007,7 +1008,9 @@ class reservations extends money {
 		td      { color:dimgray; border:1px solid gainsboro; }
 		td.nul  {                border:1px solid white;     }
 		</style>
-
+		*/
+		
+		$html = '
 		<table>
 		<caption>'.$caption.'</caption>
 		<tr class="cal">
