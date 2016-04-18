@@ -63,7 +63,7 @@
 <tr><td colspan=5><input type="submit" value="Search Rooms" class="btn btn-primary">&nbsp;&nbsp;<input type="button" value="Reset" class="btn btn-warning" onclick="document.location.href='newreservation'"></td></tr>
 </table>
 
-<div id="quick_look"></div>
+<div id="quick_look" style="display:inline"></div>
 
 <div id="null"></div>
 
