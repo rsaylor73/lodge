@@ -71,9 +71,9 @@ function checkboxes(){
     	document.getElementById('booknow').style.display='none';
     	document.getElementById('waiting').style.display='inline';
         if (count > max) {
-            displayocument.getElementById('toomuch').style.display='inline';
+            document.getElementById('toomuch').style.display='inline';
         } else {
-            displayocument.getElementById('toomuch').style.display='none';
+            document.getElementById('toomuch').style.display='none';
         }
     }
 }}
