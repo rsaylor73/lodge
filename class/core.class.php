@@ -19,12 +19,12 @@ class Core {
 
 	public function load_smarty($vars,$template) {
 		// loads the PHP Smarty class
-		require_once('libs/Smarty.class.php');
+		require_once(PATH.'/libs/Smarty.class.php');
 		$smarty=new Smarty();
-		$smarty->setTemplateDir('templates/');
-		$smarty->setCompileDir('templates_c/');
-		$smarty->setConfigDir('configs/');
-		$smarty->setCacheDir('cache/');
+		$smarty->setTemplateDir(PATH.'/templates/');
+		$smarty->setCompileDir(PATH.'/templates_c/');
+		$smarty->setConfigDir(PATH.'/configs/');
+		$smarty->setCacheDir(PATH.'/cache/');
 		if (is_array($vars)) {
 			foreach ($vars as $key=>$value) {
 				$smarty->assign($key,$value);

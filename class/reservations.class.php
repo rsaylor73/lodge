@@ -120,25 +120,6 @@ class reservations extends money {
 		}
 
 		$sql = "
-		SELECT
-			COUNT(`b`.`status`) AS 'total_beds'
-
-		FROM
-			`inventory` i, `beds` b
-
-		WHERE
-			`i`.`locationID` = '$_POST[lodge]'
-			AND `i`.`date_code` BETWEEN '$start_date' AND '$end_date'
-			AND `i`.`inventoryID` = `b`.`inventoryID`
-			AND `b`.`status` = 'avail'
-
-		GROUP BY `b`.`status`
-
-		HAVING 
-			total_beds >= '$_POST[pax]'
-		";
-
-		$sql = "
 		SELECT 
 			COUNT(`a`.`status`) AS 'total_adult_beds',
 			COUNT(`c`.`status`) AS 'total_child_beds'
@@ -160,24 +141,12 @@ class reservations extends money {
 
 		$result = $this->new_mysql($sql);
 
-		if ($_SESSION['reservationID'] != "") {
-			$data['reservationID'] = $_SESSION['reservationID'];
-		}
-
 		while ($row = $result->fetch_assoc()) {
 			$found = "1";
 			// build calendar to show # rooms available for each day
-	     	$this->load_smarty($data,'reservations_header.tpl');
+	     	//$this->load_smarty($data,'reservations_header.tpl');
 
 			$months = $this->getMonthsInRange($_POST['start_date'],$_POST['end_date']);
-			print "<form name=\"myform\" method=\"post\" action=\"viewtent\">
-			<input type=\"hidden\" name=\"lodge\" value=\"$_POST[lodge]\">
-			<input type=\"hidden\" name=\"pax\" value=\"$_POST[pax]\">
-			<input type=\"hidden\" name=\"children\" value=\"$_POST[children]\">
-			<input type=\"hidden\" name=\"nights\" value=\"$_POST[nights]\">
-			<input type=\"hidden\" name=\"tents\" value=\"$_POST[tents]\">
-			
-			";
 
 			print "<table class=\"table\">
 			<tr>";
@@ -194,46 +163,12 @@ class reservations extends money {
 			}
 			print "</tr></table>";
 
-			print "<div id=\"viewtent\" style=\"display:none\">
-				<input type=\"submit\" value=\"Select Room\" class=\"btn btn-primary\">
-				</div>
-			";
-
-			print "</form>";
-			// ajax
 			print '
 			</div>
 			';
 
 			// end ajax
-         	$this->load_smarty($null,'reservations_footer.tpl');
-		}
-		if ($found != "1") {
-			// display search form if no inventory found
-	    	$options = "<option value=\"\" selected>Select Lodge</option>";
-   	   		$sql = "SELECT `id`,`name` FROM `locations` WHERE `active` = 'Yes'";
-	      	$result = $this->new_mysql($sql);
-   	   		while ($row = $result->fetch_assoc()) {
-				if ($_POST['lodge'] == $row['id']) {
-					$options .= "<option selected value=\"$row[id]\">$row[name]</option>";
-				} else {
-		         $options .= "<option value=\"$row[id]\">$row[name]</option>";
-				}
-   	   		}
-	      	$data['lodge'] = $options;
-	      	for ($i=1; $i < 30; $i++) {
-				if ($_POST['pax'] == $i) {
-					$pax .= "<option selected value=\"$i\">$i</option>";
-				} else {
-		         	$pax .= "<option value=\"$i\">$i</option>";
-				}
-	      	}
-	      	$data['pax'] = $pax;
-			$data['start_date'] = $_POST['start_date'];
-			$data['end_date'] = $_POST['end_date'];
-			$data['msg'] = "<font color=red><br>Sorry, we did not locate any inventory that matched your search criteria.</b></font><br>";
-	      	$template = "newreservation.tpl";
-	      	$this->load_smarty($data,$template);
+         	//$this->load_smarty($null,'reservations_footer.tpl');
 		}
 	}
 
@@ -1114,11 +1049,9 @@ class reservations extends money {
                 	$html .= "
 					<td bgcolor=$color><label>
 					$mday<br>
-					<input type=\"checkbox\" name=\"data_$day\" value=\"checked\" onclick=\"document.getElementById('viewtent').style.display='inline'\">
-					<!--<a href=\"viewtent/$_POST[lodge]/$_POST[pax]/$day/$start_date/$end_date\">$mday</a>-->
 					</label></td>";
 				} else {
-               		$html .= "<td bgcolor=$color><label>$mday<br><input type=\"checkbox\" disabled></label></td>";
+               		$html .= "<td bgcolor=$color><label>$mday<br></label></td>";
 				}
             	$day_counter++;
          		$mday++;
