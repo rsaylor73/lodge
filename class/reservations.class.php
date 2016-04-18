@@ -991,6 +991,8 @@ class reservations extends money {
 				";
 			}
 
+			print "Test: $row[t2_bedname]<br>";
+
 			switch($row['t2_bedname']) {
 				case "Child1":
 				$bed_name = "Child 1";
