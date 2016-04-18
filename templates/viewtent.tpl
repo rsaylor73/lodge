@@ -55,6 +55,7 @@
 
 <script>
 function checkboxes(){
+    var max = {$tents};
     var inputElems = document.getElementsByTagName("input"),
     count = 0;
     for (var i=0; i<inputElems.length; i++) {
@@ -69,7 +70,11 @@ function checkboxes(){
     } else {
     	document.getElementById('booknow').style.display='none';
     	document.getElementById('waiting').style.display='inline';
-        document.getElementById('toomuch').style.display='inline';
+        if (count > max) {
+            displayocument.getElementById('toomuch').style.display='inline';
+        } else {
+            displayocument.getElementById('toomuch').style.display='none';
+        }
     }
 }}
 </script>
