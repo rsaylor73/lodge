@@ -17,18 +17,22 @@
 	{/if}
 		<select name="childage1" id="childage1">
 		<option value="">Child 1 Age?</option>
-		<option value="1">0 - 6</option>
-		<option value="2">7 - 15</option>
-		<option value="3">16+</option>
+		<option value="1" {if $childage1 eq "1"}selected{/if}>0 - 6</option>
+		<option value="2" {if $childage1 eq "2"}selected{/if}>7 - 15</option>
+		<option value="3" {if $childage1 eq "3"}selected{/if}>16+</option>
 		</select>
 	</td>
 
+	{if $childage2 ne ""}
+	<td id="child2">
+	{else}
 	<td id="child2" style="display:none">
+	{/if}
 		<select name="childage2" id="childage2">
 		<option value="">Child 2 Age?</option>
-		<option value="1">0 - 6</option>
-		<option value="2">7 - 15</option>
-		<option value="3">16+</option>
+		<option value="1" {if $childage2 eq "1"}selected{/if}>0 - 6</option>
+		<option value="2" {if $childage1 eq "2"}selected{/if}>7 - 15</option>
+		<option value="3" {if $childage1 eq "3"}selected{/if}>16+</option>
 		</select>
 	</td>
 </tr>
