@@ -44,6 +44,11 @@ class reservations extends money {
 		$data['childage1'] = $_POST['childage1'];
 		$data['childage2'] = $_POST['childage2'];
 
+		print "<pre>";
+		print_r($_POST);
+		print "</pre>";
+		
+
 		$sql = "SELECT * FROM `roomtype` ORDER BY `type` ASC";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
