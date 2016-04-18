@@ -41,13 +41,9 @@ class reservations extends money {
 		$data['post_children'] = $_POST['children'];
 		$data['post_tents'] = $_POST['tents2'];
 		$data['post_nights'] = $_POST['nights'];
-		$data['childage1'] = $_POST['childage1'];
-		$data['childage2'] = $_POST['childage2'];
+		$data['childage1'] = $_POST['childage1_form'];
+		$data['childage2'] = $_POST['childage2_form'];
 
-		print "<pre>";
-		print_r($_POST);
-		print "</pre>";
-		
 
 		$sql = "SELECT * FROM `roomtype` ORDER BY `type` ASC";
 		$result = $this->new_mysql($sql);
