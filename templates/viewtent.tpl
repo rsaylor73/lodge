@@ -38,8 +38,8 @@
 <tr><td><b>Check-Out Date:</b></td><td>{$end_date2}</td></tr>
 </table>
 
-<br><b>Please select {$tents} tents. Click on the toggle button in the select column to pick a tent.</b>
-<div id="toomuch" style="display:none"><font color=red>You have selected more then the number of tents requested.</font></div>
+<br><b>Click on the toggle button and select {$tents} tent(s).</b>
+<div id="toomuch" style="display:none"><font color=red><br><b>You have selected more then the number of tents requested.</b></font></div>
 <table class="table">
 	<tr>
 		<td><b>Tent</b></td><td><b>Total</b></td><td><b>Adult(s)</b></td><td><b>Children</b></td><td><b>Select</b></td>
