@@ -9,7 +9,12 @@
 <tr><td>Adults:</td><td colspan="3"><select name="pax" id="pax" required onchange="get_min_tent(this.form);show_children();">{$pax}</select> <div id="min_pax" style="display:inline"></div></td></tr>
 <tr id="child0"><td>Children:</td><td><select name="children" id="children" onchange="do_child()"><option>0</option><option>1</option><option>2</option>{if $post_children ne ""}<option selected>{$post_children}</option></select>{/if}</td></tr>
 <tr><td></td>
+
+	{if $childage1 ne ""}
 	<td id="child1" style="display:none">
+	{else}
+	<td id="child1" style="display:none">
+	{/if}
 		<select name="childage1" id="childage1">
 		<option value="">Child 1 Age?</option>
 		<option value="1">0 - 6</option>
