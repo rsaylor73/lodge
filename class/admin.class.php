@@ -332,8 +332,8 @@ class admin extends resellers {
 		$bed_map[2] = "C";
 		$bed_map[3] = "D";
 
-		$child_map[0] = "Child A";
-		$child_map[1] = "Child B";
+		$child_map[0] = "Child1";
+		$child_map[1] = "Child2";
 
 		// Create inventory
 		$sql = "SELECT * FROM `rooms` WHERE `locationID` = '$locationID'";

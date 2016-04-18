@@ -991,10 +991,24 @@ class reservations extends money {
 				";
 			}
 
+			switch($row['t2_bedname']) {
+				case "Child1":
+				$bed_name = "Child 1";
+				break;
+
+				case "Child2":
+				$bed_name = "Child 2";
+				break;
+
+				default:
+				$bed_name = $row['t2_bedname'];
+				break;
+			}
+
 			$html .= "
 			<tr>
 				<td>$row[t2_description]</td>
-				<td>$row[t2_bedname]</td>
+				<td>$bed_name</td>
 				<td>$row[t2_status]</td>
 				<td>$contact</td>
 			</tr>
