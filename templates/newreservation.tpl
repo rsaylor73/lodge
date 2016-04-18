@@ -65,7 +65,9 @@
 
 <div id="quick_look" style="display:inline"></div>
 
+<table class="table"><tr><td>
 <div id="null"></div>
+</td></tr></table>
 
 </form>
 
