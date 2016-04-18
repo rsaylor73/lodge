@@ -11,7 +11,7 @@
 <tr><td></td>
 
 	{if $childage1 ne ""}
-	<td id="child1" style="display:none">
+	<td id="child1">
 	{else}
 	<td id="child1" style="display:none">
 	{/if}
