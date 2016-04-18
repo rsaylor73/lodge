@@ -39,6 +39,7 @@
 </table>
 
 <br><b>Please select {$tents} tents. Click on the toggle button in the select column to pick a tent.</b>
+<div id="toomuch" style="display:none"><font color=red>You have selected more then the number of tents requested.</font></div>
 <table class="table">
 	<tr>
 		<td><b>Tent</b></td><td><b>Total</b></td><td><b>Adult(s)</b></td><td><b>Children</b></td><td><b>Select</b></td>
@@ -68,6 +69,7 @@ function checkboxes(){
     } else {
     	document.getElementById('booknow').style.display='none';
     	document.getElementById('waiting').style.display='inline';
+        document.getElementById('toomuch').style.display='inline';
     }
 }}
 </script>
