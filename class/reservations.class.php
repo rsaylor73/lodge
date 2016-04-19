@@ -1081,7 +1081,7 @@ class reservations extends money {
 		$tent = $_POST['tent'];
 		$reservationID = $_POST['reservationID'];
 
-		if ($reservations == "") {
+		if ($reservationID == "") {
 			$template = "error.tpl";
 			$this->load_smarty($null,$template);
 			$this->load_smarty($null,'footer.tpl');
@@ -1106,9 +1106,7 @@ class reservations extends money {
 					`b`.`reservationID` = '$reservationID'
 				";
 
-				print "$sql<br>";
-				
-
+				$today = date("Ymd");
 				$result = $this->new_mysql($sql);
 				while ($row = $result->fetch_assoc()) {
 					$sql2 = "
@@ -1116,6 +1114,12 @@ class reservations extends money {
 					('$today','$_SESSION[id]','$_POST[reason]','$row[bedID]','$row[inventoryID]','$row[name]','$row[reservationID]','$row[contactID]','$row[type]')
 					";
 					$result2 = $this->new_mysql($sql2);
+					if ($result2 == "TRUE") {
+						$sql2A = "UPDATE `beds` SET `status` = 'avail', `reservationID` = '', `contactID` = '' WHERE `bedID` = $row[bedID]'";
+						$result2A = $this->new_mysql($sql2A);
+					} else {
+						print "<br><font color=red>Error: bedID $row[bedID] failed to cancel.</font><br>";
+					}
 				}
 				$sql3 = "UPDATE `reservations` SET `cxl_date` = '$today', `cxl_user` = '$_SESSION[id]',`cancelled` = 'Yes' WHERE `reservationID` = '$reservationID'";
 				$result3 = $this->new_mysql($sql3);
