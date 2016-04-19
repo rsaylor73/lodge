@@ -1075,6 +1075,64 @@ class reservations extends money {
 		$html .= '</table>';
 	    return $html;
 	}
+
+	function cxl_reservation() {
+
+		$tent = $_POST['tent'];
+		$reservationID = $_POST['reservationID'];
+
+		if ($reservations == "") {
+			$template = "error.tpl";
+			$this->load_smarty($null,$template);
+			$this->load_smarty($null,'footer.tpl');
+			die;
+		}
+
+		switch($tent) {
+			case "ALL":
+				$sql = "
+				SELECT
+					`b`.`name`,
+					`b`.`reservationID`,
+					`b`.`contactID`,
+					`b`.`type`,
+					`b`.`inventoryID`,
+					`b`.`bedID`
+
+				FROM
+					`beds` b
+
+				WHERE
+					`b`.`reservationID` = '$reservationID'
+				";
+
+				$result = $this->new_mysql($sql);
+				while ($row = $result->fetch_assoc()) {
+					$sql2 = "
+					INSERT INTO `cancelled_beds` (`cxl_date`,`cxl_user`,`cxl_reason`,`bedID`,`inventoryID`,`name`,`reservationID`,`contactID`,`type`) VALUES
+					('$today','$_SESSION[id]','$_POST[reason]','$row[bedID]','$row[inventoryID]','$row[name]','$row[reservationID]','$row[contactID]','$row[type]')
+					";
+					$result2 = $this->new_mysql($sql2);
+				}
+				$sql3 = "UPDATE `reservations` SET `cxl_date` = '$today', `cxl_user` = '$_SESSION[id]',`cancelled` = 'Yes' WHERE `reservationID` = '$reservationID'";
+				$result3 = $this->new_mysql($sql3);
+				if ($result3 == "TRUE") {
+					$template = "cancel.tpl";
+					$data['msg'] = "<font color=red>Reservation $reservationID has been cancelled.</font>";
+					$this->load_smarty($data,$template);
+				}
+			break;
+
+			default:
+
+				// TBD
+
+			break;
+		}
+
+
+
+	}
 	
 // end class
 }
