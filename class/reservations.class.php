@@ -789,8 +789,7 @@ class reservations extends money {
 			`a`.`email`,
 			`s`.`resellerID`,
 			`s`.`company`,
-			`s`.`commission`,
-			`r`.`cancelled`
+			`s`.`commission`
 
 
 		FROM
@@ -994,7 +993,28 @@ class reservations extends money {
    	}
 
    	public function reservation_cancel($reservationID) {
-      	$data['test'] = "ok 5";
+    	$sql = "
+    	SELECT
+    		DATE_FORMAT(`r`.`cxl_date`, '%m/%d/%Y') AS 'cxl_date',
+    		`u`.`first`,
+    		`u`.`last`,
+    		`u`.`email`,
+    		`r`.`cancelled`
+
+    	FROM
+    		`reservations` r
+
+    	LEFT JOIN `users` u ON `r`.`cxl_user` = `u`.`id`
+
+    	WHERE
+    		`r`.`reservationID` = '$reservationID'
+    	"
+    	$result = $this->new_mysql($sql);
+    	while ($row = $result->fetch_assoc()) {
+			foreach ($row as $key=>$value) {
+				$data[$key] = $value;
+			}
+    	}
       	return $data;
    	}
 
