@@ -1008,7 +1008,8 @@ class reservations extends money {
 
     	WHERE
     		`r`.`reservationID` = '$reservationID'
-    	"
+    	";
+    	
     	$result = $this->new_mysql($sql);
     	while ($row = $result->fetch_assoc()) {
 			foreach ($row as $key=>$value) {
