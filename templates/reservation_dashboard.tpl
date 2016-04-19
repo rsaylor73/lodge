@@ -1,5 +1,7 @@
 <div class="col-md-6">
-<h2>Reservation {$reservationID} {$cancelled}</h2>
+<h2>Reservation {$reservationID}
+{if $cancelled eq "Yes"}<font color=red>&nbsp;<b>CANCELLED</b></font>{/if}
+</h2>
 <br>
 
 <ul class="nav nav-tabs">
