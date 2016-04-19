@@ -731,7 +731,7 @@ class reservations extends money {
 			$data['part'] = $_GET['part'];
 		}
 
-		$sql = "SELECT `cancelled FROM `reservations` WHERE `reservationID` = '$reservationID'";
+		$sql = "SELECT `cancelled` FROM `reservations` WHERE `reservationID` = '$reservationID'";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$data['cancelled'] = $row['cancelled'];
