@@ -1106,6 +1106,9 @@ class reservations extends money {
 					`b`.`reservationID` = '$reservationID'
 				";
 
+				print "$sql<br>";
+				
+
 				$result = $this->new_mysql($sql);
 				while ($row = $result->fetch_assoc()) {
 					$sql2 = "
