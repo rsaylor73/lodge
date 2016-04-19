@@ -86,7 +86,7 @@ if ($check == "FALSE") {
 		$total_child = $row['total_children'];
 	}
 
-	$k_tents = floor($total_child / $adults);
+	@$k_tents = floor($total_child / $adults);
 
 	if ($adults != "") {
 		$adult1 = $adult - ($adults * $k_tents);
