@@ -1115,7 +1115,7 @@ class reservations extends money {
 					";
 					$result2 = $this->new_mysql($sql2);
 					if ($result2 == "TRUE") {
-						$sql2A = "UPDATE `beds` SET `status` = 'avail', `reservationID` = '', `contactID` = '' WHERE `bedID` = $row[bedID]'";
+						$sql2A = "UPDATE `beds` SET `status` = 'avail', `reservationID` = '', `contactID` = '' WHERE `bedID` = '$row[bedID]'";
 						$result2A = $this->new_mysql($sql2A);
 					} else {
 						print "<br><font color=red>Error: bedID $row[bedID] failed to cancel.</font><br>";
