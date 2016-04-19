@@ -1,5 +1,5 @@
 <div class="col-md-6">
-<h2>Reservation {$reservationID}</h2>
+<h2>Reservation {$reservationID} {$cancelled}</h2>
 <br>
 
 <ul class="nav nav-tabs">

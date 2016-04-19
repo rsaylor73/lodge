@@ -782,7 +782,8 @@ class reservations extends money {
 			`a`.`email`,
 			`s`.`resellerID`,
 			`s`.`company`,
-			`s`.`commission`
+			`s`.`commission`,
+			`r`.`cancelled`
 
 
 		FROM
