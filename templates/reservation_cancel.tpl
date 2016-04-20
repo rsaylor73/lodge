@@ -25,7 +25,7 @@ Cancellation Reason:<br><textarea name="reason" cols=40 rows=5 required placehol
 
 <h3>History</h3>
 <table class="table">
-<tr><td><b>Date</b></td><td><b>Tent</b></td><td><b>Contact</b></td><td><b>Reason</b></td></tr>
+<tr><td><b>Date</b></td><td><b>Tent</b></td><td><b>Contact</b></td></tr>
 {$history}
 </table>
 
