@@ -1047,7 +1047,7 @@ class reservations extends money {
     		if (($row['first'] == "") && ($row['last'] == "")) {
     			$name = "Un-assigned Contact";
     		} else {
-    			$name = "<a href=\"mailto:$row[email]\">$row[first] $row[last]</a>"
+    			$name = "<a href=\"mailto:$row[email]\">$row[first] $row[last]</a>";
     		}
     		$history .= = "<tr><td>$row[cxl_date]</td><td>$row[description]</td><td>$name</td></tr>";
     		$h1 = "1";
