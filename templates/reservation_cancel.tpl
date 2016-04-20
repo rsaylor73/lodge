@@ -24,6 +24,10 @@ Cancellation Reason:<br><textarea name="reason" cols=40 rows=5 required placehol
 
 
 <h3>History</h3>
+<table class="table">
+<tr><td>Date</td><td>Tent</td><td>Contact</td></tr>
+{$history}
+</table>
 
 {if $cancelled eq "Yes"}
 <table class="table">

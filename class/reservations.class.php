@@ -1042,8 +1042,20 @@ class reservations extends money {
     	$data['tents'] = $this->get_reservation_tents($reservationID);
 
     	$sql = $this->show_cxl_history($reservationID);
-    	print "SQL: $sql<br>";
-
+    	$result = $this->new_mysql($sql);
+    	while ($row = $result->fetch_assoc()) {
+    		if (($row['first'] == "") && ($row['last'] == "")) {
+    			$name = "Un-assigned Contact";
+    		} else {
+    			$name = "<a href=\"mailto:$row[email]\">$row[first] $row[last]</a>"
+    		}
+    		$history .= = "<tr><td>$row[cxl_date]</td><td>$row[description]</td><td>$name</td></tr>";
+    		$h1 = "1";
+    	}
+    	if ($h1 != "1") {
+    		$history = "<tr><td colspan=3>No cancellation history found.</td></tr>";
+    	}
+    	$data['history'] = $history;
       	return $data;
    	}
 
@@ -1248,7 +1260,8 @@ class reservations extends money {
 			`c`.`last`,
 			`c`.`contactID`,
 			`c`.`email`,
-			`r`.`description`
+			`r`.`description`,
+			DATE_FORMAT(`cb`.`cxl_date`, '%m/%d/%Y')
 
 		FROM
 			`cancelled_beds` cb, `inventory` i, `rooms` r
