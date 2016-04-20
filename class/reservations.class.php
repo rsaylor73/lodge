@@ -1194,11 +1194,18 @@ class reservations extends money {
 
 
 	public function canceltent() {
+
+		$cxl_date = date("Ymd");
+		$cxl_reason = "User cancelled a tent";
+
 		$sql = "
 		SELECT
 			`b`.`bedID`,
 			`b`.`reservationID`,
-			`b`.`contactID`
+			`b`.`contactID`,
+			`b`.`inventoryID`,
+			`b`.`name`,
+			`b`.`type`
 
 		FROM
 			`beds` b, `inventory` i
@@ -1210,7 +1217,26 @@ class reservations extends money {
 
 		";
 
-		print "$sql";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$sql2 = "
+			INSERT INTO `cancelled_beds` (`cxl_date`,`cxl_user`,`cxl_reason`,`bedID`,`inventoryID`,`name`,`reservationID`,`contactID`,`type`) VALUES
+			('$cxl_date','$_SESSION[id]','$cxl_reason','$row[bedID]','$row[inventoryID]','$row[name]','$row[reservationID]','$row[contactID]','$row[type]')
+			";
+			$result2 = $this->new_mysql($sql2);
+			if ($result2 == "TRUE") {
+				$sql2A = "UPDATE `beds` SET `status` = 'avail', `reservationID` = '', `contactID` = '' WHERE `bedID` = '$row[bedID]'";
+				$result2A = $this->new_mysql($sql2A);
+			} else {
+				$msg .= "<br><font color=red>Error: bedID $row[bedID] failed to cancel.</font><br>";
+			}
+			$msg .= "<font color=green>The tent selected was cancelled on reservation $_GET[reservationID].</font>";
+			$data['msg'] = $msg;
+			$template = "cancel.tpl";
+			$this->load_smarty($data,$template);
+		}
+
+
 	}
 	
 // end class
