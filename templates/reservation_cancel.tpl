@@ -1,7 +1,5 @@
 <br>
-<h3>Cancel</h3>
 
-Test {$tents}
 
 {if $cancelled eq "No"}
 
