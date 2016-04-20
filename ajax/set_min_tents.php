@@ -28,7 +28,7 @@ if ($check == "FALSE") {
 		$adults = $row['beds'];
 	}
 
-	$tents = $_GET['pax'] / $adults;
+	@$tents = $_GET['pax'] / $adults;
 	$tents = round($tents);
 	if ($tents < 1) {
 		$tents = "1";
