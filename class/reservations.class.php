@@ -1048,7 +1048,8 @@ class reservations extends money {
 			`c`.`contactID`,
 			`c`.`email`,
 			`r`.`description`,
-			DATE_FORMAT(`cb`.`cxl_date`, '%m/%d/%Y') AS 'cxl_date'
+			DATE_FORMAT(`cb`.`cxl_date`, '%m/%d/%Y') AS 'cxl_date',
+			`cb`.`cxl_reason`
 
 		FROM
 			`cancelled_beds` cb, `inventory` i, `rooms` r
@@ -1070,7 +1071,7 @@ class reservations extends money {
     		} else {
     			$name = "<a href=\"mailto:$row[email]\">$row[first] $row[last]</a>";
     		}
-    		$history .= "<tr><td>$row[cxl_date]</td><td>$row[description]</td><td>$name</td></tr>";
+    		$history .= "<tr><td>$row[cxl_date]</td><td>$row[description]</td><td>$name</td><td>$row[cxl_reason]</td></tr>";
     		$h1 = "1";
     	}
     	if ($h1 != "1") {
