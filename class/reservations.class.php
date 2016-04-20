@@ -1016,6 +1016,9 @@ class reservations extends money {
 				$data[$key] = $value;
 			}
     	}
+
+    	$data['tents'] = $this->get_reservation_tents($reservationID);
+
       	return $data;
    	}
 

@@ -1,8 +1,10 @@
 <br>
 <h3>Cancel</h3>
 
+Test {$tents}
 
 {if $cancelled eq "No"}
+<hr>
 <form action="cxl_reservation" method="post">
 <input type="hidden" name="reservationID" value="{$reservationID}">
 <input type="hidden" name="tent" value="ALL">
