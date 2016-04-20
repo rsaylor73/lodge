@@ -4,7 +4,16 @@
 Test {$tents}
 
 {if $cancelled eq "No"}
+
+	{if $tents > 1}	
+
+	<h3>Cancel A Tent</h3>
+
+
+	{/if}
+
 <hr>
+<h3>Cancel Entire Reservation</h3>
 <form action="cxl_reservation" method="post">
 <input type="hidden" name="reservationID" value="{$reservationID}">
 <input type="hidden" name="tent" value="ALL">
