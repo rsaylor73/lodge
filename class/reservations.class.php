@@ -1049,7 +1049,7 @@ class reservations extends money {
     		} else {
     			$name = "<a href=\"mailto:$row[email]\">$row[first] $row[last]</a>";
     		}
-    		$history .= = "<tr><td>$row[cxl_date]</td><td>$row[description]</td><td>$name</td></tr>";
+    		$history .= "<tr><td>$row[cxl_date]</td><td>$row[description]</td><td>$name</td></tr>";
     		$h1 = "1";
     	}
     	if ($h1 != "1") {
