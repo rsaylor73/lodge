@@ -1230,12 +1230,11 @@ class reservations extends money {
 			} else {
 				$msg .= "<br><font color=red>Error: bedID $row[bedID] failed to cancel.</font><br>";
 			}
-			$msg .= "<font color=green>The tent selected was cancelled on reservation $_GET[reservationID].</font>";
-			$data['msg'] = $msg;
-			$template = "cancel.tpl";
-			$this->load_smarty($data,$template);
 		}
-
+		$msg .= "<font color=green>The tent selected was cancelled on reservation $_GET[reservationID].</font>";
+		$data['msg'] = $msg;
+		$template = "cancel.tpl";
+		$this->load_smarty($data,$template);
 
 	}
 	
