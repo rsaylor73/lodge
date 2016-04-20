@@ -1041,6 +1041,9 @@ class reservations extends money {
     	$data['html'] = $html;
     	$data['tents'] = $this->get_reservation_tents($reservationID);
 
+    	$sql = $this->show_cxl_history($reservationID);
+    	print "SQL: $sql<br>";
+
       	return $data;
    	}
 
@@ -1238,5 +1241,29 @@ class reservations extends money {
 
 	}
 	
+	public function show_cxl_history($reservationID) {
+		$sql = "
+		SELECT
+			`c`.`first`,
+			`c`.`last`,
+			`c`.`contactID`,
+			`c`.`email`,
+			`r`.`description`
+
+		FROM
+			`cancelled_beds` cb, `inventory` i, `rooms` r
+
+		LEFT JOIN `reserve`.`contacts` c ON `cb`.`contactID` = `c`.`contactID` 
+
+		WHERE
+			`cb`.`reservationID` = '$reservationID'
+			AND `cb`.`inventoryID` = `i`.`inventoryID`
+			AND `i`.`roomID` = `r`.`id`
+
+		GROUP BY `description`
+
+		";
+		return $sql;
+	}
 // end class
 }

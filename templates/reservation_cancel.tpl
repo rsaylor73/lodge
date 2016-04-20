@@ -23,6 +23,8 @@ Cancellation Reason:<br><textarea name="reason" cols=40 rows=5 required placehol
 {/if}
 
 
+<h3>History</h3>
+
 {if $cancelled eq "Yes"}
 <table class="table">
 <tr><td>Cancellation Date:</td><td>{$cxl_date}</td></tr>
