@@ -6,7 +6,9 @@
 	{if $tents > 1}	
 
 	<h3>Cancel A Tent</h3>
-
+	<table class="table">
+	{$html}
+	</table>
 
 	{/if}
 

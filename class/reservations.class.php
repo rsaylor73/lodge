@@ -1017,6 +1017,28 @@ class reservations extends money {
 			}
     	}
 
+    	// get a list of tents
+    	$sql = "
+		SELECT
+			`r`.`description`,
+			`r`.`id`,
+			`b`.`reservationID`
+
+		FROM
+			`beds` b, `inventory` i, `rooms` r
+
+		WHERE
+			`b`.`reservationID` = '$reservationID'
+			AND `b`.`inventoryID` = `i`.`inventoryID`
+			AND `i`.`roomID` = `r`.`id`
+
+		GROUP BY `description`
+    	";
+    	$result = $this->new_mysql($sql);
+    	while ($row = $result->fetch_assoc()) {
+    		$html .= "<tr><td>$row[description]</td><td><input type=\"button\" value=\"Cancel This Tent\" onclick=\"document.location.href='canceltent/$row[id]/$reservationID'\" class=\"btn btn-warning\"></td></tr>";
+    	}
+    	$data['html'] = $html;
     	$data['tents'] = $this->get_reservation_tents($reservationID);
 
       	return $data;
