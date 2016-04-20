@@ -1191,6 +1191,27 @@ class reservations extends money {
 			break;
 		}
 
+		public function canceltent() {
+			$sql = "
+			SELECT
+				`b`.`bedID`,
+				`b`.`reservationID`,
+				`b`.`contactID`
+
+			FROM
+				`beds` b, `inventory` i
+
+			WHERE
+				`b`.`reservationID` = '$_GET[reservationID]'
+				AND `b`.`inventoryID` = `i`.`inventoryID`
+				AND `i`.`roomID` = '$_GET[tent]'
+
+			";
+
+			print "$sql";
+
+		}
+
 
 
 	}
