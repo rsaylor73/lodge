@@ -6,8 +6,8 @@
 <form action="cxl_reservation" method="post">
 <input type="hidden" name="reservationID" value="{$reservationID}">
 <input type="hidden" name="tent" value="ALL">
-Cancellation Reason:<br><textarea name="reason" cols=40 rows=5></textarea><br><br>
-<input type="submit" value="Cancel Reservation" class="btn btn-primary">
+Cancellation Reason:<br><textarea name="reason" cols=40 rows=5 required placeholder="Please type in the reason why the reservation is being cancelled."></textarea><br><br>
+<input type="submit" value="Cancel Reservation" onclick="return confirm('You are about to cancel this reservation and will release all the tents in this reservation back to inventory. Click OK to continue.')" class="btn btn-primary">
 </form>
 {/if}
 
