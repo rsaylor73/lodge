@@ -60,7 +60,9 @@ class reservations extends money {
 
 	public function quick_search($day) {
 
-
+		if ($_POST['type'] != "") {
+			$type = "AND `r`.`type` = '$_POST[type]'";
+		}
 
 
 		$sql = "
@@ -79,6 +81,7 @@ class reservations extends money {
 			`i`.`locationID` = '$_POST[lodge]' 
 			AND `i`.`date_code` BETWEEN '$day' AND '$day'
 			AND `i`.`roomID` = `r`.`id`
+			$type
 
 		HAVING 
 			total_adult_beds >= '$_POST[pax]' AND total_child_beds >= '$_POST[children]'
