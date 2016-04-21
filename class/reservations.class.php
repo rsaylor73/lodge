@@ -126,6 +126,10 @@ class reservations extends money {
 			$data['min_night_stay'] = $row['min_night_stay'];
 		}
 
+		if ($_POST['type'] != "") {
+			$type = "AND `r`.`type` = '$_POST[type]'";
+		}
+
 		$sql = "
 		SELECT 
 			COUNT(`a`.`status`) AS 'total_adult_beds',
@@ -142,6 +146,7 @@ class reservations extends money {
 			`i`.`locationID` = '$_POST[lodge]' 
 			AND `i`.`date_code` BETWEEN '$start_date' AND '$end_date' 
 			AND `i`.`roomID` = `r`.`id`
+			$type
 
 		HAVING 
 			total_adult_beds >= '$_POST[pax]' AND total_child_beds >= '$_POST[children]'
