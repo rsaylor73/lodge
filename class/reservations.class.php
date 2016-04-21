@@ -102,9 +102,11 @@ class reservations extends money {
 
 	public function searchinventory() {
 
+		/*
 		print "<pre>";
 		print_r($_POST);
 		print "</pre>";
+		*/
 
 		$start_date = str_replace("-","",$_POST['start_date']);
 		$end_date = str_replace("-","",$_POST['end_date']);
@@ -145,8 +147,6 @@ class reservations extends money {
 		HAVING 
 			total_adult_beds >= '$pax' AND total_child_beds >= '$_POST[children]'
 		";
-
-		print "$sql<br>";
 
 		$result = $this->new_mysql($sql);
 
