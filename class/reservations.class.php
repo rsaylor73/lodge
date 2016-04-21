@@ -138,7 +138,13 @@ class reservations extends money {
 		FROM 
 			`inventory` i, `rooms` r
 
-		LEFT JOIN `beds` a ON `i`.`inventoryID` = `a`.`inventoryID` AND `a`.`type` = 'adult' AND `a`.`status` = 'avail'
+		LEFT JOIN `beds` a ON 
+			`i`.`inventoryID` = `a`.`inventoryID` 
+			AND `a`.`type` = 'adult' 
+			AND `a`.`status` = 'avail'
+			AND `i`.`roomID` = `r`.`id`
+			$type
+			
 		LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail'
 
 
