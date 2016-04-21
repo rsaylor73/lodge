@@ -130,6 +130,8 @@ class reservations extends money {
 			$type = "AND `r`.`type` = '$_POST[type]'";
 		}
 
+		$pax = $_POST['pax'] * $_POST['tents'];
+
 		$sql = "
 		SELECT 
 			COUNT(`a`.`status`) AS 'total_adult_beds',
@@ -151,7 +153,7 @@ class reservations extends money {
 			AND `i`.`date_code` BETWEEN '$start_date' AND '$end_date' 
 
 		HAVING 
-			total_adult_beds >= '$_POST[pax]' AND total_child_beds >= '$_POST[children]'
+			total_adult_beds >= '$pax' AND total_child_beds >= '$_POST[children]'
 		";
 
 		print "$sql<br>";
