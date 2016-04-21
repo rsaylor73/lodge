@@ -1,5 +1,5 @@
 <br>
-<h3>Reservation Dollars</h3>
+<h3>Nightly Rate</h3>
 
 <table class="table">
 <tr><td>Tent Nightly Rate (Adults):</td><td>${$nightly_rate}</td></tr>
