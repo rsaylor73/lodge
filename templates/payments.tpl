@@ -26,6 +26,9 @@
 	<input type="text" name="cc_year" id="cc_year" size="5" placeholder="Year"  maxlength="4" {literal}pattern="[0-9]{4}"{/literal}></td></tr>
 <tr id="credit_card4" style="display:none"><td>CVV Number:</td><td><input type="text" name="cvv" id="cvv" {literal}patern="[0-9]{3}"{/literal}</td></td>
 
+<tr id="check1" style="display:none"><td>Check Number:</td><td><input type="text" name="check_number" id="check_number" size="20"></td></tr>
+
+
 <tr><td>Amount:</td><td>$<input type="text" name="payment_amount" size=20 onkeypress="return isNumber(event)" required></td></tr>
 
 
@@ -48,7 +51,31 @@ function get_payment_type() {
 		document.getElementById('cc_month').required=true;
 		document.getElementById('cc_year').required=true;
 		document.getElementById('cvv').required=true;
+
+		document.getElementById('check1').style.display='none';
+		document.getElementById('check_number').required=false;
+
+
 	}
+
+	if (strPayment == "2") {
+		document.getElementById('check1').style.display='table-row';
+
+
+		document.getElementById('credit_card1').style.display='none';
+		document.getElementById('credit_card2').style.display='none';
+		document.getElementById('credit_card3').style.display='none';
+		document.getElementById('credit_card4').style.display='none';
+
+		document.getElementById('check_number').required=true;
+
+		document.getElementById('cc_name').required=false;
+		document.getElementById('cc_num').required=false;
+		document.getElementById('cc_month').required=false;
+		document.getElementById('cc_year').required=false;
+		document.getElementById('cvv').required=false;
+	}
+
 }
 
 function isNumber(evt) {
