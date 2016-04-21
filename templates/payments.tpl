@@ -1,5 +1,5 @@
 <div class="col-md-6">
-<h2>Payments</h2>
+<h2>Payments {$reservationID}</h2>
 
 <form action="processpayment" method="post">
 <input type="hidden" name="reservationID" value="{$reservationID}">
@@ -70,6 +70,8 @@ function get_payment_type() {
 		document.getElementById('cc_month').required=false;
 		document.getElementById('cc_year').required=false;
 		document.getElementById('cvv').required=false;
+		document.getElementById('wire1').style.display='none';
+		document.getElementById('wire_number').required=false;
 	}
 
 	if (strPayment == "3") {
