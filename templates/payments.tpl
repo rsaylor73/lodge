@@ -1,5 +1,5 @@
 <div class="col-md-6">
-<h2>Payments {$reservationID}</h2>
+<h2>Payments : Conf #{$reservationID}</h2>
 
 <form action="processpayment" method="post">
 <input type="hidden" name="reservationID" value="{$reservationID}">
@@ -27,7 +27,9 @@
 <tr id="credit_card4" style="display:none"><td>CVV Number:</td><td><input type="text" name="cvv" id="cvv" {literal}patern="[0-9]{3}"{/literal}</td></td>
 
 <tr id="check1" style="display:none"><td>Check Number:</td><td><input type="text" name="check_number" id="check_number" size="20"></td></tr>
-<tr id="wire1" style="display:none"><td>Wire Number:</td><td><input type="text" name="wire_number" id="wire_number" size="20"></td></tr>
+<tr id="check2" style="display:none"><td>Description:</td><td><textarea name="check_description" id="check_description" cols="30" rows="5"></textarea></td></tr>
+
+<tr id="wire1" style="display:none"><td>Wire Description:</td><td><textarea name="wire_description" id="wire_description" cols="30" rows="5"></td></tr>
 
 
 <tr><td>Amount:</td><td>$<input type="text" name="payment_amount" size=20 onkeypress="return isNumber(event)" required></td></tr>
@@ -53,41 +55,47 @@ function get_payment_type() {
 		document.getElementById('cc_year').required=true;
 		document.getElementById('cvv').required=true;
 		document.getElementById('check1').style.display='none';
+		document.getElementById('check2').style.display='none';
 		document.getElementById('check_number').required=false;
 		document.getElementById('wire1').style.display='none';
-		document.getElementById('wire_number').required=false;
+		document.getElementById('wire_description').required=false;
+		document.getElementById('check_description').required=false;
 	}
 
 	if (strPayment == "2") {
 		document.getElementById('check1').style.display='table-row';
+		document.getElementById('check2').style.display='table-row';
 		document.getElementById('credit_card1').style.display='none';
 		document.getElementById('credit_card2').style.display='none';
 		document.getElementById('credit_card3').style.display='none';
 		document.getElementById('credit_card4').style.display='none';
 		document.getElementById('check_number').required=true;
+		document.getElementById('check_description').required=true;
 		document.getElementById('cc_name').required=false;
 		document.getElementById('cc_num').required=false;
 		document.getElementById('cc_month').required=false;
 		document.getElementById('cc_year').required=false;
 		document.getElementById('cvv').required=false;
 		document.getElementById('wire1').style.display='none';
-		document.getElementById('wire_number').required=false;
+		document.getElementById('wire_description').required=false;
 	}
 
 	if (strPayment == "3") {
 		document.getElementById('wire1').style.display='table-row';
 		document.getElementById('check1').style.display='none';
+		document.getElementById('check2').style.display='none';
 		document.getElementById('credit_card1').style.display='none';
 		document.getElementById('credit_card2').style.display='none';
 		document.getElementById('credit_card3').style.display='none';
 		document.getElementById('credit_card4').style.display='none';
-		document.getElementById('wire_number').required=true;
+		document.getElementById('wire_description').required=true;
 		document.getElementById('check_number').required=false;
 		document.getElementById('cc_name').required=false;
 		document.getElementById('cc_num').required=false;
 		document.getElementById('cc_month').required=false;
 		document.getElementById('cc_year').required=false;
 		document.getElementById('cvv').required=false;
+		document.getElementById('check_description').required=false;
 	}
 
 }
