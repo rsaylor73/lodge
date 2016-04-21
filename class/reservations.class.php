@@ -88,8 +88,6 @@ class reservations extends money {
 
 		";
 
-		print "<br>SQL 2: $sql<br>";
-
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$found = "1";
