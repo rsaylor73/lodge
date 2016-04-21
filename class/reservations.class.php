@@ -150,6 +150,8 @@ class reservations extends money {
 
 		$result = $this->new_mysql($sql);
 
+		print "<h2>Calendar Day Snapshot</h2>";
+
 		while ($row = $result->fetch_assoc()) {
 			$found = "1";
 			// build calendar to show # rooms available for each day
