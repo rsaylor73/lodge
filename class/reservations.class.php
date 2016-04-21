@@ -112,6 +112,10 @@ class reservations extends money {
 
 	public function searchinventory() {
 
+		print "<pre>";
+		print_r($_POST);
+		print "</pre>";
+
 		$start_date = str_replace("-","",$_POST['start_date']);
 		$end_date = str_replace("-","",$_POST['end_date']);
 
