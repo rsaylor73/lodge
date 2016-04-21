@@ -59,23 +59,7 @@ class reservations extends money {
 	}
 
 	public function quick_search($day) {
-	    $sql = "
-    	SELECT
-        	COUNT(`b`.`status`) AS 'total_beds'
-            
-      	FROM     
-         	`inventory` i, `beds` b
-               
-      	WHERE 
-        	`i`.`locationID` = '$_POST[lodge]'
-         	AND `i`.`date_code` BETWEEN '$day' AND '$day'
-         	AND `i`.`inventoryID` = `b`.`inventoryID`
-         	AND `b`.`status` = 'avail'
 
-      	GROUP BY `b`.`status`
-         
-      	HAVING total_beds >= '$_POST[pax]'
-      	";
 
 		$sql = "
 		SELECT 
@@ -97,6 +81,8 @@ class reservations extends money {
 			total_adult_beds >= '$_POST[pax]' AND total_child_beds >= '$_POST[children]'
 
 		";
+
+		print "<br>SQL 2: $sql<br>";
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
