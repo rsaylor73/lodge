@@ -136,23 +136,19 @@ class reservations extends money {
 			COUNT(`c`.`status`) AS 'total_child_beds'
 
 		FROM 
-			`inventory` i, `rooms` r
+			`inventory` i
 
 		LEFT JOIN `beds` a ON 
 			`i`.`inventoryID` = `a`.`inventoryID` 
 			AND `a`.`type` = 'adult' 
 			AND `a`.`status` = 'avail'
-			AND `i`.`roomID` = `r`.`id`
-			$type
-			
+
 		LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail'
 
 
 		WHERE 
 			`i`.`locationID` = '$_POST[lodge]' 
 			AND `i`.`date_code` BETWEEN '$start_date' AND '$end_date' 
-			AND `i`.`roomID` = `r`.`id`
-			$type
 
 		HAVING 
 			total_adult_beds >= '$_POST[pax]' AND total_child_beds >= '$_POST[children]'
