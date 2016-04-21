@@ -29,7 +29,7 @@
 <tr id="check1" style="display:none"><td>Check Number:</td><td><input type="text" name="check_number" id="check_number" size="20"></td></tr>
 <tr id="check2" style="display:none"><td>Description:</td><td><textarea name="check_description" id="check_description" cols="30" rows="5"></textarea></td></tr>
 
-<tr id="wire1" style="display:none"><td>Wire Description:</td><td><textarea name="wire_description" id="wire_description" cols="30" rows="5"></td></tr>
+<tr id="wire1" style="display:none"><td>Wire Description:</td><td><textarea name="wire_description" id="wire_description" cols="30" rows="5"></textarea></td></tr>
 
 
 <tr><td>Amount:</td><td>$<input type="text" name="payment_amount" size=20 onkeypress="return isNumber(event)" required></td></tr>
