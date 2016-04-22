@@ -66,7 +66,7 @@ class money extends Core {
 		switch ($_POST['payment_type']) {
 			case "1":
 			// Credit
-         	require_once('authorizenet.class.php');
+         	require_once('class/authorizenet.class.php');
          	$a = new authorizenet_class;
          	$a->add_field('x_login', authnet_login);
          	$a->add_field('x_tran_key', authnet_key);
