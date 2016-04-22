@@ -91,6 +91,9 @@ class money extends Core {
 
 			switch ($a->process()) {
             	case 1: // Accepted
+            	print "<pre>";
+            	print_r($a);
+            	print "</pre>";
             	echo $a->get_response_reason_text();
             	break;
 
