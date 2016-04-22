@@ -61,4 +61,70 @@ class money extends Core {
 
 		$this->load_smarty($data,$template);
 	}
+
+	public function processpayment() {
+		switch ($_POST['payment_type']) {
+			case "1":
+			// Credit
+         	require_once('authorizenet.class.php');
+         	$a = new authorizenet_class;
+         	$a->add_field('x_login', authnet_login);
+         	$a->add_field('x_tran_key', authnet_key);
+         	$a->add_field('x_version', '3.1');
+         	$a->add_field('x_type', 'AUTH_CAPTURE');
+         	if (authnet_testmode == "Yes") {
+         		$a->add_field('x_test_request', 'TRUE');    // Just a test transaction
+         	}
+         	$a->add_field('x_relay_response', 'FALSE');
+         	$a->add_field('x_delim_data', 'TRUE');
+         	$a->add_field('x_delim_char', '|');
+         	$a->add_field('x_encap_char', '');
+         	$a->add_field('x_email_customer', 'FALSE');
+         	$a->add_field('x_description', "ATSL $_POST[reservationID]");
+
+         	$a->add_field('x_method', 'CC');
+         	$a->add_field('x_card_num', $_POST['cc_num']);   // test successful visa
+         	$a->add_field('x_amount', $_POST['payment_amount']);
+         	$exp_date = $_POST['cc_month'] . $_POST['cc_year'];
+         	$a->add_field('x_exp_date', $exp_date);    // march of 2008
+         	$a->add_field('x_card_code', $_POST['cvv']);    // Card CAVV Security code
+
+         	$process - $a->process();
+
+
+         	print "<pre>";
+         	print_r($process);
+         	print "</pre>";
+
+			break;
+
+			case "2":
+			// Check
+
+
+			break;
+
+			case "3":
+			// Wire
+
+
+			break;
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

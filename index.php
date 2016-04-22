@@ -16,6 +16,15 @@ if ($check == "FALSE") {
 	$core->navigation();
 	//$smarty->display('navigation.tpl');
 
+	// Define global constant - get the authorize.net account info
+	$sql = "SELECT `authnet_login`,`authnet_key`,`authnet_testmode` FROM `settings` WHERE `id` = '1'";
+	$result = $core->new_mysql($sql);
+	while ($row = $result->fetch_assoc()) {
+		define('authnet_login',$row['authnet_login']);
+		define('authnet_key',$row['authnet_key']);
+		define('authnet_testmode',$row['authnet_testmode']);
+	}
+
 	if ($_GET['section'] == "dashboard") {
 		$name = "$_SESSION[first] $_SESSION[last]";
 		$smarty->assign('name',$name);
