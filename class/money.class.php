@@ -91,17 +91,20 @@ class money extends Core {
 
 			switch ($a->process()) {
             	case 1: // Accepted
-            	echo $a->get_response_reason_text();
+            	// $a->get_response_reason_text();
             	$transactionID = $a->get_transaction_id();
-            	print "Transaction ID: $transactionID<br>";
+            	$payment = $this->record_payment($transactionID);
+            	if ($payment == "TRUE") {
+            		$msg = "<font color=green>The payment of $$_POST[payment_amount] was processed.</font>";
+            	}
             	break;
 
             	case 2:  // Declined
-            	echo $a->get_response_reason_text();
+            	$msg = "<font color=red>".$a->get_response_reason_text()."</font>";
             	break;
 
             	case 3: // Error
-            	echo $a->get_response_reason_text();
+            	$msg = "<font color=red>".$a->get_response_reason_text()."</font>";
             	break;
             }
 
@@ -111,19 +114,43 @@ class money extends Core {
 
 			case "2":
 			// Check
-
+			$payment = $this->record_payment($null);
+            if ($payment == "TRUE") {
+            	$msg = "<font color=green>The payment of $$_POST[payment_amount] was processed.</font>";
+            }
 
 			break;
 
 			case "3":
 			// Wire
-
+			$payment = $this->record_payment($null);
+            if ($payment == "TRUE") {
+            	$msg = "<font color=green>The payment of $$_POST[payment_amount] was processed.</font>";
+            }
 
 			break;
 		}
+
+		$template = "completepayment.tpl";
+		$data['reservationID'] = $_POST['reservationID'];
+		if ($msg == "") {
+			$msg = "<font color=red>There was an un-known error and the payment was not processed.</font>";
+		}
+		$data['msg'] = $msg;
+		$this->load_smarty($data,$template);
 	}
 
+	private function record_payment($transactionID) {
+		$today = date("Ymd");
+		$sql = "
 
+		INSERT INTO `payments` (`reservationID`,`payment_type`,`transactionID`,`check_number`,`check_description`,`wire_description`,`amount`,`payment_date`,`insert_date`,`update_date`,`userID`)
+		VALUES ('$_POST[reservationID]','$_POST[payment_type]','$transactionID','$_POST[check_number]','$_POST[check_description]','$_POST[wire_description]','$_POST[payment_amount]','$_POST[start_date]',
+		'$today','$today','$_SESSION[id]')
+		";
+		$result = $this->new_mysql($sql);
+		return $result;
+	}
 
 
 
