@@ -3,6 +3,6 @@
 
 {$msg}
 
-To return to your reservation click <a href="reservation_dashboard/{$reservationID}/dollars">here</a>
+<br><br>To return to your reservation click <a href="reservation_dashboard/{$reservationID}/dollars">here</a>
 
 </div>
