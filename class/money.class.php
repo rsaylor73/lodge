@@ -89,12 +89,21 @@ class money extends Core {
          	$a->add_field('x_exp_date', $exp_date);    // march of 2008
          	$a->add_field('x_card_code', $_POST['cvv']);    // Card CAVV Security code
 
-         	$process - $a->process();
+			switch ($a->process()) {
+            	case 1: // Accepted
+            	echo $a->get_response_reason_text();
+            	break;
+
+            	case 2:  // Declined
+            	echo $a->get_response_reason_text();
+            	break;
+
+            	case 3: // Error
+            	echo $a->get_response_reason_text();
+            	break;
+            }
 
 
-         	print "<pre>";
-         	print_r($process);
-         	print "</pre>";
 
 			break;
 
