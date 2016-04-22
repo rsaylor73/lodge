@@ -144,8 +144,10 @@ class money extends Core {
 		$today = date("Ymd");
 		$sql = "
 
-		INSERT INTO `payments` (`reservationID`,`payment_type`,`transactionID`,`check_number`,`check_description`,`wire_description`,`amount`,`payment_date`,`insert_date`,`update_date`,`userID`)
-		VALUES ('$_POST[reservationID]','$_POST[payment_type]','$transactionID','$_POST[check_number]','$_POST[check_description]','$_POST[wire_description]','$_POST[payment_amount]','$_POST[start_date]',
+		INSERT INTO `payments` (`customer_name`,`reservationID`,`payment_type`,`transactionID`,`check_number`,`check_description`,`wire_description`,
+		`amount`,`payment_date`,`insert_date`,`update_date`,`userID`)
+		VALUES ('$_POST[cc_name]','$_POST[reservationID]','$_POST[payment_type]','$transactionID','$_POST[check_number]','$_POST[check_description]',
+		'$_POST[wire_description]','$_POST[payment_amount]','$_POST[start_date]',
 		'$today','$today','$_SESSION[id]')
 		";
 		$result = $this->new_mysql($sql);
