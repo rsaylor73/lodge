@@ -102,6 +102,10 @@ class authorizenet_class {
 
    }
 
+   function get_transaction_id() {
+      return $this->response['Transaction ID'];
+   }
+
    function get_response_reason_text() {
       return $this->response['Response Reason Text'];
    }

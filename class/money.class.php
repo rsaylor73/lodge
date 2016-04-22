@@ -91,10 +91,9 @@ class money extends Core {
 
 			switch ($a->process()) {
             	case 1: // Accepted
-            	print "<pre>";
-            	print_r($a);
-            	print "</pre>";
             	echo $a->get_response_reason_text();
+            	$transactionID = $a->get_transaction_id();
+            	print "Transaction ID: $transactionID<br>";
             	break;
 
             	case 2:  // Declined
