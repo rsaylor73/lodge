@@ -985,6 +985,9 @@ class reservations extends money {
     	$total = (($data['nightly_rate'] + $data['child1_rate'] + $data['child2_rate']) * $data['nights']) * $data['tents'];
 
      	$data['total'] = $total;
+
+     	$payment_history = $this->get_payment_history($reservationID);
+     	$data['payment_history'] = $payment_history;
     	//$data['test'] = "ok 3";
 
     	/*

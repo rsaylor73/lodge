@@ -154,6 +154,28 @@ class money extends Core {
 		return $result;
 	}
 
+	public function get_payment_history($reservationID) {
+		$sql = "
+		SELECT
+			DATE_FORMAT(`p`.`payment_date`, '%m/%d/%Y') AS 'payment_date',
+			IF(`p`.`transactionID` != '',`p`.`transactionID`,'N/A') AS 'transactionID',
+			IF(`p`.`check_number` != '', `p`.`check_number`,'N/A') AS 'check_number',
+			`p`.`payment_type`,
+			`p`.`amount`
+
+		FROM
+			`payments` p
+
+		WHERE
+			`p`.`reservationID` = '$reservationID'
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$html .= "<tr><td>$row[payment_type]</td><td>$row[payment_amount]</td><td>$row[payment_date]</td><td>$row[transactionID]</td></tr>";
+		}
+		return $html;
+	}
+
 
 
 

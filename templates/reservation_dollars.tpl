@@ -21,4 +21,21 @@
 
 
 <h3>Payments <input type="button" value="Make A Payment" class="btn btn-success" onclick="document.location.href='payments/{$reservationID}'"></h3>
+<table class="table">
+<thead>
+<tr>
+	<th><b>Payment Type</b></th>
+	<th><b>Amount</b></th>
+	<th><b>Date</b></th>
+	<th><b>Transaction ID</b></th>
+</tr>
+</thead>
+<tbody>
+	{if $payment_history == ""}
+	<tr><td colspan="4"><font color=blue>Payment history does not exist for this reservation.</font></td></tr>
+	{else}
+	{$payment_history}
+	{/if}
+</tbody>
+</table>
 
