@@ -1,5 +1,6 @@
 <br>
 <h3>Nightly Rate</h3>
+<hr>
 
 <table class="table">
 <tr><td>Tent Nightly Rate (Adults):</td><td>${$nightly_rate}</td></tr>
@@ -18,9 +19,12 @@
 </table>
 
 <h3>Transfer/Line Item Dollars</h3>
+<hr>
 
 
-<h3>Payments <input type="button" value="Make A Payment" class="btn btn-success" onclick="document.location.href='payments/{$reservationID}'"></h3>
+<h3>Payments</h3><hr>
+<input type="button" value="Make A Payment" class="btn btn-success" onclick="document.location.href='payments/{$reservationID}'"></h3>
+
 <table class="table">
 <thead>
 <tr>
