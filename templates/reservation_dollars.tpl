@@ -28,7 +28,7 @@
 
 
 <h3>Payments</h3><hr>
-<input type="button" value="Make A Payment" class="btn btn-success" onclick="document.location.href='payments/{$reservationID}'"></h3>
+<input type="button" value="Add Payment" class="btn btn-success" onclick="document.location.href='payments/{$reservationID}'"></h3>
 
 <table class="table">
 <thead>
