@@ -183,10 +183,9 @@ class money extends Core {
 	public function get_discount_history($reservationID) {
 		$sql = "
 		SELECT
-			`gdr`.`general_discount_reason,
+			`gdr`.`general_discount_reason`,
 			`d`.`amount`,
-			DATE_FORMAT(`d`.`date_added`, '%m/%d/%Y') AS 'date_added',
-			DATE_FORMAT(`d`.`date_modified`, '%m/%d/%Y') AS 'date_modified'
+			DATE_FORMAT(`d`.`date_added`, '%m/%d/%Y') AS 'date_added'
 
 		FROM
 			`lodge_res`.`discounts` d,
