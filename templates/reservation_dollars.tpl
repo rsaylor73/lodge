@@ -21,6 +21,9 @@
 <h3>Transfer/Line Item Dollars</h3>
 <hr>
 
+<h3>Discounts</h3><hr>
+<input type="button" value="Add Discount" class="btn btn-success" onclick="document.location.href='discounts/{$reservationID}'"></h3>
+
 
 <h3>Payments</h3><hr>
 <input type="button" value="Make A Payment" class="btn btn-success" onclick="document.location.href='payments/{$reservationID}'"></h3>
