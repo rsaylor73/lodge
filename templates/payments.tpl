@@ -33,7 +33,7 @@
 
 
 <tr><td>Amount:</td><td>$<input type="text" name="payment_amount" size=20 onkeypress="return isNumber(event)" required></td></tr>
-<tr><td>Payment Date:</td><td><input type="text" name="start_date" id="start_date" required></td></tr>
+<tr><td>Payment Date:</td><td><input type="text" name="payment_date" id="payment_date" required></td></tr>
 
 
 <tr><td colspan="2"><input type="submit" value="Process Payment" class="btn btn-primary"></td></tr>

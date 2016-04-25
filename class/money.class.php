@@ -147,7 +147,7 @@ class money extends Core {
 		INSERT INTO `payments` (`customer_name`,`reservationID`,`payment_type`,`transactionID`,`check_number`,`check_description`,`wire_description`,
 		`amount`,`payment_date`,`insert_date`,`update_date`,`userID`)
 		VALUES ('$_POST[cc_name]','$_POST[reservationID]','$_POST[payment_type]','$transactionID','$_POST[check_number]','$_POST[check_description]',
-		'$_POST[wire_description]','$_POST[payment_amount]','$_POST[start_date]',
+		'$_POST[wire_description]','$_POST[payment_amount]','$_POST[payment_date]',
 		'$today','$today','$_SESSION[id]')
 		";
 		$result = $this->new_mysql($sql);
@@ -180,7 +180,37 @@ class money extends Core {
 		return $html;
 	}
 
+	// Record info about the line item billing
+	public function add_line_item() {
 
+	}
+
+	private function get_discount_reasons() {
+		$sql = "
+		SELECT
+			`gdr`.`general_discount_reasonID`,
+			`gdr`.`general_discount_reason`
+
+		FROM
+			`reserve`.`general_discount_reasons` gdr
+
+		WHERE
+			`gdr`.`status2` = 'active'
+			AND `gdr`.`hide` != 'checked'
+
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$options .= "<option value=\"$row[general_discount_reasonID]\">$row[general_discount_reason]</option>";
+		}
+		return $options;
+	}
+
+	// Record info about the discount
+	public function add_discounts() {
+		$discount_options = $this->get_discount_reasons();
+
+	}
 
 
 
