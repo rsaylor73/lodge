@@ -210,6 +210,11 @@ class money extends Core {
 	public function add_discounts() {
 		$discount_options = $this->get_discount_reasons();
 
+		$template = "add_discounts.tpl";
+		$data['reservationID'] = $_GET['reservationID'];
+		$data['discount_options'] = $discount_options;
+		$this->load_smarty($data,$template);
+
 	}
 
 
