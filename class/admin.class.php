@@ -423,8 +423,9 @@ class admin extends resellers {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$html .= "<tr><td>$row[title]</td><td>$$row[price]</td><td>...</td></tr>";
+			$found = "1";
 		}
-		if ($html == "") {
+		if ($found != "1") {
 			$html .= "<tr><td colspan=3><font color=blue>There are no line items defined.</font></td></tr>";
 		}
 		return $html;
