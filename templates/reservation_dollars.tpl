@@ -32,6 +32,7 @@
 	<td><b>Amount</b></td>
 	<th><b>Date</b></th>
 </tr>
+</thead>
 <tbody>
 	{if $discount_history eq ""}
 	<tr><td colspan="4"><font color=blue>Discount history does not exist for this reservation.</font></td></tr>
@@ -39,6 +40,7 @@
 	{$discount_history}
 	{/if}
 </tbody>
+</table>
 
 <h3>Payments</h3><hr>
 <input type="button" value="Add Payment" class="btn btn-success" onclick="document.location.href='payments/{$reservationID}'"></h3>
