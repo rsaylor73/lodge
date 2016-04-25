@@ -217,6 +217,24 @@ class money extends Core {
 
 	}
 
+	// Record and save the discount to the RSV
+	public function save_new_discount() {
+		$sql = "INSERT INTO `discounts` (`general_discount_reasonID`,`amount`,`date_added`,`date_modified`,`userID`,`reservationID`) 
+		VALUE ('$_POST[general_discount_reasonID]','$_POST[amount]','$today','$today','$_SESSION[id]','$_POST[reservationID]')";
+
+		$result = $this->new_mysql($sql);
+		if ($result == "TRUE") {
+			$msg = "<font color=green>The discount was applied.</font><br>";
+		} else {
+			$msg = "<font color=red>The discount failed to apply.</font><br>";
+		}
+		$template = "save_new_discount.tpl";
+		$data['reservationID'] = $_POST['reservationID'];
+		$data['msg'] = $msg;
+		$this->load_smarty($data,$template);
+
+	}
+
 
 
 
