@@ -55,6 +55,7 @@
       <ul>
 
          <li><a href='lodge'><span>Manage Lodge</span></a></li>
+         <li><a href='line_items'><span>Line Items</span></a></li>
          <li><a href='users'><span>Users</span></a></li>
 
 
