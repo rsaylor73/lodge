@@ -414,7 +414,7 @@ class admin extends resellers {
 
 	public function line_items() {
 		$template = "line_items.tpl";
-
+		$data['html'] = $this->list_line_items();
 		$this->load_smarty($data,$template);
 	}
 
@@ -433,7 +433,6 @@ class admin extends resellers {
 
 	public function newlineitem() {
 		$template = "newlineitem.tpl";
-		$data['html'] = $this->list_line_items();
 		$this->load_smarty($null,$template);
 	}
 
