@@ -418,10 +418,37 @@ class admin extends resellers {
 		$this->load_smarty($data,$template);
 	}
 
+	private function list_line_items() {
+		$sql = "SELECT * FROM `line_items` li ORDER BY `title` ASC";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$html .= "<tr><td>$row[title]</td><td>$$row[price]</td><td>...</td></tr>";
+		}
+		if ($html == "") {
+			$html .= "<tr><td colspan=3><font color=blue>There are no line items defined.</font></td></tr>";
+		}
+		return $html;
+	}
+
 	public function newlineitem() {
 		$template = "newlineitem.tpl";
-
+		$data['html'] = $this->list_line_items();
 		$this->load_smarty($null,$template);
+	}
+
+	public function savelineitem() {
+		$sql = "INSERT INTO `line_items` (`title`,`description`,`price`,`date_added`,`date_updated`,`userID`) VALUES
+		('$_POST[title]','$_POST[description]','$_POST[price]','$today','$today','$_SESSION[id]')
+		";
+		$result = $this->new_mysql($sql);
+		if ($result == "TRUE") {
+			$data['msg'] = "<font color=green>The line item was added.</font>";
+		} else {
+			$data['msg'] = "<font color=red>The line item failed to add.</font>";
+		}
+		$template = "line_items.tpl";
+		$data['html'] = $this->list_line_items();
+		$this->load_smarty($data,$template);
 	}
 
 
