@@ -30,6 +30,7 @@ RewriteRule ^assignreseller/([a-zA-Z0-9]+)/?$ index.php?section=assignreseller&r
 RewriteRule ^newagent/([a-zA-Z0-9]+)/?$ index.php?section=newagent&resellerID=$1 [NC,L]
 RewriteRule ^payments/([a-zA-Z0-9]+)/?$ index.php?section=payments&reservationID=$1 [NC,L]
 RewriteRule ^add_discounts/([a-zA-Z0-9]+)/?$ index.php?section=add_discounts&reservationID=$1 [NC,L]
+RewriteRule ^add_line_item/([a-zA-Z0-9]+)/?$ index.php?section=add_line_item&reservationID=$1 [NC,L]
 
 
 # Three params

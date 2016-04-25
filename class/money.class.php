@@ -209,7 +209,26 @@ class money extends Core {
 
 	// Record info about the line item billing
 	public function add_line_item() {
+		$template = "add_line_item.tpl";
 
+
+		$this->load_smarty($data,$template);
+
+	}
+
+	private function get_contacts_in_rsv($reservationID) {
+		$sql = "
+		SELECT
+
+
+		FROM
+			`lodge_res`.`beds` b,
+			
+
+		WHERE
+			`b`.`reservationID` = '$reservationID'
+			AND `b`.`contactID` = `c`.`contactID`
+		";
 	}
 
 	private function get_discount_reasons() {
