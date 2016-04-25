@@ -180,6 +180,34 @@ class money extends Core {
 		return $html;
 	}
 
+	public function get_discount_history($reservationID) {
+		$sql = "
+		SELECT
+			`gdr`.`general_discount_reason,
+			`d`.`amount`,
+			DATE_FORMAT(`d`.`date_added`, '%m/%d/%Y') AS 'date_added',
+			DATE_FORMAT(`d`.`date_modified`, '%m/%d/%Y') AS 'date_modified'
+
+		FROM
+			`lodge_res`.`discounts` d,
+			`reserve`.`general_discount_reasons` gdr
+
+		WHERE
+			`d`.`reservationID` = '$reservationID'
+			AND `d`.`general_discount_reasonID` = `gdr`.`general_discount_reasonID`
+
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$html .= "<tr><td>$row[general_discount_reason]</td><td>$$row[amount]</td><td>$row[date_added]</td></tr>";
+			$total = $total + $row['amount'];
+		}
+		if ($amount > 0) {
+			$html .= "<tr><td><b>Total:</b></td><td><b>$$total</b></td><td>&nbsp;</td></tr>";
+		}
+		return $html;
+	}
+
 	// Record info about the line item billing
 	public function add_line_item() {
 
@@ -219,14 +247,15 @@ class money extends Core {
 
 	// Record and save the discount to the RSV
 	public function save_new_discount() {
+		$today = date("Ymd");
 		$sql = "INSERT INTO `discounts` (`general_discount_reasonID`,`amount`,`date_added`,`date_modified`,`userID`,`reservationID`) 
 		VALUE ('$_POST[general_discount_reasonID]','$_POST[amount]','$today','$today','$_SESSION[id]','$_POST[reservationID]')";
 
 		$result = $this->new_mysql($sql);
 		if ($result == "TRUE") {
-			$msg = "<font color=green>The discount was applied.</font><br>";
+			$msg = "<font color=green>The discount was applied.</font>";
 		} else {
-			$msg = "<font color=red>The discount failed to apply.</font><br>";
+			$msg = "<font color=red>The discount failed to apply.</font>";
 		}
 		$template = "save_new_discount.tpl";
 		$data['reservationID'] = $_POST['reservationID'];

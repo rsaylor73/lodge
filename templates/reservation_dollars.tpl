@@ -25,7 +25,20 @@
 
 <h3>Discounts</h3><hr>
 <input type="button" value="Add Discount" class="btn btn-success" onclick="document.location.href='add_discounts/{$reservationID}'"></h3>
-
+<table class="table">
+<thead>
+<tr>
+	<th><b>Discount</b></th>
+	<td><b>Amount</b></td>
+	<th><b>Date</b></th>
+</tr>
+<tbody>
+	{if $discount_history eq ""}
+	<tr><td colspan="4"><font color=blue>Discount history does not exist for this reservation.</font></td></tr>
+	{else}
+	{$discount_history}
+	{/if}
+</tbody>
 
 <h3>Payments</h3><hr>
 <input type="button" value="Add Payment" class="btn btn-success" onclick="document.location.href='payments/{$reservationID}'"></h3>
@@ -40,7 +53,7 @@
 </tr>
 </thead>
 <tbody>
-	{if $payment_history == ""}
+	{if $payment_history eq ""}
 	<tr><td colspan="4"><font color=blue>Payment history does not exist for this reservation.</font></td></tr>
 	{else}
 	{$payment_history}
