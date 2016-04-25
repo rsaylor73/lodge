@@ -412,6 +412,18 @@ class admin extends resellers {
 
 	}
 
+	public function line_items() {
+		$template = "line_items.tpl";
+
+		$this->load_smarty($data,$template);
+	}
+
+	public function newlineitem() {
+		$template = "newlineitem.tpl";
+
+		$this->load_smarty($null,$template);
+	}
+
 
 
 // end class
