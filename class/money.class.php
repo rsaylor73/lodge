@@ -211,6 +211,7 @@ class money extends Core {
 	public function add_line_item() {
 		$template = "add_line_item.tpl";
 		$data['options'] = $this->get_contacts_in_rsv($_GET['reservationID']);
+		$data['line_items'] = $this->get_line_items();
 		$data['reservationID'] = $_GET['reservationID'];
 
 		$this->load_smarty($data,$template);
@@ -239,6 +240,18 @@ class money extends Core {
 		}
 		if ($options == "") {
 			$options = "<option value=\"\">You need to assign contacts first.</option>";
+		}
+		return $options;
+	}
+
+	private function get_line_items() {
+		$sql = "SELECT `id`,`title`,`price` FROM `line_items` ORDER BY `title` ASC";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$options .= "<option value=\"$row[id]\">$row[title] ($$row[price])</option>";
+		}
+		if ($options == "") {
+			$options = "<option value=\"\">There are no line items please add one.</option>";
 		}
 		return $options;
 	}
