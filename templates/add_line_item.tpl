@@ -1,5 +1,5 @@
 <div class="col-md-6">
-<h2>Add Line Item / Transfer</h2>
+<h2><input type="button" value="&lt;&lt; Back" onclick="javascript:window.history.back()"> Add Line Item / Transfer</h2>
 
 <form action="savelineitemtoguest" method="post">
 <input type="hidden" name="reservationID" value="{$reservationID}">
