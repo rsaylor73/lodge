@@ -210,7 +210,8 @@ class money extends Core {
 	// Record info about the line item billing
 	public function add_line_item() {
 		$template = "add_line_item.tpl";
-
+		$data['options'] = $this->get_contacts_in_rsv($_GET['reservationID']);
+		$data['reservationID'] = $_GET['reservationID'];
 
 		$this->load_smarty($data,$template);
 
@@ -219,16 +220,27 @@ class money extends Core {
 	private function get_contacts_in_rsv($reservationID) {
 		$sql = "
 		SELECT
-
+			`c`.`contactID`,
+			`c`.`first`,
+			`c`.`last`
 
 		FROM
 			`lodge_res`.`beds` b,
+			`reserve`.`contacts` c
 			
 
 		WHERE
 			`b`.`reservationID` = '$reservationID'
 			AND `b`.`contactID` = `c`.`contactID`
 		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$options .= "<option value=\"$row[contactID]\">$row[first] $row[last]</option>";
+		}
+		if ($options == "") {
+			$options = "<option value=\"\">You need to assign contacts first.</option>";
+		}
+		return $options;
 	}
 
 	private function get_discount_reasons() {
