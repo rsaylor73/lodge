@@ -21,6 +21,14 @@
 <h3>Transfer/Line Item Dollars</h3>
 <hr>
 <input type="button" value="Add Line Item" class="btn btn-success" onclick="document.location.href='add_line_item/{$reservationID}'"></h3>
+<table class="table">
+<thead>
+<tr><th><b>Name</b></th><th><b>Title</b></th><th><b>Price</b></th></tr>
+</thead>
+<tbody>
+{$line_items}
+</tbody>
+</table>
 
 
 <h3>Discounts</h3><hr>

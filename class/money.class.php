@@ -278,6 +278,40 @@ class money extends Core {
 
 	}
 
+	public function display_line_items_in_rsv($reservationID) {
+		$sql = "
+		SELECT
+			`c`.`first`,
+			`c`.`last`,
+			`l`.`title`,
+			`l`.`price`
+
+		FROM
+			`lodge_res`.`line_item_billing` lib,
+			`reserve`.`contacts` c,
+			`lodge_res`.`line_items` l
+
+		WHERE
+			`lib`.`reservationID` = '$reservationID'
+			AND `lib`.`line_item_id` = `l`.`id`
+			AND `lib`.`contactID` = `c`.`contactID`
+
+		";
+		$result = $this->new_mysql($sql);
+		while ($row=$result->fetch_assoc()) {
+			$html .= "<tr><td>$row[first] $row[last]</td><td>$row[title]</td><td>$$row[price]</td></tr>";
+			$total = $total + $row['price'];
+			$found = "1";
+		}
+		if ($total > 0) {
+			$html .= "<tr><td><b>Total:</b></td><td>&nbsp;</td><td><b>$$total</b></td></tr>";
+		}
+		if ($found != "1") {
+			$html .= "<tr><td colspan=3><font color=blue>There are no line items selected.</font></td></tr>";
+		}
+		return $html;
+	}
+
 	private function get_discount_reasons() {
 		$sql = "
 		SELECT

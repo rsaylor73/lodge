@@ -990,6 +990,7 @@ class reservations extends money {
      	$data['payment_history'] = $payment_history;
      	$discount_history = $this->get_discount_history($reservationID);
      	$data['discount_history'] = $discount_history;
+     	$data['line_items'] = $this->display_line_items_in_rsv($reservationID);
     	//$data['test'] = "ok 3";
 
     	/*
