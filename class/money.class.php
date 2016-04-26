@@ -258,6 +258,26 @@ class money extends Core {
 		return $options;
 	}
 
+	public function savelineitemtoguest() {
+		$today = date("Ymd");
+		$sql = "
+		INSERT INTO `line_item_billing` (`reservationID`,`contactID`,`line_item_id`,`date_added`,`date_updated`,`userID`)
+		VALUES ('$_POST[reservationID]','$_POST[contactID]','$_POST[line_item]','$today','$today','$_SESSION[id]')
+		";
+		$result = $this->new_mysql($sql);
+
+		if ($result == "TRUE") {
+			$msg = "<font color=green>The line item was added.</font>";
+		} else {
+			$msg = "<font color=red>The line item failed to add.</font>";
+		}
+		$template = "savelineitemtoguest.tpl";
+		$data['reservationID'] = $_POST['reservationID'];
+		$data['msg'] = $msg;
+		$this->load_smarty($data,$template);
+
+	}
+
 	private function get_discount_reasons() {
 		$sql = "
 		SELECT
