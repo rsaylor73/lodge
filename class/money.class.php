@@ -233,6 +233,8 @@ class money extends Core {
 		WHERE
 			`b`.`reservationID` = '$reservationID'
 			AND `b`.`contactID` = `c`.`contactID`
+
+		GROUP BY `c`.`contactID`
 		";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
