@@ -447,8 +447,15 @@ class admin extends resellers {
 			$data['msg'] = "<font color=red>The line item can not be deleted because it is in use with a guest.</font>";
 			$this->load_smarty($data,$template);
 		} else {
-
-
+			$sql = "DELETE FROM `line_items` WHERE `id` = '$_GET[id]'";
+			$result = $this->new_mysql($sql);
+			if ($result == "TRUE") {
+				$data['msg'] = "<font color=green>The line item was deleted.</font>";	
+			} else {
+				$data['msg'] = "<font color=red>The line item failed to delete.</font>";
+			}
+			$template = "line_items.tpl";
+			$this->load_smarty($data,$template);
 		}
 
 	}
