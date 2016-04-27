@@ -462,7 +462,15 @@ class admin extends resellers {
 	}
 
 	public function editlineitem() {
-
+		$sql = "SELECT * FROM `line_items` WHERE `id` = '$_GET[id]'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			foreach ($row as $key=>$value) {
+				$data[$key] => $value;
+			}
+		}
+		$template = "editlineitem.tpl";
+		$this->load_smarty($data,$template);
 	}
 
 	public function newlineitem() {
