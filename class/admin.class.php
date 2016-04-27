@@ -466,7 +466,7 @@ class admin extends resellers {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			foreach ($row as $key=>$value) {
-				$data[$key] => $value;
+				$data[$key] = $value;
 			}
 		}
 		$template = "editlineitem.tpl";
