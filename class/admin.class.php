@@ -424,7 +424,7 @@ class admin extends resellers {
 		while ($row = $result->fetch_assoc()) {
 			$html .= "<tr><td>$row[title]</td><td>$$row[price]</td><td>
 				<input type=\"button\" value=\"Edit\" class=\"btn btn-primary\" onclick=\"editlineitem/$row[id]\">
-				<input type=\"button\" value=\"Edit\" class=\"btn btn-warning\" onclick=\"deletelineitem/$row[id]\">
+				<input type=\"button\" value=\"Delete\" class=\"btn btn-danger\" onclick=\"deletelineitem/$row[id]\">
 				</td></tr>";
 			$found = "1";
 		}
