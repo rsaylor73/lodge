@@ -473,6 +473,19 @@ class admin extends resellers {
 		$this->load_smarty($data,$template);
 	}
 
+	public function updatelineitem() {
+		$sql = "UPDATE `line_items` SET `title` = '$_POST[title]', `description` = '$_POST[description]', `price` = '$_POST[price]' WHERE `id` = '$_POST[id]'";
+		$result = $this->new_mysql($sql);
+		if ($result == "TRUE") {
+			$data['msg'] = "<font color=green>The line item was updated.</font>";	
+		} else {
+			$data['msg'] = "<font color=red>The line item failed to update.</font>";
+		}
+		$data['html'] = $this->list_line_items();
+		$template = "line_items.tpl";
+		$this->load_smarty($data,$template);
+	}
+
 	public function newlineitem() {
 		$template = "newlineitem.tpl";
 		$this->load_smarty($null,$template);
