@@ -422,7 +422,10 @@ class admin extends resellers {
 		$sql = "SELECT * FROM `line_items` li ORDER BY `title` ASC";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$html .= "<tr><td>$row[title]</td><td>$$row[price]</td><td>...</td></tr>";
+			$html .= "<tr><td>$row[title]</td><td>$$row[price]</td><td>
+				<input type=\"button\" value=\"Edit\" class=\"btn btn-primary\" onclick=\"editlineitem/$row[id]\">
+				<input type=\"button\" value=\"Edit\" class=\"btn btn-warning\" onclick=\"deletelineitem/$row[id]\">
+				</td></tr>";
 			$found = "1";
 		}
 		if ($found != "1") {
