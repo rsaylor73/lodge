@@ -423,8 +423,8 @@ class admin extends resellers {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$html .= "<tr><td>$row[title]</td><td>$$row[price]</td><td>
-				<input type=\"button\" value=\"Edit\" class=\"btn btn-primary\" onclick=\"editlineitem/$row[id]\">
-				<input type=\"button\" value=\"Delete\" class=\"btn btn-danger\" onclick=\"deletelineitem/$row[id]\">
+				<input type=\"button\" value=\"Edit\" class=\"btn btn-primary\" onclick=\"document.location.href='editlineitem/$row[id]'\">
+				<input type=\"button\" value=\"Delete\" class=\"btn btn-danger\" onclick=\"document.location.href='deletelineitem/$row[id]'\">
 				</td></tr>";
 			$found = "1";
 		}
@@ -432,6 +432,29 @@ class admin extends resellers {
 			$html .= "<tr><td colspan=3><font color=blue>There are no line items defined.</font></td></tr>";
 		}
 		return $html;
+	}
+
+	public function deletelineitem() {
+		// check if already on a record
+		$sql = "SELECT `line_item_id` FROM `line_item_billing` WHERE `line_item_id` = '$_GET[id]'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$err = "1";
+		}
+		if ($err == "1") {
+			$template = "line_items.tpl";
+			$data['html'] = $this->list_line_items();
+			$data['msg'] = "<font color=red>The line item can not be deleted because it is in use with a guest.</font>";
+			$this->load_smarty($data,$template);
+		} else {
+
+
+		}
+
+	}
+
+	public function editlineitem() {
+
 	}
 
 	public function newlineitem() {
