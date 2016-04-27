@@ -454,6 +454,7 @@ class admin extends resellers {
 			} else {
 				$data['msg'] = "<font color=red>The line item failed to delete.</font>";
 			}
+			$data['html'] = $this->list_line_items();
 			$template = "line_items.tpl";
 			$this->load_smarty($data,$template);
 		}
