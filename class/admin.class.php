@@ -513,7 +513,32 @@ class admin extends resellers {
 	}
 
 	private function list_discounts() {
-		
+		$sql = "SELECT * FROM `general_discount_reason` ORDER BY `reason` ASC";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$html .= "<tr><td>$row[reason]</td><td>$row[show]</td><td>
+			<input type=\"button\" value=\"Edit\" class=\"table\" onclick=\"document.location.href='editdiscount/$row[id]'\">
+			</td></tr>";
+		}
+		return $html;
+	}
+
+	public function newdiscount() {
+		$template = "newdiscount.tpl";
+		$this->load_smarty($null,$template);
+	}
+
+	public function savenewdiscount() {
+		$sql = "INSERT INTO `general_discount_reason` (`reason`,`show`) VALUES ('$_POST[reason]','Yes')";
+		$result = $this->new_mysql($sql);
+		if ($result == "TRUE") {
+			$data['msg'] = "<font color=green>The discount was added.</font>";
+		} else {
+			$data['msg'] = "<font color=red>The discount failed to add.</font>";
+		}
+		$data['html'] = $this->list_discounts();
+		$template = "discounts.tpl";
+		$this->load_smarty($data,$template);
 	}
 
 

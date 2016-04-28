@@ -7,7 +7,7 @@
 <h2>Existing Discounts</h2><hr>
 <table class="table">
 <thead>
-<tr><th><b>Title</b></th><th><b>Active</b></th><th><b>Manage</b></th></tr>
+<tr><th><b>Reason</b></th><th><b>Active</b></th><th><b>Manage</b></th></tr>
 </thead>
 <tbody>
 	{$html}
