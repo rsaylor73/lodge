@@ -301,7 +301,9 @@ class money extends Core {
 		$result = $this->new_mysql($sql);
 		while ($row=$result->fetch_assoc()) {
 			$html .= "<tr><td>
-			<a href=\"editlineitem/$$row[id]/$reservationID\"><i class=\"fa fa-wrench\" aria-hidden=\"true\"></i></a>
+			<a href=\"editlineitem/$row[id]/$reservationID\"><i class=\"fa fa-wrench\" aria-hidden=\"true\"></i></a>&nbsp;
+			<a href=\"deletelineitem/$row[id]/$reservationID\" onclick=\"return confirm('You are about to delete $row[title] from guest $row[first] $row[last]. Click OK to confirm')\">
+				<i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>&nbsp;
 
 			$row[first] $row[last]</td><td>$row[title]</td><td>$$row[price]</td></tr>";
 			$total = $total + $row['price'];
