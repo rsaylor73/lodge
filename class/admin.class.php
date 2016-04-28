@@ -512,7 +512,7 @@ class admin extends resellers {
 		$this->load_smarty($data,$template);
 	}
 
-	private list_discounts() {
+	private function list_discounts() {
 		
 	}
 
