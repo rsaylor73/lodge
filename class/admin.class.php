@@ -506,6 +506,16 @@ class admin extends resellers {
 		$this->load_smarty($data,$template);
 	}
 
+	public function discounts() {
+		$template = "discounts.tpl";
+		$data['html'] = $this->list_discounts();
+		$this->load_smarty($data,$template);
+	}
+
+	private list_discounts() {
+		
+	}
+
 
 
 // end class
