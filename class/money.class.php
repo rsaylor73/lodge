@@ -284,7 +284,8 @@ class money extends Core {
 			`c`.`first`,
 			`c`.`last`,
 			`l`.`title`,
-			`l`.`price`
+			`l`.`price`,
+			`l`.`id`
 
 		FROM
 			`lodge_res`.`line_item_billing` lib,
@@ -300,7 +301,7 @@ class money extends Core {
 		$result = $this->new_mysql($sql);
 		while ($row=$result->fetch_assoc()) {
 			$html .= "<tr><td>
-			<i class=\"fa fa-wrench\" aria-hidden=\"true\"></i>
+			<a href=\"editlineitem/$$row[id]/$reservationID\"><i class=\"fa fa-wrench\" aria-hidden=\"true\"></i></a>
 
 			$row[first] $row[last]</td><td>$row[title]</td><td>$$row[price]</td></tr>";
 			$total = $total + $row['price'];
