@@ -517,7 +517,7 @@ class admin extends resellers {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$html .= "<tr><td>$row[reason]</td><td>$row[show]</td><td>
-			<input type=\"button\" value=\"Edit\" class=\"btn btn-default\" onclick=\"document.location.href='editdiscount/$row[id]'\">
+			<input type=\"button\" value=\"Edit\" class=\"btn btn-primary\" onclick=\"document.location.href='editdiscount/$row[id]'\">
 			</td></tr>";
 		}
 		return $html;
