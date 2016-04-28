@@ -16,7 +16,7 @@
 </tr>
 
 
-<tr id="credit_card1" style="display:none"><td>Name on Card:</td><td><input type="text" name="cc_name" id="cc_name" size=20 placeholder="Customer Name"></td></tr>
+<tr id="credit_card1" style="display:none"><td>Name on Card:</td><td><input type="text" name="cc_name" id="cc_name" size=20 placeholder="Name on Card"></td></tr>
 <tr id="credit_card2" style="display:none"><td>
 	<i class="fa fa-cc-visa fa-3x" aria-hidden="true"></i>
 	<i class="fa fa-cc-mastercard fa-3x" aria-hidden="true"></i>
