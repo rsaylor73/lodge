@@ -41,7 +41,6 @@ RewriteRule ^editroom/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editroo
 RewriteRule ^reservation_dashboard/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=reservation_dashboard&reservationID=$1&part=$2 [NC,L]
 RewriteRule ^editagent/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editagent&resellerID=$1&agentID=$2 [NC,L]
 RewriteRule ^canceltent/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=canceltent&tent=$1&reservationID=$2 [NC,L]
-RewriteRule ^editlineitemassigned/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editlineitemassigned&id=$1&reservationID=$2 [NC,L]
 RewriteRule ^deletelineitemassigned/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=deletelineitemassigned&id=$1&reservationID=$2 [NC,L]
 
 

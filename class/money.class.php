@@ -301,8 +301,7 @@ class money extends Core {
 		$result = $this->new_mysql($sql);
 		while ($row=$result->fetch_assoc()) {
 			$html .= "<tr><td>
-			<a href=\"editlineitemassigned/$row[id]/$reservationID\"><i class=\"fa fa-wrench\" aria-hidden=\"true\"></i></a>&nbsp;
-			<a href=\"deletelineitemassigned/$row[id]/$reservationID\" onclick=\"return confirm('You are about to delete $row[title] from guest $row[first] $row[last]. Click OK to confirm')\">
+				<a href=\"deletelineitemassigned/$row[id]/$reservationID\" onclick=\"return confirm('You are about to delete $row[title] from guest $row[first] $row[last]. Click OK to confirm')\">
 				<i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>&nbsp;
 
 			$row[first] $row[last]</td><td>$row[title]</td><td>$$row[price]</td></tr>";
@@ -318,10 +317,7 @@ class money extends Core {
 		return $html;
 	}
 
-	public function editlineitemassigned() {
 
-
-	}
 
 	public function deletelineitemassigned() {
 		$sql = "DELETE FROM `line_item_billing` WHERE `id` = '$_GET[id]' AND `reservationID` = '$_GET[reservationID]' ";
