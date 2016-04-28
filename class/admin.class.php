@@ -555,7 +555,6 @@ class admin extends resellers {
 
 	public function updatediscount() {
 		$sql = "UPDATE `general_discount_reason` SET `reason` = '$_POST[reason]' , `show` = '$_POST[show]' WHERE `id` = '$_POST[id]'";
-		print "$sql";
 		$result = $this->new_mysql($sql);
 		if ($result == "TRUE") {
 			$data['msg'] = "<font color=green>The discount was updated.</font>";
