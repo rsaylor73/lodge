@@ -299,7 +299,10 @@ class money extends Core {
 		";
 		$result = $this->new_mysql($sql);
 		while ($row=$result->fetch_assoc()) {
-			$html .= "<tr><td>$row[first] $row[last]</td><td>$row[title]</td><td>$$row[price]</td></tr>";
+			$html .= "<tr><td>
+			<i class=\"fa fa-wrench\" aria-hidden=\"true\"></i>
+
+			$row[first] $row[last]</td><td>$row[title]</td><td>$$row[price]</td></tr>";
 			$total = $total + $row['price'];
 			$found = "1";
 		}
