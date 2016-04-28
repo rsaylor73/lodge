@@ -541,6 +541,31 @@ class admin extends resellers {
 		$this->load_smarty($data,$template);
 	}
 
+	public function editdiscount() {
+		$sql = "SELECT * FROM `general_discount_reason` WHERE `id` = '$_GET[id]'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			foreach ($row as $key=>$value) {
+				$data[$key] = $value;
+			}
+		}
+		$template = "editdiscount.tpl";
+		$this->load_smarty($data,$template);
+	}
+
+	public function updatediscount() {
+		$sql = "UPDATE `general_discount_reason` SET `reason` = '$_POST[reason]' , `show` = '$_POST[show]' WHERE `id` = '$_POST[id]'";
+		$result = $this->new_mysql($sql);
+		if ($result == "TRUE") {
+			$data['msg'] = "<font color=green>The discount was updated.</font>";
+		} else {
+			$data['msg'] = "<font color=red>The discount failed to update.</font>";
+		}
+		$data['html'] = $this->list_discounts();
+		$template = "discounts.tpl";
+		$this->load_smarty($data,$template);
+	}
+
 
 
 // end class
