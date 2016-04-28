@@ -285,7 +285,7 @@ class money extends Core {
 			`c`.`last`,
 			`l`.`title`,
 			`l`.`price`,
-			`l`.`id`
+			`lib`.`id`
 
 		FROM
 			`lodge_res`.`line_item_billing` lib,
@@ -301,8 +301,8 @@ class money extends Core {
 		$result = $this->new_mysql($sql);
 		while ($row=$result->fetch_assoc()) {
 			$html .= "<tr><td>
-			<a href=\"editlineitem/$row[id]/$reservationID\"><i class=\"fa fa-wrench\" aria-hidden=\"true\"></i></a>&nbsp;
-			<a href=\"deletelineitem/$row[id]/$reservationID\" onclick=\"return confirm('You are about to delete $row[title] from guest $row[first] $row[last]. Click OK to confirm')\">
+			<a href=\"editlineitemassigned/$row[id]/$reservationID\"><i class=\"fa fa-wrench\" aria-hidden=\"true\"></i></a>&nbsp;
+			<a href=\"deletelineitemassigned/$row[id]/$reservationID\" onclick=\"return confirm('You are about to delete $row[title] from guest $row[first] $row[last]. Click OK to confirm')\">
 				<i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>&nbsp;
 
 			$row[first] $row[last]</td><td>$row[title]</td><td>$$row[price]</td></tr>";
@@ -316,6 +316,24 @@ class money extends Core {
 			$html .= "<tr><td colspan=3><font color=blue>There are no line items selected.</font></td></tr>";
 		}
 		return $html;
+	}
+
+	public function editlineitemassigned() {
+
+
+	}
+
+	public function deletelineitemassigned() {
+		$sql = "DELETE FROM `line_item_billing` WHERE `id` = '$_GET[id]' AND `reservationID` = '$_GET[reservationID]' ";
+		$result = $this->new_mysql($sql);
+		$data['reservationID'] = $_GET['reservationID'];
+		if ($result == "TRUE") {
+			$data['msg'] = "<font color=green>The line item was deleted.</font>";
+		} else {
+			$data['msg'] = "<font color=red>The line item failed to delete.</font>";
+		}
+		$template = "deletelineitemassigned.tpl";
+		$this->load_smarty($data,$template);
 	}
 
 	private function get_discount_reasons() {
