@@ -216,6 +216,8 @@ class money extends Core {
 	public function editdiscountassigned() {
 		$template = "editdiscountassigned.tpl";
 		$data['discount_options'] = $this->get_discount_reasons($id);
+		$data['id'] = $_GET['id'];
+		$data['reservationID'] = $_GET['reservationID'];
 		$sql = "SELECT `amount` FROM `discounts` WHERE `id` = '$_GET[id]' AND `reservationID` = '$_GET[reservationID]'";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
