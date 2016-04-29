@@ -16,7 +16,7 @@
 <tr><td>Number of Nights:</td><td>{$nights}</td></tr>
 <tr><td>Number of Tents:</td><td>{$tents}</td></tr>
 <tr><td>Total Reservation:</td><td>${$total}</td></tr>
-<tr><td>Balance Due:</td><td><a href="javascript:alert('Not done yet')">Click Here</a></td></tr>
+<tr><td>Balance Due:</td><td><a href="reservation_dashboard/{$reservationID}/dollars/#balance_due">Click Here</a></td></tr>
 </table>
 
 <h3>Transfer/Line Item Dollars</h3>
