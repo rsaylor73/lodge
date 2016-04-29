@@ -233,7 +233,7 @@ class money extends Core {
 		$sql = "UPDATE `discounts` SET `general_discount_reasonID` = '$_POST[general_discount_reasonID]', `amount` = '$_POST[amount]', `date_modified` = '$today', `userID` = '$_SESSION[id]' 
 		WHERE `id` = '$_POST[id]' AND `reservationID` = '$_POST[reservationID]' ";
 		$result = $this->new_mysql($sql);
-		$data['reservationID'] = $_GET['reservationID'];
+		$data['reservationID'] = $_POST['reservationID'];
 		if ($result == "TRUE") {
 			$data['msg'] = "<font color=green>The discount was updated.</font>";
 		} else {
