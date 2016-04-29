@@ -213,6 +213,24 @@ class money extends Core {
 		return $html;
 	}
 
+	public function editdiscountassigned() {
+
+	}
+
+	public function deletediscountassigned() {
+		$sql = "DELETE FROM `discounts` WHERE `id` = '$_GET[id]' AND `reservationID` = '$_GET[reservationID]' ";
+		$result = $this->new_mysql($sql);
+		$data['reservationID'] = $_GET['reservationID'];
+		if ($result == "TRUE") {
+			$data['msg'] = "<font color=green>The discount was deleted.</font>";
+		} else {
+			$data['msg'] = "<font color=red>The discount failed to delete.</font>";
+		}
+		$template = "deletediscountassigned.tpl";
+		$this->load_smarty($data,$template);
+
+	}
+
 	// Record info about the line item billing
 	public function add_line_item() {
 		$template = "add_line_item.tpl";
