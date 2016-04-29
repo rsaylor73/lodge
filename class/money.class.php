@@ -184,6 +184,7 @@ class money extends Core {
 		$sql = "
 		SELECT
 			`gdr`.`reason`,
+			`d`.`id`,
 			`d`.`amount`,
 			DATE_FORMAT(`d`.`date_added`, '%m/%d/%Y') AS 'date_added'
 
@@ -198,7 +199,12 @@ class money extends Core {
 		";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$html .= "<tr><td>$row[reason]</td><td>$$row[amount]</td><td>$row[date_added]</td></tr>";
+			$html .= "<tr><td>
+			<a href=\"editdiscountassigned/$row[id]/$reservationID\"><i class=\"fa fa-wrench\" aria-hidden=\"true\"></i></a>&nbsp;
+			<a href=\"deletediscountassigned/$row[id]/$reservationID\" onclick=\"return confirm('You are about to delete $row[reason]. Click OK to confirm.')\">
+				<i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>&nbsp;
+
+			$row[reason]</td><td>$$row[amount]</td><td>$row[date_added]</td></tr>";
 			$total = $total + $row['amount'];
 		}
 		if ($amount > 0) {
