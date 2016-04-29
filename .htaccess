@@ -43,6 +43,11 @@ RewriteRule ^reservation_dashboard/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?se
 RewriteRule ^editagent/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editagent&resellerID=$1&agentID=$2 [NC,L]
 RewriteRule ^canceltent/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=canceltent&tent=$1&reservationID=$2 [NC,L]
 RewriteRule ^deletelineitemassigned/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=deletelineitemassigned&id=$1&reservationID=$2 [NC,L]
+RewriteRule ^editdiscountassigned/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editdiscountassigned&id=$1&reservationID=$2 [NC,L]
+RewriteRule ^deletediscountassigned/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=deletediscountassigned&id=$1&reservationID=$2 [NC,L]
+
+# test
+
 
 
 # Four params
