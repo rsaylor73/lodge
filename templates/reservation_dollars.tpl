@@ -23,7 +23,7 @@
 <input type="button" value="Add Line Item" class="btn btn-success" onclick="document.location.href='add_line_item/{$reservationID}'"></h3>
 <table class="table">
 <thead>
-<tr><th><b>Guest</b></th><th><b>Title</b></th><th><b>Price</b></th></tr>
+<tr><th width="33%"><b>Guest</b></th><th width="33%"><b>Title</b></th><th width="33%"><b>Price</b></th></tr>
 </thead>
 <tbody>
 {$line_items}
@@ -36,9 +36,9 @@
 <table class="table">
 <thead>
 <tr>
-	<th><b>Discount</b></th>
-	<td><b>Amount</b></td>
-	<th><b>Date</b></th>
+	<th width="33%"><b>Discount</b></th>
+	<td width="33%"><b>Amount</b></td>
+	<th width="33%"><b>Date</b></th>
 </tr>
 </thead>
 <tbody>
@@ -56,10 +56,10 @@
 <table class="table">
 <thead>
 <tr>
-	<th><b>Payment Type</b></th>
-	<th><b>Amount</b></th>
-	<th><b>Date</b></th>
-	<th><b>Transaction ID</b></th>
+	<th width="25%"><b>Payment Type</b></th>
+	<th width="25%"><b>Amount</b></th>
+	<th width="25%"><b>Date</b></th>
+	<th width="25%"><b>Transaction ID</b></th>
 </tr>
 </thead>
 <tbody>
