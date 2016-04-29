@@ -16,6 +16,7 @@
 <tr><td>Number of Nights:</td><td>{$nights}</td></tr>
 <tr><td>Number of Tents:</td><td>{$tents}</td></tr>
 <tr><td>Total Reservation:</td><td>${$total}</td></tr>
+<tr><td>Balance Due:</td><td><a href="#balance_due">Click Here</a></td></tr>
 </table>
 
 <h3>Transfer/Line Item Dollars</h3>
@@ -72,4 +73,27 @@
 </table>
 
 <h3>Refunds/Cash Transfers</h3>
+<input type="button" value="Add Refund/Cash Transfer" class="btn btn-success" onclick="document.location.href='refundcashtransfer/{$reservationID}'"></h3>
+
+<h3 id="balance_due">Balance Due</h3>
+
+
+<script>
+$(function() {
+  $('a[href*="#"]:not([href="#"])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+</script>
+
+
 
