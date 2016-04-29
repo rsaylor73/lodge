@@ -214,7 +214,31 @@ class money extends Core {
 	}
 
 	public function editdiscountassigned() {
+		$template = "editdiscountassigned.tpl";
+		$data['discount_options'] = $this->get_discount_reasons($id);
+		$sql = "SELECT `amount` FROM `discounts` WHERE `id` = '$_GET[id]' AND `reservationID` = '$_GET[reservationID]'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$data['amount'] = $row['amount'];
+		}
 
+		$this->load_smarty($data,$template);
+
+	}
+
+	public function update_new_discount() {
+		$today = date("Ymd");
+		$sql = "UPDATE `discounts` SET `general_discount_reasonID` = '$_POST[general_discount_reasonID]', `amount` = '$_POST[amount]', `date_modified` = '$today', `userID` = '$_SESSION[id]' 
+		WHERE `id` = '$_POST[id]' AND `reservationID` = '$_POST[reservationID]' ";
+		$result = $this->new_mysql($sql);
+		$data['reservationID'] = $_GET['reservationID'];
+		if ($result == "TRUE") {
+			$data['msg'] = "<font color=green>The discount was updated.</font>";
+		} else {
+			$data['msg'] = "<font color=red>The discount failed to update.</font>";
+		}
+		$template = "update_new_discount.tpl";
+		$this->load_smarty($data,$template);
 	}
 
 	public function deletediscountassigned() {
@@ -356,7 +380,7 @@ class money extends Core {
 		$this->load_smarty($data,$template);
 	}
 
-	private function get_discount_reasons() {
+	private function get_discount_reasons($id) {
 		$sql = "
 		SELECT
 			`gdr`.`id`,
@@ -371,14 +395,18 @@ class money extends Core {
 		";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$options .= "<option value=\"$row[id]\">$row[reason]</option>";
+			if ($row['id'] == $id) {
+				$options .= "<option selected value=\"$row[id]\">$row[reason]</option>";
+			} else {
+				$options .= "<option value=\"$row[id]\">$row[reason]</option>";
+			}
 		}
 		return $options;
 	}
 
 	// Record info about the discount
 	public function add_discounts() {
-		$discount_options = $this->get_discount_reasons();
+		$discount_options = $this->get_discount_reasons($null);
 
 		$template = "add_discounts.tpl";
 		$data['reservationID'] = $_GET['reservationID'];
