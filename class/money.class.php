@@ -335,20 +335,19 @@ class money extends Core {
 	private function get_discount_reasons() {
 		$sql = "
 		SELECT
-			`gdr`.`general_discount_reasonID`,
-			`gdr`.`general_discount_reason`
+			`gdr`.`id`,
+			`gdr`.`reason`
 
 		FROM
-			`reserve`.`general_discount_reasons` gdr
+			`general_discount_reason` gdr
 
 		WHERE
-			`gdr`.`status2` = 'active'
-			AND `gdr`.`hide` != 'checked'
+			`gdr`.`show` = 'Yes'
 
 		";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$options .= "<option value=\"$row[general_discount_reasonID]\">$row[general_discount_reason]</option>";
+			$options .= "<option value=\"$row[id]\">$row[reason]</option>";
 		}
 		return $options;
 	}
