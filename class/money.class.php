@@ -183,22 +183,22 @@ class money extends Core {
 	public function get_discount_history($reservationID) {
 		$sql = "
 		SELECT
-			`gdr`.`general_discount_reason`,
+			`gdr`.`reason`,
 			`d`.`amount`,
 			DATE_FORMAT(`d`.`date_added`, '%m/%d/%Y') AS 'date_added'
 
 		FROM
-			`lodge_res`.`discounts` d,
-			`reserve`.`general_discount_reasons` gdr
+			`discounts` d,
+			`general_discount_reason` gdr
 
 		WHERE
 			`d`.`reservationID` = '$reservationID'
-			AND `d`.`general_discount_reasonID` = `gdr`.`general_discount_reasonID`
+			AND `d`.`general_discount_reasonID` = `gdr`.`id`
 
 		";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$html .= "<tr><td>$row[general_discount_reason]</td><td>$$row[amount]</td><td>$row[date_added]</td></tr>";
+			$html .= "<tr><td>$row[reason]</td><td>$$row[amount]</td><td>$row[date_added]</td></tr>";
 			$total = $total + $row['amount'];
 		}
 		if ($amount > 0) {
