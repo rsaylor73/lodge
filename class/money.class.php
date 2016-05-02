@@ -243,7 +243,7 @@ class money extends Core {
 			$data['msg'] = "<font color=red>The payment failed to delete.</font>";
 		}
 		$template = "deletepayment.tpl";
-		$data['reservationID'] = $_POST['reservationID'];
+		$data['reservationID'] = $_GET['reservationID'];
 		$this->load_smarty($data,$template);
 	}
 
