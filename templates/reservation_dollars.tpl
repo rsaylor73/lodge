@@ -40,8 +40,8 @@
 </tbody>
 </table>
 
-
-<h3 id="discounts">Discounts</h3><hr>
+<a name="discounts" id="discounts">
+<h3>Discounts</h3><hr>
 <input type="button" value="Add Discount" class="btn btn-success" onclick="document.location.href='add_discounts/{$reservationID}'"></h3>
 <table class="table">
 <thead>
