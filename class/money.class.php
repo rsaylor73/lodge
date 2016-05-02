@@ -199,7 +199,7 @@ class money extends Core {
 
 		";
 		$result = $this->new_mysql($sql);
-		while ($row = $this->fetch_assoc()) {
+		while ($row = $result->fetch_assoc()) {
 			foreach ($row as $key=>$value) {
 				$data[$key] = $value;
 			}
