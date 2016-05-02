@@ -1,6 +1,5 @@
-<a name="top" id="top"></a>
 <br>
-<h3>Nightly Rate</h3>
+<h3 id="top">Nightly Rate</h3>
 [<a href="reservation_dashboard/{$reservationID}/dollars/#transfers">Transfers/Line Items</a>] 
 [<a href="reservation_dashboard/{$reservationID}/dollars/#discounts">Discounts</a>] 
 [<a href="reservation_dashboard/{$reservationID}/dollars/#payments">Payments</a>] 
@@ -46,8 +45,7 @@
 </tbody>
 </table>
 
-<a name="discounts" id="discounts"></a>
-<h3>Discounts</h3><hr>
+<h3 id="discounts">Discounts</h3><hr>
 <input type="button" value="Add Discount" class="btn btn-success" onclick="document.location.href='add_discounts/{$reservationID}'"></h3>
 <table class="table">
 <thead>
