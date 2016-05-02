@@ -198,8 +198,6 @@ class money extends Core {
 			AND `p`.`reservationID` = '$_GET[reservationID]'
 
 		";
-		print "$sql";
-		die;
 		$result = $this->new_mysql($sql);
 		while ($row = $this->new_mysql($sql)) {
 			foreach ($row as $key=>$value) {
