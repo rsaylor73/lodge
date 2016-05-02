@@ -161,7 +161,8 @@ class money extends Core {
 			IF(`p`.`transactionID` != '',`p`.`transactionID`,'N/A') AS 'transactionID',
 			IF(`p`.`check_number` != '', `p`.`check_number`,'N/A') AS 'check_number',
 			`p`.`payment_type`,
-			`p`.`amount`
+			`p`.`amount`,
+			`p`.`id`
 
 		FROM
 			`payments` p
@@ -172,8 +173,8 @@ class money extends Core {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$html .= "<tr><td>
-			<i class=\"fa fa-wrench\" aria-hidden=\"true\"></i>&nbsp;
-			<i class=\"fa fa-trash\" aria-hidden=\"true\"></i>&nbsp;
+			<a href=\"editpayment/$row[id]/$reservationID\"><i class=\"fa fa-wrench\" aria-hidden=\"true\"></i></a>&nbsp;
+			<a href=\"deletepayment/$row[id]/$reservationID\" onclick=\"return confirm('You are about to delete a payment. Only an administration can continue. Click OK to confirm.')\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>&nbsp;
 			$row[payment_type]</td><td>$$row[amount]</td><td>$row[payment_date]</td><td>$row[transactionID]</td></tr>";
 			$total = $total + $row['amount'];
 		}
@@ -181,6 +182,33 @@ class money extends Core {
 			$html .= "<tr><td><b>Total:</b></td><td>$$total</td><td colspan=2>&nbsp;</td></tr>";
 		}
 		return $html;
+	}
+
+	public function editpayment() {
+		$template = "editpayment.tpl";
+		$sql = "
+		SELECT
+			`p`.*
+
+		FROM
+			`payments` p
+
+		WHERE
+			`p`.`id` = '$_GET[id]'
+			AND `p`.`reservationID` = '$_GET[reservationID]'
+
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $this->new_mysql($sql)) {
+			foreach ($row as $key=>$value) {
+				$data[$key] = $value;
+			}
+		}
+		$this->load_smarty($data,$template);
+	}
+
+	public function deletepayment() {
+
 	}
 
 	public function get_discount_history($reservationID) {

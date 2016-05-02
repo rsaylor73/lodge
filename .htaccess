@@ -45,6 +45,9 @@ RewriteRule ^canceltent/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=cance
 RewriteRule ^deletelineitemassigned/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=deletelineitemassigned&id=$1&reservationID=$2 [NC,L]
 RewriteRule ^editdiscountassigned/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editdiscountassigned&id=$1&reservationID=$2 [NC,L]
 RewriteRule ^deletediscountassigned/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=deletediscountassigned&id=$1&reservationID=$2 [NC,L]
+RewriteRule ^editpayment/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editpayment&id=$1&reservationID=$2 [NC,L]
+RewriteRule ^deletepayment/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=deletepayment&id=$1&reservationID=$2 [NC,L]
+
 
 # test
 
