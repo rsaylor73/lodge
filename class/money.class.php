@@ -230,6 +230,7 @@ class money extends Core {
 			$data['msg'] = "<font color=red>The payment failed to update.</font>";
 		}
 		$template = "updatepayment.tpl";
+		$data['reservationID'] = $_POST['reservationID'];
 		$this->load_smarty($data,$template);
 	}
 
