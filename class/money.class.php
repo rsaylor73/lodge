@@ -503,6 +503,12 @@ class money extends Core {
 
 	}
 
+	public function refundcashtransfer() {
+		$template = "refundcashtransfer.tpl";
+		$data['reservationID'] = $_GET['reservationID'];
+		$this->load_smarty($data,$template);
+	}
+
 
 
 
