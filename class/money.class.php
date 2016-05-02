@@ -171,7 +171,10 @@ class money extends Core {
 		";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$html .= "<tr><td>$row[payment_type]</td><td>$$row[amount]</td><td>$row[payment_date]</td><td>$row[transactionID]</td></tr>";
+			$html .= "<tr><td>
+			<i class=\"fa fa-wrench\" aria-hidden=\"true\"></i>&nbsp;
+			<i class=\"fa fa-trash\" aria-hidden=\"true\"></i>&nbsp;
+			$row[payment_type]</td><td>$$row[amount]</td><td>$row[payment_date]</td><td>$row[transactionID]</td></tr>";
 			$total = $total + $row['amount'];
 		}
 		if ($total > 0) {
