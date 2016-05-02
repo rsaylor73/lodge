@@ -28,10 +28,11 @@
 <tr><td>Balance Due:</td><td><a href="reservation_dashboard/{$reservationID}/dollars/#balance_due">Click Here</a></td></tr>
 </table>
 
-<h3 id="transfers">Transfer/Line Item Dollars</h3>
+<h3 id="transfers">
+<a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
+Transfer/Line Item Dollars</h3>
 <hr>
 <input type="button" value="Add Line Item" class="btn btn-success" onclick="document.location.href='add_line_item/{$reservationID}'">
-<a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
 <table class="table">
 <thead>
 <tr><th width="33%"><b>Guest</b></th><th width="33%"><b>Title</b></th><th width="33%"><b>Price</b></th></tr>
@@ -41,9 +42,10 @@
 </tbody>
 </table>
 
-<h3 id="discounts">Discounts</h3><hr>
-<input type="button" value="Add Discount" class="btn btn-success" onclick="document.location.href='add_discounts/{$reservationID}'"> 
+<h3 id="discounts">
 <a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
+Discounts</h3><hr>
+<input type="button" value="Add Discount" class="btn btn-success" onclick="document.location.href='add_discounts/{$reservationID}'"> 
 
 <table class="table">
 <thead>
@@ -62,9 +64,10 @@
 </tbody>
 </table>
 
-<h3 id="payments">Payments</h3><hr>
-<input type="button" value="Add Payment" class="btn btn-success" onclick="document.location.href='payments/{$reservationID}'">
+<h3 id="payments">
 <a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
+Payments</h3><hr>
+<input type="button" value="Add Payment" class="btn btn-success" onclick="document.location.href='payments/{$reservationID}'">
 </h3>
 
 <table class="table">
@@ -85,13 +88,14 @@
 </tbody>
 </table>
 
-<h3 id="refund">Refunds/Cash Transfers</h3><hr>
-<input type="button" value="Add Refund/Cash Transfer" class="btn btn-success" onclick="document.location.href='refundcashtransfer/{$reservationID}'"> 
+<h3 id="refund">
 <a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
+Refunds/Cash Transfers</h3><hr>
+<input type="button" value="Add Refund/Cash Transfer" class="btn btn-success" onclick="document.location.href='refundcashtransfer/{$reservationID}'"> 
 
 <br><br>
-<h3 id="balance_due">Balance Due <a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
-</h3><hr>
+<h3 id="balance_due"><a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
+Balance Due</h3><hr>
 
 
 
