@@ -207,6 +207,32 @@ class money extends Core {
 		$this->load_smarty($data,$template);
 	}
 
+	public function updatepayment() {
+		$today = date("Ymd");
+
+		if ($_POST['check_number'] != "") {
+			$c1_sql = " ,`check_number` = '$_POST[check_number]' ";
+		}
+		if ($_POST['check_description'] != "") {
+			$c2_sql = " ,`check_description` = '$_POST[check_description]' ";
+		}
+		if ($_POST['wire_description'] != "") {
+			$w1_sql = " ,`wire_description` = '$_POST[wire_description]' ";
+		}
+
+		$sql = "
+		UPDATE `payments` SET `amount` = '$_POST[payment_amount]', `payment_date` = '$_POST[payment_date]', `update_date` = '$today', `userID` = '$_SESSION[userID]' $c1_sql $c2_sql $w1_sql WHERE `id` = '$_POST[id]' AND `reservationID` = '$_POST[reservationID]'
+		";
+		$result = $this->new_mysql($sql);
+		if ($result == "TRUE") {
+			$data['msg'] = "<font color=green>The payment was updated.</font>";
+		} else {
+			$data['msg'] = "<font color=red>The payment failed to update.</font>";
+		}
+		$template = "updatepayment.tpl";
+		$this->load_smarty($data,$template);
+	}
+
 	public function deletepayment() {
 
 	}
