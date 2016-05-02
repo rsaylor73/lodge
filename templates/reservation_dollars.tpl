@@ -42,7 +42,9 @@
 </table>
 
 <h3 id="discounts">Discounts</h3><hr>
-<input type="button" value="Add Discount" class="btn btn-success" onclick="document.location.href='add_discounts/{$reservationID}'"></h3>
+<input type="button" value="Add Discount" class="btn btn-success" onclick="document.location.href='add_discounts/{$reservationID}'"> 
+<a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
+
 <table class="table">
 <thead>
 <tr>
@@ -84,7 +86,9 @@
 </table>
 
 <h3 id="refund">Refunds/Cash Transfers</h3>
-<input type="button" value="Add Refund/Cash Transfer" class="btn btn-success" onclick="document.location.href='refundcashtransfer/{$reservationID}'"></h3>
+<input type="button" value="Add Refund/Cash Transfer" class="btn btn-success" onclick="document.location.href='refundcashtransfer/{$reservationID}'"> 
+<a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
+
 
 <h3 id="balance_due">Balance Due</h3>
 
