@@ -235,7 +235,16 @@ class money extends Core {
 	}
 
 	public function deletepayment() {
-
+		$sql = "DELETE FROM `payments` WHERE `id` = '$_GET[id]' AND `reservationID` = '$_GET[reservationID]'";
+		$result = $this->new_mysql($sql);
+		if ($result == "TRUE") {
+			$data['msg'] = "<font color=green>The payment was deleted.</font>";
+		} else {
+			$data['msg'] = "<font color=red>The payment failed to delete.</font>";
+		}
+		$template = "deletepayment.tpl";
+		$data['reservationID'] = $_POST['reservationID'];
+		$this->load_smarty($data,$template);
 	}
 
 	public function get_discount_history($reservationID) {
