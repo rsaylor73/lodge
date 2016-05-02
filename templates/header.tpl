@@ -42,8 +42,8 @@
 
   <style type="text/css">
   h3 {
-    padding-top: 70px;
-    margin-top: -70px;
+    padding-top: 140px;
+    margin-top: -140px;
   }
   </style>
 
