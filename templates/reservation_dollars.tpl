@@ -30,12 +30,8 @@
 
 <h3 id="transfers">Transfer/Line Item Dollars</h3>
 <hr>
-
 <input type="button" value="Add Line Item" class="btn btn-success" onclick="document.location.href='add_line_item/{$reservationID}'">
-<i class="fa fa-arrow-circle-up" aria-hidden="true" onclick="document.location.href='reservation_dashboard/{$reservationID}/dollars/#top'"></i>
-
-
-</h3>
+<a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
 <table class="table">
 <thead>
 <tr><th width="33%"><b>Guest</b></th><th width="33%"><b>Title</b></th><th width="33%"><b>Price</b></th></tr>
@@ -65,7 +61,9 @@
 </table>
 
 <h3 id="payments">Payments</h3><hr>
-<input type="button" value="Add Payment" class="btn btn-success" onclick="document.location.href='payments/{$reservationID}'"></h3>
+<input type="button" value="Add Payment" class="btn btn-success" onclick="document.location.href='payments/{$reservationID}'">
+<a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
+</h3>
 
 <table class="table">
 <thead>
