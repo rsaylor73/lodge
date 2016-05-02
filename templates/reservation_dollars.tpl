@@ -1,5 +1,14 @@
 <br>
 <h3>Nightly Rate</h3>
+[<a href="reservation_dashboard/{$reservationID}/dollars/#transfers">Transfers/Line Items</a>] 
+[<a href="reservation_dashboard/{$reservationID}/dollars/#discounts">Discounts</a>] 
+[<a href="reservation_dashboard/{$reservationID}/dollars/#payments">Payments</a>] 
+[<a href="reservation_dashboard/{$reservationID}/dollars/#refund">Refunds/Cash Transfers</a>] 
+[<a href="reservation_dashboard/{$reservationID}/dollars/#balance_due">Balance</a>]
+
+
+
+
 <hr>
 
 <table class="table">
@@ -19,7 +28,7 @@
 <tr><td>Balance Due:</td><td><a href="reservation_dashboard/{$reservationID}/dollars/#balance_due">Click Here</a></td></tr>
 </table>
 
-<h3>Transfer/Line Item Dollars</h3>
+<h3 id="transfers">Transfer/Line Item Dollars</h3>
 <hr>
 <input type="button" value="Add Line Item" class="btn btn-success" onclick="document.location.href='add_line_item/{$reservationID}'"></h3>
 <table class="table">
@@ -32,7 +41,7 @@
 </table>
 
 
-<h3>Discounts</h3><hr>
+<h3 id="discounts">Discounts</h3><hr>
 <input type="button" value="Add Discount" class="btn btn-success" onclick="document.location.href='add_discounts/{$reservationID}'"></h3>
 <table class="table">
 <thead>
@@ -51,7 +60,7 @@
 </tbody>
 </table>
 
-<h3>Payments</h3><hr>
+<h3 id="payments">Payments</h3><hr>
 <input type="button" value="Add Payment" class="btn btn-success" onclick="document.location.href='payments/{$reservationID}'"></h3>
 
 <table class="table">
@@ -72,7 +81,7 @@
 </tbody>
 </table>
 
-<h3>Refunds/Cash Transfers</h3>
+<h3 id="refund">Refunds/Cash Transfers</h3>
 <input type="button" value="Add Refund/Cash Transfer" class="btn btn-success" onclick="document.location.href='refundcashtransfer/{$reservationID}'"></h3>
 
 <h3 id="balance_due">Balance Due</h3>
