@@ -1,3 +1,4 @@
+<a name="top" id="top"></a>
 <br>
 <h3>Nightly Rate</h3>
 [<a href="reservation_dashboard/{$reservationID}/dollars/#transfers">Transfers/Line Items</a>] 
@@ -30,7 +31,12 @@
 
 <h3 id="transfers">Transfer/Line Item Dollars</h3>
 <hr>
-<input type="button" value="Add Line Item" class="btn btn-success" onclick="document.location.href='add_line_item/{$reservationID}'"></h3>
+
+<input type="button" value="Add Line Item" class="btn btn-success" onclick="document.location.href='add_line_item/{$reservationID}'">
+<i class="fa fa-arrow-circle-up" aria-hidden="true" onclick="document.location.href='reservation_dashboard/{$reservationID}/dollars/#top'"></i>
+
+
+</h3>
 <table class="table">
 <thead>
 <tr><th width="33%"><b>Guest</b></th><th width="33%"><b>Title</b></th><th width="33%"><b>Price</b></th></tr>
