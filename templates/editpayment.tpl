@@ -22,7 +22,7 @@
 {/if}
 
 
-<tr><td>Amount:</td><td>$<input type="text" name="payment_amount" size=20 onkeypress="return isNumber(event)" required value="{$payment_amount}"></td></tr>
+<tr><td>Amount:</td><td>$<input type="text" name="payment_amount" size=20 onkeypress="return isNumber(event)" required value="{$amount}"></td></tr>
 <tr><td>Payment Date:</td><td><input type="text" name="payment_date" id="payment_date" required value="{$payment_date}"></td></tr>
 
 
