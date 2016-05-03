@@ -22,7 +22,7 @@
 <script>
 function check_type() {
 	var x = document.getElementById("type");
-	alert(x);
+	alert(x.selectedIndex);
 	var e = document.getElementById("type");
 	var strType = e.options[e.selectedIndex].value;
 	if (strType == "Refund") {
