@@ -38,6 +38,11 @@ function check_type() {
      		}
   		}
 
+  		// removes the obj from the DOM if was added prior
+ 		var testObj=document.getElementById("detail");
+		var y = 2;
+		testObj.remove(y);
+
 	} else {
 		document.getElementById('referral_reservationID').value="";
 
