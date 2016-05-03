@@ -1,5 +1,5 @@
 <div class="col-md-6">
-<h2>Refunds / Cash Transfer</h2>
+<h2>Refunds / Cash Transfer Conf #{$reservationID}</h2>
 
 <form action="saverefundcashtransfer">
 <input type="hidden" name="reservationID" value="{$reservationID}">
