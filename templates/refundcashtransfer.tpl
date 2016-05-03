@@ -48,10 +48,15 @@ function check_type() {
      		}
   		}
 
+		var s= document.getElementById('detail');
+		s.options[s.options.length]= new Option('Deposit', '2');
+
+  		/*
 		$('#detail').append($('<option>', {
     		value: 2,
     		text: 'Deposit'
 		}));
+		*/
 	}
 }
 </script>
