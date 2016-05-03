@@ -11,6 +11,7 @@
 	</select></td></tr>
 <tr><td>Transaction Detail:</td><td><select name="detail" required><option selected value="">--Select--</option><option>Debit</option><option>Deposit</option></select></td></tr>
 <tr><td>Referral Reservation ID:</td><td><input type="text" name="referral_reservationID" size="20" placeholder="...cash is going or coming..." required></td></tr>
+<tr><td>Amount:</td><td><input type="text" name="amount" id="amount" required></td></tr>
 <tr><td><input type="submit" class="btn btn-primary" value="Save"></td></tr>
 </table>
 </form>
