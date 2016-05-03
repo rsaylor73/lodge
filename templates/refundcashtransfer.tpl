@@ -27,7 +27,7 @@ function check_type() {
 		document.getElementById('referral_reservationID').value="N/A";
 		document.getElementById('detail').value="Debit";
 
-		remove(e.options[2]);
+		e.remove(e.options[2]);
 	} else {
 		document.getElementById('referral_reservationID').value="";
 	}
