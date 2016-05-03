@@ -33,7 +33,7 @@ function check_type() {
 
 		var selectobject=document.getElementById("type")
   		for (var i=0; i<selectobject.length; i++){
-  			if (selectobject.options[i].value == 'Deposit' ) {
+  			if (selectobject.options[i].value == 'Cash Transfer' ) {
      			selectobject.remove(i);
      			alert('Removed' + selectobject.options[i].value);
      		}
