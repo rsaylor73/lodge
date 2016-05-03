@@ -1,7 +1,7 @@
 <div class="col-md-6">
 <h2>Refunds / Cash Transfer Conf #{$reservationID}</h2>
 
-<form action="saverefundcashtransfer">
+<form action="saverefundcashtransfer" method="post">
 <input type="hidden" name="reservationID" value="{$reservationID}">
 <table class="table">
 <tr><td width="200">Transaction Type:</td><td><select name="type" id="type" required onchange="check_type()">
