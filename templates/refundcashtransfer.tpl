@@ -31,7 +31,7 @@ function check_type() {
 		document.getElementById('referral_reservationID').value="N/A";
 		document.getElementById('detail').value="Debit";
 
-		var selectobject=document.getElementById("detail")
+		var selectobject=document.getElementById("detail");
   		for (var i=0; i<selectobject.length; i++){
   			if (selectobject.options[i].value == 'Deposit' ) {
      			selectobject.remove(i);
@@ -41,20 +41,10 @@ function check_type() {
 	} else {
 		document.getElementById('referral_reservationID').value="";
 
-		var selectobject=document.getElementById("detail")
-  		for (var i=0; i<selectobject.length; i++){
-  			if (selectobject.options[i].value == 'Deposit' ) {
-  				var stop = 1;
-  				alert(stop);
-  			}
-  		}
-
-  		if (stop != 1) {
 			$('#detail').append($('<option>', {
     			value: 2,
     			text: 'Deposit'
 			}));
-		}
 	}
 }
 </script>
