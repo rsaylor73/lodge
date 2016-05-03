@@ -41,22 +41,16 @@ function check_type() {
 	} else {
 		document.getElementById('referral_reservationID').value="";
 
-		var selectobject=document.getElementById("detail");
-  		for (var i=0; i<selectobject.length; i++){
-  			if (selectobject.options[i].value == 'Deposit' ) {
-     			selectobject.remove(i);
-     		}
-  		}
+		var testObj=document.getElementById("detail");
+		var y = 2;
+		testObj.remove(y);
+
+
 
 		var s= document.getElementById('detail');
 		s.options[s.options.length]= new Option('Deposit', '2');
 
-  		/*
-		$('#detail').append($('<option>', {
-    		value: 2,
-    		text: 'Deposit'
-		}));
-		*/
+
 	}
 }
 </script>
