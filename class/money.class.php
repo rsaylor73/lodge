@@ -528,10 +528,15 @@ class money extends Core {
 	}
 
 	public function listrefundtransfers($reservationID) {
-		$sql = "SELECT `type`,`detail`,`referral_reservationID`,`amount` FROM `transfers` WHERE `reservationID` = '$reservationID'";
+		$sql = "SELECT `id`,`type`,`detail`,`referral_reservationID`,`amount` FROM `transfers` WHERE `reservationID` = '$reservationID'";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$html .= "<tr><td>$row[type]</td><td>$row[detail]</td><td>$row[referral_reservationID]</td><td>$$row[amount]</td></tr>";
+			$html .= "<tr><td>
+			<a href=\"editrefundtransfer/$row[id]/$reservationID\"><i class=\"fa fa-wrench\" aria-hidden=\"true\"></i></a>
+			&nbsp;
+			<a href=\"deleterefundtransfer/$row[id]/$reservationID\" onclick=\"return confirm('You are about to delete $row[type] in the amount of $$row[amount]. Only an administrator can delete this transaction. Click Ok to confirm.')\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>
+			&nbsp;
+			$row[type]</td><td>$row[detail]</td><td>$row[referral_reservationID]</td><td>$$row[amount]</td></tr>";
 		}
 		if ($html == "") {
 			$html .= "<tr><td colspan=4><font color=blue>There are no refund/transfers.</font></td></tr>";
