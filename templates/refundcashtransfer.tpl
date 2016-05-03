@@ -21,14 +21,13 @@
 
 <script>
 function check_type() {
-	var x = document.getElementById("type");
-	alert(x.2);
 	var e = document.getElementById("type");
 	var strType = e.options[e.selectedIndex].value;
 	if (strType == "Refund") {
 		document.getElementById('referral_reservationID').value="N/A";
 		document.getElementById('detail').value="Debit";
 
+		remove(e.options[2]);
 	} else {
 		document.getElementById('referral_reservationID').value="";
 	}
