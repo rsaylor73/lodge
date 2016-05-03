@@ -45,6 +45,7 @@ function check_type() {
   		for (var i=0; i<selectobject.length; i++){
   			if (selectobject.options[i].value == 'Deposit' ) {
   				var stop = 1;
+  				alert(stop);
   			}
   		}
 
