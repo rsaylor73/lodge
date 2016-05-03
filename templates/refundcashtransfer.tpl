@@ -23,9 +23,11 @@
 function check_type() {
 	var e = document.getElementById("type");
 	var strType = e.options[e.selectedIndex].value;
+	alert(e.options[e.selectedIndex]);
 	if (strType == "Refund") {
 		document.getElementById('referral_reservationID').value="N/A";
 		document.getElementById('detail').value="Debit";
+
 	} else {
 		document.getElementById('referral_reservationID').value="";
 	}
