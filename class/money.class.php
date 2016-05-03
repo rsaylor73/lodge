@@ -544,6 +544,22 @@ class money extends Core {
 		return $html;
 	}
 
+	public function editrefundtransfer() {
+		$sql = "SELECT * FROM `transfers` WHERE `id` = '$_GET[id]' AND `reservationID` = '$_GET[reservationID]'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			foreach ($row as $key=>$value) {
+				$data[$key] = $value;
+			}
+		}
+		$template = "editrefundtransfer.tpl";
+		$this->load_smarty($data,$template);
+	}
+
+	public function deleterefundtransfer() {
+
+	}
+
 
 
 

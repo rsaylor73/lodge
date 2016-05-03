@@ -48,7 +48,8 @@ RewriteRule ^editdiscountassigned/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?sec
 RewriteRule ^deletediscountassigned/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=deletediscountassigned&id=$1&reservationID=$2 [NC,L]
 RewriteRule ^editpayment/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editpayment&id=$1&reservationID=$2 [NC,L]
 RewriteRule ^deletepayment/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=deletepayment&id=$1&reservationID=$2 [NC,L]
-
+RewriteRule ^editrefundtransfer/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editrefundtransfer&id=$1&reservationID=$2 [NC,L]
+RewriteRule ^deleterefundtransfer/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=deleterefundtransfer&id=$1&reservationID=$2 [NC,L]
 
 # test
 
