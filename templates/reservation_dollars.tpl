@@ -93,6 +93,22 @@ Payments</h3><hr>
 Refunds/Cash Transfers</h3><hr>
 <input type="button" value="Add Refund/Cash Transfer" class="btn btn-success" onclick="document.location.href='refundcashtransfer/{$reservationID}'"> 
 
+<table class="table">
+<thead>
+<tr>
+<th width="25%"><b>Type</b></th>
+<th width="25%"><b>Detail</b></th>
+<th width="25%"><b>Referral</b></th>
+<th width="25%"><b>Amount</b></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+{$refund_transfer}
+</tr>
+</tbody>
+</table>
+
 <br><br>
 <h3 id="balance_due"><a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
 Balance Due</h3><hr>

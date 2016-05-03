@@ -509,7 +509,35 @@ class money extends Core {
 		$this->load_smarty($data,$template);
 	}
 
+	public function saverefundcashtransfer() {
+		$today = date("Ymd");
+		$sql = "
+		INSERT INTO `transfers` (`type`,`detail`,`referral_reservationID`,`reservationID`,`amount`,`userID`,`date_created`,`date_updated`) VALUES
+		('$_POST[type]','$_POST[detail]','$_POST[referral_reservationID]','$_POST[reservationID]','$_POST[amount]','$_SESSION[id]','$today','$today')
+		";
+		$result = $this->new_mysql($sql);
+		if ($result == "TRUE") {
+			$msg = "<font color=green>The transfer was applied.</font>";
+		} else {
+			$msg = "<font color=red>The transfer failed to apply.</font>";
+		}
+		$template = "saverefundcashtransfer.tpl";
+		$data['reservationID'] = $_POST['reservationID'];
+		$data['msg'] = $msg;
+		$this->load_smarty($data,$template);
+	}
 
+	public function listrefundtransfers($reservationID) {
+		$sql = "SELECT `type`,`detail`,`referral_reservationID`,`amount` WHERE `reservationID` = '$reservationID'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$html .= "<tr><td>$row[type]</td><td>$row[detail]</td><td>$row[referral_reservationID]</td><td>$$row[amount]</td></tr>";
+		}
+		if ($html == "") {
+			$html .= "<tr><td colspan=4><font color=blue>There are no refund/transfers.</font></td></tr>";
+		}
+		return $html;
+	}
 
 
 

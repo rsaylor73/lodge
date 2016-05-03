@@ -991,6 +991,7 @@ class reservations extends money {
      	$discount_history = $this->get_discount_history($reservationID);
      	$data['discount_history'] = $discount_history;
      	$data['line_items'] = $this->display_line_items_in_rsv($reservationID);
+     	$data['refund_transfer'] = $this->listrefundtransfers($reservationID);
     	//$data['test'] = "ok 3";
 
     	/*
