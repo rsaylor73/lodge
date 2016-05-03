@@ -15,7 +15,7 @@
 	<option value="Deposit">Deposit</option>
 </select></td></tr>
 <tr><td>Referral Reservation ID:</td><td><input type="text" name="referral_reservationID" id="referral_reservationID" size="20" placeholder="...cash is going or coming..." required></td></tr>
-<tr><td>Amount:</td><td><input type="text" name="amount" id="amount" required></td></tr>
+<tr><td>Amount:</td><td>$<input type="text" name="amount" id="amount" required onkeypress="return isNumber(event)"></td></tr>
 <tr><td><input type="submit" class="btn btn-primary" value="Save"></td></tr>
 </table>
 </form>
@@ -57,5 +57,17 @@ function check_type() {
 
 
 	}
+}
+
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 46 || charCode > 57)) {
+        return false;
+    }
+    if (charCode == 47) {
+    	return false;
+    }
+    return true;
 }
 </script>
