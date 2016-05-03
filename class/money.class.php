@@ -529,6 +529,7 @@ class money extends Core {
 
 	public function listrefundtransfers($reservationID) {
 		$sql = "SELECT `type`,`detail`,`referral_reservationID`,`amount` WHERE `reservationID` = '$reservationID'";
+		print "$sql";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$html .= "<tr><td>$row[type]</td><td>$row[detail]</td><td>$row[referral_reservationID]</td><td>$$row[amount]</td></tr>";
