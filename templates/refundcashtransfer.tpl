@@ -40,6 +40,12 @@ function check_type() {
 
 	} else {
 		document.getElementById('referral_reservationID').value="";
+
+		$('#detail').append($('<option>', {
+    		value: 2,
+    		text: 'Deposit'
+		}));
+
 	}
 }
 </script>
