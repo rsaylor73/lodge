@@ -7,7 +7,7 @@
 <table class="table">
 <tr><td width="200">Transaction Type:</td><td>{$type}</td></tr>
 <tr><td>Transaction Detail:</td><td><select name="detail" id="detail" required>
-	<option selected value="{$detail}">{$detail}</option>
+	<option selected value="{$detail}">{$detail} (Default)</option>
 	<option value="Debit">Debit</option>
 	{if $type eq "Cash Transfer"}
 	<option value="Deposit">Deposit</option>
