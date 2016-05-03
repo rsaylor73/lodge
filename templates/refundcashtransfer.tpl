@@ -31,11 +31,10 @@ function check_type() {
 		document.getElementById('referral_reservationID').value="N/A";
 		document.getElementById('detail').value="Debit";
 
-		var selectobject=document.getElementById("type")
+		var selectobject=document.getElementById("detail")
   		for (var i=0; i<selectobject.length; i++){
-  			if (selectobject.options[i].value == 'Cash Transfer' ) {
+  			if (selectobject.options[i].value == 'Deposit' ) {
      			selectobject.remove(i);
-     			alert('Removed' + selectobject.options[i].value);
      		}
   		}
 
