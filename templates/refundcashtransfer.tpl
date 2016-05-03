@@ -13,7 +13,14 @@
 	<option selected value="">--Select--</option>
 	<option value="Debit">Debit</option>
 	<option value="Deposit">Deposit</option>
-</select></td></tr>
+</select>
+&nbsp;<a href="javascript:void(0)" onclick="document.getElementById('detail_extra').style.display='table-row';"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+</td></tr>
+
+<tr id="detail_extra" style="display:none"><td colspan=2>
+	<b>Debit</b> will rapply as a cash widthdraw from the reservation. In the condition of a refund the reservation price will be reduced by the refund price.<br>
+	<b>Deposit</b> will apply as a cash payment to the reservation.</td></tr>
+
 <tr><td>Referral Reservation ID:</td><td><input type="text" name="referral_reservationID" id="referral_reservationID" size="20" placeholder="...cash is going or coming..." required></td></tr>
 <tr><td>Amount:</td><td>$ <input type="text" name="amount" id="amount" required onkeypress="return isNumber(event)" size="18"></td></tr>
 <tr><td><input type="submit" class="btn btn-primary" value="Save"></td></tr>
