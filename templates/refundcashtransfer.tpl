@@ -19,8 +19,8 @@
 
 <tr id="detail_extra" style="display:none"><td colspan=2>
 	<b>Debit</b> will apply as a cash widthdraw from the reservation. In the condition of a refund the reservation price will be reduced by the refund price.<hr>
-	<b>Deposit</b> will apply as a cash payment to the reservation.<hr>
-	<a href="javascript:void(0)" onclick="document.getElementById('detail_extra').style.display='none';"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+	<b>Deposit</b> will apply as a cash payment to the reservation.<br>
+	<a href="javascript:void(0)" onclick="document.getElementById('detail_extra').style.display='none';"><i class="fa fa-times-circle" aria-hidden="true"></i> close</a>
 
 
 </td></tr>
