@@ -41,10 +41,17 @@ function check_type() {
 	} else {
 		document.getElementById('referral_reservationID').value="";
 
-			$('#detail').append($('<option>', {
-    			value: 2,
-    			text: 'Deposit'
-			}));
+		var selectobject=document.getElementById("detail");
+  		for (var i=0; i<selectobject.length; i++){
+  			if (selectobject.options[i].value == 'Deposit' ) {
+     			selectobject.remove(i);
+     		}
+  		}
+
+		$('#detail').append($('<option>', {
+    		value: 2,
+    		text: 'Deposit'
+		}));
 	}
 }
 </script>
