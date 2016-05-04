@@ -584,7 +584,7 @@ class money extends Core {
 			$msg = "<font color=red>The transfer failed to delete.</font>";
 		}
 		$template = "deleterefundtransfer.tpl";
-		$data['reservationID'] = $_POST['reservationID'];
+		$data['reservationID'] = $_GET['reservationID'];
 		$data['msg'] = $msg;
 		$this->load_smarty($data,$template);
 
