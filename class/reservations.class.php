@@ -994,8 +994,8 @@ class reservations extends money {
      	$data['refund_transfer'] = $this->listrefundtransfers($reservationID);
 
      	$bd = $this->get_balance_due($reservationID);
-     	$data['commission'] = $db[0];
-     	$data['balance_due'] = $db[1];
+     	$data['commission'] = $db['commission'];
+     	$data['balance_due'] = $db['amount_due'];
     	//$data['test'] = "ok 3";
 
     	/*
