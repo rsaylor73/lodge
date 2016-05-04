@@ -556,6 +556,25 @@ class money extends Core {
 		$this->load_smarty($data,$template);
 	}
 
+	public function updaterefundcashtransfer() {
+		$today = date("Ymd");
+		$sql = "
+		UPDATE `transfers` SET `detail` = `detail` = '$_POST[detail]', `referral_reservationID` = '$_POST[referral_reservationID]', `amount` = '$_POST[amount]',
+		`date_updated` = '$today', `userID` = '$_SESSION[id]' WHERE `id` = '$_POST[id]' AND `reservationID` = '$_POST[reservationID]'
+		";
+		$result = $this->new_mysql($sql);
+		if ($result == "TRUE") {
+			$msg = "<font color=green>The transfer was updated.</font>";
+		} else {
+			$msg = "<font color=red>The transfer failed to update.</font>";
+		}
+		$template = "updaterefundcashtransfer.tpl";
+		$data['reservationID'] = $_POST['reservationID'];
+		$data['msg'] = $msg;
+		$this->load_smarty($data,$template);
+
+	}
+
 	public function deleterefundtransfer() {
 
 	}
