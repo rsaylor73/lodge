@@ -114,6 +114,7 @@ Refunds/Cash Transfers</h3><hr>
 <h3 id="commission">
 <a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
 Commission</h3><hr>
+<h4>${$commission}</h4>
 
 <br><br>
 <h3 id="balance_due"><a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>

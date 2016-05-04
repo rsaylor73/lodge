@@ -992,7 +992,10 @@ class reservations extends money {
      	$data['discount_history'] = $discount_history;
      	$data['line_items'] = $this->display_line_items_in_rsv($reservationID);
      	$data['refund_transfer'] = $this->listrefundtransfers($reservationID);
-     	$data['balance_due'] = $this->get_balance_due($reservationID);
+
+     	$bd = $this->get_balance_due($reservationID);
+     	$data['commission'] = $db[0];
+     	$data['balance_due'] = $db[1];
     	//$data['test'] = "ok 3";
 
     	/*

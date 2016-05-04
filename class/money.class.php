@@ -695,8 +695,32 @@ class money extends Core {
 		$rate = $rate - $debit;
 		$rate = $rate - $deposit;
 
-		$amount_due = $rate + $line - $discount - $payments;
-		return($amount_due);
+		// Commission
+		$sql = "
+		SELECT
+			`s`.`commission`
+
+		FROM
+			`reservations` r, `users` u
+
+		LEFT JOIN `reserve`.`reseller_agents` a ON `r`.`reseller_agentID` = `a`.`reseller_agentID`
+		LEFT JOIN `reserve`.`resellers` s ON `a`.`resellerID` = `s`.`resellerID`
+
+		WHERE
+			`r`.`reservationID` = '$reservationID'
+			AND `r`.`userID` = `u`.`id`
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$commission = $row['commission'] * .01;
+		}
+		$total_commission = $rate * $commission;
+
+		$amount_due = $rate + $line - $discount - $payments - $total_commission;
+
+		$data2['commission'] = $total_commission;
+		$data2['amount_due'] = $amount_due;
+		return($data2);
 	}
 
 
