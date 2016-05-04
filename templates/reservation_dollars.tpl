@@ -112,6 +112,7 @@ Refunds/Cash Transfers</h3><hr>
 <br><br>
 <h3 id="balance_due"><a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
 Balance Due</h3><hr>
+<h4>${$balance_due}</h4>
 
 
 
