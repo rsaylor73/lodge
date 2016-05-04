@@ -686,11 +686,12 @@ class money extends Core {
 		$deposit = "0";
 		$sql = "SELECT `id`,`type`,`detail`,`referral_reservationID`,`amount` FROM `transfers` WHERE `reservationID` = '$reservationID' AND `detail` = 'Deposit'";
 		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
 			$deposit = $deposit + $row['amount'];
 		}
 
 		// calculate final amount due
-		//$amount_due = $rate + $line - $discount - $payments - $debit - $deposit;
+		$amount_due = $rate + $line - $discount - $payments - $debit - $deposit;
 		print "Amound Due: $amount_due<br>";
 
 	}
