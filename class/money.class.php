@@ -599,26 +599,99 @@ class money extends Core {
     		}
     	}
     	$data['tents'] = $this->get_reservation_tents($reservationID);
-    	$total = (($data['nightly_rate'] + $data['child1_rate'] + $data['child2_rate']) * $data['nights']) * $data['tents'];
-     	$data['total'] = $total;
-     	print "Test: Total nights $total<br>";
+    	$rate = (($data['nightly_rate'] + $data['child1_rate'] + $data['child2_rate']) * $data['nights']) * $data['tents'];
 
-		// get total of transfers
+		// get total of transfers (line items)
+		$line = "0";
+		$sql = "
+		SELECT
+			`c`.`first`,
+			`c`.`last`,
+			`l`.`title`,
+			`l`.`price`,
+			`lib`.`id`
 
+		FROM
+			`lodge_res`.`line_item_billing` lib,
+			`reserve`.`contacts` c,
+			`lodge_res`.`line_items` l
+
+		WHERE
+			`lib`.`reservationID` = '$reservationID'
+			AND `lib`.`line_item_id` = `l`.`id`
+			AND `lib`.`contactID` = `c`.`contactID`
+
+		";
+		$result = $this->new_mysql($sql);
+		while ($row=$result->fetch_assoc()) {
+			$line = $line + $row['price'];
+		}
 
 		// get total of discounts
+		$discount = "0";
+		$sql = "
+		SELECT
+			`gdr`.`reason`,
+			`d`.`id`,
+			`d`.`amount`,
+			DATE_FORMAT(`d`.`date_added`, '%m/%d/%Y') AS 'date_added'
 
+		FROM
+			`discounts` d,
+			`general_discount_reason` gdr
+
+		WHERE
+			`d`.`reservationID` = '$reservationID'
+			AND `d`.`general_discount_reasonID` = `gdr`.`id`
+
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$discount = $discount + $row['amount'];
+		}
 
 		// get total of payments
+		$payments = "0";
+		$sql = "
+		SELECT
+			DATE_FORMAT(`p`.`payment_date`, '%m/%d/%Y') AS 'payment_date',
+			IF(`p`.`transactionID` != '',`p`.`transactionID`,'N/A') AS 'transactionID',
+			IF(`p`.`check_number` != '', `p`.`check_number`,'N/A') AS 'check_number',
+			`p`.`payment_type`,
+			`p`.`amount`,
+			`p`.`id`
+
+		FROM
+			`payments` p
+
+		WHERE
+			`p`.`reservationID` = '$reservationID'
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$payments = $payments + $row['amount'];
+		}
 
 		
 		// get total of transfer debits
+		$debit = "0";
+		$sql = "SELECT `id`,`type`,`detail`,`referral_reservationID`,`amount` FROM `transfers` WHERE `reservationID` = '$reservationID' AND `detail` = 'Debit'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$debit = $debit + $row['amount'];
+		}
 
 
 		// get total of transfer deposits
-
+		$deposit = "0";
+		$sql = "SELECT `id`,`type`,`detail`,`referral_reservationID`,`amount` FROM `transfers` WHERE `reservationID` = '$reservationID' AND `detail` = 'Deposit'";
+		$result = $this->new_mysql($sql);
+			$deposit = $deposit + $row['amount'];
+		}
 
 		// calculate final amount due
+		$amount_due = $rate + $line - $discount - $payments - $debit - $deposit;
+		print "Amound Due: $amount_due<br>";
 
 	}
 
