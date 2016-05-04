@@ -999,6 +999,10 @@ class reservations extends money {
     	print_r($data);
     	print "</pre>";
 		*/
+
+    	// test
+    	$this->get_balance_due($reservationID);
+
       	return $data;
    	}
 

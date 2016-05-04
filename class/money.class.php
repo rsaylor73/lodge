@@ -576,6 +576,49 @@ class money extends Core {
 	}
 
 	public function deleterefundtransfer() {
+		$sql = "DELETE FROM `transfers` WHERE `id` = '$_GET[id]' AND `reservationID` = '$_GET[reservationID]'";
+		$result = $this->new_mysql($sql);
+		if ($result == "TRUE") {
+			$msg = "<font color=green>The transfer was deleted.</font>";
+		} else {
+			$msg = "<font color=red>The transfer failed to delete.</font>";
+		}
+		$template = "deleterefundtransfer.tpl";
+		$data['reservationID'] = $_POST['reservationID'];
+		$data['msg'] = $msg;
+		$this->load_smarty($data,$template);
+
+	}
+
+	function get_balance_due($reservationID) {
+		// get nightly rate
+		$arr[] = $this->dollars($reservationID);
+    	foreach ($arr as $key) {
+    		foreach ($key as $key2=>$value2) {
+    			$data[$key2] = $value2;
+    		}
+    	}
+    	$data['tents'] = $this->get_reservation_tents($reservationID);
+    	$total = (($data['nightly_rate'] + $data['child1_rate'] + $data['child2_rate']) * $data['nights']) * $data['tents'];
+     	$data['total'] = $total;
+     	print "Test: Total nights $total<br>";
+
+		// get total of transfers
+
+
+		// get total of discounts
+
+
+		// get total of payments
+
+		
+		// get total of transfer debits
+
+
+		// get total of transfer deposits
+
+
+		// calculate final amount due
 
 	}
 
