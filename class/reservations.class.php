@@ -997,9 +997,9 @@ class reservations extends money {
      	print "<pre>";
      	print_r($db);
      	print "</pre>";
-     	
-     	$data['commission'] = $db['commission'];
-     	$data['balance_due'] = $db['amount_due'];
+
+     	$data[0] = $db['commission'];
+     	$data[1] = $db['amount_due'];
     	//$data['test'] = "ok 3";
 
     	/*

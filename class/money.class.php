@@ -718,9 +718,10 @@ class money extends Core {
 
 		$amount_due = $rate + $line - $discount - $payments - $total_commission;
 
-		$data2['commission'] = $total_commission;
-		$data2['amount_due'] = $amount_due;
-		return($data2);
+		$data2 = array();
+		$data2[] = $total_commission;
+		$data2[] = $amount_due;
+		return $data2;
 	}
 
 
