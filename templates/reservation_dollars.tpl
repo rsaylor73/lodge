@@ -4,6 +4,7 @@
 [<a href="reservation_dashboard/{$reservationID}/dollars/#discounts">Discounts</a>] 
 [<a href="reservation_dashboard/{$reservationID}/dollars/#payments">Payments</a>] 
 [<a href="reservation_dashboard/{$reservationID}/dollars/#refund">Refunds/Cash Transfers</a>] 
+[<a href="reservation_dashboard/{$reservationID}/dollars/#commission">Commission</a>] 
 [<a href="reservation_dashboard/{$reservationID}/dollars/#balance_due">Balance</a>]
 
 
@@ -108,6 +109,11 @@ Refunds/Cash Transfers</h3><hr>
 </tr>
 </tbody>
 </table>
+
+
+<h3 id="commission">
+<a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
+Commission</h3><hr>
 
 <br><br>
 <h3 id="balance_due"><a href="reservation_dashboard/{$reservationID}/dollars/#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
