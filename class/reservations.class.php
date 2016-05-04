@@ -997,7 +997,7 @@ class reservations extends money {
 
 
      	$data['commission'] = $arr2[0];
-     	$data['amount_due'] = $arr2[1];
+     	$data['balance_due'] = $arr2[1];
     	//$data['test'] = "ok 3";
 
     	/*
