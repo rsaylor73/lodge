@@ -690,7 +690,7 @@ class money extends Core {
 		}
 
 		// calculate final amount due
-		$amount_due = $rate + $line - $discount - $payments - $debit - $deposit;
+		//$amount_due = $rate + $line - $discount - $payments - $debit - $deposit;
 		print "Amound Due: $amount_due<br>";
 
 	}
