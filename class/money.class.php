@@ -724,8 +724,8 @@ class money extends Core {
 		return $data2;
 	}
 
-	public function viewinvoice($reservationID) {
-		$data['reservationID'] = $reservationID;
+	public function viewinvoice() {
+		$data['reservationID'] = $_GET['reservationID'];
 
 		$template = "invoice.tpl";
 		$this->load_smarty($data,$template);
