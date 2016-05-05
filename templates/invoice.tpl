@@ -245,7 +245,8 @@
                   <td>TBD</td>
                 </tr>
 
-
+                <tr><td colspan="2"><br></td></tr>
+                
                 <tr>
                   <td><b>Check-In</b></td>
                   <td><b>Check-Out</b></td>
