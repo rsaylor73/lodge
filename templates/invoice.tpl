@@ -173,7 +173,7 @@
  <td valign="top" align="left" width="100%" style="background:#f9f8f8;">
  <center>
 
-   <table class="w320 full-width-gmail-android" bgcolor="#f9f8f8" background="https://www.filepicker.io/api/file/al80sTOMSEi5bKdmCgp2" style="background-color:transparent" cellpadding="0" cellspacing="0" border="0" width="100%">
+   <table class="w320 full-width-gmail-android" bgcolor="#f9f8f8" style="background-color:transparent" cellpadding="0" cellspacing="0" border="0" width="100%">
       <tr>
         <td width="100%" height="48" valign="top">
             <!--[if gte mso 9]>
