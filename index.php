@@ -24,7 +24,7 @@ if ($check == "FALSE") {
 		define('authnet_key',$row['authnet_key']);
 		define('authnet_testmode',$row['authnet_testmode']);
 	}
-
+print "Test $_GET[section]<br>";
 	if ($_GET['section'] == "dashboard") {
 		$name = "$_SESSION[first] $_SESSION[last]";
 		$smarty->assign('name',$name);
