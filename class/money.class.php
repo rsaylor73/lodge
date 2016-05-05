@@ -724,7 +724,7 @@ class money extends Core {
 		return $data2;
 	}
 
-	public function view_invoice($reservationID) {
+	public function viewinvoice($reservationID) {
 		$data['reservationID'] = $reservationID;
 
 		$template = "invoice.tpl";
