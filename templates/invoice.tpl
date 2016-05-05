@@ -209,7 +209,7 @@
                 <table cellspacing="0" cellpadding="0" width="100%">
                   <tr>
                     <td class="left" style="padding-bottom:20px; text-align:left;">
-                      <b>Invoice:</b> A80SD99
+                      <b>Invoice:</b> {$reservationID}
                     </td>
                   </tr>
                   <tr>
