@@ -246,7 +246,7 @@
                 </tr>
 
                 <tr><td colspan="2"><br></td></tr>
-                
+
                 <tr>
                   <td><b>Check-In</b></td>
                   <td><b>Check-Out</b></td>
@@ -263,63 +263,7 @@
 
 
 
-                <table cellspacing="0" cellpadding="0" width="100%">
-                  <tr>
-                    <td>
-                      <b>Plan</b>
-                    </td>
-                    <td>
-                      <b>Period</b>
-                    </td>
-                    <td>
-                      <b>Amount</b>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="border-bottom" height="5"></td>
-                    <td class="border-bottom" height="5"></td>
-                    <td class="border-bottom" height="5"></td>
-                  </tr>
-                  <tr>
-                    <td style="padding-top:5px;">
-                      Silver Monthly
-                    </td>
-                    <td style="padding-top:5px;">
-                      Dec 4, 2013 - Jan 4, 2014
-                    </td>
-                    <td style="padding-top:5px;" class="mobile">
-                      $39.99
-                    </td>
-                  </tr>
-                </table>
-
-                <table cellspacing="0" cellpadding="0" width="100%">
-                  <tr>
-                    <td class="mobile-center" align="left" style="padding:40px 0;">
-                      <div class="mobile-center" align="left"><!--[if mso]>
-                          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="#" style="height:38px;v-text-anchor:middle;width:190px;" arcsize="11%" strokecolor="#407429" fill="t">
-                            <v:fill type="tile" src="https://www.filepicker.io/api/file/N8GiNGsmT6mK6ORk00S7" color="#41CC00" />
-                            <w:anchorlock/>
-                            <center style="color:#ffffff;font-family:sans-serif;font-size:17px;font-weight:bold;">View Account</center>
-                          </v:roundrect>
-                        <![endif]--><a href="#"
-                        style="background-color:#41CC00;background-image:url(https://www.filepicker.io/api/file/N8GiNGsmT6mK6ORk00S7);border:1px solid #407429;border-radius:4px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:17px;font-weight:bold;text-shadow: -1px -1px #47A54B;line-height:38px;text-align:center;text-decoration:none;width:190px;-webkit-text-size-adjust:none;mso-hide:all;">View Account</a></div>
-                    </td>
-                  </tr>
-                </table>
-
-                <table cellspacing="0" cellpadding="0" width="100%">
-                  <tr>
-                    <td class="left" style="text-align:left;">
-                      Thanks so much,
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="left" width="129" height="20" style="padding-top:10px; text-align:left;">
-                      <img class="left" width="129" height="20" src="https://www.filepicker.io/api/file/2R9HpqboTPaB4NyF35xt" alt="Company Name">
-                    </td>
-                  </tr>
-                </table>
+                
 
                 </td>
               </tr>
