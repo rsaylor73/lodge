@@ -26,6 +26,7 @@ if ($check == "FALSE") {
 	}
 print "Test $_GET[section]<br>";
 	if ($_GET['section'] == "dashboard") {
+		print "Test2...<br>";
 		$name = "$_SESSION[first] $_SESSION[last]";
 		$smarty->assign('name',$name);
 		$smarty->assign('access',$_SESSION['userType']);
