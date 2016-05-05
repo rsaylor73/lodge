@@ -726,6 +726,7 @@ class money extends Core {
 
 	public function viewinvoice() {
 		$data['reservationID'] = $_GET['reservationID'];
+		$data['date'] = date("m/d/Y");
 
 		$template = "invoice.tpl";
 		$this->load_smarty($data,$template);

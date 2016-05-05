@@ -209,11 +209,16 @@
                 <table cellspacing="0" cellpadding="0" width="100%">
                   <tr>
                   <td class="left" style="padding-bottom:20px; text-align:left;">
-                    <b>Invoice Date:</b> DATE
+                    <b>Invoice Date:</b> {$date}
 
                   </td>
                   <td class="right" style="padding-bottom:20px; text-align:right;">
-                    <b>Confirmation # {$reservationID}</b>
+                    <h2>Confirmation # {$reservationID}</h2>
+                    <b>Mail Payments to:</b><br>
+                    WayneWorks Marine, LLC<br>
+                    209 Hudson Trace<br>
+                    Augusta, GA 30907<br>
+                    USA<br>
 
 
                   </td>
