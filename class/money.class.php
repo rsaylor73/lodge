@@ -725,8 +725,14 @@ class money extends Core {
 	}
 
 	public function viewinvoice() {
-		$data['reservationID'] = $_GET['reservationID'];
+		$reservationID = $_GET['reservationID'];
+		$data['reservationID'] = $reservationID;
 		$data['date'] = date("m/d/Y");
+
+		$get_res_details = $this->reservation_details($reservationID);
+		$data['begin_date'] = $this->get_reservation_dates($reservationID,'ASC');
+		$data['end_date'] 	= $this->get_reservation_dates($reservationID,'DESC');
+		$data['nights']		= $this->get_reservation_nights($reservationID);
 
 		$template = "invoice.tpl";
 		$this->load_smarty($data,$template);

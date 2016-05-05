@@ -242,7 +242,7 @@
 
                 <tr>
                   <td>TBD</td>
-                  <td>TBD</td>
+                  <td>{$nights}</td>
                 </tr>
 
                 <tr><td colspan="2"><br></td></tr>
@@ -253,8 +253,8 @@
                 </tr>
 
                 <tr>
-                  <td>TBD</td>
-                  <td>TBD</td>
+                  <td>{$begin_date}</td>
+                  <td>{$end_date}</td>
                 </tr>
 
 
