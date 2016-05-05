@@ -208,11 +208,11 @@
 
                 <table cellspacing="0" cellpadding="0" width="100%">
                   <tr>
-                  <td class="left" style="padding-bottom:20px; text-align:left;">
+                  <td class="left" style="padding-bottom:20px; text-align:left; vertical-align: text-top;">
                     <b>Invoice Date:</b> {$date}
 
                   </td>
-                  <td class="right" style="padding-bottom:20px; text-align:right;">
+                  <td class="right" style="padding-bottom:20px; text-align:right; vertical-align: text-top;">
                     <h2>Confirmation # {$reservationID}</h2>
                     <b>Mail Payments to:</b><br>
                     WayneWorks Marine, LLC<br>
