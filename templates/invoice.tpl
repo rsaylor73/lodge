@@ -257,9 +257,11 @@
                   <td>{$end_date}</td>
                 </tr>
 
-
-
                 </table>
+
+                <table cellspacing="0" cellpadding="0" width="100%">
+                <tr><td class="border-bottom" height="5" colspan="2"><b>Base Rate</b></td></tr>
+
 
 
 

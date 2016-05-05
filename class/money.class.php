@@ -590,7 +590,7 @@ class money extends Core {
 
 	}
 
-	function get_balance_due($reservationID) {
+	private function get_base_rate($reservationID) {
 		// get nightly rate
 		$arr[] = $this->dollars($reservationID);
     	foreach ($arr as $key) {
@@ -600,6 +600,12 @@ class money extends Core {
     	}
     	$data['tents'] = $this->get_reservation_tents($reservationID);
     	$rate = (($data['nightly_rate'] + $data['child1_rate'] + $data['child2_rate']) * $data['nights']) * $data['tents'];
+    	return $rate;
+	}
+
+	function get_balance_due($reservationID) {
+		// get nightly rate
+		$rate = $this->get_base_rate($reservationID);
 
 		// get total of transfers (line items)
 		$line = "0";
