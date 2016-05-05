@@ -590,6 +590,7 @@ class money extends Core {
 
 	}
 
+	// gets the total of the reservation rate including kid prices
 	private function get_base_rate($reservationID) {
 		// get nightly rate
 		$arr[] = $this->dollars($reservationID);
@@ -739,6 +740,7 @@ class money extends Core {
 		$data['begin_date'] = $this->get_reservation_dates($reservationID,'ASC');
 		$data['end_date'] 	= $this->get_reservation_dates($reservationID,'DESC');
 		$data['nights']		= $this->get_reservation_nights($reservationID);
+		$data['rate'] 		= $this->get_base_rate($reservationID);
 
 		$template = "invoice.tpl";
 		$this->load_smarty($data,$template);
