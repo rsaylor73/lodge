@@ -245,6 +245,22 @@
                 </table>
 
                 <table cellspacing="0" cellpadding="0" width="100%">
+                <tr><td class="border-bottom" height="5" colspan="4"><b>Reservation Details</b></td></tr>
+
+                <tr>
+                  <td><n>Tents</n></td>
+                  <td><b>Nights</b></td>
+                  <td><b>Check-In</b></td>
+                  <td><b>Check-Out</b></td>
+                </tr>
+
+
+
+                </table>
+
+
+
+                <table cellspacing="0" cellpadding="0" width="100%">
                   <tr>
                     <td>
                       <b>Plan</b>
