@@ -12,7 +12,7 @@
 	<td>
 		<i class="fa fa-print"></i>&nbsp;
 		<i class="fa fa-envelope-o"></i>&nbsp;
-		<i class="fa fa-eye"></i>
+		<a href="invoice/{$reservationID}" target="_blank"><i class="fa fa-eye"></i></a>
 	</td>
 	<td><a href="mailto:{$t1_email}">{$t1_first} {$t1_last}</a></td>
 	<td>{$t1_booked_date}</td>
