@@ -170,7 +170,7 @@
 <body style="padding:0; margin:0; display:block; background:#ffffff; -webkit-text-size-adjust:none">
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
- <td valign="top" align="left" width="100%" style="background:repeat-x url(https://www.filepicker.io/api/file/al80sTOMSEi5bKdmCgp2) #f9f8f8;">
+ <td valign="top" align="left" width="100%" style="background:#f9f8f8;">
  <center>
 
    <table class="w320 full-width-gmail-android" bgcolor="#f9f8f8" background="https://www.filepicker.io/api/file/al80sTOMSEi5bKdmCgp2" style="background-color:transparent" cellpadding="0" cellspacing="0" border="0" width="100%">
