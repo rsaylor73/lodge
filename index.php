@@ -5,7 +5,6 @@ include "include/mysql.php";
 include "include/templates.php";
 
 if ($_GET['h'] != "no") {
-
 	$smarty->display('header.tpl');
 }
 
@@ -13,8 +12,9 @@ $check = $core->check_login();
 if ($check == "FALSE") {
 	$smarty->display('login.tpl');
 } else {
-	$core->navigation();
-	//$smarty->display('navigation.tpl');
+	if ($_GET['h'] != "no") {
+		$core->navigation();
+	}
 
 	// Define global constant - get the authorize.net account info
 	$sql = "SELECT `authnet_login`,`authnet_key`,`authnet_testmode` FROM `settings` WHERE `id` = '1'";
@@ -24,9 +24,7 @@ if ($check == "FALSE") {
 		define('authnet_key',$row['authnet_key']);
 		define('authnet_testmode',$row['authnet_testmode']);
 	}
-print "Test $_GET[section]<br>";
 	if ($_GET['section'] == "dashboard") {
-		print "Test2...<br>";
 		$name = "$_SESSION[first] $_SESSION[last]";
 		$smarty->assign('name',$name);
 		$smarty->assign('access',$_SESSION['userType']);
