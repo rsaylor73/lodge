@@ -185,7 +185,7 @@
                 <tr>
                   <td class="header center" width="100%">
                     <a href="#">
-                      Company Name
+                      Aggressor Fleet
                     </a>
                   </td>
                 </tr>
@@ -205,6 +205,20 @@
             <table class="w320" cellspacing="0" cellpadding="0" width="500">
               <tr>
                 <td class="body-padding mobile-padding">
+
+                <table cellspacing="0" cellpadding="0" width="100%">
+                  <tr>
+                  <td class="left" style="padding-bottom:20px; text-align:left;">
+                    <b>Invoice Date:</b> DATE
+
+                  </td>
+                  <td class="right" style="padding-bottom:20px; text-align:right;">
+                    <b>Confirmation # {$reservationID}</b>
+
+
+                  </td>
+                  </tr>
+                </table>
 
                 <table cellspacing="0" cellpadding="0" width="100%">
                   <tr>
