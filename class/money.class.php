@@ -604,11 +604,7 @@ class money extends Core {
     	return $rate;
 	}
 
-	function get_balance_due($reservationID) {
-		// get nightly rate
-		$rate = $this->get_base_rate($reservationID);
-
-		// get total of transfers (line items)
+	private function get_line_item_amounts($reservationID) {
 		$line = "0";
 		$sql = "
 		SELECT
@@ -633,6 +629,15 @@ class money extends Core {
 		while ($row=$result->fetch_assoc()) {
 			$line = $line + $row['price'];
 		}
+		return $line;
+	}
+
+	function get_balance_due($reservationID) {
+		// get nightly rate
+		$rate = $this->get_base_rate($reservationID);
+
+		// get total of transfers (line items)
+		$line = $this->get_line_item_amounts($reservationID);
 
 		// get total of discounts
 		$discount = "0";
@@ -741,6 +746,7 @@ class money extends Core {
 		$data['end_date'] 	= $this->get_reservation_dates($reservationID,'DESC');
 		$data['nights']		= $this->get_reservation_nights($reservationID);
 		$data['rate'] 		= $this->get_base_rate($reservationID);
+		$data['line']		= $this->get_line_item_amounts($reservationID);
 
 		$template = "invoice.tpl";
 		$this->load_smarty($data,$template);

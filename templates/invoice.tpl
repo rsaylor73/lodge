@@ -261,7 +261,8 @@
                 <br>
                 <table cellspacing="0" cellpadding="0" width="100%">
                 <tr><td class="border-bottom" height="5" colspan="2"><b>Balance Summary</b></td></tr>
-                <tr><td><b>Rate:</b></td><td>${$rate}</td></tr>
+                <tr><td><b>Lodge Rate:</b></td><td>${$rate}</td></tr>
+                <tr><td><b>Line Items/Transfers:</b></td><td>${$line}</td></tr>
 
 
                 </table>
