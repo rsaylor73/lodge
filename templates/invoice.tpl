@@ -230,28 +230,30 @@
                   </tr>
                 </table>
 
-                <table cellspacing="0" cellpadding="0" width="100%">
-                  <tr>
-                    <td class="left" style="padding-bottom:20px; text-align:left;">
-                      <b>Invoice:</b> {$reservationID}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="left" style="padding-bottom:40px; text-align:left;">
-                    Hi Bob,<br>
-                    Your credit card ending in 1234 has been charged:
-                    </td>
-                  </tr>
-                </table>
+
 
                 <table cellspacing="0" cellpadding="0" width="100%">
-                <tr><td class="border-bottom" height="5" colspan="4"><b>Reservation Details</b></td></tr>
+                <tr><td class="border-bottom" height="5" colspan="2"><b>Reservation Details</b></td></tr>
 
                 <tr>
-                  <td><n>Tents</n></td>
+                  <td><b>Tents</b></td>
                   <td><b>Nights</b></td>
+                </tr>
+
+                <tr>
+                  <td>TBD</td>
+                  <td>TBD</td>
+                </tr>
+
+
+                <tr>
                   <td><b>Check-In</b></td>
                   <td><b>Check-Out</b></td>
+                </tr>
+
+                <tr>
+                  <td>TBD</td>
+                  <td>TBD</td>
                 </tr>
 
 
