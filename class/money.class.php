@@ -632,6 +632,30 @@ class money extends Core {
 		return $line;
 	}
 
+	private function get_payments_amount($reservationID) {
+		$payments = "0";
+		$sql = "
+		SELECT
+			DATE_FORMAT(`p`.`payment_date`, '%m/%d/%Y') AS 'payment_date',
+			IF(`p`.`transactionID` != '',`p`.`transactionID`,'N/A') AS 'transactionID',
+			IF(`p`.`check_number` != '', `p`.`check_number`,'N/A') AS 'check_number',
+			`p`.`payment_type`,
+			`p`.`amount`,
+			`p`.`id`
+
+		FROM
+			`payments` p
+
+		WHERE
+			`p`.`reservationID` = '$reservationID'
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$payments = $payments + $row['amount'];
+		}
+		return $payments;
+	}
+
 	function get_balance_due($reservationID) {
 		// get nightly rate
 		$rate = $this->get_base_rate($reservationID);
@@ -663,27 +687,7 @@ class money extends Core {
 		}
 
 		// get total of payments
-		$payments = "0";
-		$sql = "
-		SELECT
-			DATE_FORMAT(`p`.`payment_date`, '%m/%d/%Y') AS 'payment_date',
-			IF(`p`.`transactionID` != '',`p`.`transactionID`,'N/A') AS 'transactionID',
-			IF(`p`.`check_number` != '', `p`.`check_number`,'N/A') AS 'check_number',
-			`p`.`payment_type`,
-			`p`.`amount`,
-			`p`.`id`
-
-		FROM
-			`payments` p
-
-		WHERE
-			`p`.`reservationID` = '$reservationID'
-		";
-		$result = $this->new_mysql($sql);
-		while ($row = $result->fetch_assoc()) {
-			$payments = $payments + $row['amount'];
-		}
-
+		$payments = $this->get_payments_amount($reservationID);
 		
 		// get total of transfer debits
 		$debit = "0";
@@ -747,6 +751,7 @@ class money extends Core {
 		$data['nights']		= $this->get_reservation_nights($reservationID);
 		$data['rate'] 		= $this->get_base_rate($reservationID);
 		$data['line']		= $this->get_line_item_amounts($reservationID);
+		$data['payments']	= $this->get_payments_amount($reservationID);
 
 		$template = "invoice.tpl";
 		$this->load_smarty($data,$template);
