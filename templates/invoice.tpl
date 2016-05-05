@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=320, initial-scale=1" />
-  <title>Airmail Invoice</title>
+  <title>{$reservationID}</title>
   <style type="text/css">
 
     /* ----- Client Fixes ----- */
@@ -185,7 +185,7 @@
                 <tr>
                   <td class="header center" width="100%">
                     <a href="#">
-                      Aggressor Fleet
+                      <img src="https://www.liveaboardfleet.net/lodge/assets/img/logo.png">
                     </a>
                   </td>
                 </tr>
