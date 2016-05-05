@@ -35,7 +35,7 @@ RewriteRule ^deletelineitem/([a-zA-Z0-9]+)/?$ index.php?section=deletelineitem&i
 RewriteRule ^editlineitem/([a-zA-Z0-9]+)/?$ index.php?section=editlineitem&id=$1 [NC,L]
 RewriteRule ^editdiscount/([a-zA-Z0-9]+)/?$ index.php?section=editdiscount&id=$1 [NC,L]
 RewriteRule ^refundcashtransfer/([a-zA-Z0-9]+)/?$ index.php?section=refundcashtransfer&reservationID=$1 [NC,L]
-RewriteRule ^invoice/([a-zA-Z0-9]+)/?$ viewinvoice.php??section=viewinvoice&reservationID=$1 [NC,L]
+RewriteRule ^invoice/([a-zA-Z0-9]+)/?$ index.php??section=viewinvoice&reservationID=$1&h=no [NC,L]
 
 # Three params
 # IE: search/12345/676767
