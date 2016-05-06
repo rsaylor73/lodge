@@ -235,7 +235,7 @@
                 <table cellspacing="0" cellpadding="0" width="100%">
                 <tr><td class="border-bottom" height="5" colspan="2"><b>Reservation Details</b></td></tr>
 
-                <tr><td><b>Tents</b></td><td>TBD</td></tr>
+                <tr><td><b>Tents</b></td><td>{$tents}</td></tr>
                 <tr><td><b>Nights</b></td><td>{$nights}</td></tr>
                 <tr><td><b>Check-In</b></td><td>{$begin_date}</td></tr>
                 <tr><td><b>Check-Out</b></td><td>{$end_date}</td></tr>
