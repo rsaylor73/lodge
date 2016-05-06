@@ -210,11 +210,13 @@
                   <tr>
                   <td class="left" style="padding-bottom:20px; text-align:left; vertical-align: text-top;">
                     <b>Invoice Date:</b> {$date}<br><br>
-                    Contact First Last<br>
-                    Address Line 1<br>
-                    Address Line 2<br>
-                    City, State/Province Zip<br>
-                    Country<br>
+                    {$first} {$last}<br>
+                    {$address1}<br>
+                    {if $address2 ne ""}
+                    {$address2}<br>
+                    {/if}
+                    {$city}, {$state}{$province} {$zip}<br>
+                    {$country}<br>
 
                   </td>
                   <td class="right" style="padding-bottom:20px; text-align:right; vertical-align: text-top;">

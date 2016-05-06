@@ -797,6 +797,37 @@ class money extends Core {
 			`r`.`reservationID` = '$reservationID'
 			AND `r`.`userID` = `u`.`id`
 		";
+
+		// get contact info
+		$sql = "
+		SELECT
+			`c`.`first`,
+			`c`.`last`,
+			`c`.`address1`,
+			`c`.`address2`,
+			`c`.`city`,
+			`c`.`province`,
+			`c`.`state`,
+			`c`.`zip`,
+			`cc`.`country`
+
+
+		FROM
+			`reservations` r, `reserve`.`contacts` c, `reserve`.`countries` cc
+
+		WHERE
+			`r`.`reservationID` = '$reservationID'
+			AND `r`.`contactID` = `c`.`contactID`
+			AND `c`.`countryID` = `cc`.`countryID`
+
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			foreach ($row as $key=>$value) {
+				$data[$key] = $value;
+			}
+		}
+
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$commission = $row['commission'] * .01;
