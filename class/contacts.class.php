@@ -263,7 +263,7 @@ class contacts extends reservations {
 	}
 
 	public function assigncontacttorsv() {
-		print "Test $_POST[reservationID]<br>";
+		print "Test $_GET[reservationID] | $_GET[contactID]<br>";
 	}
 
 // end class
