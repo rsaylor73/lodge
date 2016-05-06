@@ -171,10 +171,13 @@ class contacts extends reservations {
 		$data['country'] = $country;
 		$template = "newcontact.tpl";
 
-		if ($_GET['reservationID'] != "") {
+		if (($_GET['reservationID'] != "") && ($_GET['action'] != "reservation")) {
 			$data['reservationID'] = $_GET['reservationID'];
 			$data['bed'] = $_GET['bed'];
 			$data['roomID'] = $_GET['roomID'];
+		}
+		if (($_GET['reservationID'] != "") && ($_GET['action'] == "reservation")) {
+			$data['action'] = "reservation";
 		}
 
      	$this->load_smarty($data,$template);

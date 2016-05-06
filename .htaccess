@@ -53,6 +53,8 @@ RewriteRule ^deletepayment/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=de
 RewriteRule ^editrefundtransfer/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editrefundtransfer&id=$1&reservationID=$2 [NC,L]
 RewriteRule ^deleterefundtransfer/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=deleterefundtransfer&id=$1&reservationID=$2 [NC,L]
 RewriteRule ^assigncontacttorsv/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=assigncontacttorsv&reservationID=$1&contactID=$2 [NC,L]
+RewriteRule ^newcontact/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=newcontact&reservationID=$1&action=$2 [NC,L]
+
 
 
 # Four params

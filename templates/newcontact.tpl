@@ -5,6 +5,7 @@
 <input type="hidden" name="reservationID" value="{$reservationID}">
 <input type="hidden" name="bed" value="{$bed}">
 <input type="hidden" name="roomID" value="{$roomID}">
+<input type="hidden" name="action" value="{$action}">
 <table class="table">
 	<tr><td><b>Title:</b></td><td><input type="text" name="title" placeholder="(Mr., Ms., etc.)" size=40></td></tr>
 	<tr><td><b>First Name:</b></td><td><input type="text" name="first" size=40 required></td></tr>
