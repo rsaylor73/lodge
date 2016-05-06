@@ -69,7 +69,7 @@ if ($check == "FALSE") {
 		<td>
 		";
 
-		if ($_POST['action'] == "reservation") {
+		if ($_GET['action'] == "reservation") {
 			$html .= "<input type=\"button\" onclick=\"document.location.href='assigncontacttorsv/$_GET[reservationID]/$row[contactID]'\" 
 			class=\"btn btn-primary\" value=\"Assign Contact\">";
 		} else {
