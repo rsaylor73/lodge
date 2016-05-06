@@ -235,21 +235,21 @@
                 <table cellspacing="0" cellpadding="0" width="100%">
                 <tr><td class="border-bottom" height="5" colspan="2"><b>Reservation Details</b></td></tr>
 
-                <tr><td><b>Tents</b></td><td>{$tents}</td></tr>
-                <tr><td><b>Nights</b></td><td>{$nights}</td></tr>
-                <tr><td><b>Check-In</b></td><td>{$begin_date}</td></tr>
-                <tr><td><b>Check-Out</b></td><td>{$end_date}</td></tr>
+                <tr><td><b>Tents</b></td><td class="right" style="padding-bottom:20px; text-align:right; vertical-align: text-top;">{$tents}</td></tr>
+                <tr><td><b>Nights</b></td><td class="right" style="padding-bottom:20px; text-align:right; vertical-align: text-top;">{$nights}</td></tr>
+                <tr><td><b>Check-In</b></td><td class="right" style="padding-bottom:20px; text-align:right; vertical-align: text-top;">{$begin_date}</td></tr>
+                <tr><td><b>Check-Out</b></td><td class="right" style="padding-bottom:20px; text-align:right; vertical-align: text-top;">{$end_date}</td></tr>
 
 
                 <tr><td colspan="2"><br></td></tr>
 
                 <tr><td class="border-bottom" height="5" colspan="2"><b>Balance Summary</b></td></tr>
-                <tr><td><b>Lodge Rate:</b></td><td>${$rate}</td></tr>
-                <tr><td><b>Line Items/Transfers:</b></td><td>${$line}</td></tr>
-                <tr><td><b>Payments:</b></td><td>${$payments}</td></tr>
-                <tr><td><b>Discounts:</b></td><td>${$discounts}</td></tr>
+                <tr><td><b>Lodge Rate:</b></td><td class="right" style="padding-bottom:20px; text-align:right; vertical-align: text-top;">${$rate}</td></tr>
+                <tr><td><b>Line Items/Transfers:</b></td><td class="right" style="padding-bottom:20px; text-align:right; vertical-align: text-top;">${$line}</td></tr>
+                <tr><td><b>Payments:</b></td><td class="right" style="padding-bottom:20px; text-align:right; vertical-align: text-top;">${$payments}</td></tr>
+                <tr><td><b>Discounts:</b></td><td class="right" style="padding-bottom:20px; text-align:right; vertical-align: text-top;">${$discounts}</td></tr>
                 <tr><td colspan="2"><br></td></tr>
-                <tr><td><b>Amount Due:</b></td><td>${$amount_due}</td></tr>
+                <tr><td><b>Amount Due:</b></td><td class="right" style="padding-bottom:20px; text-align:right; vertical-align: text-top;">${$amount_due}</td></tr>
 
 
                 </table>
