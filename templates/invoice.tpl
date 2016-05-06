@@ -248,7 +248,6 @@
                 <tr><td><b>Line Items/Transfers:</b></td><td class="right" style="padding-bottom:10px; text-align:right; vertical-align: text-top;">${$line}</td></tr>
                 <tr><td><b>Payments:</b></td><td class="right" style="padding-bottom:10px; text-align:right; vertical-align: text-top;">${$payments}</td></tr>
                 <tr><td><b>Discounts:</b></td><td class="right" style="padding-bottom:10px; text-align:right; vertical-align: text-top;">${$discounts}</td></tr>
-                <tr><td colspan="2"><br></td></tr>
                 <tr><td><b>Amount Due:</b></td><td class="right" style="padding-bottom:10px; text-align:right; vertical-align: text-top;">${$amount_due}</td></tr>
 
 
