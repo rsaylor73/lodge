@@ -768,7 +768,7 @@ class money extends Core {
 		$data['line']		= $this->get_line_item_amounts($reservationID);
 		$data['payments']	= $this->get_payments_amount($reservationID);
 		$data['discounts']	= $this->get_discount_amount($reservationID);
-		$data['tents']		= get_reservation_tents($reservationID);
+		$data['tents']		= $this->get_reservation_tents($reservationID);
 
 		$line = $data['line'];
 		$payments = $data['payments'];
