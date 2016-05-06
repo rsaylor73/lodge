@@ -260,7 +260,10 @@ class contacts extends reservations {
 		$data['action'] = "reservation";
 		$template = "assigncontact.tpl";
 		$this->load_smarty($data,$template);
+	}
 
+	public function assigncontacttorsv() {
+		print "Test $_POST[reservationID]<br>";
 	}
 
 // end class
