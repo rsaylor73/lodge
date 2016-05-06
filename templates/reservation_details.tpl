@@ -33,7 +33,7 @@
 {if $contactID eq ""}
 <tr>
 	<td colspan=3>
-		<form action="assigncontact/{$reservationID}" method="get">
+		<form action="assigncontacttoreservation/{$reservationID}" method="get">
 		<input type="submit" value="Assign Contact" class="btn btn-warning">
 		</form>
 	</td></tr>
@@ -41,7 +41,7 @@
 {else}
 <tr><td colspan="2"><b>Contact</b></td><td><b>Email</b></td><</tr>
 <tr><td colspan="3">
-		<form action="assigncontact/{$reservationID}" method="get">
+		<form action="assigncontacttoreservation/{$reservationID}" method="get">
 		<input type="submit" value="Change Contact" class="btn btn-warning">
 		</form>
 	</td></tr>

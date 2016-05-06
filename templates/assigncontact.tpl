@@ -5,6 +5,7 @@
 <input type="hidden" name="reservationID" value="{$reservationID}">
 <input type="hidden" name="bed" value="{$bed}">
 <input type="hidden" name="roomID" value="{$roomID}">
+<input type="hidden" name="action" value="{$action}">
 <table class="table">
 
 <tr>

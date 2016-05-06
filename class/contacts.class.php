@@ -255,5 +255,13 @@ class contacts extends reservations {
 		$this->load_smarty($data,$template);
 	}
 
+	public function assigncontacttoreservation() {
+		$data['reservationID'] = $_GET['reservationID'];
+		$data['action'] = "reservation";
+		$template = "assigncontact.tpl";
+		$this->load_smarty($data,$template);
+
+	}
+
 // end class
 }
