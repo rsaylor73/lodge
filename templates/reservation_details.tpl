@@ -40,6 +40,7 @@
 
 {else}
 <tr><td colspan="2"><b>Contact</b></td><td><b>Email</b></td><</tr>
+<tr><td colspan="2">{$first} {$last}</td><td><a href="mailto:{$email}">{$email}</a></td></tr>
 <tr><td colspan="3">
 		<form action="assigncontacttoreservation/{$reservationID}" method="get">
 		<input type="submit" value="Change Contact" class="btn btn-warning">

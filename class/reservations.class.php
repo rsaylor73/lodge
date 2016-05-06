@@ -797,7 +797,11 @@ class reservations extends money {
 			`a`.`email`,
 			`s`.`resellerID`,
 			`s`.`company`,
-			`s`.`commission`
+			`s`.`commission`,
+			`c`.`contactID`,
+			`c`.`first`,
+			`c`.`last`,
+			`c`.`email`
 
 
 		FROM
@@ -805,6 +809,7 @@ class reservations extends money {
 
 		LEFT JOIN `reserve`.`reseller_agents` a ON `r`.`reseller_agentID` = `a`.`reseller_agentID`
 		LEFT JOIN `reserve`.`resellers` s ON `a`.`resellerID` = `s`.`resellerID`
+		LEFT JOIN `reserve`.`contacts` c ON `r`.`contactID` = `c`.`contactID`
 
 		WHERE
 			`r`.`reservationID` = '$reservationID'

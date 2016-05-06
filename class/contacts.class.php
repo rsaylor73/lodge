@@ -195,18 +195,31 @@ class contacts extends reservations {
 		if ($result == "TRUE") {
 
 			if ($_POST['reservationID'] != "") {
-				print "<br><font color=green>The contact was added. Loading...<br>Click <a href=\"assigncontact/$_POST[reservationID]/$_POST[bed]\">here</a> if the page does not load.</font><br>";
+				print "<br><font color=green>The contact was added. Loading...<br>";
 
-				// redirect here
-				?>
-				<script>
-   				setTimeout(function() {
-					window.location.replace('assigncontact/<?=$_POST['reservationID'];?>/<?=$_POST['bed'];?>/<?=$_POST['roomID'];?>')
+				if ($_POST['action'] == "reservation") {
+					print "Click <a href=\"reservation_dashboard/$_POST[reservationID]/details\">here</a> if the page does not load.</font><br>";
+					// redirect here
+					?>
+					<script>
+   					setTimeout(function() {
+						window.location.replace('reservation_dashboard/<?=$_POST['reservationID'];?>/details')
+					}
+   					,2000);
+					</script>
+					<?php
+				} else {
+					// redirect here
+					print "Click <a href=\"assigncontact/$_POST[reservationID]/$_POST[bed]/$_POST[roomID]\">here</a> if the page does not load.</font><br>";
+					?>
+					<script>
+   					setTimeout(function() {
+						window.location.replace('assigncontact/<?=$_POST['reservationID'];?>/<?=$_POST['bed'];?>/<?=$_POST['roomID'];?>')
+					}
+   					,2000);
+					</script>
+					<?php
 				}
-   				,2000);
-				</script>
-				<?php
-
 
 			} else {
 				$msg = "<font color=green>The contact was added.</font><br>";
