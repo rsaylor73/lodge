@@ -277,7 +277,7 @@
                   <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#E5E5E5">
                     <tr>
                       <td class="center" style="padding:25px; text-align:center;">
-                        <b><a href="#">Get in touch</a></b> if you have any questions or feedback
+                        <b>info@aggressor.com</b> | US & Canada: 800-348-2628 | International: + 1 706-933-2531
                       </td>
                     </tr>
                   </table>
@@ -287,30 +287,7 @@
           </center>
         </td>
       </tr>
-      <tr>
-        <td style="border-top:1px solid #B3B3B3; border-bottom:1px solid #B3B3B3;" align="center">
-          <center>
-            <table class="w320" cellspacing="0" cellpadding="0" width="500" bgcolor="#E5E5E5">
-              <tr>
-                <td align="center" style="padding:25px; text-align:center">
-                  <table cellspacing="0" cellpadding="0" width="100%" bgcolor="#E5E5E5">
-                    <tr>
-                      <td class="center footer" style="font-size:12px;">
-                        <a href="#">Contact Us</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                        <span class="footer-group">
-                          <a href="#">Facebook</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                          <a href="#">Twitter</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                          <a href="#">Support</a>
-                        </span>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </center>
-        </td>
-      </tr>
+ 
     </table>
 
   </center>
