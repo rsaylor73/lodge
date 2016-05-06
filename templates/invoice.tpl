@@ -263,6 +263,9 @@
                 <tr><td><b>Lodge Rate:</b></td><td>${$rate}</td></tr>
                 <tr><td><b>Line Items/Transfers:</b></td><td>${$line}</td></tr>
                 <tr><td><b>Payments:</b></td><td>${$payments}</td></tr>
+                <tr><td><b>Discounts:</b></td><td>${$discounts}</td></tr>
+                <tr><td colspan="2"><br></td></tr>
+                <tr><td><b>Amount Due:</b></td><td>${$amount_due}</td></tr>
 
 
                 </table>

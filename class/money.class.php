@@ -656,14 +656,7 @@ class money extends Core {
 		return $payments;
 	}
 
-	function get_balance_due($reservationID) {
-		// get nightly rate
-		$rate = $this->get_base_rate($reservationID);
-
-		// get total of transfers (line items)
-		$line = $this->get_line_item_amounts($reservationID);
-
-		// get total of discounts
+	private function get_discount_amount($reservationID) {
 		$discount = "0";
 		$sql = "
 		SELECT
@@ -685,26 +678,48 @@ class money extends Core {
 		while ($row = $result->fetch_assoc()) {
 			$discount = $discount + $row['amount'];
 		}
+		return $discount;
+	}
 
-		// get total of payments
-		$payments = $this->get_payments_amount($reservationID);
-		
-		// get total of transfer debits
+	private function get_transfer_debits($reservationID) {
 		$debit = "0";
 		$sql = "SELECT `id`,`type`,`detail`,`referral_reservationID`,`amount` FROM `transfers` WHERE `reservationID` = '$reservationID' AND `detail` = 'Debit'";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$debit = $debit + $row['amount'];
 		}
+		return $debit;
+	}
 
-
-		// get total of transfer deposits
+	private function get_transfer_deposits($reservationID) {
 		$deposit = "0";
 		$sql = "SELECT `id`,`type`,`detail`,`referral_reservationID`,`amount` FROM `transfers` WHERE `reservationID` = '$reservationID' AND `detail` = 'Deposit'";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$deposit = $deposit + $row['amount'];
 		}
+		return $deposit;
+	}
+
+	function get_balance_due($reservationID) {
+		// get nightly rate
+		$rate = $this->get_base_rate($reservationID);
+
+		// get total of transfers (line items)
+		$line = $this->get_line_item_amounts($reservationID);
+
+		// get total of discounts
+		$discount = $this->get_discount_amount($reservationID);
+	
+
+		// get total of payments
+		$payments = $this->get_payments_amount($reservationID);
+		
+		// get total of transfer debits
+		$debit = $this->get_transfer_debits($reservationID);
+
+		// get total of transfer deposits
+		$deposit = $this->get_transfer_deposits($reservationID);
 
 		// calculate final amount due
 
@@ -752,6 +767,43 @@ class money extends Core {
 		$data['rate'] 		= $this->get_base_rate($reservationID);
 		$data['line']		= $this->get_line_item_amounts($reservationID);
 		$data['payments']	= $this->get_payments_amount($reservationID);
+		$data['discounts']	= $this->get_discount_amount($reservationID);
+
+		$line = $data['line'];
+		$payments = $data['payments'];
+		$discount = $data['discounts'];
+
+
+		$debit 				= $this->get_transfer_debits($reservationID);
+		$deposit 			= $this->get_transfer_deposits($reservationID);
+
+		$rate = $data['rate'];
+		$rate = $rate - $debit;
+		$rate = $rate - $deposit;
+
+		// Commission
+		$sql = "
+		SELECT
+			`s`.`commission`
+
+		FROM
+			`reservations` r, `users` u
+
+		LEFT JOIN `reserve`.`reseller_agents` a ON `r`.`reseller_agentID` = `a`.`reseller_agentID`
+		LEFT JOIN `reserve`.`resellers` s ON `a`.`resellerID` = `s`.`resellerID`
+
+		WHERE
+			`r`.`reservationID` = '$reservationID'
+			AND `r`.`userID` = `u`.`id`
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$commission = $row['commission'] * .01;
+		}
+		$total_commission = $rate * $commission;
+
+		$amount_due = $rate + $line - $discount - $payments - $total_commission;
+		$data['amount_due'] = $amount_due;
 
 		$template = "invoice.tpl";
 		$this->load_smarty($data,$template);
