@@ -277,7 +277,7 @@
                   <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#E5E5E5">
                     <tr>
                       <td class="center" style="padding:25px; text-align:center;">
-                        <b>info@aggressor.com</b> | US & Canada: 800-348-2628 | International: + 1 706-933-2531
+                        <b>info@aggressor.com</b> <br>US & Canada: 800-348-2628 <br>International: + 1 706-933-2531
                       </td>
                     </tr>
                   </table>
