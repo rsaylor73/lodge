@@ -263,7 +263,12 @@ class contacts extends reservations {
 	}
 
 	public function assigncontacttorsv() {
-		print "Test $_GET[reservationID] | $_GET[contactID]<br>";
+		$sql = "UPDATE `reservations` SET `contactID` = '$_GET[contactID]' WHERE `reservationID` = '$_GET[reservationID]'";
+		$result = $this->new_mysql($sql);
+		$template = "assigncontacttorsv.tpl";
+		$data['reservationID'] = $_GET['reservationID'];
+		$data['msg'] = "<font color=green>The contact was assigned to the reservation.</font>";
+		$this->load_smarty($data,$template);
 	}
 
 // end class
