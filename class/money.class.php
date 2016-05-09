@@ -840,12 +840,14 @@ class money extends Core {
 		if ($_GET['p'] == "1") {
 			$data['print'] = "Yes";
 		}
-		
+
 		$template = "invoice.tpl";
 		$this->load_smarty($data,$template);
 	}
 
-
+	public function emailinvoice() {
+		$html = $this->viewinvoice();
+	}
 
 
 

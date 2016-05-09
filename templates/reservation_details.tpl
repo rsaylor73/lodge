@@ -11,7 +11,7 @@
 <tr>
 	<td>
 		<a href="javascript:void(0)" onclick="window.frames['hidden_save'].location.href='printinvoice/{$reservationID}';" ><i class="fa fa-print"></i></a>&nbsp;
-		<i class="fa fa-envelope-o"></i>&nbsp;
+		<a href="javascript:void(0)" onclick="window.frames['hidden_save'].location.href='emailinvoice/{$reservationID}';" ><i class="fa fa-envelope-o"></i></a>&nbsp;
 		<a href="invoice/{$reservationID}" target="_blank"><i class="fa fa-eye"></i></a>
 	</td>
 	<td><a href="mailto:{$t1_email}">{$t1_first} {$t1_last}</a></td>
