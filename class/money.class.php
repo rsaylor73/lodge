@@ -847,6 +847,50 @@ class money extends Core {
 
 	public function emailinvoice() {
 		$html = $this->viewinvoice();
+
+		// get email of contact
+		$sql = "
+		SELECT
+			`c`.`first`,
+			`c`.`last`,
+			`c`.`email`
+
+		FROM
+			`reservations` r,
+			`reserve`.`contacts` c
+
+		WHERE
+			`r`.`reservationID` = '$_GET[reservationID]'
+			AND `r`.`contactID` = `c`.`contactID`
+
+		";
+
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$email = $row['email'];
+			$first = $row['first'];
+			$last = $row['last'];
+		}
+		$settings = $this->get_settings();
+		$subj = $settings[0] ." invoice for confirnation #".$_GET['reservationID'];
+		$msg = "Dear $first $last,<br><br>Attached you will find a copy of your invoice.<br><br>";
+		$msg .= $html;
+
+		mail($email,$subj,$msg,$settings[3]);
+		if ($email != "") {
+			?>
+			<script>
+			alert('The invoice was emailed to <?=$email;?>');
+			</script>
+			<?php
+		} else {
+			?>
+			<script>
+			alert('ERROR: No email for the reservation contact found!');
+			</script>
+			<?php
+		}
+
 	}
 
 
