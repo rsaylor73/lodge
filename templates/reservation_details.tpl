@@ -1,8 +1,6 @@
 <br>
 <h3>Details</h3>
 
-<iframe name="hidden_save" width="0" height="0" frameborder="0"></iframe>
-
 <table class="table">
 <tr>
 	<td><b>Invoice</b></td>
@@ -69,3 +67,6 @@
 {/if}
 
 </table>
+
+<iframe name="hidden_save" width="0" height="0" frameborder="0"></iframe>
+
