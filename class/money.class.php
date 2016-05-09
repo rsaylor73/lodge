@@ -846,7 +846,10 @@ class money extends Core {
 	}
 
 	public function emailinvoice() {
-		$html = file_get_contents("invoice/$_GET[reservationID]");
+		$settings = $this->get_settings();
+
+		$url = $settings[1] . "invoice/" . $_GET['reservationID'];
+		$html = file_get_contents($url);
 
 		// get email of contact
 		$sql = "
@@ -871,7 +874,6 @@ class money extends Core {
 			$first = $row['first'];
 			$last = $row['last'];
 		}
-		$settings = $this->get_settings();
 		$subj = $settings[0] ." invoice for confirnation #".$_GET['reservationID'];
 		$msg = "Dear $first $last,<br><br>Attached you will find a copy of your invoice.<br><br>";
 		$msg .= $html;
