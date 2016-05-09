@@ -879,9 +879,6 @@ class money extends Core {
 		$msg = "Dear $first $last,<br><br>Attached you will find a copy of your invoice.<br><br>";
 		$msg .= $html;
 
-		print "Test: $remote_addr $msg<br>";
-		die;
-
 		mail($email,$subj,$msg,$settings[3]);
 		if ($email != "") {
 			?>
