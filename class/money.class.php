@@ -846,7 +846,7 @@ class money extends Core {
 	}
 
 	public function emailinvoice() {
-		$html = $this->viewinvoice();
+		$html = file_get_contents("invoice/$_GET[reservationID]");
 
 		// get email of contact
 		$sql = "
