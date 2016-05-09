@@ -34,18 +34,20 @@ class loader extends reports {
 
 		$remote_addr = $_SERVER['REMOTE_ADDR'];
 		if ($remote_addr == "98.142.222.59") { // Server IP of the virtual host
+			// bypass the access
 			$type = "admin";
-		}
+		} else {
 
-		/* This function checks if the user has access to the module. Each module will define the access and send to this method */
-		foreach ($type as $value) {
-			if ($_SESSION['userType'] == $value) {
-				$ok = "1";
+			/* This function checks if the user has access to the module. Each module will define the access and send to this method */
+			foreach ($type as $value) {
+				if ($_SESSION['userType'] == $value) {
+					$ok = "1";
+				}
 			}
-		}
-		if ($ok != "1") {
-			print "<br><br><font color=red>Sorry, but you do not have access to the requestion action.</font><br><br>";
-			die;
+			if ($ok != "1") {
+				print "<br><br><font color=red>Sorry, but you do not have access to the requestion action.</font><br><br>";
+				die;
+			}
 		}
 	}
 
