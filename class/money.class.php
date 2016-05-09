@@ -847,7 +847,7 @@ class money extends Core {
 
 	public function emailinvoice() {
 		$settings = $this->get_settings();
-		$remote_addr = $_SERVER['remote_addr'];
+		$remote_addr = $_SERVER['REMOTE_ADDR'];
 		print "<pre>";
 		print_r($_SERVER);
 		print "</pre>";
