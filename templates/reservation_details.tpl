@@ -1,6 +1,8 @@
 <br>
 <h3>Details</h3>
 
+<iframe name="hidden_save" width="0" height="0" frameborder="0"></iframe>
+
 <table class="table">
 <tr>
 	<td><b>Invoice</b></td>
@@ -10,7 +12,7 @@
 
 <tr>
 	<td>
-		<a href="javascript:void(0)" onclick="window.frames[1].location.href='printinvoice/{$reservationID}';" ><i class="fa fa-print"></i></a>&nbsp;
+		<a href="javascript:void(0)" onclick="window.frames['hidden_save'].location.href='printinvoice/{$reservationID}';" ><i class="fa fa-print"></i></a>&nbsp;
 		<i class="fa fa-envelope-o"></i>&nbsp;
 		<a href="invoice/{$reservationID}" target="_blank"><i class="fa fa-eye"></i></a>
 	</td>
