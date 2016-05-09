@@ -847,6 +847,7 @@ class money extends Core {
 
 	public function emailinvoice() {
 		$settings = $this->get_settings();
+		$remote_addr = $_SERVER['remote_addr'];
 
 		$url = $settings[1] . "invoice/" . $_GET['reservationID'];
 		$html = file_get_contents($url);
@@ -878,7 +879,7 @@ class money extends Core {
 		$msg = "Dear $first $last,<br><br>Attached you will find a copy of your invoice.<br><br>";
 		$msg .= $html;
 
-		print "Test: $msg<br>";
+		print "Test: $remote_addr $msg<br>";
 		die;
 
 		mail($email,$subj,$msg,$settings[3]);
