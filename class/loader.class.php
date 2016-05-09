@@ -21,6 +21,8 @@ class loader extends reports {
       	if ($found == "1") {
       		return "TRUE";
 		} else {
+			$remote_addr = $_SERVER['REMOTE_ADDR'];
+			print "T $remote_addr<br>";
 			return "FALSE";
 		}
 	}
