@@ -168,6 +168,13 @@
 
 </head>
 <body style="padding:0; margin:0; display:block; background:#ffffff; -webkit-text-size-adjust:none">
+
+{if $print eq "Yes"}
+<script>
+window.print();
+</script>
+{/if}
+
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
  <td valign="top" align="left" width="100%" style="background:#f9f8f8;">
