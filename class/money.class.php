@@ -721,11 +721,6 @@ class money extends Core {
 		// get total of transfer deposits
 		$deposit = $this->get_transfer_deposits($reservationID);
 
-		// calculate final amount due
-
-		$rate = $rate - $debit;
-		$rate = $rate - $deposit;
-
 		// Commission
 		$sql = "
 		SELECT
@@ -747,7 +742,7 @@ class money extends Core {
 		}
 		$total_commission = $rate * $commission;
 
-		$amount_due = $rate + $line - $discount - $payments - $total_commission;
+		$amount_due = $rate + $line - $discount - $payments - $total_commission - $debit - $deposit;
 
 		$data2 = array();
 		$data2[] = $total_commission;
