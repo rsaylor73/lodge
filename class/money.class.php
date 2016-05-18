@@ -792,7 +792,11 @@ class money extends Core {
 			`r`.`reservationID` = '$reservationID'
 			AND `r`.`userID` = `u`.`id`
 		";
-
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$commission = $row['commission'] * .01;
+		}
+		
 		// get contact info
 		$sql = "
 		SELECT
