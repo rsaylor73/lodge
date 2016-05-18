@@ -775,8 +775,7 @@ class money extends Core {
 		$deposit 			= $this->get_transfer_deposits($reservationID);
 
 		$rate = $data['rate'];
-		$rate = $rate - $debit;
-		$rate = $rate - $deposit;
+		$rate = $rate - $discount;
 
 		// Commission
 		$sql = "
@@ -830,7 +829,7 @@ class money extends Core {
 		}
 		$total_commission = $rate * $commission;
 
-		$amount_due = $rate + $line - $discount - $payments - $total_commission;
+		$amount_due = $rate + $line - $debit - $refund - $payments - $total_commission;
 		$data['amount_due'] = $amount_due;
 
 		if ($_GET['p'] == "1") {
