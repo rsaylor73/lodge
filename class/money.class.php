@@ -796,7 +796,7 @@ class money extends Core {
 		while ($row = $result->fetch_assoc()) {
 			$commission = $row['commission'] * .01;
 		}
-		
+
 		// get contact info
 		$sql = "
 		SELECT
@@ -827,10 +827,6 @@ class money extends Core {
 			}
 		}
 
-		$result = $this->new_mysql($sql);
-		while ($row = $result->fetch_assoc()) {
-			$commission = $row['commission'] * .01;
-		}
 		$total_commission = $rate * $commission;
 
 		$amount_due = $rate + $line - $debit - $refund - $payments - $total_commission;
