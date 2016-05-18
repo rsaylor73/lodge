@@ -97,9 +97,9 @@ Refunds/Cash Transfers</h3><hr>
 <table class="table">
 <thead>
 <tr>
-<th width="35%"><b>Type</b></th>
+<th width="30%"><b>Type</b></th>
 <th width="25%"><b>Detail</b></th>
-<th width="15%"><b>Referral ID</b></th>
+<th width="20%"><b>Referral ID</b></th>
 <th width="25%"><b>Amount</b></th>
 </tr>
 </thead>
