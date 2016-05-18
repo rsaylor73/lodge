@@ -740,9 +740,10 @@ class money extends Core {
 		while ($row = $result->fetch_assoc()) {
 			$commission = $row['commission'] * .01;
 		}
+		$rate = $rate - $discount;
 		$total_commission = $rate * $commission;
 
-		$amount_due = $rate + $line - $discount - $payments - $total_commission - $debit - $deposit;
+		$amount_due = $rate + $line - $payments - $total_commission - $debit - $deposit;
 
 		$data2 = array();
 		$data2[] = $total_commission;
