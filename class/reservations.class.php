@@ -965,7 +965,7 @@ class reservations extends money {
 
 			$move = "";
 			if ($this_tent != $row['t2_description']) {
-				$move = "M";
+				$move = "<a href=\"move/$row[reservationID]/"><i class=\"fa fa-arrows\" aria-hidden=\"true\"></i></a> ";
 				$this_tent = $row['t2_description'];
 			}
 
