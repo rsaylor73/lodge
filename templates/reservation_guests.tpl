@@ -3,6 +3,7 @@
 
 <table class="table">
 <tr>
+	<td width="20"></td>
 	<td><b>Tent</b></td>
 	<td><b>Bed</b></td>
 	<td><b>Status</b></td>
