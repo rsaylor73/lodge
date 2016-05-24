@@ -1304,6 +1304,15 @@ class reservations extends money {
 		$this->load_smarty($data,$template);
 
 	}
+
+	public function move() {
+		/* $_GET[reservationID] , $_GET[tentID] */
+		$data['reservationID'] = $_GET['reservationID'];
+		$data['tentID'] = $_GET['tentID'];
+
+		$template = "move.tpl";
+		$this->load_smarty($data,$template);
+	}
 	
 
 // end class
