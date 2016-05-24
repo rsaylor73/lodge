@@ -303,6 +303,11 @@ class reservations extends money {
 		return $fee;
 	}
 
+	private function movetent() {
+
+
+	}
+
 	public function viewtent() {
 
 		$nights2 = $_POST['nights'] - 1;
@@ -1316,6 +1321,8 @@ class reservations extends money {
 		/* $_GET[reservationID] , $_GET[tentID] */
 		$data['reservationID'] = $_GET['reservationID'];
 		$data['tentID'] = $_GET['tentID'];
+
+		$this->movetent(); // TBA
 
 		$template = "move.tpl";
 		$this->load_smarty($data,$template);
