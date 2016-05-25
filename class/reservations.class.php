@@ -381,7 +381,7 @@ class reservations extends money {
 		LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail'
 
 		WHERE
-			`i`.`locationID` = '$_POST[lodge]' 
+			`i`.`locationID` = '$locationID' 
 			AND `i`.`date_code` BETWEEN '$start_date' AND '$end_date'
 			AND `i`.`roomID` = `r`.`id`
 			$type
