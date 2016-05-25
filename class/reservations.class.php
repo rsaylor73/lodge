@@ -306,22 +306,34 @@ class reservations extends money {
 	private function movetent() {
 		$reservationID = $_GET['reservationID'];
 
+		$sql = "SELECT `child1_age`,`child2_age` FROM `reservations` WHERE `reservationID` = '$reservationID'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$child1_age = $row['child1_age'];
+			$child2_age = $row['child2_age'];
+		}	
+
 		// get data from reservation
 		$start_date = $this->get_reservation_dates($reservationID,'ASC','reports');
 		$end_date 	= $this->get_reservation_dates($reservationID,'DESC','reports');
 		$nights		= $this->get_reservation_nights($reservationID);
+		$nights2 	= $nights - 1;
+		$end_date2 	= date("Ymd", strtotime($start_date ."+ $nights2 days"));
 
 		$sql = "
 		SELECT
-			`b`.`name`
+			`b`.`name`,
+			`i`.`locationID`
 
 		FROM
 			`reservations` r,
-			`beds` b
+			`beds` b,
+			`inventory` i
 
 		WHERE
 			`r`.`reservationID` = '$reservationID'
 			AND `b`.`reservationID` = `r`.`reservationID`
+			AND `b`.`inventoryID` = `i`.`inventoryID`
 
 		GROUP BY `b`.`name`
 		";
@@ -330,6 +342,7 @@ class reservations extends money {
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
+			$locationID = $row['locationID'];
 			if (($row['name'] != "Child1") && ($row['name'] != "Child2")) {
 				$adults++;
 			}
@@ -341,8 +354,6 @@ class reservations extends money {
 
     	$template = "move.tpl";
       	$data = array();
-      	$data['adults'] = $adults;
-
 		
 		if ($children == "0") {
 			//
@@ -380,21 +391,23 @@ class reservations extends money {
 		HAVING total_adult_beds >= '$adults' $child_sql
 		";
 
-		$data['nights'] = $_POST['nights'];
-		$data['adults'] = $_POST['pax'];
-		$data['children'] = $_POST['children'];
+		$data['nights'] = $nights;
+		$data['adults'] = $adults;
+		$data['children'] = $children;
 		$data['start_date2'] = date("m/d/Y",strtotime($start_date));
 		$data['end_date2'] = date("m/d/Y",strtotime($end_date2));
-		$data['tents'] = $_POST['tents'];
-		$data['lodge'] = $_POST['lodge'];
-		$data['start_date'] = $_POST['start_date'];
-		$data['pax'] = $_POST['pax'];
-		$data['type'] = $_POST['type'];
-		$data['childage1'] = $this->child_age_map($_POST['childage1']);
-		$data['childage2'] = $this->child_age_map($_POST['childage2']);
-		$data['childage1_form'] = $_POST['childage1'];
-		$data['childage2_form'] = $_POST['childage2'];
+		$data['tents'] = '1';
+		$data['reservationID'] = $reservationID;
+		$data['lodge'] = $locationID;
+		$data['start_date'] = $start_date;
+		$data['pax'] = $adults;
 
+		$data['type'] = $_POST['type'];
+
+		$data['childage1'] = $this->child_age_map($child1_age);
+		$data['childage2'] = $this->child_age_map($child2_age);
+		$data['childage1_form'] = $child1_age;
+		$data['childage2_form'] = $child2_age;
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
