@@ -341,7 +341,7 @@ class reservations extends money {
 
     	$template = "move.tpl";
       	$data = array();
-      	$data['adults'] = $adults;ß
+      	$data['adults'] = $adults;
 
 		
 		if ($children == "0") {
