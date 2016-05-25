@@ -304,7 +304,139 @@ class reservations extends money {
 	}
 
 	private function movetent() {
+		$reservationID = $_GET['reservationID'];
 
+		// get data from reservation
+		$start_date = $this->get_reservation_dates($reservationID,'ASC','reports');
+		$end_date 	= $this->get_reservation_dates($reservationID,'DESC','reports');
+		$nights		= $this->get_reservation_nights($reservationID);
+
+		$sql = "
+		SELECT
+			`b`.`name`
+
+		FROM
+			`reservations` r,
+			`beds` b
+
+		WHERE
+			`r`.`reservationID` = '$reservationID'
+			AND `b`.`reservationID` = `r`.`reservationID`
+
+		GROUP BY `b`.`name`
+		";
+		$adults = "0";
+		$children = "0";
+
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			if (($row['name'] != "Child1") && ($row['name'] != "Child2")) {
+				$adults++;
+			}
+			if (($row['name'] == "Child1") or ($row['name'] == "Child2")) {
+				$children++;
+			}
+		}
+
+
+    	$template = "move.tpl";
+      	$data = array();
+
+		
+		if ($children == "0") {
+			//
+			$child_sql = "AND total_child_beds = '0'";
+		} else {
+			$child_sql = "AND total_child_beds >= '$children'";
+		}
+
+		$sql = "
+		SELECT
+			`r`.`id`,
+			`r`.`description`,
+			COUNT(`a`.`status`) AS 'total_adult_beds',
+			COUNT(`c`.`status`) AS 'total_child_beds',
+			`r`.`nightly_rate`,
+			`r`.`beds` AS 'adult',
+			`r`.`children`,
+			`a`.`status` AS 'adult_status',
+			`c`.`status` AS 'child_status'
+
+		FROM
+			`inventory` i, `rooms` r
+
+		LEFT JOIN `beds` a ON `i`.`inventoryID` = `a`.`inventoryID` AND `a`.`type` = 'adult' AND `a`.`status` = 'avail'
+		LEFT JOIN `beds` c ON `i`.`inventoryID` = `c`.`inventoryID` AND `c`.`type` = 'child' AND `c`.`status` = 'avail'
+
+		WHERE
+			`i`.`locationID` = '$_POST[lodge]' 
+			AND `i`.`date_code` BETWEEN '$start_date' AND '$end_date'
+			AND `i`.`roomID` = `r`.`id`
+			$type
+
+		GROUP BY `r`.`description`
+
+		HAVING total_adult_beds >= '$adults' $child_sql
+		";
+
+		$data['nights'] = $_POST['nights'];
+		$data['adults'] = $_POST['pax'];
+		$data['children'] = $_POST['children'];
+		$data['start_date2'] = date("m/d/Y",strtotime($start_date));
+		$data['end_date2'] = date("m/d/Y",strtotime($end_date2));
+		$data['tents'] = $_POST['tents'];
+		$data['lodge'] = $_POST['lodge'];
+		$data['start_date'] = $_POST['start_date'];
+		$data['pax'] = $_POST['pax'];
+		$data['type'] = $_POST['type'];
+		$data['childage1'] = $this->child_age_map($_POST['childage1']);
+		$data['childage2'] = $this->child_age_map($_POST['childage2']);
+		$data['childage1_form'] = $_POST['childage1'];
+		$data['childage2_form'] = $_POST['childage2'];
+
+
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			if ($row['adult_status'] == "avail") {
+				$total = $row['nightly_rate'] * $nights;
+
+				if ($_POST['childage1'] != "") {
+					$fee = $this->child_age_fee($_POST['childage1']);
+					$child_fee = (($row['nightly_rate'] / 2) / $fee) * $nights;
+				}
+				$total = $total + $child_fee;
+
+				if ($_POST['childage2'] != "") {
+					$fee = $this->child_age_fee($_POST['childage2']);
+					$child_fee = (($row['nightly_rate'] / 2) / $fee) * $nights;
+				}
+				$total = $total + $child_fee;
+
+
+				$html .= "<tr><td>$row[description]</td><td>$$total</td><td>$row[adult]</td><td>$row[children]</td><td> 
+				<input data-toggle=\"toggle\" name=\"roomID$row[id]\" type=\"checkbox\" value=\"On\" onchange=\"checkboxes()\">
+				</td></tr>";	
+				$found = "1";
+				$counter++;
+			}
+		}
+
+		if ($counter < $_POST['tents']) {
+			$data['msg'] = "<br><font color=red>Sorry, you indicated you need <b>$_POST[tents]</b> tents but only $counter tents are available.</font><br>";
+			$stop = "1";
+		}
+
+		if ($found != "1") {
+			$data['msg'] = "<br><font color=red>Sorry, there are no rooms available for the duration and number of guests you have selected.</font><br>";
+		}
+
+		if ($stop != "1") {
+			$data['btn'] = "<div id=\"booknow\" style=\"display:none\"><input type=\"submit\" value=\"Book Reservation\" class=\"btn btn-success\"></div>";
+		}
+
+		$data['html'] = $html;
+
+	    $this->load_smarty($data,$template);
 
 	}
 
@@ -826,8 +958,8 @@ class reservations extends money {
 			foreach ($row as $key=>$value) {
 				$data[$key] = $value;
 			}
-			$data['begin_date'] = $this->get_reservation_dates($reservationID,'ASC');
-			$data['end_date'] 	= $this->get_reservation_dates($reservationID,'DESC');
+			$data['begin_date'] = $this->get_reservation_dates($reservationID,'ASC',$null);
+			$data['end_date'] 	= $this->get_reservation_dates($reservationID,'DESC',$null);
 			$data['nights']		= $this->get_reservation_nights($reservationID);
 		}
 
@@ -836,12 +968,19 @@ class reservations extends money {
 		return $data;
 	}
 
-	public function get_reservation_dates($reservationID,$direction) {
-		if ($direction == "DESC") {
+	public function get_reservation_dates($reservationID,$direction,$format) {
+		if ($format == "") {
+			$date_format = "%m/%d/%Y";
+		}
+		if ($format == "reports") {
+			$date_format = "%Y%m%d";
+		}
+
+		if (($direction == "DESC") && ($format == "")) {
 			// add 1 day to result
-			$d = "DATE_FORMAT(DATE_ADD(`inventory`.`date_code`,INTERVAL 1 DAY), '%m/%d/%Y') AS 'date'";
+			$d = "DATE_FORMAT(DATE_ADD(`inventory`.`date_code`,INTERVAL 1 DAY), '".$date_format."') AS 'date'";
 		} else {
-			$d = "DATE_FORMAT(`inventory`.`date_code`, '%m/%d/%Y') AS 'date'";
+			$d = "DATE_FORMAT(`inventory`.`date_code`, '".$date_format."') AS 'date'";
 		}
 		$sql = "
 		SELECT
@@ -1324,8 +1463,6 @@ class reservations extends money {
 
 		$this->movetent(); // TBA
 
-		$template = "move.tpl";
-		$this->load_smarty($data,$template);
 	}
 	
 
