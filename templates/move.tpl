@@ -16,9 +16,11 @@
 </form>
 <br>
 
-<form action="reservenow" method="post">
+<form action="movenow" method="post">
 <input type="hidden" name="childage1_form" value="{$childage1_form}">
 <input type="hidden" name="childage2_form" value="{$childage2_form}">
+<input type="hidden" name="tentID" value="{$tentID}">
+<input type="hidden" name="reservationID" value="{$reservationID}">
 {$form_html}
 
 
@@ -50,7 +52,7 @@
 {$msg}
 {$btn}
 
-<div id="waiting" style="display:inline"><br><b>Please select {$tents} tents. Once you select {$tents} tents this message will be replaced with a reservation button.</b></div>
+<div id="waiting" style="display:inline"><br><b>Please select {$tents} tents. Once you select {$tents} tents this message will be replaced with a move tent button.</b></div>
 
 </form>
 

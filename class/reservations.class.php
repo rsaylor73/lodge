@@ -401,9 +401,7 @@ class reservations extends money {
 		$data['lodge'] = $locationID;
 		$data['start_date'] = $start_date;
 		$data['pax'] = $adults;
-
-		$data['type'] = $_POST['type'];
-
+		$data['tentID'] = $_GET['tentID'];
 		$data['childage1'] = $this->child_age_map($child1_age);
 		$data['childage2'] = $this->child_age_map($child2_age);
 		$data['childage1_form'] = $child1_age;
@@ -445,13 +443,20 @@ class reservations extends money {
 		}
 
 		if ($stop != "1") {
-			$data['btn'] = "<div id=\"booknow\" style=\"display:none\"><input type=\"submit\" value=\"Book Reservation\" class=\"btn btn-success\"></div>";
+			$data['btn'] = "<div id=\"booknow\" style=\"display:none\"><input type=\"submit\" value=\"Move Tent\" class=\"btn btn-success\"></div>";
 		}
 
 		$data['html'] = $html;
 
 	    $this->load_smarty($data,$template);
 
+	}
+
+	public function movenow() {
+
+		print "<pre>";
+		print_r($_POST);
+		print "</pre>";
 	}
 
 	public function viewtent() {
