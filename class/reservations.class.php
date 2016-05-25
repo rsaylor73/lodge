@@ -341,6 +341,7 @@ class reservations extends money {
 
     	$template = "move.tpl";
       	$data = array();
+      	$data['adults'] = $adults;ß
 
 		
 		if ($children == "0") {
@@ -1458,11 +1459,7 @@ class reservations extends money {
 
 	public function move() {
 		/* $_GET[reservationID] , $_GET[tentID] */
-		$data['reservationID'] = $_GET['reservationID'];
-		$data['tentID'] = $_GET['tentID'];
-
-		$this->movetent(); // TBA
-
+		$this->movetent();
 	}
 	
 
