@@ -317,8 +317,8 @@ class reservations extends money {
 		$start_date = $this->get_reservation_dates($reservationID,'ASC','reports');
 		$end_date 	= $this->get_reservation_dates($reservationID,'DESC','reports');
 		$nights		= $this->get_reservation_nights($reservationID);
-		$nights2 	= $nights - 1;
-		$end_date2 	= date("Ymd", strtotime($start_date ."+ $nights2 days"));
+		//$nights2 	= $nights - 1;
+		$end_date2 	= date("Ymd", strtotime($start_date ."+ $nights days"));
 
 		$sql = "
 		SELECT
