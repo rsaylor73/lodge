@@ -457,6 +457,29 @@ class reservations extends money {
 		print "<pre>";
 		print_r($_POST);
 		print "</pre>";
+
+		$sql = "
+		SELECT
+			`b`.*
+
+		FROM
+			`beds` b,
+			`inventory` i
+
+		WHERE
+			`b`.`reservationID` = '29'
+			AND `b`.`inventoryID` = `i`.`inventoryID`
+			AND `i`.`roomID` = '9'
+		";
+		// get data from old tent
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			// add to new tent
+
+			// remove from old tent
+
+		}
+
 	}
 
 	public function viewtent() {
