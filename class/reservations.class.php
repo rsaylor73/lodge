@@ -455,7 +455,7 @@ class reservations extends money {
 	public function movenow() {
 
 		foreach ($_POST as $key=>$value) {
-			if (preg_match('/roomID/',$key)) {
+			if (preg_match('/roomID/i',$key)) {
 				$roomID = substr('roomID','',$key);
 			}
 		}
