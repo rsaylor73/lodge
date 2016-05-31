@@ -454,12 +454,21 @@ class reservations extends money {
 
 	public function movenow() {
 
+		foreach ($_POST as $key=>$value) {
+			if (preg_match('/roomID/',$key)) {
+				$roomID = substr('roomID','',$key);
+			}
+		}
+
+		print "Test: $roomID<br>";
+
 		print "<pre>";
 		print_r($_POST);
 		print "</pre>";
 
 		$sql = "
 		SELECT
+			`i`.*,
 			`b`.*
 
 		FROM
@@ -467,18 +476,20 @@ class reservations extends money {
 			`inventory` i
 
 		WHERE
-			`b`.`reservationID` = '29'
+			`b`.`reservationID` = '$_POST[reservationID]'
 			AND `b`.`inventoryID` = `i`.`inventoryID`
-			AND `i`.`roomID` = '9'
+			AND `i`.`roomID` = '$_POST[tentID]'
+
+		ORDER BY `i`.`date_code` ASC
 		";
+
 		// get data from old tent
+		$counter = "0";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			// add to new tent
-
-			// remove from old tent
-
+			$counter++;
 		}
+
 
 	}
 
