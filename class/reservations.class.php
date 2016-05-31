@@ -455,18 +455,10 @@ class reservations extends money {
 	public function movenow() {
 
 		foreach ($_POST as $key=>$value) {
-			print "Key: $key<br>";
 			if (preg_match("/roomID/i",$key)) {
-				print "Found $key!<br>";
 				$roomID = str_replace('roomID','',$key);
 			}
 		}
-
-		print "Test: $roomID<br>";
-
-		print "<pre>";
-		print_r($_POST);
-		print "</pre>";
 
 		$sql = "
 		SELECT
@@ -487,11 +479,42 @@ class reservations extends money {
 
 		// get data from old tent
 		$counter = "0";
+		$dates = array();
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$counter++;
+			$dates[] = $row['date_code'];
 		}
 
+		$start_date = reset($dates);
+		$end_date = end($dates);
+
+		$sql = "
+		SELECT
+			`i`.*,
+			`b`.*
+
+		FROM
+			`beds` b,
+			`inventory` i
+
+		WHERE
+			`b`.`inventoryID` = `i`.`inventoryID`
+			AND `i`.`date_code` BETWEEN '$start_date' AND '$end_date'
+			AND `i`.`roomID` = '$roomID'
+			AND `b`.`reservationID` = ''
+			AND `b`.`status` = 'avail'
+
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$counter2++;
+		}
+		if (($counter > 0) && ($counter == $counter2)) {
+			print "Looks good!<br>";
+		} else {
+			print "<font color=red>No inventory...<br></font>";
+		}
 
 	}
 
