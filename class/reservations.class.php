@@ -457,6 +457,7 @@ class reservations extends money {
 		foreach ($_POST as $key=>$value) {
 			print "Key: $key<br>";
 			if (preg_match("/roomID/i",$key)) {
+				print "Found $key!<br>";
 				$roomID = substr('roomID','',$key);
 			}
 		}
