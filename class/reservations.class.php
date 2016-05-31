@@ -458,7 +458,7 @@ class reservations extends money {
 			print "Key: $key<br>";
 			if (preg_match("/roomID/i",$key)) {
 				print "Found $key!<br>";
-				$roomID = substr('roomID','',$key);
+				$roomID = strreplace('roomID','',$key);
 			}
 		}
 
