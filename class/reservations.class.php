@@ -486,8 +486,8 @@ class reservations extends money {
 			$dates[] = $row['date_code'];
 		}
 
-		$start_date = reset($dates);
-		$end_date = end($dates);
+		//$start_date = reset($dates);
+		//$end_date = end($dates);
 
 		$sql = "
 		SELECT
@@ -508,6 +508,7 @@ class reservations extends money {
 		";
 		print "$sql<br>";
 		die;
+
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$counter2++;
