@@ -512,7 +512,40 @@ class reservations extends money {
 			$counter2++;
 		}
 		if (($counter > 0) && ($counter == $counter2)) {
-			print "Looks good!<br>";
+			//print "Looks good!<br>";
+			// Update new inventory
+			$sql2 = "
+			UPDATE `beds` 
+
+			SET 
+				`beds`.`reservationID` = '$_POST[reservationID]',
+				`beds`.`status` = 'booked'
+
+			WHERE `beds`.`inventoryID` = `inventory`.`inventoryID`
+			AND `inventory`.`date_code` BETWEEN '$start_date' AND '$end_date'
+			AND `inventory`.`roomID` = '$roomID'
+			AND `beds`.`reservationID` = ''
+			AND `beds`.`status` = 'avail'
+
+			";
+
+			$sql3 = "
+			UPDATE `beds`
+
+			SET
+				`beds`.`reservationID` = '',
+				`beds`.`status` = 'avail'
+
+			WHERE
+			`beds`.`reservationID` = '$_POST[reservationID]'
+			AND `beds`.`inventoryID` = `inventory`.`inventoryID`
+			AND `inventory`.`roomID` = '$_POST[tentID]'
+			";
+
+			print "SQL 1:<br>$sql2<br><br>";
+			print "SQL 2:<br>$sql3<br><br>";
+
+
 		} else {
 			print "<font color=red>No inventory...<br></font>";
 		}
