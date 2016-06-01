@@ -513,6 +513,7 @@ class reservations extends money {
 			$counter2++;
 			$name = $row['name'];
 			$cid[$name]['contactID'] = $row['contactID'];
+			print "Test $row[contactID]<br>";
 		}
 		if (($counter > 0) && ($counter == $counter2)) {
 			//print "Looks good!<br>";
