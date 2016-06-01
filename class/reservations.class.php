@@ -488,7 +488,6 @@ class reservations extends money {
 			$dates[] = $row['date_code'];
 			$name = $row['name'];
 			$cid[$name] = $row['contactID'];
-			print "Test $row[contactID]<br>";
 		}
 
 		$start_date = reset($dates);
@@ -541,14 +540,6 @@ class reservations extends money {
 				AND `beds`.`reservationID` = ''
 				AND `beds`.`status` = 'avail'
 			";
-
-			print "<br>SQL:<br>$sql2";
-			print "<pre>";
-			print_r($cid);
-			print "</pre>";
-
-			die;
-
 
 			$result2 = $this->new_mysql($sql2);
 
