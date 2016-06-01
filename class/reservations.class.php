@@ -544,6 +544,8 @@ class reservations extends money {
 			print_r($cid);
 			print "</pre>";
 
+			die;
+
 
 			$result2 = $this->new_mysql($sql2);
 
