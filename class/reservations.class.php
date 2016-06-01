@@ -478,6 +478,8 @@ class reservations extends money {
 		";
 
 		// get data from old tent
+		$cid = array();
+
 		$counter = "0";
 		$dates = array();
 		$result = $this->new_mysql($sql);
@@ -510,7 +512,6 @@ class reservations extends money {
 
 		";
 
-		$cid = array();
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$counter2++;
