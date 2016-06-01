@@ -528,6 +528,7 @@ class reservations extends money {
 			AND `beds`.`status` = 'avail'
 
 			";
+			$result2 = $this->new_mysql($sql2);
 
 			$sql3 = "
 			UPDATE `beds`
@@ -541,13 +542,17 @@ class reservations extends money {
 			AND `beds`.`inventoryID` = `inventory`.`inventoryID`
 			AND `inventory`.`roomID` = '$_POST[tentID]'
 			";
+			$result3 = $this->new_mysql($sql3);
+			$data['reservationID'] = $_POST['reservationID'];
+			$template = "movenowsuccess.tpl";
+			$this->load_smarty($data,$template);
 
-			print "SQL 1:<br>$sql2<br><br>";
-			print "SQL 2:<br>$sql3<br><br>";
 
 
 		} else {
-			print "<font color=red>No inventory...<br></font>";
+			$template = "error.tpl";
+			$data['msg'] = "<font color=red>The inventory you wanted to move to is no longer available.</font><br><br>";
+			$this->load_smarty($data,$template);
 		}
 
 	}
