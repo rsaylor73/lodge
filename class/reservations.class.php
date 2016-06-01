@@ -507,30 +507,44 @@ class reservations extends money {
 
 		";
 
+		$cid = array();
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$counter2++;
 			$name = $row['name'];
-			$cid[$name] = $row['contactID'];
+			$cid[$name]['contactID'] = $row['contactID'];
 		}
 		if (($counter > 0) && ($counter == $counter2)) {
 			//print "Looks good!<br>";
 			// Update new inventory
+
 			$sql2 = "
-			UPDATE `beds`,`inventory` 
+			UPDATE `beds`,`inventory`
 
-			SET 
+			SET
 				`beds`.`reservationID` = '$_POST[reservationID]',
-				`beds`.`status` = 'booked'
+				`beds`.`status` = 'booked',
+				`beds`.`contactID` = CASE
+					WHEN `beds`.`name` = '.$cid['A'].' THEN '.$cid['A']['ContactID'].'
+					WHEN `beds`.`name` = '.$cid['B'].' THEN '.$cid['B']['ContactID'].'
+					WHEN `beds`.`name` = '.$cid['Child1'].' THEN '.$cid['Child1']['ContactID'].'
+					WHEN `beds`.`name` = '.$cid['Child2'].' THEN '.$cid['Child2']['ContactID'].'
+				END
 
-
-			WHERE `beds`.`inventoryID` = `inventory`.`inventoryID`
-			AND `inventory`.`date_code` BETWEEN '$start_date' AND '$end_date'
-			AND `inventory`.`roomID` = '$roomID'
-			AND `beds`.`reservationID` = ''
-			AND `beds`.`status` = 'avail'
-
+			WHERE
+				`beds`.`inventoryID` = `inventory`.`inventoryID`
+				AND `inventory`.`date_code` BETWEEN '$start_date' AND '$end_date'
+				AND `inventory`.`roomID` = '$roomID'
+				AND `beds`.`reservationID` = ''
+				AND `beds`.`status` = 'avail'
 			";
+
+			print "<br>SQL:<br>$sql2";
+			print "<pre>";
+			print_r($cid);
+			print "</pre>";
+
+
 			$result2 = $this->new_mysql($sql2);
 
 			$sql3 = "
