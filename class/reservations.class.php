@@ -515,7 +515,7 @@ class reservations extends money {
 			//print "Looks good!<br>";
 			// Update new inventory
 			$sql2 = "
-			UPDATE `beds` 
+			UPDATE `beds`,`inventory` 
 
 			SET 
 				`beds`.`reservationID` = '$_POST[reservationID]',
@@ -531,7 +531,7 @@ class reservations extends money {
 			$result2 = $this->new_mysql($sql2);
 
 			$sql3 = "
-			UPDATE `beds`
+			UPDATE `beds`,`inventory`
 
 			SET
 				`beds`.`reservationID` = '',
