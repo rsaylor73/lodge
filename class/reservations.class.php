@@ -507,6 +507,8 @@ class reservations extends money {
 
 		";
 
+		print "SQL TOP:<br>$sql<br><br>";
+
 		$cid = array();
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
