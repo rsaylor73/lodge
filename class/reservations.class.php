@@ -484,6 +484,9 @@ class reservations extends money {
 		while ($row = $result->fetch_assoc()) {
 			$counter++;
 			$dates[] = $row['date_code'];
+			$name = $row['name'];
+			$cid[$name]['contactID'] = $row['contactID'];
+			print "Test $row[contactID]<br>";
 		}
 
 		$start_date = reset($dates);
@@ -507,15 +510,11 @@ class reservations extends money {
 
 		";
 
-		print "SQL TOP:<br>$sql<br><br>";
-
 		$cid = array();
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$counter2++;
-			$name = $row['name'];
-			$cid[$name]['contactID'] = $row['contactID'];
-			print "Test $row[contactID]<br>";
+
 		}
 		if (($counter > 0) && ($counter == $counter2)) {
 			//print "Looks good!<br>";
