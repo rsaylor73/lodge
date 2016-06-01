@@ -510,6 +510,8 @@ class reservations extends money {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$counter2++;
+			$name = $row['name'];
+			$cid[$name] = $row['contactID'];
 		}
 		if (($counter > 0) && ($counter == $counter2)) {
 			//print "Looks good!<br>";
@@ -520,6 +522,7 @@ class reservations extends money {
 			SET 
 				`beds`.`reservationID` = '$_POST[reservationID]',
 				`beds`.`status` = 'booked'
+
 
 			WHERE `beds`.`inventoryID` = `inventory`.`inventoryID`
 			AND `inventory`.`date_code` BETWEEN '$start_date' AND '$end_date'
@@ -535,7 +538,8 @@ class reservations extends money {
 
 			SET
 				`beds`.`reservationID` = '',
-				`beds`.`status` = 'avail'
+				`beds`.`status` = 'avail',
+				`beds`.`contactID` = ''
 
 			WHERE
 			`beds`.`reservationID` = '$_POST[reservationID]'
