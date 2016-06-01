@@ -487,7 +487,7 @@ class reservations extends money {
 			$counter++;
 			$dates[] = $row['date_code'];
 			$name = $row['name'];
-			$cid[$name]['contactID'] = $row['contactID'];
+			$cid[$name] = $row['contactID'];
 			print "Test $row[contactID]<br>";
 		}
 
@@ -528,10 +528,10 @@ class reservations extends money {
 				`beds`.`reservationID` = '$_POST[reservationID]',
 				`beds`.`status` = 'booked',
 				`beds`.`contactID` = CASE
-					WHEN `beds`.`name` = '".$cid['A']."' THEN '".$cid['A']['ContactID']."'
-					WHEN `beds`.`name` = '".$cid['B']."' THEN '".$cid['B']['ContactID']."'
-					WHEN `beds`.`name` = '".$cid['Child1']."' THEN '".$cid['Child1']['ContactID']."'
-					WHEN `beds`.`name` = '".$cid['Child2']."' THEN '".$cid['Child2']['ContactID']."'
+					WHEN `beds`.`name` = 'A' THEN '".$cid['A']."'
+					WHEN `beds`.`name` = 'B' THEN '".$cid['B']."'
+					WHEN `beds`.`name` = 'Child1' THEN '".$cid['Child1']."'
+					WHEN `beds`.`name` = 'Child2' THEN '".$cid['Child2']."'
 				END
 
 			WHERE
