@@ -544,6 +544,7 @@ class reservations extends money {
 			";
 			$result3 = $this->new_mysql($sql3);
 			$data['reservationID'] = $_POST['reservationID'];
+			$data['msg'] = "<br><font color=green>The tent was successfully moved.</font><br>";
 			$template = "movenowsuccess.tpl";
 			$this->load_smarty($data,$template);
 
