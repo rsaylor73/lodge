@@ -1592,6 +1592,33 @@ class reservations extends money {
 		/* $_GET[reservationID] , $_GET[tentID] */
 		$this->movetent();
 	}
+
+	public function notes($type,$action) {
+
+		switch ($action) {
+			case "new":
+				$template = "newnote.tpl";
+				$data['reservationID'] = $_GET['reservationID'];
+				$data['type'] = $type;
+				$this->load_smarty($data,$template);
+
+			break;
+
+			case "list":
+
+
+			break;
+
+			default:
+				$msg = "Sorry, but we could not detect the type of note to use.";
+				$template = "error.tpl";
+				$data['msg'] = $msg;
+				$this->load_smarty($data,$template);
+			break;
+		}
+
+
+	}
 	
 
 // end class
