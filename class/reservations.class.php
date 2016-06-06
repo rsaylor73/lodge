@@ -1607,7 +1607,7 @@ class reservations extends money {
 				case "reservation":
 				?>
 				<script>
-					document.location.href='reservation_dashboard/$_POST[reservationID]/notes';
+					document.location.href='reservation_dashboard/<?=$_POST[reservationID];?>/notes';
 				</script>
 				<?php
 				break;
