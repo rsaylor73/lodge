@@ -1623,14 +1623,18 @@ class reservations extends money {
 		$sql = "
 		SELECT
 			DATE_FORMAT(`n`.`timestamp`, '%m/%d/%Y') AS 'date',
-			`n`.`note`
+			`n`.`note`,
+			`users`.`first`,
+			`users`.`last`
+
 
 		FROM
-			`notes` n
+			`notes` n, `users`
 
 		WHERE
 			`n`.`reservationID` = '$reservationID'
 			AND `n`.`type` = '$type'
+			AND `n`.`userID` = `users`.`id`
 
 		ORDER BY `n`.`timestamp` ASC, `n`.`id` DESC
 		";
@@ -1639,6 +1643,7 @@ class reservations extends money {
 			$html .= "<hr><table class=\"table\">
 			<tr>
 				<td width=\"200\">$row[date]</td>
+				<td width=\"200\">$row[first] $row[last]</td>
 				<td>$row[note]</td>
 			</tr>
 			</table>";
