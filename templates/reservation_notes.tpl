@@ -1,3 +1,4 @@
 <br>
 <h3>Notes</h3>
-Test {$test}
+
+{$notes_data}
