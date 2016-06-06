@@ -1600,6 +1600,7 @@ class reservations extends money {
 	public function savenewnote() {
 		$date = date("Ymd");
 		$sql = "INSERT INTO `notes` (`reservationID`,`userID`,`note`,`timestamp`,`type`) VALUES ('$_POST[reservationID]','$_SESSION[id]','$_POST[note]','$date',$_POST[type]')";
+		print "$sql<br>";
 		$result = $this->new_mysql($sql);
 
 		if ($result == "TRUE") {
