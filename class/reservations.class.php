@@ -1303,7 +1303,7 @@ class reservations extends money {
    	public function reservation_notes($reservationID) {
       	$this->notes($reservationID,'new');
 
-    	return $data;
+    	//return $data;
 
    	}
 
