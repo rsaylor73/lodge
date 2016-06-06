@@ -1301,7 +1301,7 @@ class reservations extends money {
    	}
 
    	public function reservation_notes($reservationID) {
-      	$data['notes_data'] = $this->notes($reservationID,'reservation','new');
+      	$data['notes_data'] = "Test";
 
     	return $data;
 
@@ -1595,33 +1595,6 @@ class reservations extends money {
 		$this->movetent();
 	}
 
-	public function notes($reservationID,$type,$action) {
-
-		switch ($action) {
-			case "new":
-				$template = "newnote.tpl";
-				$data['reservationID'] = $reservationID;
-				$data['type'] = $type;
-				$this->load_smarty($data,$template);
-
-			break;
-
-			case "list":
-
-
-			break;
-
-			default:
-				$msg = "Sorry, but we could not detect the type of note to use.";
-				$template = "error.tpl";
-				$data['msg'] = $msg;
-				$data = $this->load_smarty($data,$template);
-			break;
-		}
-		return $data;
-
-
-	}
 	
 
 // end class
