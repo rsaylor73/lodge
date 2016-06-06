@@ -1301,9 +1301,9 @@ class reservations extends money {
    	}
 
    	public function reservation_notes($reservationID) {
-      	$this->notes($reservationID,'new');
+      	$data = $this->notes($reservationID,'reservation','new');
 
-    	//return $data;
+    	return $data;
 
    	}
 
@@ -1595,7 +1595,7 @@ class reservations extends money {
 		$this->movetent();
 	}
 
-	public function notes($reservationID,$type) {
+	public function notes($reservationID,$type,$action) {
 
 		switch ($action) {
 			case "new":
