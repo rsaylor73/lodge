@@ -1640,7 +1640,8 @@ class reservations extends money {
 			<tr>
 				<td width=\"200\">$row[date]</td>
 				<td>$row[note]</td>
-			</tr>";
+			</tr>
+			</table>";
 		}
 		return $html;
 	}	
