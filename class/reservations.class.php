@@ -1597,6 +1597,29 @@ class reservations extends money {
 		$this->movetent();
 	}
 
+	public function savenewnote() {
+		$date = date("Ymd");
+		$sql = "INSERT INTO `notes` (`reservationID`,`userID`,`note`,`timestamp`,`type`) VALUES ('$_POST[reservationID]','$_SESSION[id]','$_POST[note]','$date',$_POST[type]')";
+		$result = $this->new_mysql($sql);
+
+		if ($result == "TRUE") {
+			switch ($_POST['type']) {
+				case "reservation":
+				?>
+				<script>
+					document.location.href='reservation_dashboard/$_POST[reservationID]/notes';
+				</script>
+				<?php
+				break;
+
+				default:
+					print "We could not redirect you to the proper page for type $_POST[type]<br>";
+				break;
+			}
+		}
+
+	}
+
 	
 
 // end class
