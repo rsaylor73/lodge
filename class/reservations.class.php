@@ -1303,7 +1303,7 @@ class reservations extends money {
    	public function reservation_notes($reservationID) {
 
    		// get data
-   		$data['notes_data'] = " ";
+   		$data['notes_data'] = $this->list_notes($reservationID,'reservation');
 
     	return $data;
 
@@ -1613,14 +1613,37 @@ class reservations extends money {
 				break;
 
 				default:
-					print "We could not redirect you to the proper page for type $_POST[type]<br>";
+					print "<br><br>We could not redirect you to the proper page for type $_POST[type]<br>";
 				break;
 			}
 		}
-
 	}
 
-	
+	public function list_notes($reservationID,$type) {
+		$sql = "
+		SELECT
+			DATE_FORMAT(`n`.`date`, '%m/%d/%Y') AS 'date',
+			`n`.`note`
+
+		FROM
+			`notes` n
+
+		WHERE
+			`n`.`reservationID` = '$reservationID'
+			AND `n`.`type` = '$type'
+
+		ORDER BY `n`.`date` DESC
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$html .= "<hr><table class=\"table\">
+			<tr>
+				<td width=\"200\">$row[date]</td>
+				<td>$row[note]</td>
+			</tr>";
+		}
+		return $html;
+	}	
 
 // end class
 }
