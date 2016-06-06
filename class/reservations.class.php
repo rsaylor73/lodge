@@ -1301,7 +1301,7 @@ class reservations extends money {
    	}
 
    	public function reservation_notes($reservationID) {
-      	$data['notes_data'] = "Test";
+      	$data['notes_data'] = load_smarty($null,'newnote.tpl');
 
     	return $data;
 
