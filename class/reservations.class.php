@@ -1615,9 +1615,10 @@ class reservations extends money {
 				$msg = "Sorry, but we could not detect the type of note to use.";
 				$template = "error.tpl";
 				$data['msg'] = $msg;
-				$this->load_smarty($data,$template);
+				$data = $this->load_smarty($data,$template);
 			break;
 		}
+		return $data;
 
 
 	}
