@@ -1301,8 +1301,10 @@ class reservations extends money {
    	}
 
    	public function reservation_notes($reservationID) {
-      	$data['test'] = "ok 4";
-      	return $data;
+      	$this->notes($reservationID,'new');
+
+    	return $data;
+
    	}
 
    	public function reservation_cancel($reservationID) {
@@ -1593,12 +1595,12 @@ class reservations extends money {
 		$this->movetent();
 	}
 
-	public function notes($type,$action) {
+	public function notes($reservationID,$type) {
 
 		switch ($action) {
 			case "new":
 				$template = "newnote.tpl";
-				$data['reservationID'] = $_GET['reservationID'];
+				$data['reservationID'] = $reservationID;
 				$data['type'] = $type;
 				$this->load_smarty($data,$template);
 
