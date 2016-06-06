@@ -1632,7 +1632,7 @@ class reservations extends money {
 			`n`.`reservationID` = '$reservationID'
 			AND `n`.`type` = '$type'
 
-		ORDER BY `n`.`timestamp` ASC, `n`.`id` ASC
+		ORDER BY `n`.`timestamp` ASC, `n`.`id` DESC
 		";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
