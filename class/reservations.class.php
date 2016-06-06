@@ -1622,7 +1622,7 @@ class reservations extends money {
 	public function list_notes($reservationID,$type) {
 		$sql = "
 		SELECT
-			DATE_FORMAT(`n`.`date`, '%m/%d/%Y') AS 'date',
+			DATE_FORMAT(`n`.`timestamp`, '%m/%d/%Y') AS 'date',
 			`n`.`note`
 
 		FROM
