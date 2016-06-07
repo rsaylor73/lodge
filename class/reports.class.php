@@ -82,13 +82,16 @@ class reports extends admin {
 
 				GROUP BY `b`.`name`, `b`.`contactID`
 				";
+				$counter = "0";
 				$result2 = $this->new_mysql($sql2);
 				while ($row2 = $result2->fetch_assoc()) {
+					$counter++;
 					$html .= "
-					<tr><td>$row[first]</td><td colspan=2>$row[last]</td></tr>
-					<tr><td colspan=3>$row[email]</td></tr>
-					<tr><td colspan=3>Gender: $row[sex]</td></tr>
-					<tr><td colspan=3>DOB: $row[dob]</td></tr>
+					<tr bgcolor=\"#F5F5F5\"><td colspan=3><b>Guest $counter</b></td></tr>
+					<tr><td>$row2[first]</td><td colspan=2>$row2[last]</td></tr>
+					<tr><td colspan=3>$row2[email]</td></tr>
+					<tr><td colspan=3>Gender: $row[2sex]</td></tr>
+					<tr><td colspan=3>DOB: $row2[dob]</td></tr>
 					";
 				}
 				$html .= "<tr><td colspan=3><hr></td></tr>";
