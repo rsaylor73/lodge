@@ -42,7 +42,7 @@
 
          <li class='has-sub'><a href='#'><span>Guests</span></a>
             <ul>
-               <li><a href='#'><span>Check-In Report</span></a>
+               <li><a href='checkinreport'><span>Check-In Report</span></a>
                <li><a href='#'><span>Check-Out Report</span></a>
             </ul>
          </li>
@@ -58,6 +58,7 @@
          <li><a href='line_items'><span>Line Items</span></a></li>
          <li><a href='discounts'><span>Discounts</span></a></li>
          <li><a href='users'><span>Users</span></a></li>
+         <li><a href='#'><span>Permissions</span></a></li>
 
 
       </ul>
