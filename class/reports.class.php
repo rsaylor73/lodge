@@ -4,6 +4,14 @@ include $GLOBAL['path']."/class/admin.class.php";
 class reports extends admin {
 
 	public function checkinreport() {
+
+
+		$date1 = date("Ymd");
+		$date1_f = date("m/d/Y");
+
+		$date2 = date("Ymd",strtotime($date1 . "+7 day"));
+		$date2_f = date("m/d/Y",strtotime($date1 . "+7 day"));
+
 		$sql = "
 		SELECT
 			`r`.`reservationID`,
@@ -16,7 +24,7 @@ class reports extends admin {
 
 		WHERE
 			`i`.`locationID` = '2'
-			AND `i`.`date_code` BETWEEN '20160606' AND '20160616'
+			AND `i`.`date_code` BETWEEN '$date1' AND '$date2'
 			AND `i`.`inventoryID` = `b`.`inventoryID`
 			AND `b`.`reservationID` = `r`.`reservationID`
 			AND `r`.`active` = 'Yes'
@@ -100,12 +108,10 @@ class reports extends admin {
 				$html .= "<tr><td colspan=3><hr></td></tr>";
 
 			}
-			//print "Test: $row[reservationID] | $row[date] | $test_date<br>";
 		}
 
-		// test to be placed in a template
 		print "<div class=\"col-md-6\">";
-		print "<h2>Check-In Report (Date Range TBD)</h2>";
+		print "<h2>Check-In Report ($date1_f to $date2_f)</h2>";
 		print "<table class=\"table\">";
 		print "$html";
 		print "</table>";
