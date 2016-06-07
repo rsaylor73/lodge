@@ -42,12 +42,16 @@ class reports extends admin {
 					<td>$guests</td>
 				</tr>
 				";
+
+				$contacts = $this->reservation_guests($row['reservationID']);
+				$html .= "<tr><td colspan=2>$contacts</td></tr>";
 			}
 			//print "Test: $row[reservationID] | $row[date] | $test_date<br>";
 		}
 
 		// test to be placed in a template
 		print "<div class=\"col-md-6\">";
+		print "<h1>Check-In Report (Date Range TBD)</h1>";
 		print "<table class=\"table\">";
 		print "$html";
 		print "</table>";
