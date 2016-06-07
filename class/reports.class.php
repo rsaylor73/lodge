@@ -111,7 +111,7 @@ class reports extends admin {
 		}
 
 		print "<div class=\"col-md-6\">";
-		print "<h2>Check-In Report ($date1_f to $date2_f)</h2>";
+		print "<h2>Check-In Report<br>($date1_f to $date2_f)</h2>";
 		print "<table class=\"table\">";
 		print "$html";
 		print "</table>";
