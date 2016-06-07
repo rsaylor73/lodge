@@ -43,7 +43,7 @@
          <li class='has-sub'><a href='#'><span>Guests</span></a>
             <ul>
                <li><a href='checkinreport'><span>Check-In Report</span></a>
-               <li><a href='#'><span>Check-Out Report</span></a>
+               <li><a href='checkoutreport'><span>Check-Out Report</span></a>
             </ul>
          </li>
       </ul>

@@ -3,6 +3,10 @@ include $GLOBAL['path']."/class/admin.class.php";
 
 class reports extends admin {
 
+	public function checkoutreport() {
+		
+	}
+
 	public function checkinreport() {
 
 
