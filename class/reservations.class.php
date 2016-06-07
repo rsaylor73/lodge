@@ -1203,7 +1203,7 @@ class reservations extends money {
 		return $counter;
 	}
 
-    public function ƒ {
+    public function reservation_guests($reservationID) {
 		// Tab 2
 		
 		$sql = "
