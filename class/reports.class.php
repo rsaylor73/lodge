@@ -27,6 +27,7 @@ class reports extends admin {
 		while ($row = $result->fetch_assoc()) {
 			$test_date = $this->get_reservation_dates($row['reservationID'],'ASC','reports');
 			$test_date_formatted = $this->get_reservation_dates($row['reservationID'],'ASC',$null);
+			$nights	= $this->get_reservation_nights($row['reservationID']);
 			if ($row['date'] == $test_date) {
 				$html .= "
 				<tr>
