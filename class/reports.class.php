@@ -13,7 +13,7 @@ class reports extends admin {
 		$sql = "
 		SELECT
 			`r`.`reservationID`,
-			MAX(DATE_ADD(`i`.`date_code`, INTERVAL 1 DAY)) AS 'date'
+			MAX(`i`.`date_code`) AS 'date'
 
 		FROM
 			`inventory` i,
