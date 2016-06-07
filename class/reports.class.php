@@ -43,11 +43,6 @@ class reports extends admin {
 				</tr>
 				";
 
-				$contacts = $this->reservation_guests($row['reservationID']);
-				print "<pre>";
-				print_r($contacts);
-				print "</pre>";
-				$html .= "<tr><td colspan=2>$contacts</td></tr>";
 			}
 			//print "Test: $row[reservationID] | $row[date] | $test_date<br>";
 		}
