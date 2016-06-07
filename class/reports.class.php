@@ -45,6 +45,52 @@ class reports extends admin {
 				</tr>
 				";
 
+				// get contact details
+				$sql2 = "
+				SELECT
+					b.*,
+					`c`.`first`,
+					`c`.`last`,
+					`c`.`email`,
+					`c`.`sex`,
+					`c`.`address1`,
+					`c`.`address2`,
+					`c`.`city`,
+					`c`.`province`,
+					`c`.`state`,
+					`cn`.`country`,
+					`c`.`phone1_type`,
+					`c`.`phone1`,
+					`c`.`phone2_type`,
+					`c`.`phone2`,
+					`c`.`phone3_type`,
+					`c`.`phone3`,
+					`c`.`phone4_type`,
+					`c`.`phone4`,
+					DATE_FORMAT(`c`.`date_of_birth`, '%m/%d/%Y') AS 'dob'
+
+				FROM
+					`beds` b,
+					`reserve`.`contacts` c
+
+				LEFT JOIN `reserve`.`countries` cn ON `c`.`countryID` = `cn`.`countryID`
+
+				WHERE
+					`b`.`reservationID` = '$row[reservationID]'
+					AND `b`.`contactID` != ''
+					AND `b`.`contactID` = `c`.`contactID`
+
+				GROUP BY `b`.`name`, `b`.`contactID`
+				";
+				$result2 = $this->new_mysql($sql2);
+				while ($row2 = $result2->fetch_assoc()) {
+					$html .= "
+					<tr><td>$row[first]</td><td colspan=2>$row[last]</td></tr>
+					<tr><td colspan=3>$row[email]</td></tr>
+					<tr><td colspan=3>Gender: $row[sex]</td></tr>
+					<tr><td colspan=3>DOB: $row[dob]</td></tr>
+					";
+				}
 				$html .= "<tr><td colspan=3><hr></td></tr>";
 
 			}
