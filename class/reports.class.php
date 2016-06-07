@@ -45,6 +45,8 @@ class reports extends admin {
 				</tr>
 				";
 
+				$html .= "<tr><td colspan=3><hr></td></tr>";
+
 			}
 			//print "Test: $row[reservationID] | $row[date] | $test_date<br>";
 		}
