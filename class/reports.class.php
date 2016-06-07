@@ -28,6 +28,7 @@ class reports extends admin {
 			$test_date = $this->get_reservation_dates($row['reservationID'],'ASC','reports');
 			$test_date_formatted = $this->get_reservation_dates($row['reservationID'],'ASC',$null);
 			$nights	= $this->get_reservation_nights($row['reservationID']);
+			$pax = $this->get_total_pax($row['reservationID']);
 			if ($row['date'] == $test_date) {
 				$html .= "
 				<tr>
@@ -40,7 +41,7 @@ class reports extends admin {
 				<tr>
 					<td><a href=\"reservation_dashboard/$row[reservationID]/details\">$row[reservationID]</a></td>
 					<td>$nights</td>
-					<td>$guests</td>
+					<td>$pax</td>
 				</tr>
 				";
 

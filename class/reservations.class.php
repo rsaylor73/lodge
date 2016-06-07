@@ -1138,6 +1138,28 @@ class reservations extends money {
 		return $date;
 	}
 
+	public function get_total_pax($reservationID) {
+		$sql = "
+		SELECT
+			b.*
+
+		FROM
+			`beds` b
+
+		WHERE
+			`b`.`reservationID` = '$reservationID'
+			AND `b`.`contactID` != ''
+
+		GROUP BY `b`.`name`, `b`.`contactID`
+		";
+		$pax = "0";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$pax++;
+		}
+		return $pax;
+	}
+
 	public function get_reservation_nights($reservationID) {
 		$sql = "
 		SELECT
@@ -1181,7 +1203,7 @@ class reservations extends money {
 		return $counter;
 	}
 
-    public function reservation_guests($reservationID) {
+    public function ƒ {
 		// Tab 2
 		
 		$sql = "
