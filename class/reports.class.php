@@ -22,6 +22,8 @@ class reports extends admin {
 			AND `r`.`active` = 'Yes'
 
 		GROUP BY `r`.`reservationID`
+
+		ORDER BY `date_code` ASC
 		";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
@@ -30,6 +32,7 @@ class reports extends admin {
 			$nights	= $this->get_reservation_nights($row['reservationID']);
 			$pax = $this->get_total_pax($row['reservationID']);
 			if ($row['date'] == $test_date) {
+				$html .= "<tr><td colspan=3><font color=\"blue\">Check-In Date: <b>$test_date_formatted</b></td></tr>";
 				$html .= "
 				<tr>
 					<th><b>Conf #</b></th>
