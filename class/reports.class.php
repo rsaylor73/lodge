@@ -26,7 +26,32 @@ class reports extends admin {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$test_date = $this->get_reservation_dates($row['reservationID'],'ASC','reports');
-			print "Test: $row[reservationID] | $row[date] | $test_date<br>";
+			$test_date_formatted = $this->get_reservation_dates($row['reservationID'],'ASC',$null);
+			if ($row['date'] == $test_date) {
+				$html .= "
+				<tr>
+					<th><b>Conf #</b></th>
+					<th><b>Nights</b></th>
+					<th><b>Guests</b></th>
+				</tr>
+				";
+				$html .= "
+				<tr>
+					<td><a href=\"reservation_dashboard/$row[reservationID]/details\">$row[reservationID]</a></td>
+					<td>$nights</td>
+					<td>$guests</td>
+				</tr>
+				";
+			}
+			//print "Test: $row[reservationID] | $row[date] | $test_date<br>";
 		}
+
+		// test to be placed in a template
+		print "<div class=\"col-md-6\">";
+		print "<table class=\"table\">";
+		print "$html";
+		print "</table>";
+		print "</div>";
+
 	}
 }
