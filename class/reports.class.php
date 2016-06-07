@@ -33,8 +33,8 @@ class reports extends admin {
 		";	
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$test_date = $this->get_reservation_dates($row['reservationID'],'ASC','reports');
-			$test_date_formatted = $this->get_reservation_dates($row['reservationID'],'ASC',$null);
+			$test_date = $this->get_reservation_dates($row['reservationID'],'DESC','reports');
+			$test_date_formatted = $this->get_reservation_dates($row['reservationID'],'DESC',$null);
 			$nights	= $this->get_reservation_nights($row['reservationID']);
 			$pax = $this->get_total_pax($row['reservationID']);
 			if ($row['date'] == $test_date) {
