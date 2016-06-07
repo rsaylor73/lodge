@@ -90,7 +90,7 @@ class reports extends admin {
 					<tr bgcolor=\"#F5F5F5\"><td colspan=3><b>Guest $counter</b></td></tr>
 					<tr><td>$row2[first]</td><td colspan=2>$row2[last]</td></tr>
 					<tr><td colspan=3>$row2[email]</td></tr>
-					<tr><td colspan=3>Gender: $row[2sex]</td></tr>
+					<tr><td colspan=3>Gender: $row2[sex]</td></tr>
 					<tr><td colspan=3>DOB: $row2[dob]</td></tr>
 					";
 				}
