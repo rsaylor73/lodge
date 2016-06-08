@@ -704,7 +704,8 @@ class money extends Core {
 	function cron_update_balance_due() {
 		$sql = "
 		SELECT
-			`r`.`reservationID`
+			`r`.`reservationID`,
+			`r`.`calculated_cron_balancedue`
 
 		FROM
 			`reservations` r
@@ -714,16 +715,17 @@ class money extends Core {
 
 		";	
 
-		print "<div class=\"col-md-6\">";
-
-
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			@$balance = $this->get_balance_due($row['reservationID']);
-			print "Balance: $row[reservationID] - $ $balance[1]<br>";
+			//print "Balance: $row[reservationID] - $ $balance[1]<br>";
+				if (($row['calculated_cron_balancedue'] != "0") && ($balance[1] != "0")) {
+					$date = date("Ymd");
+					$time = date("H:i:s");
+					print "$row[reservationID] : $balance[1]<br>";				
+				}
 		}
 
-		print "</div>";
 	}
 
 	function get_balance_due($reservationID) {
