@@ -704,7 +704,7 @@ class money extends Core {
 	function cron_update_balance_due() {
 		$sql = "
 		SELECT
-
+			`r`.`reservationID`
 
 		FROM
 			`reservations` r
