@@ -713,11 +713,21 @@ class money extends Core {
 			`r`.`active` = 'Yes'
 
 		";	
+
+		print "<div class=\"col-md-6\">";
+
+
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			@$balance = $this->get_balance_due($row['reservationID']);
-			print "Balance: $row[reservationID] - $ $balance<br>";
+			print "Reservation $row[reservationID]<br>";
+			print "<pre>";
+			print_r($balance);
+			print "</pre>";
+			//print "Balance: $row[reservationID] - $ $balance<br>";
 		}
+
+		print "</div>";
 	}
 
 	function get_balance_due($reservationID) {
