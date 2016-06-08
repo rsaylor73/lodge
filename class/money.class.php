@@ -718,12 +718,16 @@ class money extends Core {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			@$balance = $this->get_balance_due($row['reservationID']);
-			//print "Balance: $row[reservationID] - $ $balance[1]<br>";
-				if (($row['calculated_cron_balancedue'] != "0") && ($balance[1] != "0")) {
-					$date = date("Ymd");
-					$time = date("H:i:s");
-					print "$row[reservationID] : $balance[1]<br>";				
-				}
+			$date = date("Ymd");
+			$time = date("H:i:s");
+			$sql2 = "UPDATE `reservations` SET 
+			`calculated_cron_date` = '$date',
+			`calculated_cron_time` = '$time',
+			`calculated_cron_balancedue` = '$balance[1]'
+			WHERE `reservationID` = '$row[reservationID]'
+			";
+			$result2 = $this->new_mysql($sql2);
+			//print "$row[reservationID] : $balance[1]<br>";				
 		}
 
 	}
