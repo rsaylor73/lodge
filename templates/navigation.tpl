@@ -33,7 +33,7 @@
          <li class='has-sub'><a href='#'><span>Financial</span></a>
             <ul>
                <li><a href='#'><span>Transfer Report</span></a>
-               <li><a href='#'><span>Balance Report</span></a>
+               <li><a href='balancereport'><span>Balance Report</span></a>
                <li><a href='#'><span>Reconsile Report</span></a>
 
             </ul>
