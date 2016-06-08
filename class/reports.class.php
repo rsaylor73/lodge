@@ -3,6 +3,10 @@ include $GLOBAL['path']."/class/admin.class.php";
 
 class reports extends admin {
 
+	public balancereport() {
+		
+	}
+
 	public function checkoutreport() {
 		$date1 = date("Ymd");
 		$date1_f = date("m/d/Y");

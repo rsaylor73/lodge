@@ -701,6 +701,25 @@ class money extends Core {
 		return $deposit;
 	}
 
+	function cron_update_balance_due() {
+		$sql = "
+		SELECT
+
+
+		FROM
+			`reservations` r
+
+		WHERE
+			`r`.`active` = 'Yes'
+
+		";	
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$balance = $this->get_balance_due($row['reservationID']);
+			print "Balance: $row[reservationID] - $ $balance<br>";
+		}
+	}
+
 	function get_balance_due($reservationID) {
 		// get nightly rate
 		$rate = $this->get_base_rate($reservationID);
