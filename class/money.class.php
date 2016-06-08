@@ -715,7 +715,7 @@ class money extends Core {
 		";	
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$balance = $this->get_balance_due($row['reservationID']);
+			@$balance = $this->get_balance_due($row['reservationID']);
 			print "Balance: $row[reservationID] - $ $balance<br>";
 		}
 	}
