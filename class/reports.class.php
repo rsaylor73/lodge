@@ -4,6 +4,38 @@ include $GLOBAL['path']."/class/admin.class.php";
 class reports extends admin {
 
 	public function balancereport() {
+		$sql = "
+		SELECT
+			`r`.`reservationID`,
+			`r`.`calculated_cron_balancedue`,
+			MIN(`i`.`date_code`) AS 'start_date'
+
+		FROM
+			`reservations` r,
+			`beds` b,
+			`inventory` i
+
+		WHERE
+			`r`.`calculated_cron_balancedue` > '0'
+			AND `r`.`reservationID` = `b`.`reservationID`
+			AND `b`.`inventoryID` = `i`.`inventoryID`
+
+		GROUP BY `r`.`reservationID`
+
+		ORDER BY `i`.`date_code` ASC
+		";
+
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$html .= "<tr><td>$row[reservationID]</td><td>$row[calculated_cron_balancedue]</td><td>$row[start_date]</td></tr>";
+		}
+
+		print "<div class=\"col-md-6\">";
+		print "<h2>Balance Due Report</h2>";
+		print "<table class=\"table\">";
+		print "$html";
+		print "</table>";
+		print "</div>";
 		
 	}
 

@@ -702,6 +702,12 @@ class money extends Core {
 	}
 
 	function cron_update_balance_due() {
+		/*
+		This function does not return anything to the screen. It is intended for a cron job
+		running once every 4 hours.
+
+		*/
+
 		$sql = "
 		SELECT
 			`r`.`reservationID`,
