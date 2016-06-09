@@ -10,7 +10,7 @@ class reports extends admin {
 			`r`.`calculated_cron_balancedue`,
 			MIN(`i`.`date_code`) AS 'start_date',
 			DATE_FORMAT(`i`.`date_code`, '%m/%d/%Y') AS 'formatted_date',
-			DATEDIFF(now(),`i`.`date_code`) AS 'days'
+			DATEDIFF(`i`.`date_code`,now()) AS 'days'
 
 		FROM
 			`reservations` r,
