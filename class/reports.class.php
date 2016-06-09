@@ -29,11 +29,14 @@ class reports extends admin {
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$html .= "<tr><td>$row[reservationID]</td><td>$ ".number_format($row[calculated_cron_balancedue],2,'.',',')."</td><td>$row[formatted_date]</td><td>$row[days]</td></tr>";
+			$html .= "<tr>
+			<td><a href=\"reservation_dashboard/$row[reservationID]/dollars\">$row[reservationID]</a></td>
+			<td>$ ".number_format($row[calculated_cron_balancedue],2,'.',',')."</td><td>$row[formatted_date]</td><td>$row[days]</td></tr>";
 		}
 
 		print "<div class=\"col-md-6\">";
 		print "<h2>Balance Due Report</h2>";
+		print "<i>This report is updated once every 4 hours.</i>";
 		print "<table class=\"table\">";
 		print "<tr>
 			<th>Conf #</th>
