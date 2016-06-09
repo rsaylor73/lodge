@@ -27,12 +27,18 @@ class reports extends admin {
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$html .= "<tr><td>$row[reservationID]</td><td>$row[calculated_cron_balancedue]</td><td>$row[start_date]</td></tr>";
+			$html .= "<tr><td>$row[reservationID]</td><td>$row[calculated_cron_balancedue]</td><td>$row[start_date]</td><td>$days</td></tr>";
 		}
 
 		print "<div class=\"col-md-6\">";
 		print "<h2>Balance Due Report</h2>";
 		print "<table class=\"table\">";
+		print "<tr>
+			<th>Conf #</th>
+			<th>Amount Due</th>
+			<th>Travel Date</th>
+			<th>Days Out</th>
+		</tr>";
 		print "$html";
 		print "</table>";
 		print "</div>";
