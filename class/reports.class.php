@@ -28,7 +28,7 @@ class reports extends admin {
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$html .= "<tr><td>$row[reservationID]</td><td>$row[calculated_cron_balancedue]</td><td>$row[formatted_date]</td><td>$days</td></tr>";
+			$html .= "<tr><td>$row[reservationID]</td><td>$ ".number_format($row[calculated_cron_balancedue],2,'.',',')."</td><td>$row[formatted_date]</td><td>$days</td></tr>";
 		}
 
 		print "<div class=\"col-md-6\">";
