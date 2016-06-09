@@ -9,7 +9,8 @@ class reports extends admin {
 			`r`.`reservationID`,
 			`r`.`calculated_cron_balancedue`,
 			MIN(`i`.`date_code`) AS 'start_date',
-			DATE_FORMAT(`i`.`date_code`, '%m/%d/%Y') AS 'formatted_date'
+			DATE_FORMAT(`i`.`date_code`, '%m/%d/%Y') AS 'formatted_date',
+			DATEDIFF(now(),`i`.`date_code`) AS 'days'
 
 		FROM
 			`reservations` r,
@@ -28,7 +29,7 @@ class reports extends admin {
 
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
-			$html .= "<tr><td>$row[reservationID]</td><td>$ ".number_format($row[calculated_cron_balancedue],2,'.',',')."</td><td>$row[formatted_date]</td><td>$days</td></tr>";
+			$html .= "<tr><td>$row[reservationID]</td><td>$ ".number_format($row[calculated_cron_balancedue],2,'.',',')."</td><td>$row[formatted_date]</td><td>$row[days]</td></tr>";
 		}
 
 		print "<div class=\"col-md-6\">";
