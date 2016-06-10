@@ -4,7 +4,7 @@
 <form>
 <table class="table">
 <tr>
-	<th>Section</th>
+	<th>Section / PHP Function</th>
 	<th>Permission</th>
 </tr>
 {$data}
