@@ -71,6 +71,8 @@ class admin extends resellers {
 			$c1 = "";
 			$c2 = "";
 			$c3 = "";
+			$c4 = "";
+			$c5 = "";
 
 			if (preg_match("/admin/i",$row['access'])) {
 				$c1 = "checked";
