@@ -10,7 +10,7 @@
 {$data}
 
 <tr>
-<td colspan="3"><input type="submit" value="Save"></td></tr>
+<td colspan="3"><input type="submit" class="btn btn-primary" value="Save"></td></tr>
 </table>
 </form>
 
