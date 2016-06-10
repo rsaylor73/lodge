@@ -6,6 +6,8 @@ include $GLOBAL['path']."/class/resellers.class.php";
 class admin extends resellers {
 
 	public function savepermissions() {
+		$ok = "0";
+		$fail = "0";
 		$sql = "SELECT * FROM `whitelist`";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
@@ -58,9 +60,19 @@ class admin extends resellers {
 			$i .= $row['id'];
 			$description = $_POST[$i];
 
-			$sql = "UPDATE `whitelist` SET `access` = '$perm', `description` = '$description' WHERE `id` = '$row[id]'";
-			print "SQL:<br>$sql<hr>";
+			$sql2 = "UPDATE `whitelist` SET `access` = '$perm', `description` = '$description' WHERE `id` = '$row[id]'";
+			$result2 = $this->new_mysql($sql2);
+			if ($result2 == "TRUE") {
+				$ok++;
+			} else {
+				$fail++;
+			}
 		}
+
+		print "<div class=\"col-md-6\">";
+		print "<h2>Permissions</h2>";
+		print "A total of <font color=green>$ok</font> permissions was updated. <font color=red>$fail</font> permissions failed to update.<br><br>";
+		print "</div>";
 	}
 
 	public function permissions() {
