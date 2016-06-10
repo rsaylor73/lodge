@@ -9,9 +9,28 @@ class admin extends resellers {
 		$sql = "SELECT * FROM `whitelist`";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
+
+			$c1 = "";
+			$c2 = "";
+			$c3 = "";
+
+			if (preg_match("/admin/i",$row['access'])) {
+				$c1 = "checked";
+			}
+			if (preg_match("/agent/i",$row['access'])) {
+				$c2 = "checked";
+			}
+			if (preg_match("/accounting/i",$row['access'])) {
+				$c3 = "checked";
+			}
+
 			$html .= "<tr>
 			<td>$row[method]</td>
-			<td><input type=\"text\" name=\"access$row[id]\" value=\"$row[access]\"></td>
+			<td>
+			<input type=\"checkbox\" name=\"admin$row[id]\" value=\"checked\" $c1> Admin 
+			<input type=\"checkbox\" name=\"agent$row[id]\" value=\"checked\" $c2> Agent 
+			<input type=\"checkbox\" name=\"accounting$row[id]\" value=\"checked\" $c3> Accounting
+			</td>
 			<td><textarea name=\"description$row[id]\" cols=30 rows=2>$row[description]</textarea></td>
 			</tr>
 			";
