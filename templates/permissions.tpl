@@ -1,7 +1,7 @@
 <div class="col-md-6">
 <h2>System Permissions : Access Control</h2>
 
-<form>
+<form action="savepermissions" method="post">
 <table class="table">
 <tr>
 	<th>Section / PHP Function</th>

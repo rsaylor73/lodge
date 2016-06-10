@@ -5,6 +5,48 @@ include $GLOBAL['path']."/class/resellers.class.php";
 
 class admin extends resellers {
 
+	public function savepermissions() {
+		$sql = "SELECT * FROM `whitelist`";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$perm = "";
+
+			// admin
+			$i = "admin";
+			$i .= $row['id'];
+			$admin = $_POST[$i];
+			if ($admin == "checked") {
+				$perm .= "admin,";
+			}
+
+			// agent
+			$i = "agent";
+			$i .= $row['id'];
+			$agent = $_POST[$i];
+			if ($agent == "checked") {
+				$perm .= "agent,";
+			}
+
+			// accounting
+			$i = "accounting";
+			$i .= $row['id'];
+			$accounting = $_POST[$i];
+			if ($accounting == "checked") {
+				$perm .= "accounting,";
+			}
+
+			// clear end
+			$perm = substr($perm,0,-1);
+
+			$i = "description";
+			$i .= $row['id'];
+			$description = $_POST[$i];
+
+			$sql = "UPDATE `whitelist` SET `access` = '$perm', `description` = '$description' WHERE `id` = '$row[id]'";
+			print "SQL:<br>$sql<hr>";
+		}
+	}
+
 	public function permissions() {
 		$sql = "SELECT * FROM `whitelist`";
 		$result = $this->new_mysql($sql);
