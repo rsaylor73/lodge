@@ -35,6 +35,22 @@ class admin extends resellers {
 				$perm .= "accounting,";
 			}
 
+			// crew
+			$i = "crew";
+			$i .= $row['id'];
+			$crew = $_POST[$i];
+			if ($crew == "checked") {
+				$perm .= "crew,";
+			}
+
+			// owner
+			$i = "owner";
+			$i .= $row['id'];
+			$owner = $_POST[$i];
+			if ($owner == "checked") {
+				$perm .= "owner,";
+			}
+
 			// clear end
 			$perm = substr($perm,0,-1);
 
@@ -65,13 +81,21 @@ class admin extends resellers {
 			if (preg_match("/accounting/i",$row['access'])) {
 				$c3 = "checked";
 			}
+			if (preg_match("/crew/i",$row['access'])) {
+				$c4 = "checked";
+			}
+			if (preg_match("/owner/i",$row['access'])) {
+				$c5 = "checked";
+			}
 
 			$html .= "<tr>
 			<td>$row[method]</td>
 			<td>
-			<input type=\"checkbox\" name=\"admin$row[id]\" value=\"checked\" $c1> Admin&nbsp;&nbsp;
-			<input type=\"checkbox\" name=\"agent$row[id]\" value=\"checked\" $c2> Agent&nbsp;&nbsp; 
-			<input type=\"checkbox\" name=\"accounting$row[id]\" value=\"checked\" $c3> Accounting&nbsp;&nbsp;
+			<input type=\"checkbox\" name=\"admin$row[id]\" value=\"checked\" $c1> Admin &nbsp;&nbsp;
+			<input type=\"checkbox\" name=\"agent$row[id]\" value=\"checked\" $c2> Agent &nbsp;&nbsp; 
+			<input type=\"checkbox\" name=\"accounting$row[id]\" value=\"checked\" $c3> Accounting &nbsp;&nbsp;
+			<input type=\"checkbox\" name=\"crew$row[id]\" value=\"checked\" $c4> Crew &nbsp;&nbsp;
+			<input type=\"checkbox\" name=\"owner$row[id]\" value=\"checked\" $c5> Owner &nbsp;&nbsp;
 			</td>
 			</tr>
 			<tr><td colspan=2><textarea name=\"description$row[id]\" cols=80 rows=2 placeholder=\"Description\">$row[description]</textarea><hr></td>
