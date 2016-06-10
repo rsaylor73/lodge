@@ -32,9 +32,9 @@
 
          <li class='has-sub'><a href='#'><span>Financial</span></a>
             <ul>
-               <li><a href='#'><span>Transfer Report</span></a>
+               <li><a href='transferreport'><span>Transfer Report</span></a>
                <li><a href='balancereport'><span>Balance Report</span></a>
-               <li><a href='#'><span>Reconsile Report</span></a>
+               <li><a href='paymentreport'><span>Payment Report</span></a>
 
             </ul>
          </li>
@@ -58,7 +58,7 @@
          <li><a href='line_items'><span>Line Items</span></a></li>
          <li><a href='discounts'><span>Discounts</span></a></li>
          <li><a href='users'><span>Users</span></a></li>
-         <li><a href='#'><span>Permissions</span></a></li>
+         <li><a href='permissions'><span>Permissions</span></a></li>
 
 
       </ul>

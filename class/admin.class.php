@@ -5,6 +5,10 @@ include $GLOBAL['path']."/class/resellers.class.php";
 
 class admin extends resellers {
 
+	public function permissions() {
+		
+	}
+
 	public function lodge($msg='') {
 		// alias to managelodge
 		$this->managelodge($msg);
