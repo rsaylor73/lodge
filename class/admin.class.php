@@ -31,7 +31,8 @@ class admin extends resellers {
 			<input type=\"checkbox\" name=\"agent$row[id]\" value=\"checked\" $c2> Agent 
 			<input type=\"checkbox\" name=\"accounting$row[id]\" value=\"checked\" $c3> Accounting
 			</td>
-			<td><textarea name=\"description$row[id]\" cols=30 rows=2>$row[description]</textarea></td>
+			</tr>
+			<tr><td colspan=2><textarea name=\"description$row[id]\" cols=30 rows=2 placeholder=\"Description\">$row[description]</textarea><<hr>/td>
 			</tr>
 			";
 		}

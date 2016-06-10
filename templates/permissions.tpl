@@ -6,7 +6,6 @@
 <tr>
 	<th>Section</th>
 	<th>Permission</th>
-	<th>Description</th>
 </tr>
 {$data}
 
