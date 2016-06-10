@@ -6,6 +6,19 @@ include $GLOBAL['path']."/class/resellers.class.php";
 class admin extends resellers {
 
 	public function permissions() {
+		$sql = "SELECT * FROM `whitelist`";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$html .= "<tr>
+			<td>$row[method]</td>
+			<td><input type=\"text\" name=\"access$row[id]\" value=\"$row[access]\"></td>
+			<td><textarea name=\"description$row[id]\" cols=30 rows=2>$row[description]</textarea></td>
+			</tr>
+			";
+		}
+		$template = "permissions.tpl";
+		$data['data'] = $html;
+		$this->load_smarty($data,$template);
 		
 	}
 
