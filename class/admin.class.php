@@ -27,12 +27,12 @@ class admin extends resellers {
 			$html .= "<tr>
 			<td>$row[method]</td>
 			<td>
-			<input type=\"checkbox\" name=\"admin$row[id]\" value=\"checked\" $c1> Admin 
-			<input type=\"checkbox\" name=\"agent$row[id]\" value=\"checked\" $c2> Agent 
-			<input type=\"checkbox\" name=\"accounting$row[id]\" value=\"checked\" $c3> Accounting
+			<input type=\"checkbox\" name=\"admin$row[id]\" value=\"checked\" $c1> Admin&nbsp;&nbsp;
+			<input type=\"checkbox\" name=\"agent$row[id]\" value=\"checked\" $c2> Agent&nbsp;&nbsp; 
+			<input type=\"checkbox\" name=\"accounting$row[id]\" value=\"checked\" $c3> Accounting&nbsp;&nbsp;
 			</td>
 			</tr>
-			<tr><td colspan=2><textarea name=\"description$row[id]\" cols=30 rows=2 placeholder=\"Description\">$row[description]</textarea><<hr>/td>
+			<tr><td colspan=2><textarea name=\"description$row[id]\" cols=80 rows=2 placeholder=\"Description\">$row[description]</textarea><hr></td>
 			</tr>
 			";
 		}
