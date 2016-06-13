@@ -51,12 +51,12 @@ class reports extends admin {
 				AND `lb`.`contactID` = `c`.`contactID`
 				AND `lb`.`line_item_id` = `l`.`id`
 			";
-			$html .= "<tr><td colspan=3>Reservation: $row[reservationID] : $row[formatted_date]</td></tr>";
+			$html .= "<tr><td colspan=3><b>Reservation: $row[reservationID] : $row[formatted_date]</b></td></tr>";
 			$result2 = $this->new_mysql($sql2);
 			while ($row2 = $result2->fetch_assoc()) {
 				$html .= "<tr><td>$row2[title]</td><td>$row2[first] $row2[last]</td>";
 			}
-
+			$html .= "<tr><td colspan=3><hr></td></tr>";
 		}
 		print "<div class=\"col-md-6\">";
 		print "<h2>Transfer Report</h2>";
