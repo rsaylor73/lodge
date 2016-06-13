@@ -3,6 +3,54 @@ include $GLOBAL['path']."/class/admin.class.php";
 
 class reports extends admin {
 
+	public function paymentreport() {
+		$sql = "
+		SELECT
+			SUM(`p`.`amount`) AS 'total',
+			`p`.`reservationID`,
+			`c`.`first`,
+			`c`.`last`,
+			`c`.`email`
+
+		FROM
+			`payments` p,
+			`reservations` r
+
+		LEFT JOIN `reserve`.`contacts` c ON `r`.`contactID` = `c`.`contactID`
+
+		WHERE
+			`p`.`reservationID` = `r`.`reservationID`
+
+		GROUP BY `p`.`reservationID`
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			if (($row['first'] == "") && ($row['last'] == "")) {
+				$row['first'] = "None";
+				$row['email'] = "#";
+			}
+			$html .= "
+			<tr>
+				<td><a href=\"reservation_dashboard/$row[reservationID]/dollars\">$row[reservationID]</a></td>
+				<td>$".number_format($row['total'],2,'.',',')."</td>
+				<td><a href=\"mailto:$row[email]\">$row[first] $row[last]</a></td>
+			</tr>
+			";
+		}
+
+		print "<div class=\"col-md-6\">";
+		print "<h2>Payment Report</h2>";
+		print "<table class=\"table\">";
+		print "<tr>
+			<th>Conf #</th>
+			<th>Amount Paid</th>
+			<th>Contact</th>
+		</tr>";
+		print "$html";
+		print "</table>";
+		print "</div>";
+	}
+
 	public function balancereport() {
 		$sql = "
 		SELECT
