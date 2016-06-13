@@ -3,6 +3,69 @@ include $GLOBAL['path']."/class/admin.class.php";
 
 class reports extends admin {
 
+	public function transferreport() {
+		$sql = "
+		SELECT
+			`r`.`reservationID`,
+			`l`.`title`,
+			MIN(`i`.`date_code`) AS 'start_date',
+			DATE_FORMAT(`i`.`date_code`, '%m/%d/%Y') AS 'formatted_date',
+			DATEDIFF(`i`.`date_code`,now()) AS 'days'
+
+		FROM
+			`line_item_billing` lb,
+			`reservations` r,
+			`line_items` l,
+			`beds` b,
+			`inventory` i
+
+		WHERE
+			`lb`.`reservationID` = `r`.`reservationID`
+			AND `r`.`cancelled` = 'No'
+			AND `lb`.`line_item_id` = `l`.`id`
+			AND `r`.`reservationID` = `b`.`reservationID`
+			AND `b`.`inventoryID` = `i`.`inventoryID`
+
+		GROUP BY `r`.`reservationID`
+
+		ORDER BY `i`.`date_code` ASC
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			// get transferes for that RES
+			$sql2 = "
+			SELECT
+				`c`.`first`,
+				`c`.`last`,
+				`c`.`email`,
+				`l`.`title`
+
+			FROM
+				`line_item_billing` lb,
+				`reserve`.`contacts` c,
+				`line_items` l
+
+
+			WHERE
+				`lb`.`reservationID` = '$row[reservationID]'
+				AND `lb`.`contactID` = `c`.`contactID`
+				AND `lb`.`line_item_id` = `l`.`id`
+			";
+			$html .= "<tr><td colspan=3>Reservation: $row[reservationID] : $row[formatted_date]</td></tr>";
+			$result2 = $this->new_mysql($sql2);
+			while ($row2 = $result2->fetch_assoc()) {
+				$html .= "<tr><td>$row2[title]</td><td>$row2[first] $row2[last]</td>";
+			}
+
+		}
+		print "<div class=\"col-md-6\">";
+		print "<h2>Transfer Report</h2>";
+		print "<table class=\"table\">";
+		print "$html";
+		print "</table>";
+		print "</div>";
+	}
+
 	public function paymentreport() {
 		$sql = "
 		SELECT
