@@ -52,7 +52,7 @@ class reports extends admin {
 				AND `lb`.`line_item_id` = `l`.`id`
 			";
 			$html .= "<tr><td colspan=2><b>Reservation: $row[reservationID] : $row[formatted_date]</b></td></tr>";
-			$html .= "<tr><td><b>Package</b></td><td><b>Guest</b></td></tr>"
+			$html .= "<tr><td><b>Package</b></td><td><b>Guest</b></td></tr>";
 			$result2 = $this->new_mysql($sql2);
 			while ($row2 = $result2->fetch_assoc()) {
 				$html .= "<tr><td>$row2[title]</td><td>$row2[first] $row2[last]</td>";
