@@ -53,9 +53,14 @@ class reports extends admin {
 			";
 			$html .= "<tr><td colspan=2><b>Reservation: <a href=\"reservation_dashboard/$row[reservationID]/dollars\">$row[reservationID]</a> : Check-In Date $row[formatted_date]</b></td></tr>";
 			$html .= "<tr><td><b>Package</b></td><td><b>Guest</b></td></tr>";
+			$found = "0";
 			$result2 = $this->new_mysql($sql2);
 			while ($row2 = $result2->fetch_assoc()) {
+				$found = "1";
 				$html .= "<tr><td>$row2[title]</td><td>$row2[first] $row2[last]</td>";
+			}
+			if ($found == "0") {
+				$html .= "<tr><td colspan=2><font color=red>There are no transfers for this reservation or the transfer has been removed.</font></td></tr>";
 			}
 			$html .= "<tr><td colspan=2><hr></td></tr>";
 		}
