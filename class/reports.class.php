@@ -51,7 +51,7 @@ class reports extends admin {
 				AND `lb`.`contactID` = `c`.`contactID`
 				AND `lb`.`line_item_id` = `l`.`id`
 			";
-			$html .= "<tr><td colspan=2><b>Reservation: <a href=\"reservation_dashboard/$row[reservationID]/dollars\">$row[reservationID]</a> : $row[formatted_date]</b></td></tr>";
+			$html .= "<tr><td colspan=2><b>Reservation: <a href=\"reservation_dashboard/$row[reservationID]/dollars\">$row[reservationID]</a> : Check-In Date $row[formatted_date]</b></td></tr>";
 			$html .= "<tr><td><b>Package</b></td><td><b>Guest</b></td></tr>";
 			$result2 = $this->new_mysql($sql2);
 			while ($row2 = $result2->fetch_assoc()) {
