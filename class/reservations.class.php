@@ -1547,6 +1547,14 @@ class reservations extends money {
 					if ($result2 == "TRUE") {
 						$sql2A = "UPDATE `beds` SET `status` = 'avail', `reservationID` = '', `contactID` = '' WHERE `bedID` = '$row[bedID]'";
 						$result2A = $this->new_mysql($sql2A);
+
+						$cxl_transfers = "INSERT INTO `cxl_line_item_billing` SELECT `line_item_billing`.* FROM `line_item_billing` WHERE 
+						`reservationID` = '$reservationID'";
+						$result_cxl_t = $this->new_mysql($cxl_transfers);
+
+						$cxl_transfers = "DELETE FROM `line_item_billing` WHERE `reservationID` = '$reservationID'";
+                                                $result_cxl_t = $this->new_mysql($cxl_transfers);
+
 					} else {
 						print "<br><font color=red>Error: bedID $row[bedID] failed to cancel.</font><br>";
 					}
@@ -1555,7 +1563,7 @@ class reservations extends money {
 				$result3 = $this->new_mysql($sql3);
 				if ($result3 == "TRUE") {
 					$template = "cancel.tpl";
-					$data['msg'] = "<font color=red>Reservation $reservationID has been cancelled.</font>";
+					$data['msg'] = "<font color=red>Reservation <a href=\"reservation_dashboard/$reservationID/details\">$reservationID</a> has been cancelled.</font>";
 					$this->load_smarty($data,$template);
 				}
 			break;
@@ -1607,7 +1615,7 @@ class reservations extends money {
 				$msg .= "<br><font color=red>Error: bedID $row[bedID] failed to cancel.</font><br>";
 			}
 		}
-		$msg .= "<font color=green>The tent selected was cancelled on reservation $_GET[reservationID].</font>";
+		$msg .= "<font color=green>The tent selected was cancelled on reservation <a href=\"reservation_dashboard/$_GET[reservationID]/details\">$_GET[reservationID]</a>.</font>";
 		$data['msg'] = $msg;
 		$template = "cancel.tpl";
 		$this->load_smarty($data,$template);

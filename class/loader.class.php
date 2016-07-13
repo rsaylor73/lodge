@@ -22,7 +22,7 @@ class loader extends reports {
       		return "TRUE";
 		} else {
 			$remote_addr = $_SERVER['REMOTE_ADDR'];
-			if ($remote_addr == "98.142.222.59") { // Server IP of the virtual host
+			if ($remote_addr == "98.142.222.28") { // Server IP of the virtual host
 				return "TRUE";
 			} else {
 				return "FALSE";

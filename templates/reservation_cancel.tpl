@@ -18,7 +18,7 @@
 <input type="hidden" name="reservationID" value="{$reservationID}">
 <input type="hidden" name="tent" value="ALL">
 Cancellation Reason:<br><textarea name="reason" cols="40" rows="5" required placeholder="Please type in the reason why the reservation is being cancelled."></textarea><br><br>
-<input type="submit" value="Cancel Reservation" id="cxl" disabled class="btn btn-primary">&nbsp;&nbsp;<input type="checkbox" name="agree" onclick="document.getElementById('cxl').disabled=false;"> <b><i>You are about to cancel this reservation and will release all the tents in this reservation back to inventory.</i></b>
+<input type="submit" value="Cancel Reservation" id="cxl" disabled class="btn btn-primary">&nbsp;&nbsp;<input type="checkbox" name="agree" onclick="document.getElementById('cxl').disabled=false;"> <b><i>You are about to cancel this reservation and will release all the tents in this reservation back to inventory. If there are any transfers assigned those will be cancelled.</i></b>
 </form>
 {/if}
 
