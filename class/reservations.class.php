@@ -1100,7 +1100,7 @@ class reservations extends money {
 		return $data;
 	}
 
-	public function get_reservation_dates($reservationID,$direction,$format) {
+	public function get_reservation_dates($reservationID,$direction,$format="") {
 		if ($format == "") {
 			$date_format = "%m/%d/%Y";
 		}

@@ -29,6 +29,7 @@ if ($check == "FALSE") {
 		$smarty->assign('name',$name);
 		$smarty->assign('access',$_SESSION['userType']);
 		$smarty->display('dashboard.tpl');
+		$core->load_module('locatereservation');
 	}
 
 	if (($_GET['section'] != "dashboard") && ($_GET['section'] != "")) {

@@ -11,7 +11,7 @@
 <input type="hidden" name="type" value="{$type}">
 <input type="hidden" name="childage1_form" value="{$childage1_form}">
 <input type="hidden" name="childage2_form" value="{$childage2_form}">
-<input type="submit" value="Back To Search Results" class="btn btn-success">
+<input type="submit" value="Back To Search" class="btn btn-success">
 </form>
 <br>
 

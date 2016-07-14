@@ -140,16 +140,20 @@ $(function() {
     </div>
 
    <div id="blue">
-      <div class="container">
+      <!--<div class="container">-->
          <div class="row centered">
-            <div class="col-lg-8 col-lg-offset-2">
+            <div class="col-sm-8 col-lg-offset-2"> <!-- was lg-8 -->
             </div>
          </div><!-- row -->
-      </div><!-- container -->
+     <!--</div>-->   <!-- container -->
    </div><!-- blue wrap -->
 
 
-   <div id="dg">
+
+
+
+   <!--<div id="dg">-->
+<div id="clear-fix"></div>
       <div class="container">
          <div class="row">
 				<div id="main_element">

@@ -121,50 +121,168 @@ class reports extends admin {
 	}
 
 	public function balancereport() {
-		$sql = "
-		SELECT
-			`r`.`reservationID`,
-			`r`.`calculated_cron_balancedue`,
-			MIN(`i`.`date_code`) AS 'start_date',
-			DATE_FORMAT(`i`.`date_code`, '%m/%d/%Y') AS 'formatted_date',
-			DATEDIFF(`i`.`date_code`,now()) AS 'days'
+		print "<div class=\"col-sm-8\">";
+                print "<h2>Balance Due Report</h2>";
+                print "<i>This report is updated once every 4 hours.</i>";
 
-		FROM
-			`reservations` r,
-			`beds` b,
-			`inventory` i
+                $today = date("Ymd");
 
-		WHERE
-			`r`.`calculated_cron_balancedue` > '0'
-			AND `r`.`reservationID` = `b`.`reservationID`
-			AND `b`.`inventoryID` = `i`.`inventoryID`
+                $temp = strtotime($today);
+                $temp = strtotime("-3 YEAR", $temp);
+                $past_due = date("Ymd", $temp);
 
-		GROUP BY `r`.`reservationID`
+                $temp = strtotime($today);
+                $temp = strtotime("+90 DAY", $temp);
+                $next_90 = date("Ymd", $temp);
 
-		ORDER BY `i`.`date_code` ASC
-		";
+                $temp = strtotime($today);
+                $temp = strtotime("+6 MONTH", $temp);
+                $next_6 = date("Ymd", $temp);
 
-		$result = $this->new_mysql($sql);
-		while ($row = $result->fetch_assoc()) {
-			$html .= "<tr>
-			<td><a href=\"reservation_dashboard/$row[reservationID]/dollars\">$row[reservationID]</a></td>
-			<td>$ ".number_format($row[calculated_cron_balancedue],2,'.',',')."</td><td>$row[formatted_date]</td><td>$row[days]</td></tr>";
-		}
+                $temp = strtotime($today);
+                $temp = strtotime("+9 MONTH", $temp);
+                $next_9 = date("Ymd", $temp);
 
-		print "<div class=\"col-md-6\">";
-		print "<h2>Balance Due Report</h2>";
-		print "<i>This report is updated once every 4 hours.</i>";
-		print "<table class=\"table\">";
-		print "<tr>
-			<th>Conf #</th>
-			<th>Amount Due</th>
-			<th>Travel Date</th>
-			<th>Days Out</th>
-		</tr>";
-		print "$html";
-		print "</table>";
+                $temp = strtotime($today);
+                $temp = strtotime("+10 YEAR",$temp);
+                $greater = date("Ymd", $temp);
+
+                $this->get_balance_report_range($past_due,$today,'allpast','All Past Due');
+                $this->get_balance_report_range($today,$next_90,'90','Next 90 Days');
+                $this->get_balance_report_range($next_90,$next_6,'90to6','90 Days To 6 Months');
+                $this->get_balance_report_range($next_6,$next_9,'6to9','6 Months To 9 Months');
+                $this->get_balance_report_range($next_9,$greater,'9plus','9 Months And Greater');
+
 		print "</div>";
 		
+	}
+
+	private function get_balance_report_range($start,$end,$type,$title) {
+		print "<hr><center><h2><font color=blue>$title</font></h2></center>";
+
+		switch ($type) {
+		        case "allpast":
+		        $deposit_amount = "100";
+		        break;
+
+		        case "90":
+		        $deposit_amount = "100";
+		        break;
+
+		        default:
+		        $deposit_amount = "40";
+		        break;
+		}  
+
+                $sql = "
+                SELECT
+                        `r`.`reservationID`,
+                        `r`.`calculated_cron_balancedue`,
+                        MIN(`i`.`date_code`) AS 'start_date',
+                        DATE_FORMAT(`i`.`date_code`, '%m/%d/%Y') AS 'formatted_date',
+                        DATEDIFF(`i`.`date_code`,now()) AS 'days',
+			`c`.`first`,
+			`c`.`last`
+
+                FROM
+                        `reservations` r,
+                        `beds` b,
+                        `inventory` i
+
+		LEFT JOIN `reserve`.`contacts` c ON `r`.`contactID` = `c`.`contactID`
+
+                WHERE
+                        `r`.`calculated_cron_balancedue` > '0'
+			AND `i`.`date_code` BETWEEN '$start' AND '$end'
+                        AND `r`.`reservationID` = `b`.`reservationID`
+                        AND `b`.`inventoryID` = `i`.`inventoryID`
+
+                GROUP BY `r`.`reservationID`
+
+                ORDER BY `i`.`date_code` ASC
+                ";
+
+                $result = $this->new_mysql($sql);
+                while ($row = $result->fetch_assoc()) {
+                        $html .= "<tr>";
+			$reservationID = $row['reservationID'];
+
+			// get total price
+	                $rate           = $this->get_base_rate($reservationID);
+                        $line           = $this->get_line_item_amounts($reservationID);
+                        $payments       = $this->get_payments_amount($reservationID);
+                        $discounts      = $this->get_discount_amount($reservationID);
+			$debit          = $this->get_transfer_debits($reservationID);
+			$deposit        = $this->get_transfer_deposits($reservationID);
+
+	                // Commission
+        	        $sql2 = "
+	                SELECT
+        	                `s`.`commission`
+
+	                FROM
+        	                `reservations` r, `users` u
+
+	                LEFT JOIN `reserve`.`reseller_agents` a ON `r`.`reseller_agentID` = `a`.`reseller_agentID`
+        	        LEFT JOIN `reserve`.`resellers` s ON `a`.`resellerID` = `s`.`resellerID`
+
+                	WHERE
+                        	`r`.`reservationID` = '$reservationID'
+	                        AND `r`.`userID` = `u`.`id`
+	                ";
+        	        $result2 = $this->new_mysql($sql2);
+                	while ($row2 = $result2->fetch_assoc()) {
+	                        $commission = $row2['commission'] * .01;
+        	        }
+
+	                $total_commission = $rate * $commission;
+
+
+			if ($row['calculated_cron_balancedue'] > 0) {
+				switch ($deposit_amount) {
+		 	               case "100":
+				               $h1 = "<td bgcolor=\"#FA5858\"><b><font color=\"#FFFFFF\">BALANCE DUE</font></b></td>";
+						$c1 = "#FA5858";
+			               break;
+
+			               case "40":
+				               $deposit = (($rate + $line) - ($discounts + $total_commission)) * .40;
+				               if ($payments >= $deposit) {
+					               $h1 = "<td bgcolor=\"#5FB404\"><b>DEPOSIT PAID</b></td>";
+							$c1 = "#5FB404"; 
+				               } else {
+					               $h1 = "<td bgcolor=\"#F2F5A9\"><b>DEPOSIT DUE</b></td>";
+							$c1 = "#F2F5A9";
+				               }
+			               break;
+				}
+
+				$html .= "$h1
+				<td>$ ".number_format($rate,2,'.',',')."</td>
+                                <td>$ ".number_format($line,2,'.',',')."</td>
+                                <td>$ ".number_format($discounts,2,'.',',')."</td>
+                                <td>$ ".number_format($payments,2,'.',',')."</td>
+	                        <td>$ ".number_format($row[calculated_cron_balancedue],2,'.',',')."</td></tr>";
+
+				$html .= "<tr><td bgcolor=$c1><a href=\"invoice/$row[reservationID]\" target=_blank><font color=black>VIEW INVOICE</font></a></td><td colspan=3>$row[first] $row[last] (<a href=\"reservation_dashboard/$row[reservationID]/dollars\" target=_blank>$row[reservationID]</a>)</td>
+				<td colspan=2>Start $row[formatted_date]</td>
+				</tr>
+				<tr><td colspan=6>&nbsp;</td></tr>
+				";
+			}
+                }
+
+                print "<table class=\"table\">";
+                print "<tr>
+			<th>&nbsp;</th>
+			<th>Base Cost</th>
+			<th>Line Items</th>
+			<th>Discounts</th>
+			<th>Payments</th>
+                        <th>Amount Due</th>
+                </tr>";
+                print "$html";
+                print "</table>";
 	}
 
 	public function checkoutreport() {

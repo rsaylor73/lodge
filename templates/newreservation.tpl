@@ -69,9 +69,14 @@
 <tr><td>Number of Nights:</td><td colspan="3"><select name="nights"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option>
 	{if $post_nights ne ""}<option selected>{$post_nights}</option>{/if}</select></td></tr>
 
-<tr><td>Type:</td><td><select name="type"><option value="">Any</option>{$type}</select> <font color=blue><br>Children are welcome in the Family class tents</font></td></tr>
-<tr><td>Check-In Date:</td><td colspan="3"><input type="text" name="start_date" id="start_date" value="{$post_start_date}" required> 
-	&nbsp;<button class="btn btn-primary" onclick="quick_look(this.form);return false;"><i class="fa fa-refresh"></i></button>
+<tr><td>Type:</td><td><select name="type"><option value="">Any</option>{$type}</select> <font color=blue><br>Children are welcome in the <b>Delux Family tent</b></font></td></tr>
+<tr><td>Check-In Date:</td><td colspan="3"><input type="text" name="start_date" id="start_date" value="{$post_start_date}" onclick="document.getElementById('refresh').style.display='inline'" required> 
+
+	{if $post_start_date eq ""}
+		{assign var="style" value='style="display:none"'}
+	{/if}
+
+	&nbsp;<button class="btn btn-primary" id="refresh" {$style} onclick="quick_look(this.form);return false;"><i class="fa fa-refresh"></i></button>
 
 	</td></tr>
 <tr><td colspan=5><input type="submit" value="Search Rooms" class="btn btn-primary">&nbsp;&nbsp;<input type="button" value="Reset" class="btn btn-warning" onclick="document.location.href='newreservation'"></td></tr>

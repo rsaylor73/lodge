@@ -591,7 +591,7 @@ class money extends Core {
 	}
 
 	// gets the total of the reservation rate including kid prices
-	private function get_base_rate($reservationID) {
+	public function get_base_rate($reservationID) {
 		// get nightly rate
 		$arr[] = $this->dollars($reservationID);
     	foreach ($arr as $key) {
@@ -604,7 +604,7 @@ class money extends Core {
     	return $rate;
 	}
 
-	private function get_line_item_amounts($reservationID) {
+	public function get_line_item_amounts($reservationID) {
 		$line = "0";
 		$sql = "
 		SELECT
@@ -632,7 +632,7 @@ class money extends Core {
 		return $line;
 	}
 
-	private function get_payments_amount($reservationID) {
+	public function get_payments_amount($reservationID) {
 		$payments = "0";
 		$sql = "
 		SELECT
@@ -656,7 +656,7 @@ class money extends Core {
 		return $payments;
 	}
 
-	private function get_discount_amount($reservationID) {
+	public function get_discount_amount($reservationID) {
 		$discount = "0";
 		$sql = "
 		SELECT
@@ -681,7 +681,7 @@ class money extends Core {
 		return $discount;
 	}
 
-	private function get_transfer_debits($reservationID) {
+	public function get_transfer_debits($reservationID) {
 		$debit = "0";
 		$sql = "SELECT `id`,`type`,`detail`,`referral_reservationID`,`amount` FROM `transfers` WHERE `reservationID` = '$reservationID' AND `detail` = 'Debit'";
 		$result = $this->new_mysql($sql);
@@ -691,7 +691,7 @@ class money extends Core {
 		return $debit;
 	}
 
-	private function get_transfer_deposits($reservationID) {
+	public function get_transfer_deposits($reservationID) {
 		$deposit = "0";
 		$sql = "SELECT `id`,`type`,`detail`,`referral_reservationID`,`amount` FROM `transfers` WHERE `reservationID` = '$reservationID' AND `detail` = 'Deposit'";
 		$result = $this->new_mysql($sql);
