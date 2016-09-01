@@ -75,7 +75,7 @@ class reports extends admin {
 	public function paymentreport() {
 		$sql = "
 		SELECT
-			SUM(`p`.`amount`) AS 'total',
+			`p`.`amount` AS 'total',
 			`p`.`reservationID`,
 			`c`.`first`,
 			`c`.`last`,
@@ -90,7 +90,6 @@ class reports extends admin {
 		WHERE
 			`p`.`reservationID` = `r`.`reservationID`
 
-		GROUP BY `p`.`reservationID`
 		";
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
@@ -101,8 +100,15 @@ class reports extends admin {
 			$html .= "
 			<tr>
 				<td><a href=\"reservation_dashboard/$row[reservationID]/dollars\">$row[reservationID]</a></td>
+
+				<td>TBD</td>
+                                <td>TBD</td>
+                                <td>TBD</td>
+                                <td>TBD</td>
+                                <td>TBD</td>
+                                <td>TBD</td>
+
 				<td>$".number_format($row['total'],2,'.',',')."</td>
-				<td><a href=\"mailto:$row[email]\">$row[first] $row[last]</a></td>
 			</tr>
 			";
 		}
@@ -112,8 +118,13 @@ class reports extends admin {
 		print "<table class=\"table\">";
 		print "<tr>
 			<th>Conf #</th>
-			<th>Amount Paid</th>
-			<th>Contact</th>
+			<th>Start</th>
+			<th>Company</th>
+			<th>Name</th>
+			<th>Payment</th>
+			<th>Comments</th>
+			<th>Type</th>
+			<th>Amount</th>
 		</tr>";
 		print "$html";
 		print "</table>";

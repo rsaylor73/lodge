@@ -1,5 +1,5 @@
 <div class="col-md-6">
-<h2>Move Tent : Cont # {$reservationID}</h2>
+<h2><input type="button" value="&lt;&lt; Back" onclick="javascript:window.history.back()"> Move Tent : Cont # {$reservationID}</h2>
 
 
 <form action="newreservation" method="post">
@@ -52,7 +52,7 @@
 {$msg}
 {$btn}
 
-<div id="waiting" style="display:inline"><br><b>Please select {$tents} tents. Once you select {$tents} tents this message will be replaced with a move tent button.</b></div>
+<div id="waiting" style="display:inline"><br><b>Please select {$tents} tent(s). Once you select {$tents} tent(s) this message will be replaced with a move tent button.</b></div>
 
 </form>
 

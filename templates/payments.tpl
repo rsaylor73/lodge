@@ -1,5 +1,5 @@
 <div class="col-md-6">
-<h2>Payments : Conf #{$reservationID}</h2>
+<h2><input type="button" value="&lt;&lt; Back" onclick="javascript:window.history.back()"> Payments : Conf #{$reservationID}</h2>
 
 <form action="processpayment" method="post">
 <input type="hidden" name="reservationID" value="{$reservationID}">

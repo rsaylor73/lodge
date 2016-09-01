@@ -1,5 +1,5 @@
 <div class="col-md-6">
-<h2>Refunds / Cash Transfer Conf #{$reservationID}</h2>
+<h2><input type="button" value="&lt;&lt; Back" onclick="javascript:window.history.back()"> Refunds / Cash Transfer Conf #{$reservationID}</h2>
 
 <form action="saverefundcashtransfer" method="post">
 <input type="hidden" name="reservationID" value="{$reservationID}">

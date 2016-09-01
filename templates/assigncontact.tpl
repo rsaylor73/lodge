@@ -21,7 +21,14 @@
 	<td width="150"><b>Contact ID</b></td><td><input type="text" name="resellerID" size="40" onkeypress="if(event.keyCode==13) { lookup_contact(this.form); return false;}"></td>
 </tr>
 
-<tr><td colspan="2"><input type="button" value="Search" class="btn btn-primary" onclick="lookup_contact(this.form)">&nbsp;&nbsp;
+<tr>
+	<td width="150"><b>Contact Type</b></td><td><select name="contact_type">
+		<option selected value="">Any</option>
+		<option value="consumer">Consumer</option>
+		<option value="reseller">Reseller</option>
+		</select></td></tr>
+
+<tr><td colspan="2">
 
 {if $action eq "reservation"}
 
@@ -34,6 +41,8 @@ onclick="window.open('newcontact/{$reservationID}/reservation');document.getElem
 onclick="window.open('newcontact/{$reservationID}/{$bed}/{$roomID}');document.getElementById('message').style.display='inline';"> 
 
 {/if}
+
+&nbsp;&nbsp;<input type="button" value="Search" class="btn btn-primary" onclick="lookup_contact(this.form)">
 
 <div id="message" style="display:none"><br><i>You can search for your new contact after you add them.</i></div></td></tr>
 </table>

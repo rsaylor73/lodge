@@ -66,10 +66,10 @@
 		<option selected>{$post_tents}</option>
 	{/if}
 	</select> <input type="checkbox" name="or" onclick="document.getElementById('tents2').disabled=false"> Override </td></tr>
-<tr><td>Number of Nights:</td><td colspan="3"><select name="nights"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option>
+<tr><td>Number of Nights:</td><td colspan="3"><select name="nights"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option>
 	{if $post_nights ne ""}<option selected>{$post_nights}</option>{/if}</select></td></tr>
 
-<tr><td>Type:</td><td><select name="type"><option value="">Any</option>{$type}</select> <font color=blue><br>Children are welcome in the <b>Delux Family tent</b></font></td></tr>
+<tr><td>Type:</td><td><select name="type"><option value="">Any</option>{$type}</select> <font color=blue><br>Children are welcome in the <b>Deluxe Family tent</b></font></td></tr>
 <tr><td>Check-In Date:</td><td colspan="3"><input type="text" name="start_date" id="start_date" value="{$post_start_date}" onclick="document.getElementById('refresh').style.display='inline'" required> 
 
 	{if $post_start_date eq ""}

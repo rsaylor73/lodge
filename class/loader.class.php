@@ -33,7 +33,7 @@ class loader extends reports {
 	public function check_access($type) {
 
 		$remote_addr = $_SERVER['REMOTE_ADDR'];
-		if ($remote_addr == "98.142.222.59") { // Server IP of the virtual host
+		if ($remote_addr == "98.142.222.28") { // Server IP of the virtual host
 			// bypass the access
 			$type = "admin";
 		} else {

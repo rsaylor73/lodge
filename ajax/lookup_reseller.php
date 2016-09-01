@@ -33,7 +33,22 @@ if ($check == "FALSE") {
 
 		ORDER BY `r`.`company` ASC, `a`.`first` ASC, `a`.`last` ASC
 		";
-	} elseif ($_GET['company'] != "") {
+	} else {
+
+		if ($_GET['company'] != "") {
+			$s1 = " AND `r`.`company` LIKE '%$_GET[company]%' ";
+		}
+		if ($_GET['city'] != "") {
+			$s2 = " AND `a`.`city` LIKE '%$_GET[city]%' ";
+		}
+		if ($_GET['email'] != "") {
+			$s3 = " AND `a`.`email` LIKE '%$_GET[email]%' ";
+		}
+		if ($_GET['country'] != "") {
+			$s4a = " ,`countries` c ";
+			$s4b = " AND `a`.`countryID` = `c`.`countryID` AND `c`.`country` LIKE '%$_GET[country]%' ";
+		}
+
 		$sql = "
 		SELECT
 			`r`.`company`,
@@ -43,20 +58,23 @@ if ($check == "FALSE") {
 			`a`.`last`
 
 		FROM
-			`reserve`.`resellers` r, `reserve`.`reseller_agents` a
+			`reserve`.`resellers` r, `reserve`.`reseller_agents` a $s4a
 
 		WHERE
-			`r`.`company` LIKE '%$_GET[company]%'
-			AND `r`.`resellerID` = `a`.`resellerID`
+			`r`.`resellerID` = `a`.`resellerID`
 			AND `a`.`status` = 'Active'
 			AND `a`.`first` != ''
 			AND `a`.`last` != ''
 
+			$s1
+			$s2
+			$s3
+			$s4b
+
 		ORDER BY `r`.`company` ASC, `a`.`first` ASC, `a`.`last` ASC
+
+		LIMIT 100
 		";
-	} else {
-		print "<br><font color=red>Please enter in a company name or a reseller ID.</font><br>";
-		die;
 	}
 
 	$result = $core->new_mysql($sql);

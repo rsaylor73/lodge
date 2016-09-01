@@ -40,7 +40,7 @@
 
 {else}
 <tr><td colspan="2"><b>Contact</b></td><td><b>Email</b></td></tr>
-<tr><td colspan="2">{$first} {$last}</td><td><a href="mailto:{$email}">{$email}</a></td></tr>
+<tr><td colspan="2"><a href="editcontact/{$contactID}" target=_blank>{$first} {$last}</a></td><td><a href="mailto:{$email}">{$email}</a></td></tr>
 <tr><td colspan="3">
 		<form action="assigncontacttoreservation/{$reservationID}" method="get">
 		<input type="submit" value="Change Contact" class="btn btn-warning">
@@ -58,7 +58,7 @@
 	</td></tr>
 {else}
 <tr><td><b>Reseller</b></td><td><b>Agent</b></td><td><b>Commission</b></td></tr>
-<tr><td>{$company}</td><td><a href="mailto:{$email}?subject=Aggressor Lodge reservation {$reservationID}">{$first} {$last}</a></td><td>{$commission} %</td></tr>
+<tr><td>{$company}</td><td><a href="mailto:{$email}?subject=Aggressor Lodge reservation {$reservationID}">{$r_first} {$r_last}</a></td><td>{$commission} %</td></tr>
 <tr><td colspan="3">
 		<form action="assignreseller/{$reservationID}" method="get">
 		<input type="submit" value="Change Agent" class="btn btn-warning">

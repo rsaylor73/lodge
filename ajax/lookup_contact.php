@@ -36,9 +36,18 @@ if ($check == "FALSE") {
 			`c`.`contactID` = '$_GET[contactID]'
 
 		";
-
 	} else {
 		// name, email
+                switch ($_GET['contact_type']) {
+                        case "consumer":
+                                $s1 = " AND `c`.`contact_type` = 'consumer' ";
+                        break;
+
+                        case "reseller":
+                                $s1 = " AND `c`.`contact_type` != 'consumer' ";
+                        break;
+                }
+
 		$sql = "
 		SELECT
 			`c`.`contactID`,
@@ -61,6 +70,7 @@ if ($check == "FALSE") {
 			`c`.`first` LIKE '%$_GET[first]%'
 			AND `c`.`last` LIKE '%$_GET[last]%'
 			AND `c`.`email` LIKE '%$_GET[email]%'
+			$s1
 		";
 	}
 	$result = $core->new_mysql($sql);
@@ -76,6 +86,7 @@ if ($check == "FALSE") {
 			$html .= "<input type=\"button\" onclick=\"document.location.href='assigncontacttobed/$_GET[reservationID]/$row[contactID]/$_GET[bed]/$_GET[roomID]'\" 
 			class=\"btn btn-primary\" value=\"Assign Contact\">";
 		}
+
 
 		$html .= "
 		</td></tr>

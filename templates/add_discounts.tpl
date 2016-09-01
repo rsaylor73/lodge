@@ -1,5 +1,5 @@
 <div class="col-md-6">
-<h2>Add Discount : Conf #{$reservationID}</h2>
+<h2><input type="button" value="&lt;&lt; Back" onclick="javascript:window.history.back()"> Add Discount : Conf #{$reservationID}</h2>
 
 <form action="save_new_discount" method="post">
 <input type="hidden" name="reservationID" value="{$reservationID}">
