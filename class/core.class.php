@@ -33,6 +33,16 @@ class Core {
 		$smarty->display($template);
 	}
 
+	public function activity_log($reservationID,$activity,$sql,$module) {
+		$sql = $this->linkID->real_escape_string($sql);
+
+		$date = date("Ymd H:i:s");
+		$sql2 = "INSERT INTO `activity_log` (`date`,`uuname`,`reservationID`,`activity`,`sql`,`module`) VALUES
+		('$date','$_SESSION[uuname]','$reservationID','$activity','$sql','$module')";
+
+		$result = $this->new_mysql($sql2);
+	}
+
 
 	public function country_list($id) {
 		// returns a list of counties from the AF database

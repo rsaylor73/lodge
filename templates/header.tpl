@@ -95,7 +95,8 @@
          dateFormat: "yy-mm-dd",
          changeMonth: true,
          changeYear: true,
-         yearRange: "-2:+1"
+	 maxDate: '0',
+         yearRange: "-2:+0"
          
       });
 

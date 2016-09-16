@@ -36,8 +36,8 @@
 		<select name="childage2" id="childage2">
 		<option value="">Child 2 Age?</option>
 		<option value="1" {if $childage2 eq "1"}selected{/if}>0 - 6</option>
-		<option value="2" {if $childage1 eq "2"}selected{/if}>7 - 15</option>
-		<option value="3" {if $childage1 eq "3"}selected{/if}>16+</option>
+		<option value="2" {if $childage2 eq "2"}selected{/if}>7 - 15</option>
+		<option value="3" {if $childage2 eq "3"}selected{/if}>16+</option>
 		</select>
 	</td>
 </tr>
@@ -69,7 +69,8 @@
 <tr><td>Number of Nights:</td><td colspan="3"><select name="nights"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option>
 	{if $post_nights ne ""}<option selected>{$post_nights}</option>{/if}</select></td></tr>
 
-<tr><td>Type:</td><td><select name="type"><option value="">Any</option>{$type}</select> <font color=blue><br>Children are welcome in the <b>Deluxe Family tent</b></font></td></tr>
+
+<tr id="type_display" {if $post_children > 0} style="display:none" {/if}><td>Type:</td><td><select name="type" id="type"><option value="">Any</option>{$type}</select> <font color=blue><br>Children are welcome in the <b>Deluxe Family tent</b></font></td></tr>
 <tr><td>Check-In Date:</td><td colspan="3"><input type="text" name="start_date" id="start_date" value="{$post_start_date}" onclick="document.getElementById('refresh').style.display='inline'" required> 
 
 	{if $post_start_date eq ""}
@@ -100,18 +101,24 @@ function do_child() {
 		document.getElementById('childage1').required=true;
 		document.getElementById('child2').style.display='none';
 		document.getElementById('childage2').required=false;
+		document.getElementById('type_display').style.display='none';
+		document.getElementById('type').value='';
 	}
 	if (strChild == "2") {
 		document.getElementById('child1').style.display='inline';
 		document.getElementById('childage1').required=true;
 		document.getElementById('child2').style.display='inline';
 		document.getElementById('childage2').required=true;
+                document.getElementById('type_display').style.display='none';
+                document.getElementById('type').value='';
 	}
 	if (strChild == "0") {
 		document.getElementById('childage1').required=false;
 		document.getElementById('childage2').required=false;
 		document.getElementById('child1').style.display='none';
 		document.getElementById('child2').style.display='none';
+                document.getElementById('type_display').style.display='inline';
+                document.getElementById('type').value='';
 	}
 }
 

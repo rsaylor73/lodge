@@ -114,6 +114,7 @@ class contacts extends reservations {
 				`c`.`contactID` = '$_GET[contactID]'
 
 		";
+		$data['reservationID'] = $_GET['reservationID'];
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			foreach ($row as $key=>$value) {
@@ -147,10 +148,22 @@ class contacts extends reservations {
 		if ($result == "TRUE") {
 			$msg = "<font color=green>The contact was updated.</font><br>";
 			$data['msg'] = $msg;
-			$template = "contacts.tpl";
-	      	$data['list'] = $this->list_contacts();
-	      	$data['country'] = $this->country_list($null);
-			$this->load_smarty($data,$template);
+
+			if ($_POST['reservationID'] != "") {
+				print "<br><br>$msg";
+				print "<br>Loading please wait...<br>";
+				?>
+				<script>
+					setInterval(document.location.href='reservation_dashboard/<?=$_POST['reservationID']?>/guests',2000);
+				</script>
+				<?php
+
+			} else {
+				$template = "contacts.tpl";
+			      	$data['list'] = $this->list_contacts();
+			      	$data['country'] = $this->country_list($null);
+				$this->load_smarty($data,$template);
+			}
 		} else {
 			$this->error();
 		}

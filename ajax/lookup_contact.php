@@ -71,10 +71,13 @@ if ($check == "FALSE") {
 			AND `c`.`last` LIKE '%$_GET[last]%'
 			AND `c`.`email` LIKE '%$_GET[email]%'
 			$s1
+
+		LIMIT 50
 		";
 	}
 	$result = $core->new_mysql($sql);
 	while ($row = $result->fetch_assoc()) {
+		$found = "1";
 		$html .= "<tr><td width=\"250\">$row[first] $row[last]</td><td>$row[city]</td><td>$row[country]</td>
 		<td>
 		";
@@ -93,6 +96,9 @@ if ($check == "FALSE") {
 		<tr><td>DOB: $row[dob]</td><td colspan=4>$row[email]</td></tr>
 		";
 	}
-	print "<table class=\"table\">$html</table>";
+	if ($found != "1") {
+		$html = "<tr><td colspan=\"3\"><font color=blue>Sorry, there were no matches</font></td></tr>";
+	}
+	print "<table class=\"table\"><tr><td colspan=\"3\"><b>Displaying up to 50 records</b></td></tr>$html</table>";
 
 }

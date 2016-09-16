@@ -49,8 +49,8 @@
 {$msg}
 {$btn}
 
-<div id="waiting" style="display:inline"><br><b>Please select {$tents} tents. Once you select {$tents} tents this message will be replaced with a reservation button.</b></div>
-
+<div id="waiting" style="display:inline"><br><b>Please select {$tents} tent(s). Once you select {$tents} tent(s) this message will be replaced with a reservation button.</b></div>
+<br><br>
 </form>
 
 <script>

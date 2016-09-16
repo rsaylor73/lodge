@@ -150,7 +150,10 @@ class money extends Core {
 		'$_POST[wire_description]','$_POST[payment_amount]','$_POST[payment_date]',
 		'$today','$today','$_SESSION[id]')
 		";
+
 		$result = $this->new_mysql($sql);
+                $this->activity_log($_POST['reservationID'],"payment recorded amount $$_POST[payment_amount]",$sql,'payments');
+
 		return $result;
 	}
 
@@ -231,10 +234,17 @@ class money extends Core {
 		}
 		$template = "updatepayment.tpl";
 		$data['reservationID'] = $_POST['reservationID'];
+		$this->activity_log($_POST['reservationID'],"payment updated amount $$_POST[payment_amount]",$sql,'payments');
 		$this->load_smarty($data,$template);
 	}
 
 	public function deletepayment() {
+		$sql = "SELECT `amount` FROM `payments` WHERE `id` = '$_GET[id]' AND `reservationID` = '$_GET[reservationID]'";
+                $result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$amount = $row['amount'];
+		}
+
 		$sql = "DELETE FROM `payments` WHERE `id` = '$_GET[id]' AND `reservationID` = '$_GET[reservationID]'";
 		$result = $this->new_mysql($sql);
 		if ($result == "TRUE") {
@@ -244,6 +254,7 @@ class money extends Core {
 		}
 		$template = "deletepayment.tpl";
 		$data['reservationID'] = $_GET['reservationID'];
+		$this->activity_log($_GET['reservationID'],"payment deleted amount $$amount",$sql,'payments');
 		$this->load_smarty($data,$template);
 	}
 
@@ -499,6 +510,9 @@ class money extends Core {
 		$template = "save_new_discount.tpl";
 		$data['reservationID'] = $_POST['reservationID'];
 		$data['msg'] = $msg;
+
+                $this->activity_log($_POST['reservationID'],"discount applied amount $$_POST[amount]",$sql,'payments');
+
 		$this->load_smarty($data,$template);
 
 	}
@@ -518,6 +532,23 @@ class money extends Core {
 		$result = $this->new_mysql($sql);
 		if ($result == "TRUE") {
 			$msg = "<font color=green>The transfer was applied.</font>";
+
+			if ($_POST['referral_reservationID'] != "") {
+				switch ($_POST['detail']) {
+					case "Debit":
+					$new_detail = "Deposit";
+					break;
+
+					case "Deposit":
+					$new_detail = "Debit";
+					break;
+				}
+				$sql2 = "INSERT INTO `transfers` (`type`,`detail`,`referral_reservationID`,`reservationID`,`amount`,`userID`,`date_created`,`date_updated`) VALUES
+				('$_POST[type]','$new_detail','$_POST[reservationID]','$_POST[referral_reservationID]','$_POST[amount]','$_SESSION[id]','$today','$today')
+				";
+				$result2 = $this->new_mysql($sql2);
+			}
+
 		} else {
 			$msg = "<font color=red>The transfer failed to apply.</font>";
 		}
@@ -536,7 +567,7 @@ class money extends Core {
 			&nbsp;
 			<a href=\"deleterefundtransfer/$row[id]/$reservationID\" onclick=\"return confirm('You are about to delete $row[type] in the amount of $$row[amount]. Only an administrator can delete this transaction. Click Ok to confirm.')\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>
 			&nbsp;
-			$row[type]</td><td>$row[detail]</td><td>$row[referral_reservationID]</td><td>$$row[amount]</td></tr>";
+			$row[type]</td><td>$row[detail]</td><td><a href=\"reservation_dashboard/$row[referral_reservationID]/dollars\">$row[referral_reservationID]</a></td><td>$$row[amount]</td></tr>";
 		}
 		if ($html == "") {
 			$html .= "<tr><td colspan=4><font color=blue>There are no refund/transfers.</font></td></tr>";
@@ -832,6 +863,27 @@ class money extends Core {
 		$result = $this->new_mysql($sql);
 		while ($row = $result->fetch_assoc()) {
 			$commission = $row['commission'] * .01;
+		}
+
+		// get reseller info
+		$sql = "
+		SELECT
+			`rs`.`resellerID`,
+			`rs`.`company`
+
+		FROM
+			`reservations` r,
+			`reserve`.`resellers` rs
+
+		WHERE
+			`r`.`reservationID` = '$reservationID'
+			AND `r`.`resellerID` = `rs`.`resellerID`
+		";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			if ($row['resellerID'] != "19") {
+				$data['company'] = $row['company'];
+			}
 		}
 
 		// get contact info

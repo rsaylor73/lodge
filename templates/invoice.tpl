@@ -217,6 +217,11 @@ window.print();
                   <tr>
                   <td class="left" style="padding-bottom:20px; text-align:left; vertical-align: text-top;">
                     <b>Invoice Date:</b> {$date}<br><br>
+
+		    {if $company ne ""}
+			{$company}<br>
+		    {/if}
+
                     {$first} {$last}<br>
                     {$address1}<br>
                     {if $address2 ne ""}

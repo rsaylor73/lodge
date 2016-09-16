@@ -1,5 +1,5 @@
 <div class="col-md-6">
-<h2>Assign Contact : {$reservationID}</h2>
+<h2><input type="button" value="&lt;&lt; Back" onclick="javascript:window.history.back()"> Assign Contact : {$reservationID}</h2>
 
 <form name="myform">
 <input type="hidden" name="reservationID" value="{$reservationID}">

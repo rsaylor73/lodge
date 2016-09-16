@@ -233,6 +233,7 @@ class reservations extends money {
 		$sql = "INSERT INTO `reservations` (`date_created`,`userID`,`active`) VALUES ('$today','$_SESSION[id]','Yes')";
 		$result = $this->new_mysql($sql);
 		$reservationID = $this->linkID->insert_id;
+		$this->activity_log($reservationID,"new reservation created",$sql,'reservations');
 		return $reservationID;
 	}
 
@@ -560,6 +561,9 @@ class reservations extends money {
 			$data['reservationID'] = $_POST['reservationID'];
 			$data['msg'] = "<br><font color=green>The tent was successfully moved.</font><br>";
 			$template = "movenowsuccess.tpl";
+
+			$this->activity_log($_POST['reservationID'],"Tent moved",$sql3,'reservations');
+
 			$this->load_smarty($data,$template);
 
 
@@ -676,13 +680,21 @@ class reservations extends money {
 
 				if ($_POST['childage1'] != "") {
 					$fee = $this->child_age_fee($_POST['childage1']);
-					$child_fee = (($row['nightly_rate'] / 2) / $fee) * $nights;
+					if ($fee > 0) {
+						$child_fee = (($row['nightly_rate'] / 2) / $fee) * $nights;
+					} else {
+						$child_fee = "0";
+					}
 				}
 				$total = $total + $child_fee;
 
 				if ($_POST['childage2'] != "") {
 					$fee = $this->child_age_fee($_POST['childage2']);
-					$child_fee = (($row['nightly_rate'] / 2) / $fee) * $nights;
+					if ($fee > 0) {
+						$child_fee = (($row['nightly_rate'] / 2) / $fee) * $nights;
+					} else {
+						$child_fee = "0";
+					}
 				}
 				$total = $total + $child_fee;
 
@@ -696,7 +708,7 @@ class reservations extends money {
 		}
 
 		if ($counter < $_POST['tents']) {
-			$data['msg'] = "<br><font color=red>Sorry, you indicated you need <b>$_POST[tents]</b> tents but only $counter tents are available.</font><br>";
+			$data['msg'] = "<br><font color=red>Sorry, you indicated you need <b>$_POST[tents]</b> tent(s) but only $counter tent(s) are available.</font><br>";
 			$stop = "1";
 		}
 
@@ -1240,7 +1252,7 @@ class reservations extends money {
 			if ($row['t2_contactID'] == "") {
 				$contact = "<input type=\"button\" value=\"Assign Contact\" class=\"btn btn-primary\" onclick=\"document.location.href='assigncontact/$reservationID/$row[t2_bedname]/$row[roomID]'\">";
 			} else {
-				$contact = "<a href=\"javascript:void(0)\" onclick=\"document.location.href='editcontact/$row[t2_contactID]'\"><i class=\"fa fa-pencil-square-o\"></i></a> 
+				$contact = "<a href=\"javascript:void(0)\" onclick=\"document.location.href='editcontact/$row[t2_contactID]/$reservationID'\"><i class=\"fa fa-pencil-square-o\"></i></a> 
 				$row[t2_first] $row[t2_middle] $row[t2_last]&nbsp;&nbsp;
 				<a href=\"javascript:void(0)\" onclick=\"document.location.href='assigncontact/$reservationID/$row[t2_bedname]/$row[roomID]'\"><i class=\"fa fa-wrench\"></i></a>
 
@@ -1545,6 +1557,7 @@ class reservations extends money {
 					";
 					$result2 = $this->new_mysql($sql2);
 					if ($result2 == "TRUE") {
+
 						$sql2A = "UPDATE `beds` SET `status` = 'avail', `reservationID` = '', `contactID` = '' WHERE `bedID` = '$row[bedID]'";
 						$result2A = $this->new_mysql($sql2A);
 
@@ -1562,6 +1575,7 @@ class reservations extends money {
 				$sql3 = "UPDATE `reservations` SET `cxl_date` = '$today', `cxl_user` = '$_SESSION[id]',`cancelled` = 'Yes' WHERE `reservationID` = '$reservationID'";
 				$result3 = $this->new_mysql($sql3);
 				if ($result3 == "TRUE") {
+					$this->activity_log($reservationID,"CXL Reservation",$sql3,'reservations');
 					$template = "cancel.tpl";
 					$data['msg'] = "<font color=red>Reservation <a href=\"reservation_dashboard/$reservationID/details\">$reservationID</a> has been cancelled.</font>";
 					$this->load_smarty($data,$template);
@@ -1618,6 +1632,9 @@ class reservations extends money {
 		$msg .= "<font color=green>The tent selected was cancelled on reservation <a href=\"reservation_dashboard/$_GET[reservationID]/details\">$_GET[reservationID]</a>.</font>";
 		$data['msg'] = $msg;
 		$template = "cancel.tpl";
+
+		$this->activity_log($_GET['reservationID'],"CXL Tent",$sql2,'reservations');
+
 		$this->load_smarty($data,$template);
 
 	}

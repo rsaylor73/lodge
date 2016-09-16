@@ -314,8 +314,36 @@ class resellers extends contacts {
 	}
 
 	public function assignagenttoreservation() {
+		// lookup reseller and if resellerID ne 19 then assign the reseller as the contact as well only if they have a contact ID
+		$contactID = ''; // init
+		if ($_GET['resellerID'] != "19") {
+			$sql = "
+			SELECT
+				`c`.`contactID`
+
+			FROM
+				`reserve`.`contacts` c	
+
+			WHERE
+				`c`.`reseller_agentID` = '$_GET[reseller_agentID]'
+
+			LIMIT 1
+			";
+			$result = $this->new_mysql($sql);
+			while ($row = $result->fetch_assoc()) {
+				$contactID = $row['contactID'];
+			}
+		}
+
+
 		$sql = "UPDATE `reservations` SET `reseller_agentID` = '$_GET[reseller_agentID]', `resellerID` = '$_GET[resellerID]' WHERE `reservationID` = '$_GET[reservationID]'";
 		$result = $this->new_mysql($sql);
+
+		if ($contactID != "") {
+			$sql = "UPDATE `reservations` SET `contactID` = '$contactID' WHERE `reservationID` = '$_GET[reservationID]'";
+			$result = $this->new_mysql($sql);
+		}
+
 		$this->reservation_dashboard();
 	}
 

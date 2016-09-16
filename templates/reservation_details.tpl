@@ -30,7 +30,8 @@
 	<td>{$nights}</td>
 </tr>
 
-{if $contactID eq ""}
+{if $resellerID ne ""}
+	{if $contactID eq ""}
 <tr>
 	<td colspan=3>
 		<form action="assigncontacttoreservation/{$reservationID}" method="get">
@@ -46,6 +47,7 @@
 		<input type="submit" value="Change Contact" class="btn btn-warning">
 		</form>
 	</td></tr>
+	{/if}
 {/if}
 
 

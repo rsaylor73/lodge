@@ -59,7 +59,7 @@
          <li><a href='discounts'><span>Discounts</span></a></li>
          <li><a href='users'><span>Users</span></a></li>
          <li><a href='permissions'><span>Permissions</span></a></li>
-
+	 <li><a href='show_log'><span>Activity Log</span></a></li>
 
       </ul>
    </li>

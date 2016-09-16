@@ -1,8 +1,9 @@
 <div class="col-md-6">
-<h2>Edit Contact</h2>
+<h2><input type="button" value="&lt;&lt; Back" onclick="javascript:window.history.back()"> Edit Contact</h2>
 
 <form action="updatecontact" method="post">
 <input type="hidden" name="contactID" value="{$contactID}">
+<input type="hidden" name="reservationID" value="{$reservationID}">
 <table class="table">
 	<tr><td><b>Title:</b></td><td><input type="text" name="title" value="{$title}" placeholder="(Mr., Ms., etc.)" size=40></td></tr>
 	<tr><td><b>First Name:</b></td><td><input type="text" name="first" value="{$first}" size=40 required></td></tr>
