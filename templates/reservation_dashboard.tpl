@@ -1,5 +1,10 @@
 <div class="col-md-6">
-<h2>Reservation {$reservationID}
+<h2>Reservation 
+
+
+<form action="reservation_dashboard" method="post" style="display:inline">
+<input type="text" name="reservationID" value="{$reservationID}" size="2">
+</form>
 {if $cancelled eq "Yes"}<font color=red>&nbsp;<b>CANCELLED</b></font>{/if}
 </h2>
 <br>

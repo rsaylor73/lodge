@@ -10,7 +10,9 @@
 		<td><b>Password:</b><br><input type="password" name="uupass" placeholder="Password" size=20 required onkeypress="if(event.keyCode==13) { loginfrm(this.form); return false;}"></td>
 	</tr>
 	<tr>
-		<td><center><input type="button" name="login" value="Login" class="btn btn-primary" onclick="loginfrm(this.form)"></center></td>
+		<td><center><input type="button" name="login" value="Login" class="btn btn-primary" onclick="loginfrm(this.form)">&nbsp;&nbsp;
+		<input type="button" name="forgot" value="Forgot Password" class="btn btn-warning" onclick="document.location.href='forgot_password'">
+		</center></td>
 	</tr>
 </table>
 </form>

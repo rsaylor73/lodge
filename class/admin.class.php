@@ -5,6 +5,43 @@ include $GLOBAL['path']."/class/resellers.class.php";
 
 class admin extends resellers {
 
+	public function show_log() {
+		$sql = "SELECT DISTINCT `uuname` FROM `activity_log`";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$users .= "<option>$row[uuname]</option>";
+		}
+
+		$sql = "SELECT DISTINCT `module` FROM `activity_log`";
+                $result = $this->new_mysql($sql);
+                while ($row = $result->fetch_assoc()) {
+			$modules .= "<option>$row[module]</option>";
+		}
+
+		$data['users'] = $users;
+		$data['modules'] = $modules;
+		$template = "activity_log.tpl";
+		$this->load_smarty($data,$template);
+	}
+
+	public function showactivitylog() {
+		$sql = "SELECT * FROM `activity_log` WHERE `uuname` LIKE '%$_POST[users]%' AND `module` LIKE '%$_POST[modules]%'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$html .= "<tr><td>$row[date]</td><td>$row[uuname]</td><td>$row[reservationID]</td><td>$row[activity]</td><td>$row[module]</td></tr>";
+			$found = "1";
+		}
+
+		if ($found != "1") {
+			$html .= "<tr><td colspan=\"5\"><font color=blue>Sorry, no results found</font></td></tr>";
+		}
+
+		$template = "show_activity_results.tpl";
+		$data['html'] = $html;
+		$this->load_smarty($data,$template);
+
+	}
+
 	public function savepermissions() {
 		$ok = "0";
 		$fail = "0";
@@ -149,6 +186,7 @@ class admin extends resellers {
 		$sql = "INSERT INTO `locations` (`name`,`min_night_stay`,`agent_email`) VALUES ('$_POST[name]','$_POST[min_night_stay]','$_POST[agent_email]')";
 		$result = $this->new_mysql($sql);
 		if ($result == "TRUE") {
+			$this->activity_log('N/A',"Lodge $_POST[name] was added",$sql,'admin');
 			$this->managelodge('<font color=green>The location was saved.</font><br>');
 		} else {
 			$this->error();
@@ -179,6 +217,7 @@ class admin extends resellers {
 		'$_POST[inventory_start_date]', `auto_inventory` = '$_POST[auto_inventory]',`inventory_stop_date` = '$_POST[inventory_stop_date]'  WHERE `id` = '$_POST[id]'";
 		$result = $this->new_mysql($sql);
       	if ($result == "TRUE") {
+		$this->activity_log('N/A',"Lodge $_POST[name] was updated",$sql,'admin');
         	$this->managelodge('<font color=green>The location was updated.</font><br>');
       	} else {
         	$this->error();
@@ -276,10 +315,12 @@ class admin extends resellers {
 	public function updateroom() {
 		if ($_POST['delete'] == "checked") {
 			$sql = "DELETE FROM `rooms` WHERE `id` = '$_POST[id]'";
+			$this->activity_log('N/A',"Room $_POST[id] was deleted",$sql,'admin');
 		} else {
 			$sql = "UPDATE `rooms` SET `description` = '$_POST[description]', `beds` = '$_POST[beds]', `children` = '$_POST[children]', 
 			`writeup` = '$_POST[writeup]', `type` = '$_POST[type]',
 			`nightly_rate` = '$_POST[nightly_rate]' WHERE `id` = '$_POST[id]'";
+			$this->activity_log('N/A',"Room $_POST[name] was updated",$sql,'admin');
 		}
       	$result = $this->new_mysql($sql);
       	if ($result == "TRUE") {
@@ -304,6 +345,7 @@ class admin extends resellers {
 	public function saveroom() {
 		$sql = "INSERT INTO `rooms` (`locationID`,`description`,`beds`,`children`,`nightly_rate`,`type`,`writeup`) 
 		VALUES ('$_POST[id]','$_POST[description]','$_POST[beds]','$_POST[children]','$_POST[nightly_rate]','$_POST[type]','$_POST[writeup]')";
+		$this->activity_log('N/A',"Room added",$sql,'admin');
 		$result = $this->new_mysql($sql);
 		if ($result == "TRUE") {
 			$_GET['id'] = $_POST['id'];
@@ -357,9 +399,18 @@ class admin extends resellers {
 	public function deleteuser() {
 		// check if they are trying to delete them self
 		if ($_SESSION['id'] != $_GET['id']) {
+			$sql = "SELECT `uuname` FROM `users` WHERE `id` = '$_GET[id]'";
+			$result = $this->new_mysql($sql);
+			while ($row = $result->fetch_assoc()) {
+				$uu = $row['uuname'];
+			}
+
 			$sql = "DELETE FROM `users` WHERE `id` = '$_GET[id]'";
-	    	$result = $this->new_mysql($sql);
+		    	$result = $this->new_mysql($sql);
    	   		if ($result == "TRUE") {
+
+			$this->activity_log('N/A',"User $uu was deleted",$sql,'admin');
+
       	   		$msg = "<font color=green>The user was deleted.</font><br>";
 	      	} else {
    	      		$msg = "<font color=red>The user failed to delete.</font><br>";
@@ -386,12 +437,20 @@ class admin extends resellers {
 	}
 
 	public function updateuser() {
+                        $sql = "SELECT `uuname` FROM `users` WHERE `id` = '$_POST[id]'";
+                        $result = $this->new_mysql($sql);
+                        while ($row = $result->fetch_assoc()) {
+                                $uu = $row['uuname'];
+                        }
+
 		$sql = "
 		UPDATE `users` SET `first` = '$_POST[first]', `last` = '$_POST[last]', `email` = '$_POST[email]', `uupass` = '$_POST[uupass]', `userType` = '$_POST[userType]', `active` = '$_POST[active]' 
 		WHERE `id` = '$_POST[id]'
 		";
       	$result = $this->new_mysql($sql);
       	if ($result == "TRUE") {
+		$this->activity_log('N/A',"User $uu was updated",$sql,'admin');
+
         	$msg = "<font color=green>The user was updated.</font><br>";
       	} else {
         	$msg = "<font color=red>The user failed to update.</font><br>";
@@ -414,6 +473,7 @@ class admin extends resellers {
 		'$_POST[uupass]','$_POST[userType]','Yes','$today')";
 		$result = $this->new_mysql($sql);
 		if ($result == "TRUE") {
+			$this->activity_log('N/A',"User $_POST[uuname] was added",$sql,'admin');
 			$msg = "<font color=green>The user was created.</font><br>";
 		} else {
 			$msg = "<font color=red>The user failed to create.</font><br>";

@@ -109,16 +109,45 @@ class Core {
 		return $state;
 	}
 
-	/*
-	public function get_one_state($id) {
-   		$sql = "SELECT * FROM `state` WHERE `id` = '$id'";
-      	$result = $this->new_mysql($sql);
-      	while ($row = $result->fetch_assoc()) {
-      		$state .= "<option selected value=\"$row[id]\">$row[state]</option>";
-      	}
-		return $state;
+
+	public function profile($msg = "") {
+		$sql = "SELECT * FROM `users` WHERE `uuname` = '$_SESSION[uuname]'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			foreach ($row as $key=>$value) {
+				$data[$key] = $value;
+			}
+		}
+		$data['msg'] = $msg;
+		$template = "profile.tpl";
+		$this->load_smarty($data,$template);
 	}
-	*/
+
+	public function saveprofile() {
+		$sql = "SELECT `email` FROM `users` WHERE `uuname` != '$_SESSION[uuname]' AND `email` = '$_POST[email]'";
+		$result = $this->new_mysql($sql);
+		while ($row = $result->fetch_assoc()) {
+			$found = "1";
+		}
+		if ($found == "1") {
+			$msg = "<font color=red>Sorry, the email <b>$_POST[email]</b> is already registered.</font><br>";
+			$this->profile($msg);
+		} else {
+			if ($_POST['uupass'] != "") {
+				$uupass = " ,`uupass`  = '$_POST[uupass]'";
+			}
+			$sql2 = "UPDATE `users` SET `first` = '$_POST[first]', `last` = '$_POST[last]', `email` = '$_POST[email]' $uupass 
+			WHERE `uuname` = '$_SESSION[uuname]'";
+			$result2 = $this->new_mysql($sql2);
+			if ($result2 == "TRUE") {
+				$msg = "<font color=green>Your profile was updated.</font><br>";
+				$this->profile($msg);
+			} else {
+				$msg = "<font color=red>Your profile failed to update.</font><br>";
+				$this->profile($msg);
+			}
+		}
+	}
 
 	public function logout() {
 		$data['msg'] = "<font color=green>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have been logged out. Loading...</font>";
@@ -136,8 +165,13 @@ class Core {
 		<?php
 	}
 
+	public function forgot_password() {
+		$template = "forgot_password.tpl";
+		$this->load_smarty($null,$template);
+	}
+
 	// Login form
-   public function login($msg) {
+	public function login($msg) {
 		$data = array();
 		if ($msg != "") {
 			$data['msg'] = "$msg";	
@@ -146,7 +180,7 @@ class Core {
 		}
 		$template = "login.tpl";
 		$this->load_smarty($data,$template);
-   }
+	}
 
 
 	// User Dashboard

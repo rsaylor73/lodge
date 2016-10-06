@@ -342,6 +342,8 @@ class money extends Core {
 		$data['line_items'] = $this->get_line_items();
 		$data['reservationID'] = $_GET['reservationID'];
 
+		$html = $this->display_line_items_in_rsv($_GET['reservationID']);
+		$data['html'] = $html;
 		$this->load_smarty($data,$template);
 
 	}
@@ -395,7 +397,7 @@ class money extends Core {
 		$result = $this->new_mysql($sql);
 
 		if ($result == "TRUE") {
-			$msg = "<font color=green>The line item was added.</font>";
+			$msg = "<font color=green>The line item was added. Loading...</font>";
 		} else {
 			$msg = "<font color=red>The line item failed to add.</font>";
 		}

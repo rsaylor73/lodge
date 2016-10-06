@@ -3,6 +3,12 @@
 
 {$msg}
 
-<br><br>To return to your reservation click <a href="reservation_dashboard/{$reservationID}/dollars">here</a>
+                                <script>
+                                setTimeout(function() {
+                                      window.location.replace('add_line_item/{$reservationID}')
+                                }
+                                ,2000);
+                                </script>
+
 
 </div>

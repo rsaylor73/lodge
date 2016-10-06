@@ -66,7 +66,7 @@
 	{/if}
 
 
-
+   <li><a href="profile"><span>My Profile</span></a></li>
    <li class='last'><a href="logout"><span>Logout</span></a></li>
 </ul>
 </div>

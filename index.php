@@ -10,7 +10,11 @@ if ($_GET['h'] != "no") {
 
 $check = $core->check_login();
 if ($check == "FALSE") {
-	$smarty->display('login.tpl');
+	if ($_GET['section'] == "forgot_password") {
+		$smarty->display('forgot_password.tpl');
+	} else {
+		$smarty->display('login.tpl');
+	}
 } else {
 	if ($_GET['h'] != "no") {
 		$core->navigation();
