@@ -1,7 +1,7 @@
 <div class="col-md-6">
 <h2><a href="users">Users</a></h2>
 {$msg}
-<input type="button" value="Add New User" class="btn btn-success" onclick="document.location.href='addnewuser/'">
+<input type="button" value="Add New User" class="btn btn-success" onclick="document.location.href='addnewuser'">
 
 <table class="table">
 <tr>

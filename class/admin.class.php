@@ -432,6 +432,7 @@ class admin extends resellers {
 				$data[$key] = $value;
 			}
 		}
+		unset($data['uupass']);
 		$template = "edituser.tpl";
 		$this->load_smarty($data,$template);
 	}
@@ -444,7 +445,7 @@ class admin extends resellers {
                         }
 
 		$sql = "
-		UPDATE `users` SET `first` = '$_POST[first]', `last` = '$_POST[last]', `email` = '$_POST[email]', `uupass` = '$_POST[uupass]', `userType` = '$_POST[userType]', `active` = '$_POST[active]' 
+		UPDATE `users` SET `first` = '$_POST[first]', `last` = '$_POST[last]', `email` = '$_POST[email]', `userType` = '$_POST[userType]', `active` = '$_POST[active]' 
 		WHERE `id` = '$_POST[id]'
 		";
       	$result = $this->new_mysql($sql);
@@ -467,21 +468,57 @@ class admin extends resellers {
       	$this->load_smarty($data,$template);
 	}
 
+
+	public function randomPassword() {
+		$alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+		$pass = array(); //remember to declare $pass as an array
+		$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+		for ($i = 0; $i < 8; $i++) {
+			$n = rand(0, $alphaLength);
+			$pass[] = $alphabet[$n];
+		}
+		return implode($pass); //turn the array into a string
+	}
+
+
 	public function saveuser() {
+		$password = $this->randomPassword();
 		$today = date("Ymd");
 		$sql = "INSERT INTO `users` (`first`,`last`,`email`,`uuname`,`uupass`,`userType`,`active`,`date_created`) VALUES ('$_POST[first]','$_POST[last]','$_POST[email]','$_POST[uuname]',
-		'$_POST[uupass]','$_POST[userType]','Yes','$today')";
+		'$password','$_POST[userType]','Yes','$today')";
 		$result = $this->new_mysql($sql);
 		if ($result == "TRUE") {
 			$this->activity_log('N/A',"User $_POST[uuname] was added",$sql,'admin');
 			$msg = "<font color=green>The user was created.</font><br>";
+
+			$subj = "Welcome to Aggressor Safari Lodge";
+			$msg_e = "$_POST[first] $_POST[last],<br><br>Your online reservation system account was just created and is ready for you to login.<br><br>
+			Website: <a href=\"https://reservations.aggressorsafarilodge.com\">https://reservations.aggressorsafarilodge.com</a><br>
+			Username: $_POST[uuname]<br>
+			Password: $password<br><br>
+			Once you login click on My Profile to change your password. If you forget your password in the future from the login screen
+			click on Forgot Password.<br><br>
+			Welcome Aboard!<br>";
+
+			$from_header = "Aggressor Fleet <info@aggressor.com>";
+		        $reply_header = "Aggressor Fleet <info@aggressor.com>";
+
+	                $header = "MIME-Version: 1.0\r\n";
+        	        $header .= "Content-type: text/html; charset=iso-8859-1\r\n";
+	                $header .= "From: $from_header\r\n";
+        	        $header .= "Reply-To: $reply_header\r\n";
+                	$header .= "X-Priority: 3\r\n";
+	                $header .= "X-Mailer: PHP/" . phpversion()."\r\n";
+
+			mail($_POST['email'],$subj,$msg_e,$header);
+
 		} else {
 			$msg = "<font color=red>The user failed to create.</font><br>";
 		}
 		$data['msg'] = $msg;
-      	$data['output'] = $this->list_users(); // gets data
+	      	$data['output'] = $this->list_users(); // gets data
 		$template = "users.tpl";
-      	$this->load_smarty($data,$template);
+	      	$this->load_smarty($data,$template);
 	}
 
 	public function get_rates($roomID) {

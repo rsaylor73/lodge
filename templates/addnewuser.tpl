@@ -8,11 +8,6 @@
 </div>
 
 <div class="input-group input-group-lg">
-  <span class="input-group-addon" id="sizing-addon1" style="width:125px;">Password: </span>
-  <input type="text" name="uupass" required class="form-control" placeholder="Password" aria-describedby="sizing-addon1">
-</div>
-
-<div class="input-group input-group-lg">
   <span class="input-group-addon" id="sizing-addon1" style="width:125px;">First Name: </span>
   <input type="text" name="first" required class="form-control" placeholder="First Name" aria-describedby="sizing-addon1">
 </div>
