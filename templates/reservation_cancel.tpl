@@ -18,7 +18,8 @@
 <input type="hidden" name="reservationID" value="{$reservationID}">
 <input type="hidden" name="tent" value="ALL">
 Cancellation Reason:<br><textarea name="reason" cols="40" rows="5" required placeholder="Please type in the reason why the reservation is being cancelled."></textarea><br><br>
-<input type="submit" value="Cancel Reservation" id="cxl" disabled class="btn btn-primary">&nbsp;&nbsp;<input type="checkbox" name="agree" onclick="document.getElementById('cxl').disabled=false;"> <b><i>You are about to cancel this reservation and will release all the tents in this reservation back to inventory. If there are any transfers assigned those will be cancelled.</i></b>
+<input type="submit" value="Cancel Reservation" id="cxl" disabled class="btn btn-primary">&nbsp;&nbsp;<input class="messageCheckbox" type="checkbox" value="agree" onclick="toggle();"> <b>
+<i>You are about to cancel this reservation and will release all the tents in this reservation back to inventory. If there are any transfers assigned those will be cancelled.</i></b>
 </form>
 {/if}
 
@@ -34,6 +35,16 @@ Cancellation Reason:<br><textarea name="reason" cols="40" rows="5" required plac
 <tr><td>Cancellation Date:</td><td>{$cxl_date}</td></tr>
 <tr><td>Cancellation User:</td><td><a href="mailto:{$email}">{$first} {$last}</a></td></tr>
 </table>
-
-
 {/if}
+
+{literal}
+<script>
+function toggle() {
+	document.getElementById('cxl').disabled=true;
+	var checkedValue = document.querySelector('.messageCheckbox:checked').value;
+	if (checkedValue == "agree") {
+		document.getElementById('cxl').disabled=false;
+	}
+}
+</script>
+{/literal}

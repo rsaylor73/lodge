@@ -1049,13 +1049,13 @@ class reservations extends money {
 			break;
 
 			case "cancel":
-            	$array = $this->reservation_cancel($reservationID);
-            	$data = array_merge($data,$array);
+	        	    	$array = $this->reservation_cancel($reservationID);
+	        	    	$data = array_merge($data,$array);
 			break;
 		}
 
 		$template = "reservation_dashboard.tpl";
-      	$this->load_smarty($data,$template);
+	      	$this->load_smarty($data,$template);
 	}
 
 	/*
@@ -1220,15 +1220,16 @@ class reservations extends money {
 		
 		$sql = "
 		SELECT
-			`b`.`status` 										AS 't2_status',
-			`r`.`description` 									AS 't2_description',
-			`b`.`name` 											AS 't2_bedname',
+			`b`.`status` 							AS 't2_status',
+			`r`.`description` 						AS 't2_description',
+			`b`.`name` 							AS 't2_bedname',
+			`b`.`bedID`,
 			DATE_FORMAT(`i`.`date_code`, '%m/%d/%Y') 			AS 't2_date',
-			`c`.`contactID`										AS 't2_contactID',
-			`c`.`first`											AS 't2_first',
-			`c`.`middle`										AS 't2_middle',
-			`c`.`last`											AS 't2_last',
-			`c`.`email`											AS 't2_email',
+			`c`.`contactID`							AS 't2_contactID',
+			`c`.`first`							AS 't2_first',
+			`c`.`middle`							AS 't2_middle',
+			`c`.`last`							AS 't2_last',
+			`c`.`email`							AS 't2_email',
 			`i`.`roomID`
 
 		FROM
@@ -1252,7 +1253,11 @@ class reservations extends money {
 			if ($row['t2_contactID'] == "") {
 				$contact = "<input type=\"button\" value=\"Assign Contact\" class=\"btn btn-primary\" onclick=\"document.location.href='assigncontact/$reservationID/$row[t2_bedname]/$row[roomID]'\">";
 			} else {
-				$contact = "<a href=\"javascript:void(0)\" onclick=\"document.location.href='editcontact/$row[t2_contactID]/$reservationID'\"><i class=\"fa fa-pencil-square-o\"></i></a> 
+				$contact = "
+				<a href=\"javascript:void(0)\" onclick=\"document.location.href='sendgis/$row[t2_contactID]/$reservationID/$row[bedID]'\">
+				<i class=\"glyphicon glyphicon-cloud\"></i></a>&nbsp;
+				<a href=\"javascript:void(0)\" onclick=\"document.location.href='editcontact/$row[t2_contactID]/$reservationID'\">
+				<i class=\"fa fa-pencil-square-o\"></i></a> 
 				$row[t2_first] $row[t2_middle] $row[t2_last]&nbsp;&nbsp;
 				<a href=\"javascript:void(0)\" onclick=\"document.location.href='assigncontact/$reservationID/$row[t2_bedname]/$row[roomID]'\"><i class=\"fa fa-wrench\"></i></a>
 
@@ -1288,11 +1293,48 @@ class reservations extends money {
 				<td>$contact</td>
 			</tr>
 			";
-		
-		}
+			}
 
-      $data['t2_html'] = $html;
-      return $data;
+		$sql2 = "
+		SELECT 
+			DATE_FORMAT(`g`.`date`, '%m/%d/%Y') AS 'date',
+			`c`.`first`,
+			`c`.`last`,
+			`g`.`uuname`,
+			`b`.`bedID`,
+			`c`.`contactID`,
+			`b`.`gis_pw`
+
+		FROM
+			`lodge_res`.`gis_history` g,
+			`reserve`.`contacts` c,
+			`lodge_res`.`beds` b
+
+		WHERE
+			`g`.`reservationID` = '$reservationID'
+			AND `g`.`contactID` = `c`.`contactID`
+			AND `g`.`bedID` = `b`.`bedID`
+		";
+		$result2 = $this->new_mysql($sql2);
+		while ($row2 = $result2->fetch_assoc()) {
+			$html2 .= "<tr>
+			<td>$row2[first] $row2[last]</td>
+			<td>
+			<a href=\"https://gis.aggressorsafarilodge.com/gis/$reservationID/$row2[contactID]/$row2[bedID]/$row2[gis_pw]\" target=_blank>
+			GIS Link</a></td>
+			<td>$row2[date]</td>
+			<td>$row2[uuname]</td>
+			</tr>";
+			$found2 = "1";
+		}
+		if ($found2 != "1") {
+			$html2 = "<tr><td colspan=4>No GIS Link history found</td></tr>";
+		}
+		
+
+	 	$data['t2_html'] = $html;
+		$data['t3_html'] = $html2;
+       		return $data;
    	}
 
    	public function reservation_dollars($reservationID) {
@@ -1418,7 +1460,7 @@ class reservations extends money {
     	$result = $this->new_mysql($sql);
     	while ($row = $result->fetch_assoc()) {
     		if (($row['first'] == "") && ($row['last'] == "")) {
-    			$name = "Un-assigned Contact";
+    			$name = "Contact was not assigned.";
     		} else {
     			$name = "<a href=\"mailto:$row[email]\">$row[first] $row[last]</a>";
     		}

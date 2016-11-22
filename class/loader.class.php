@@ -111,6 +111,8 @@ class loader extends reports {
 			$this->$module();
 		} elseif (method_exists('resellers',$module)) {
 			$this->$module();
+		} elseif (method_exists('gis',$module)) {
+			$this->$module();
 		} elseif (method_exists('admin',$module)) {
 			$this->$module();
 		} else {

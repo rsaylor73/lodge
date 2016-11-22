@@ -1,7 +1,7 @@
 <?php
-include $GLOBAL['path']."/class/admin.class.php";
+include $GLOBAL['path']."/class/gis.class.php";
 
-class reports extends admin {
+class reports extends gis {
 
 	public function transferreport() {
 		$sql = "
