@@ -1083,11 +1083,8 @@ class reservations extends money {
 			`c`.`first`,
 			`c`.`last`,
 			`c`.`email`
-
-
 		FROM
 			`reservations` r, `users` u
-
 		LEFT JOIN `reserve`.`reseller_agents` a ON `r`.`reseller_agentID` = `a`.`reseller_agentID`
 		LEFT JOIN `reserve`.`resellers` s ON `a`.`resellerID` = `s`.`resellerID`
 		LEFT JOIN `reserve`.`contacts` c ON `r`.`contactID` = `c`.`contactID`
@@ -1096,7 +1093,6 @@ class reservations extends money {
 			`r`.`reservationID` = '$reservationID'
 			AND `r`.`userID` = `u`.`id`
 		";
-
 		$result = $this->new_mysql($sql);
 		while($row = $result->fetch_assoc()) {
 			foreach ($row as $key=>$value) {
@@ -1106,9 +1102,6 @@ class reservations extends money {
 			$data['end_date'] 	= $this->get_reservation_dates($reservationID,'DESC',$null);
 			$data['nights']		= $this->get_reservation_nights($reservationID);
 		}
-
-
-
 		return $data;
 	}
 
