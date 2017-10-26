@@ -3,6 +3,8 @@ Options +FollowSymLinks
 AddType application/x-httpd-php5 .php5 .php .php3 .php2 .phtml
 
 RewriteCond %{SERVER_PORT} 80 
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^(.*)$ https://reservations.aggressorsafarilodge.com/$1 [R,L]
 
 RewriteCond %{SCRIPT_FILENAME} !-d
@@ -11,64 +13,148 @@ RewriteCond %{SCRIPT_FILENAME} !-f
 # One param
 # IE: search
 
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^/?([^/]*)$ index.php?section=$1 [NC,L]
  
 
 # Two params
 # IE: search/12345
 
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^edituser/([a-zA-Z0-9]+)/?$ index.php?section=edituser&id=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^deleteuser/([a-zA-Z0-9]+)/?$ index.php?section=deleteuser&id=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^editlodge/([a-zA-Z0-9]+)/?$ index.php?section=editlodge&id=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^managerooms/([a-zA-Z0-9]+)/?$ index.php?section=managerooms&id=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^newroom/([a-zA-Z0-9]+)/?$ index.php?section=newroom&id=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^reservation_dashboard/([a-zA-Z0-9]+)/?$ index.php?section=reservation_dashboard&reservationID=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^editcontact/([a-zA-Z0-9]+)/?$ index.php?section=editcontact&contactID=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^editreseller/([a-zA-Z0-9]+)/?$ index.php?section=editreseller&resellerID=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^editagents/([a-zA-Z0-9]+)/?$ index.php?section=editagents&resellerID=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^assignreseller/([a-zA-Z0-9]+)/?$ index.php?section=assignreseller&reservationID=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^newagent/([a-zA-Z0-9]+)/?$ index.php?section=newagent&resellerID=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^payments/([a-zA-Z0-9]+)/?$ index.php?section=payments&reservationID=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^add_discounts/([a-zA-Z0-9]+)/?$ index.php?section=add_discounts&reservationID=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^add_line_item/([a-zA-Z0-9]+)/?$ index.php?section=add_line_item&reservationID=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^deletelineitem/([a-zA-Z0-9]+)/?$ index.php?section=deletelineitem&id=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^editlineitem/([a-zA-Z0-9]+)/?$ index.php?section=editlineitem&id=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^editdiscount/([a-zA-Z0-9]+)/?$ index.php?section=editdiscount&id=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^refundcashtransfer/([a-zA-Z0-9]+)/?$ index.php?section=refundcashtransfer&reservationID=$1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^invoice/([a-zA-Z0-9]+)/?$ index.php?section=viewinvoice&reservationID=$1&h=no [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^printinvoice/([a-zA-Z0-9]+)/?$ index.php?section=viewinvoice&reservationID=$1&h=no&p=1 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^emailinvoice/([a-zA-Z0-9]+)/?$ index.php?section=emailinvoice&reservationID=$1&h=no [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^assigncontacttoreservation/([a-zA-Z0-9]+)/?$ index.php?section=assigncontacttoreservation&reservationID=$1 [NC,L]
 
 # Three params
 # IE: search/12345/676767
 
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteRule ^editcontact/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editcontact&contactID=$1&reservationID=$2 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^editroom/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editroom&id=$1&id2=$2 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^reservation_dashboard/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=reservation_dashboard&reservationID=$1&part=$2 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^editagent/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editagent&resellerID=$1&agentID=$2 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^canceltent/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=canceltent&tent=$1&reservationID=$2 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^deletelineitemassigned/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=deletelineitemassigned&id=$1&reservationID=$2 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^editdiscountassigned/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editdiscountassigned&id=$1&reservationID=$2 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^deletediscountassigned/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=deletediscountassigned&id=$1&reservationID=$2 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^editpayment/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editpayment&id=$1&reservationID=$2 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^deletepayment/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=deletepayment&id=$1&reservationID=$2 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^editrefundtransfer/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=editrefundtransfer&id=$1&reservationID=$2 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^deleterefundtransfer/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=deleterefundtransfer&id=$1&reservationID=$2 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^assigncontacttorsv/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=assigncontacttorsv&reservationID=$1&contactID=$2 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^newcontact/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=newcontact&reservationID=$1&action=$2 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^move/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=move&reservationID=$1&tentID=$2 [NC,L]
-
 
 # Four params
 # IE: search/12345/676767/A
 
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^assignagenttoreservation/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=assignagenttoreservation&reservationID=$1&reseller_agentID=$2&resellerID=$3 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^assigncontact/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=assigncontact&reservationID=$1&bed=$2&roomID=$3 [NC,L]
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^newcontact/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=newcontact&reservationID=$1&bed=$2&roomID=$3 [NC,L]
-
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteRule ^sendgis/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=sendgis&contactID=$1&reservationID=$2&bedID=$3 [NC,L]
 # Five params
 # IE: search/12345/676767/A/1
 
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^assigncontacttobed/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/?$ index.php?section=assigncontacttobed&reservationID=$1&contactID=$2&bed=$3&roomID=$4
-
-
